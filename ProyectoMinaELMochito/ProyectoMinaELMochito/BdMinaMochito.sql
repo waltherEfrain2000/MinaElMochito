@@ -165,9 +165,3 @@ end
 go
 
 --exec CrearEmpleado '0314200000189','Abdiel','Jesus','Giron','Garcia',21,1,'San Jose De Comayagua',1
-
-
-
-
-
-
