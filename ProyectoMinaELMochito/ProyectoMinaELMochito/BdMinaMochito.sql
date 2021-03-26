@@ -3,6 +3,7 @@
 use tempdb
 go
 
+
 create database MinaElMochito
 go
 
@@ -46,7 +47,7 @@ create table Minas.Mineral
 (
 	idMineral int identity  not null,
 	descripcion varchar(15),
-	precio numeric(18,2),
+	precio decimal(18,2) not null,
 	Constraint PK_Mineral_id
 	       primary key clustered(idMineral)
 )
@@ -81,6 +82,7 @@ create table Minas.Empleado
 	idGenero int ,
 	direccion  varchar(50),
 	idCargo int,
+	salario decimal,
 	estado  varchar(15)
 
 	 Constraint PK_Empleado_id
@@ -100,7 +102,6 @@ create table Minas.viajeInterno
 (
 	idViaje int identity not null,
 	idVehiculo int not null,
-	precio numeric(18,2),
 	idEmpleado int not null,
 
 	
@@ -124,6 +125,7 @@ create table Minas.Produccion
 	idViaje int not null,
 	idMineral int not null,
 	precio numeric(18,2),
+	peso numeric(18, 2),
 	
 		
 	 Constraint PK_Produccion_idProduccion
@@ -139,17 +141,6 @@ create table Minas.Produccion
 )
 go
 
-create table Minas.Invetario
-(
-	idInventario int identity not null,
-	descripcion varchar(15),
-	cantidad int,
-
-	 Constraint PK_Inventario_idInventario
-	       primary key clustered(idInventario),
-
-)
-go
 
 create table Minas.InventarioMineral
 (
@@ -202,7 +193,7 @@ go
 
 Create table Usuarios.Usuario
 (
-  id INT NOT NULL IDENTITY (200, 1),
+    id INT NOT NULL IDENTITY (200, 1),
 	nombreCompleto VARCHAR(255) NOT NULL,
 	username VARCHAR(100) NOT NULL,
 	password VARCHAR(100) NOT NULL,
@@ -217,14 +208,120 @@ Create table Usuarios.Usuario
 
 
 ------------------------------restricciones
-
+---para que el rol del usuario solo sea administrador o empleado de turno
 ALTER TABLE Usuarios.Usuario WITH CHECK
 	ADD CONSTRAINT CHK_Usuarios_USuarios$RolUsuario
 	CHECK (rol IN('ADMINISTRADOR', 'EMPLEADODETURNO'))
 GO
 
 
+
+
+-- No puede existir nombres de usuarios repetidos
+ALTER TABLE Usuarios.Usuario
+	ADD CONSTRAINT AK_Usuarios_Usuario_username
+	UNIQUE NONCLUSTERED (username)
+
+GO
+
+-- La contraseña debe contener al menos 6 caracteres
+ALTER TABLE Usuarios.Usuario WITH CHECK
+	ADD CONSTRAINT CHK_Usuarios_Usuario$VerificarLongitudContraseña
+	CHECK (LEN(password) >= 6)
+	
+
+
+
+GO
+
+----triggers -------------------------
+
+---trigger para llenar Inventario mineral despues de una insercion en produccion
+create trigger Minas.ActualizarInventarioMineral
+on [Minas].[Produccion]
+AFTER INSERT
+AS BEGIN 
+declare 
+@idMineral as int , @peso as decimal,@precio as decimal,@total as decimal
+
+select @peso= [peso] from inserted
+select @idMineral= [idMineral]from inserted
+select @precio=[precio] from inserted
+Set @total=@peso * @precio
+
+update [Minas].[InventarioMineral]
+set[peso]=@peso,[fechaActualizacion] =SYSDATETIMEOFFSET(), total =total + @total where [idMineral] =@idMineral
+end 
+GO
+ALTER TABLE [Minas].[Produccion] ENABLE TRIGGER [ActualizarInventarioMineral]
+GO
+
+
+-----Triggers para un manejo de entradas de minerales (concepto de entrada en kardex)----
+create trigger Minas.AumentarInventario
+on [Minas].[Produccion]
+AFTER INSERT
+AS BEGIN 
+declare 
+@idMineral as int , @peso as decimal,@precio as decimal,@total as decimal
+
+select @peso= [peso] from inserted
+select @idMineral= [idMineral]from inserted
+select @precio=[precio] from inserted
+Set @total=@peso * @precio
+
+INSERT INTO  [Minas].[Entrada]
+VALUES(@idMineral,@peso,@total,SYSDATETIMEOFFSET())
+end 
+GO
+
+
+-----trigger para restar en inventario mineral despues de una salida
+CREATE TRIGGER Minas.reduccionInventarioMineral
+ON [Minas].[Salida]
+AFTER INSERT
+AS
+BEGIN
+	DECLARE @cantidad decimal,@total decimal , @idMineral int
+	SELECT @cantidad = cantidad,@total=Total  ,@idMineral = idmineral from inserted 
+	update [Minas].[InventarioMineral]
+	set
+	[peso] =  [peso] - @cantidad,
+[fechaActualizacion]= SYSUTCDATETIME(),
+[Total]=[Total]-Total
+	where [idMineral] = @idMineral
+END
+GO
+
+
 ----------------------------------------------------------------Inserciones------------------------------------------------------
+
+insert into [Minas].[Mineral] ([descripcion],[precio]) values
+('ORO',1174.44)
+go
+
+insert into [Minas].[EstadoVehiculo] ([descripcion]) values
+('Disponible')
+go 
+
+insert into [Minas].[Vehiculo] ([marca],[modelo],[placa],[color],[estado]) values
+('MACK', 'MACK 4X4','12wer12s','rojo',1)
+go
+
+insert into [Minas].[Empleado] ([identidad],[primerNombre],[segundoNombre],[primerApellido],[segundoApellido],[edad],[idGenero],direccion,[idCargo],[salario],[estado]) values 
+('0318200300249','lionel','ronaldo','messi','cuccittini','33',1,'barrio no te encuentro',1,10000,1)
+go
+
+insert into [Minas].[viajeInterno]([idVehiculo],[idEmpleado])values 
+(1,2)
+
+insert into [Minas].[Produccion]([idViaje],[idMineral],[precio],[peso])Values
+(4,1,11411,11.5)
+go
+
+
+insert into [Minas].[InventarioMineral]([idMineral],[peso],[fechaActualizacion],[Total])values
+(1,0,GETDATE(),0)
 insert into Minas.Genero values
 ('M'),
 ('F')
