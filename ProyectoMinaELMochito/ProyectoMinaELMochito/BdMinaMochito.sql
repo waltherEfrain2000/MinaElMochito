@@ -349,6 +349,74 @@ insert into [Minas].[InventarioMineral]([idMineral],[peso],[fechaActualizacion],
 
 
 ---------------------------------------------------------------Procedimientos Almanenados----------------------------------------
+/* Procedimiento para Usuarios (Agregar Nuevo usuario)*/
+
+
+CREATE PROCEDURE agregarUsuarios (
+
+@nombreCompleto varchar(225),
+@username varchar(100),
+@paswrod varchar(100),
+@rol char (25),
+@estado bit 
+)
+
+AS
+BEGIN
+if exists (select username from Usuarios.Usuario where username= @username and estado=1)
+raiserror ('Ya existe un usuario con ese usuario, porfavor ingrese uno nuevo',16,1)
+else
+insert into Usuarios.Usuario( nombreCompleto,username,password,rol,estado) 
+values(@nombreCompleto,@username,@paswrod,@rol,@estado)
+END
+
+exec agregarUsuarios  'marlon menjivar','MMenji','1234567','ADMINISTRADOR',1
+
+/*procedimiento para actualizar un usuario*/
+drop procedure actualizarUsuario
+create procedure actualizarUsuario (
+@id as int ,
+@nombreCompleto varchar(225),
+@username varchar(100),
+@paswrod varchar(100),
+@rol char (25),
+@estado bit 
+)
+
+AS
+BEGIN
+
+update Usuarios.Usuario
+set nombreCompleto  = @nombreCompleto, username = @username,
+password  = @paswrod, rol=@rol,estado=@estado
+where id = @id
+end 
+
+exec actualizarUsuario 200,'marlon DE porras','MMenji','1234567','ADMINISTRADOR',1
+
+
+----crear procedimiento eliminar usuario
+
+create procedure eliminarUsuario(@id int )
+AS
+BEGIN
+
+update Usuarios.Usuario set estado =0
+where  id =@id
+end 
+
+exec eliminarUsuario 200,'ADMINISTRADOR'
+/*procedimiento ´para buscar usuario*/
+create procedure buscarUser
+@nombre as varchar(225)
+as begin
+select *
+from Usuarios.Usuario
+where nombreCompleto like '%' +@nombre+ '%'
+
+end 
+exec buscarUser 'm'
+
 --CRUD Empleado
 --Crear
 create procedure CrearEmpleado
