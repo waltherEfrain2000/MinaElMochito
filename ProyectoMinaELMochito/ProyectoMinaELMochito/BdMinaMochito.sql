@@ -342,6 +342,7 @@ go
 
 insert into [Minas].[InventarioMineral]([idMineral],[peso],[fechaActualizacion],[Total])values
 (1,0,GETDATE(),0)
+go
 --select * from Minas.cargo
 
 
@@ -369,11 +370,12 @@ else
 insert into Usuarios.Usuario( nombreCompleto,username,password,rol,estado) 
 values(@nombreCompleto,@username,@paswrod,@rol,@estado)
 END
-
-exec agregarUsuarios  'marlon menjivar','MMenji','1234567','ADMINISTRADOR',1
+go
+--exec agregarUsuarios  'marlon menjivar','MMenji','1234567','ADMINISTRADOR',1
 
 /*procedimiento para actualizar un usuario*/
 drop procedure actualizarUsuario
+go
 create procedure actualizarUsuario (
 @id as int ,
 @nombreCompleto varchar(225),
@@ -391,9 +393,9 @@ set nombreCompleto  = @nombreCompleto, username = @username,
 password  = @paswrod, rol=@rol,estado=@estado
 where id = @id
 end 
-
+go
 exec actualizarUsuario 200,'marlon DE porras','MMenji','1234567','ADMINISTRADOR',1
-
+go
 
 ----crear procedimiento eliminar usuario
 
@@ -404,8 +406,9 @@ BEGIN
 update Usuarios.Usuario set estado =0
 where  id =@id
 end 
-
+go
 exec eliminarUsuario 200,'ADMINISTRADOR'
+go
 /*procedimiento ´para buscar usuario*/
 create procedure buscarUser
 @nombre as varchar(225)
@@ -413,11 +416,13 @@ as begin
 select *
 from Usuarios.Usuario
 where nombreCompleto like '%' +@nombre+ '%'
-
 end 
+go
 exec buscarUser 'm'
+go
 
---CRUD Empleado
+
+----------------------------------------CRUD Empleado
 --Crear
 create procedure CrearEmpleado
 @identidad varchar(13),
@@ -435,4 +440,75 @@ insert	into Minas.Empleado values(@identidad,@primerNombre,@segundoNombre,@prime
 end
 go
 
---exec CrearEmpleado '0314200000189','Abdiel','Jesus','Giron','Garcia',21,1,'San Jose De Comayagua',1
+create procedure verEmpleados
+as begin
+select E.IdEmpleado AS 'Empleado ID',
+	   E.identidad,
+	   E.primerNombre as 'Primer Nombre',
+	   E.segundoNombre as 'Segundo Nombre',
+	   E.primerApellido as 'Primer Apellido',
+	   E.segundoApellido as 'Segundo Apellido',
+	   E.edad,
+	   G.descripcion as 'Genero',
+	   E.direccion,
+	   C.descripcion as 'Cargo'
+from Minas.Empleado E INNER JOIN  Minas.Genero G
+on G.idGenero = E.idGenero INNER JOIN Minas.cargo C
+on C.idCargo = E.idCargo
+where E.estado = 'activo'
+end
+go
+
+--ver empleado Individual
+create procedure verEmpleado(@ID int)
+as 
+begin
+select E.IdEmpleado AS 'Empleado ID',
+	   E.identidad,
+	   E.primerNombre as 'Primer Nombre',
+	   E.segundoNombre as 'Segundo Nombre',
+	   E.primerApellido as 'Primer Apellido',
+	   E.segundoApellido as 'Segundo Apellido',
+	   E.edad,
+	   G.descripcion as 'Genero',
+	   E.direccion,
+	   C.descripcion as 'Cargo'
+from Minas.Empleado E INNER JOIN  Minas.Genero G
+on G.idGenero = E.idGenero INNER JOIN Minas.cargo C
+on C.idCargo = E.idCargo
+where E.IdEmpleado = @ID and  E.estado = 'activo'
+end
+go
+
+--Actualizar un empleado
+create procedure ActualizarEmpleado(	
+@primerNombre varchar(20),
+@segundoNombre varchar(20),
+@primerApellido varchar(20) ,
+@segundoApellido varchar(20),
+@edad int,
+@idGenero int ,
+@direccion  varchar(50),
+@idCargo int
+)
+as 
+begin
+update Minas.Empleado set 
+primerNombre = @primerNombre,
+segundoNombre = @segundoNombre,
+primerApellido = @primerApellido,
+segundoApellido = @segundoApellido,
+edad = @edad,
+idGenero =@idGenero,
+direccion =@direccion,
+idCargo = @idCargo
+end
+go
+
+--Eliminar un empleado
+create procedure EliminarEmpleado(@ID int)
+as
+begin
+	update Minas.Empleado set estado = 'inactivo'
+end
+go
