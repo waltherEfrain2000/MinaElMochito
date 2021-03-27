@@ -237,7 +237,7 @@ GO
 ----triggers -------------------------
 
 ---trigger para llenar Inventario mineral despues de una insercion en produccion
-create trigger Minas.ActualizarInventarioMineral
+create trigger Minas.ActualizarInventarioMinera
 on [Minas].[Produccion]
 AFTER INSERT
 AS BEGIN 
@@ -250,14 +250,17 @@ select @precio=[precio] from inserted
 Set @total=@peso * @precio
 
 update [Minas].[InventarioMineral]
-set[peso]=@peso,[fechaActualizacion] =SYSDATETIMEOFFSET(), total =total + @total where [idMineral] =@idMineral
+set[peso]=(peso + @peso),[fechaActualizacion] =SYSDATETIMEOFFSET(), total =total + @total where [idMineral] =@idMineral
+
+
+
 end 
 GO
-ALTER TABLE [Minas].[Produccion] ENABLE TRIGGER [ActualizarInventarioMineral]
+ALTER TABLE [Minas].[Produccion] ENABLE TRIGGER [ActualizarInventarioMinera]
 GO
 
 
------Triggers para un manejo de entradas de minerales (concepto de entrada en kardex)----
+---Triggers para un manejo de entradas de minerales (concepto de entrada en kardex)----
 create trigger Minas.AumentarInventario
 on [Minas].[Produccion]
 AFTER INSERT
@@ -271,8 +274,10 @@ select @precio=[precio] from inserted
 Set @total=@peso * @precio
 
 INSERT INTO  [Minas].[Entrada]
-VALUES(@idMineral,@peso,@total,SYSDATETIMEOFFSET())
+VALUES(@idMineral,@peso,@total,'',SYSDATETIMEOFFSET())
 end 
+GO
+ALTER TABLE [Minas].[Produccion] ENABLE TRIGGER [AumentarInventario]
 GO
 
 
@@ -296,6 +301,21 @@ GO
 
 ----------------------------------------------------------------Inserciones------------------------------------------------------
 
+
+insert into Minas.Genero values
+('M'),
+('F')
+go
+
+--select * from Minas.Genero
+
+insert into Minas.cargo values
+('Gerente'),
+('escabador')
+go
+
+
+
 insert into [Minas].[Mineral] ([descripcion],[precio]) values
 ('ORO',1174.44)
 go
@@ -313,28 +333,17 @@ insert into [Minas].[Empleado] ([identidad],[primerNombre],[segundoNombre],[prim
 go
 
 insert into [Minas].[viajeInterno]([idVehiculo],[idEmpleado])values 
-(1,2)
+(1,1)
 
 insert into [Minas].[Produccion]([idViaje],[idMineral],[precio],[peso])Values
-(4,1,11411,11.5)
+(1,1,11411,11.5)
 go
 
 
 insert into [Minas].[InventarioMineral]([idMineral],[peso],[fechaActualizacion],[Total])values
 (1,0,GETDATE(),0)
-insert into Minas.Genero values
-('M'),
-('F')
-go
-
---select * from Minas.Genero
-
-insert into Minas.cargo values
-('Gerente'),
-('escabador')
-go
-
 --select * from Minas.cargo
+
 
 
 
