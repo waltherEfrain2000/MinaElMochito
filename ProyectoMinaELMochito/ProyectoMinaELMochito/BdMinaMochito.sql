@@ -64,7 +64,7 @@ create table Minas.Vehiculo
       Constraint PK_Vehiculo_id
 	       primary key clustered(idVehiculo),    
    
-   constraint fk_vehiculo_estado
+    constraint fk_vehiculo_estado
 	foreign key (estado)
 	references Minas.EstadoVehiculo(idEstado),
 ) 
@@ -74,10 +74,7 @@ create table Minas.Empleado
 (
 	IdEmpleado int identity not null,
 	identidad varchar(13) not null,
-	primerNombre varchar(20) not null,
-	segundoNombre varchar(20),
-	primerApellido varchar(20) not null,
-	segundoApellido varchar(20),
+	primerNombre varchar(100) not null,
 	edad int,
 	idGenero int ,
 	direccion  varchar(50),
@@ -85,14 +82,14 @@ create table Minas.Empleado
 	salario decimal,
 	estado  varchar(15)
 
-	 Constraint PK_Empleado_id
-	       primary key clustered(IdEmpleado),
+	Constraint PK_Empleado_id
+	primary key clustered(IdEmpleado),
 	  
-	    constraint fk_Empleado_idGenero
+	constraint fk_Empleado_idGenero
 	foreign key (idGenero)
 	references Minas.Genero(idGenero),
 
-      constraint fk_vehiculo_idcargo
+    constraint fk_vehiculo_idcargo
 	foreign key (idCargo)
 	references Minas.Cargo(idCargo)
 )
@@ -104,15 +101,14 @@ create table Minas.viajeInterno
 	idVehiculo int not null,
 	idEmpleado int not null,
 
-	
-	 Constraint PK_viaje_idViaje
-	       primary key clustered(idViaje),
+	Constraint PK_viaje_idViaje
+	primary key clustered(idViaje),
 
-  constraint fk_ViajeInterno_idVehiculo
+    constraint fk_ViajeInterno_idVehiculo
 	foreign key (idVehiculo)
 	references Minas.Vehiculo(idVehiculo),
 
-	  constraint fk_ViajeInterno_idEmpleado
+	constraint fk_ViajeInterno_idEmpleado
 	foreign key (idEmpleado)
 	references Minas.Empleado(idEmpleado)
 	  
@@ -128,14 +124,14 @@ create table Minas.Produccion
 	peso numeric(18, 2),
 	
 		
-	 Constraint PK_Produccion_idProduccion
-	       primary key clustered(idProduccion),
+	Constraint PK_Produccion_idProduccion
+	primary key clustered(idProduccion),
 
-  constraint fk_Produccion_idViaje
+    constraint fk_Produccion_idViaje
 	foreign key (idViaje)
 	references Minas.viajeInterno(idViaje),
 
-	  constraint fk_Produccion_idMineral
+	constraint fk_Produccion_idMineral
 	foreign key (idMineral)
 	references Minas.Mineral(idMineral)
 )
@@ -149,7 +145,7 @@ create table Minas.InventarioMineral
 	fechaActualizacion datetime,
 	Total decimal(18,2)
 
-	  constraint fk_InventarioMineral_idMineral
+	constraint fk_InventarioMineral_idMineral
 	foreign key (idMineral)
 	references Minas.Mineral(idMineral)
 )
@@ -165,9 +161,9 @@ create table Minas.Salida
 	fechaSalida datetime,
 
 	Constraint PK_Salida_idSalida
-	       primary key clustered(idSalida),
+	primary key clustered(idSalida),
 
-  constraint fk_Salidas_idProducto
+    constraint fk_Salidas_idProducto
 	foreign key (idmineral)
 	references Minas.Mineral(idMineral),
 )
@@ -183,9 +179,9 @@ create table Minas.Entrada
 	fechaEntrada datetime,
 
 	Constraint PK_Entrada_idEntrada
-	       primary key clustered(idEntrada),
+	primary key clustered(idEntrada),
 
-  constraint fk_Entrada_Producto
+    constraint fk_Entrada_Producto
 	foreign key (idProducto)
 	references Minas.Mineral(idMineral),
 )
@@ -201,9 +197,7 @@ Create table Usuarios.Usuario
 	estado BIT NOT NULL,
 
 	CONSTRAINT PK_Usuario_id
-		PRIMARY KEY CLUSTERED (id)
-
-
+    PRIMARY KEY CLUSTERED (id)
 )
 
 
@@ -213,9 +207,6 @@ ALTER TABLE Usuarios.Usuario WITH CHECK
 	ADD CONSTRAINT CHK_Usuarios_USuarios$RolUsuario
 	CHECK (rol IN('ADMINISTRADOR', 'EMPLEADODETURNO'))
 GO
-
-
-
 
 -- No puede existir nombres de usuarios repetidos
 ALTER TABLE Usuarios.Usuario
@@ -229,9 +220,6 @@ ALTER TABLE Usuarios.Usuario WITH CHECK
 	ADD CONSTRAINT CHK_Usuarios_Usuario$VerificarLongitudContraseña
 	CHECK (LEN(password) >= 6)
 	
-
-
-
 GO
 
 ----triggers -------------------------
@@ -252,13 +240,11 @@ Set @total=@peso * @precio
 update [Minas].[InventarioMineral]
 set[peso]=(peso + @peso),[fechaActualizacion] =SYSDATETIMEOFFSET(), total =total + @total where [idMineral] =@idMineral
 
-
-
 end 
 GO
+
 ALTER TABLE [Minas].[Produccion] ENABLE TRIGGER [ActualizarInventarioMinera]
 GO
-
 
 ---Triggers para un manejo de entradas de minerales (concepto de entrada en kardex)----
 create trigger Minas.AumentarInventario
@@ -297,8 +283,6 @@ BEGIN
 	where [idMineral] = @idMineral
 END
 GO
-
-
 ----------------------------------------------------------------Inserciones------------------------------------------------------
 
 
@@ -343,10 +327,6 @@ go
 insert into [Minas].[InventarioMineral]([idMineral],[peso],[fechaActualizacion],[Total])values
 (1,0,GETDATE(),0)
 go
---select * from Minas.cargo
-
-
-
 
 
 ---------------------------------------------------------------Procedimientos Almanenados----------------------------------------
@@ -371,7 +351,6 @@ insert into Usuarios.Usuario( nombreCompleto,username,password,rol,estado)
 values(@nombreCompleto,@username,@paswrod,@rol,@estado)
 END
 go
---exec agregarUsuarios  'marlon menjivar','MMenji','1234567','ADMINISTRADOR',1
 
 /*procedimiento para actualizar un usuario*/
 drop procedure actualizarUsuario
@@ -394,8 +373,6 @@ password  = @paswrod, rol=@rol,estado=@estado
 where id = @id
 end 
 go
-exec actualizarUsuario 200,'marlon DE porras','MMenji','1234567','ADMINISTRADOR',1
-go
 
 ----crear procedimiento eliminar usuario
 
@@ -407,8 +384,7 @@ update Usuarios.Usuario set estado =0
 where  id =@id
 end 
 go
-exec eliminarUsuario 200,'ADMINISTRADOR'
-go
+
 /*procedimiento ´para buscar usuario*/
 create procedure buscarUser
 @nombre as varchar(225)
@@ -418,8 +394,7 @@ from Usuarios.Usuario
 where nombreCompleto like '%' +@nombre+ '%'
 end 
 go
-exec buscarUser 'm'
-go
+
 
 
 ----------------------------------------CRUD Empleado
