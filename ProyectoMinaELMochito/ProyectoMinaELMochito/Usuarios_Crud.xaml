@@ -9,7 +9,7 @@
          AllowsTransparency="True" Background="Transparent" 
         WindowStyle="None" ResizeMode="NoResize"
          WindowStartupLocation="CenterScreen">
-    <Grid Background="#f2edf6f9">
+    <Grid Background="#f2006d77">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
@@ -57,5 +57,48 @@
   
   
         </DataGrid>
+
+        <Button Name="btnIngresar" Content="Insertar" Grid.Column="0" Grid.Row="8" Width="150" Height="40">
+            
+        </Button>
+        <iconPacks:PackIconMaterial Kind="StarPlus" 
+                                                VerticalAlignment="Center" 
+                                                HorizontalAlignment="Left" 
+                                                Foreground="White"
+                                                Name="icon1"
+                                                Width="24" Visibility="Visible" Grid.Column="0" Grid.Row="8" Margin="130,10,0,15" RenderTransformOrigin="2.949,0.131"   />
+
+        <Button Name="btnModificar" Content="Modificar" Grid.Column="1" Grid.Row="8" Width="150" Height="40">
+
+        </Button>
+        <iconPacks:PackIconMaterial Kind="StarCog"
+                                                VerticalAlignment="Center" 
+                                                HorizontalAlignment="Left" 
+                                                Foreground="White"
+                                                Name="icon2"
+                                                Width="24" Visibility="Visible" Grid.Column="1" Grid.Row="8" Margin="130,10,0,15" RenderTransformOrigin="2.949,0.131"   />
+
+        <Button Name="btnEliminar" Content="Eliminar" Grid.Column="2" Grid.Row="8" Width="150" Height="40">
+
+        </Button>
+        <iconPacks:PackIconMaterial Kind="StarMinus" 
+                                                VerticalAlignment="Center" 
+                                                HorizontalAlignment="Left" 
+                                                Foreground="White"
+                                                Name="icon3"
+                                                Width="24" Visibility="Visible" Grid.Column="2" Grid.Row="8" Margin="130,10,0,15" RenderTransformOrigin="2.949,0.131"   />
+
+
+        <Button Name="btnsalir" Content="Salir" Grid.Column="3" Grid.Row="8" Width="150" Height="40">
+
+        </Button>
+        <iconPacks:PackIconMaterial Kind="ExitToApp" 
+                                                VerticalAlignment="Center" 
+                                                HorizontalAlignment="Left" 
+                                                Foreground="White"
+                                                Name="icon4"
+                                                Width="24" Visibility="Visible" Grid.Column="3" Grid.Row="8" Margin="130,10,0,15" RenderTransformOrigin="2.949,0.131"   />
+
+
     </Grid>
 </Window>
