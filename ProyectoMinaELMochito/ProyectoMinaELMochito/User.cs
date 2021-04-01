@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 using System.Data.SqlClient;
 using System.Configuration;
+using System.Data;
 
 namespace ProyectoMinaELMochito
 {
@@ -93,6 +94,42 @@ namespace ProyectoMinaELMochito
                 // Cerrar la conexión
                 sqlConnection.Close();
             }
+        }
+
+
+       public   List<User> MostrarUsuario()
+        {
+            List<User> users = new List<User>();
+            try
+            {
+                // Query de selección
+                string query = @"select	id,nombreCompleto,username, password,rol,estado from Usuarios.Usuario";
+
+                // Establecer la conexión
+                sqlConnection.Open();
+
+                // Crear el comando SQL
+                SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
+
+                // Obtener los datos de las habitaciones
+                using (SqlDataReader rdr = sqlCommand.ExecuteReader())
+                {
+                    while (rdr.Read())
+                        users.Add(new User { Id = Convert.ToInt32(rdr["id"]), NombreCompleto = rdr["nombreCompleto"].ToString(), Username = rdr["username"].ToString(), Password=rdr["password"].ToString(), Rol = rdr["rol"].ToString(), Estado =Convert.ToBoolean( rdr["estado"] )});
+                }
+
+                return users;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            finally
+            {
+                // Cerrar la conexión
+                sqlConnection.Close();
+            }
+
         }
     }
 }
