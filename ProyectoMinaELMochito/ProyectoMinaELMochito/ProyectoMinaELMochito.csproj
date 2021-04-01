@@ -141,6 +141,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="BdMinaMochito.sql" />
+    <Resource Include="ImagesMinerales\cobre.png" />
+    <Resource Include="ImagesMinerales\logo.png" />
+    <Resource Include="ImagesMinerales\oro.png" />
+    <Resource Include="ImagesMinerales\plata.png" />
+    <Resource Include="ImagesMinerales\plomo.png" />
+    <Resource Include="ImagesMinerales\Zinc.png" />
     <Resource Include="logo.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

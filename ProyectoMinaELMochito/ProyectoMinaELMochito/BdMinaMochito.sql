@@ -193,7 +193,7 @@ Create table Usuarios.Usuario
 	nombreCompleto VARCHAR(255) NOT NULL,
 	username VARCHAR(100) NOT NULL,
 	password VARCHAR(100) NOT NULL,
-	rol char (25),
+	rol VARCHAR (25),
 	estado BIT NOT NULL,
 
 	CONSTRAINT PK_Usuario_id
