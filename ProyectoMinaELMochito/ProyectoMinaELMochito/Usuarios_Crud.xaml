@@ -41,7 +41,7 @@
         <TextBox Name="txtusername" Grid.Row="3" Grid.Column="1"/>
         <Label Name="lbPassword" Content="Contraseña" Grid.Row="4" Grid.Column="0" HorizontalAlignment="Center"/>
         <PasswordBox Name="pssPassword" Grid.Row="4" Grid.Column="1"/>
-        <Label Name="lbRol" Content="Rol" Grid.Row="5" Grid.Column="0" HorizontalAlignment="Center"/>
+        <Label Name="lbRol" Content="Rol" Grid.Row="5" Grid.Column="0" HorizontalAlignment="Center" />
         <ComboBox Name="cmbRol" Grid.Column="1" Grid.Row="5" >
             <ComboBoxItem>ADMINISTRADOR</ComboBoxItem>
             <ComboBoxItem>EMPLEADODETURNO</ComboBoxItem>
@@ -58,7 +58,7 @@
   
         </DataGrid>
 
-        <Button Name="btnIngresar" Content="Insertar" Grid.Column="0" Grid.Row="8" Width="150" Height="40">
+        <Button Name="btnIngresar" Click="btnIngresar_Click" Content="Insertar" Grid.Column="0" Grid.Row="8" Width="150" Height="40">
             
         </Button>
         <iconPacks:PackIconMaterial Kind="StarPlus" 

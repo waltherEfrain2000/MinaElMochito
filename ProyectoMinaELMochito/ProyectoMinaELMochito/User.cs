@@ -96,7 +96,10 @@ namespace ProyectoMinaELMochito
             }
         }
 
-
+        /// <summary>
+        /// aqui creamos una lista con los datos de los usuarios existentes
+        /// </summary>
+        /// <returns>los datos de los usuarios</returns>
        public   List<User> MostrarUsuario()
         {
             List<User> users = new List<User>();
@@ -131,5 +134,38 @@ namespace ProyectoMinaELMochito
             }
 
         }
+
+
+        public void CrearUsuario(User user)
+        {
+            try
+            {
+                string query = @"INSERT INTO Usuarios.Usuario (nombreCompleto, username, password, rol,estado)
+                                 VALUES (@nombreCompleto, @username, @password,@rol,@estado)";
+
+                sqlConnection.Open();
+
+                SqlCommand sqlCommand= new SqlCommand(query, sqlConnection);
+
+                sqlCommand.Parameters.AddWithValue("@nombreCompleto", user.NombreCompleto);
+                sqlCommand.Parameters.AddWithValue("@username", user.Username);
+                sqlCommand.Parameters.AddWithValue("@password", user.Password);
+                sqlCommand.Parameters.AddWithValue("@rol", user.Rol);
+                sqlCommand.Parameters.AddWithValue("@estado", user.Estado);
+
+                sqlCommand.ExecuteNonQuery();
+
+            }
+            catch (Exception e)
+            {
+
+                throw e;
+            }
+            finally
+            {
+                sqlConnection.Close();
+            }
+        }
+       
     }
 }
