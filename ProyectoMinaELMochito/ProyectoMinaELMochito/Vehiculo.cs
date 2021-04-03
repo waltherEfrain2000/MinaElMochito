@@ -68,6 +68,62 @@ namespace ProyectoMinaELMochito
 
             }
         }
+        public void ActualizarVehiculo(Vehiculo vehiculo)
+        {
+            try
+            {
+                string query = @"UPDATE	Minas.Vehiculo SET color = @color,estado = @estado Where idVehiculo  = @idVehiculo";
+
+                sqlConnection.Open();
+
+
+                SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
+
+                sqlCommand.Parameters.AddWithValue("@idVehiculo", vehiculo.VehiculoID);
+                sqlCommand.Parameters.AddWithValue("@color", vehiculo.Color);
+                sqlCommand.Parameters.AddWithValue("@estado", vehiculo.Estado);
+
+                sqlCommand.ExecuteNonQuery();
+            }
+            catch (Exception e)
+            {
+
+                throw e;
+            }
+            finally
+            {
+                sqlConnection.Close();
+
+            }
+        }
+
+        public void EliminarVehiculo(Vehiculo vehiculo)
+        {
+            try
+            {
+                string query = @"UPDATE	Minas.Vehiculo SET estado = @estado Where idVehiculo  = @idVehiculo";
+
+                sqlConnection.Open();
+
+                SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
+
+                sqlCommand.Parameters.AddWithValue("@idVehiculo", vehiculo.VehiculoID);
+                sqlCommand.Parameters.AddWithValue("@estado", 3);
+
+                sqlCommand.ExecuteNonQuery();
+
+            }
+            catch (Exception e)
+            {
+
+                throw e;
+            }
+            finally
+            {
+                sqlConnection.Close();
+
+            }
+        }
 
 
     }
