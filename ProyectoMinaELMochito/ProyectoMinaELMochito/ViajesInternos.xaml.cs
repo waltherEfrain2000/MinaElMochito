@@ -87,5 +87,108 @@ namespace ProyectoMinaELMochito
             }
         }
 
+        //Limpiar las cajas de texto
+        private void LimpiarCasillas()
+        {
+            txtIdEmpleado.Text = string.Empty;
+            txtIdVehiculo.Text = string.Empty;
+            txtnombreEmpleado.Text = string.Empty;
+            txtVehiculo.Text = string.Empty;
+        }
+
+        //Obtener los datos de las cajas de texto
+        private void ObtenerDatos()
+        {
+            viajeinterno.IdEmpleado = Convert.ToInt32(txtIdEmpleado.Text);
+            viajeinterno.IdVehiculo = Convert.ToInt32(txtIdVehiculo.Text);
+        }
+
+        //Valores formulario desde el objeto
+        private void ValoresFormularioObjeto()
+        {
+            txtIdEmpleado.Text = viajeinterno.IdEmpleado.ToString();
+            txtIdVehiculo.Text = viajeinterno.IdVehiculo.ToString();
+            txtnombreEmpleado.Text = viajeinterno.NombreEmpleado;
+            txtVehiculo.Text = viajeinterno.Vehiculo;
+        }
+
+        //Vamos a verificar que todas las casillas estén llenas
+        private bool VerificacionCasillas()
+        {
+            if (txtIdEmpleado.Text == string.Empty || txtIdVehiculo.Text == string.Empty)
+            {
+                MessageBoxResult result = MessageBox.Show("Por favor!, Verifique que las casillas contengan la infromación requerida!",
+                    "Confirmar", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return false;
+            }
+
+            //Si hay valores en las casillas entonces se retornará verdadero
+            return true;
+        }
+
+        /// <summary>
+        /// En el momento en que el usuario decida presionar el botón siguiente 
+        /// automáticamente se agregarán los datos en la tabla de viajeInterno para
+        /// así guardar el registro de quién y en qué vehículo se exportará el material
+        /// </summary>
+        private void btnSiguiente_Click(object sender, RoutedEventArgs e)
+        {
+            //Primero verificamos que las casillas no estén vacías
+            if (VerificacionCasillas())
+            {
+                try
+                {
+                    //Vamos a obtener los valores ingresados para la tabla
+                    ObtenerDatos();
+
+                    //Insertamos los valores en la tabla
+                    viajeinterno.AgregarDatosAViajeInterno(viajeinterno);
+
+                    //Si los datos se intertarón mostrar un mensje
+                    MessageBox.Show("Los datos han sido ingresados correctamente!");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Ha ocurrido un error al momento de insertar los datos...");
+                    Console.WriteLine(ex.Message);
+                }
+                finally
+                {
+                    LimpiarCasillas();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Este método va a obtener las propiedades del datagrid
+        /// y las va a pasar a los textBox
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ObtienePropiedades(ViajeInterno viajeInterno)
+        {
+            this.txtIdEmpleado.Text = Convert.ToString(viajeinterno.IdEmpleado);
+            this.txtnombreEmpleado.Text = Convert.ToString(viajeinterno.NombreEmpleado);
+            //this.txtIdVehiculo.Text = Convert.ToString(viajeInterno.IdVehiculo);
+            //this.txtVehiculo.Text = Convert.ToString(viajeInterno.Vehiculo);
+        }
+
+        private void MostarEnTexBoxContenido(object sender, SelectionChangedEventArgs e)
+        {
+            DataGrid dataGrid = (DataGrid)sender;
+            DataRowView row_selected = dataGrid.SelectedItem as DataRowView;
+
+            //Validar que realmente se esta seleccionando un elemento del datagrid
+            if (row_selected != null)
+            {
+                txtIdEmpleado.Text = row_selected["Id Empleado"].ToString();
+                txtnombreEmpleado.Text = row_selected["Nombre"].ToString();
+            }
+            else
+            {
+                MessageBox.Show("Por favor seleccione una fila del datagrid");
+            }
+        }
+
     }
 }
