@@ -95,7 +95,7 @@
                                                 x:Name="icon2"
                                                 Width="24" Visibility="Visible" Grid.Column="1" Grid.Row="8" Margin="130,10,0,15" RenderTransformOrigin="2.949,0.131"   />
 
-        <Button x:Name="btnEliminar" Content="Eliminar" Grid.Column="2" Grid.Row="8" Width="150" Height="40"/>
+        <Button x:Name="btnEliminar" Content="Eliminar" Grid.Column="2" Grid.Row="8" Width="150" Height="40" Click="btnEliminar_Click"/>
         <iconPacks:PackIconMaterial Kind="StarMinus" 
                                                 VerticalAlignment="Center" 
                                                 HorizontalAlignment="Left" 
@@ -104,7 +104,7 @@
                                                 Width="24" Visibility="Visible" Grid.Column="2" Grid.Row="8" Margin="130,10,0,15" RenderTransformOrigin="2.949,0.131"   />
 
 
-        <Button x:Name="btnsalir" Content="Salir" Grid.Column="3" Grid.Row="8" Width="150" Height="40"/>
+        <Button x:Name="btnsalir" Content="Salir" Grid.Column="3" Grid.Row="8" Width="150" Height="40" Click="btnsalir_Click"/>
         <iconPacks:PackIconMaterial Kind="ExitToApp" 
                                                 VerticalAlignment="Center" 
                                                 HorizontalAlignment="Left" 

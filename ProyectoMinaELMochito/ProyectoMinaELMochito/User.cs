@@ -201,6 +201,37 @@ namespace ProyectoMinaELMochito
                 sqlConnection.Close();
             }
         }
-       
+
+
+
+        public void InvalidarUsuario(User user)
+        {
+            try
+            {
+
+                string query = @"UPDATE Usuarios.Usuario
+                                 SET estado=@estado
+                                 WHERE id = @id";
+
+                sqlConnection.Open();
+                SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
+
+                sqlCommand.Parameters.AddWithValue("@id", user.Id);
+  
+                sqlCommand.Parameters.AddWithValue("@estado", user.Estado);
+
+                sqlCommand.ExecuteNonQuery();
+            }
+            catch (Exception e)
+            {
+
+                throw e;
+            }
+            finally
+            {
+                sqlConnection.Close();
+            }
+        }
+
     }
 }

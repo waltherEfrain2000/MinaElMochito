@@ -130,6 +130,21 @@ namespace ProyectoMinaELMochito
 
         }
 
+        private void ObtenerValoresFormularioInabilitar()
+        {
+
+            user.Id = Convert.ToInt32(txtid.Text);
+         
+            if (cmbEstado.SelectedIndex == 0)
+            {
+                MessageBox.Show("El usuario ya esta invalidado, no se puede hacer nada");
+        
+            }
+            else 
+
+                user.Estado = false;
+
+        }
         private void limpiar()
         {
             txtnombre.Text = string.Empty;
@@ -238,6 +253,13 @@ namespace ProyectoMinaELMochito
                 txtusername.Text = dataRowView["Nombre de Usuario"].ToString();
                 pssPassword.Password = dataRowView["Contraseña"].ToString();
 
+                if (dataRowView["Rol"].ToString()== "ADMINISTRADOR")
+                {
+                    cmbRol.SelectedIndex = 0;
+                }
+                cmbRol.SelectedIndex = 1;
+
+               
             }
 
         }
@@ -282,5 +304,37 @@ namespace ProyectoMinaELMochito
             }
         }
 
+        private void btnEliminar_Click(object sender, RoutedEventArgs e)
+        {
+            if (VerificarValores())
+            {
+                try
+                {
+                    ObtenerValoresFormularioInabilitar();
+
+                    user.InvalidarUsuario(user);
+
+                    MessageBox.Show("el Usuario se deshabilito correctamente!");
+
+                    limpiar();
+
+                }
+                catch (Exception ex)
+                {
+
+                    MessageBox.Show($"Error al momento de deshabilitar el Usuario...{ex}");
+                }
+                finally
+                {
+                    CargarDatos();
+                    limpiar();
+                }
+            }
+        }
+
+        private void btnsalir_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
     }
 }
