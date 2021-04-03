@@ -58,12 +58,12 @@
         </DataGrid>
 
         <Button x:Name="btnAgregar" Content="Agregar" Grid.Column="4" Grid.Row="1" Margin="15 5" Click="btnAgregar_Click"  />
-        <Button x:Name="btnModificar" Content="Modificar" Grid.Column="4" Grid.Row="3"  Margin="15 5" Click="btnModificar_Click"/>
-        <Button x:Name="btnEliminar" Content="eliminar" Grid.Column="4" Grid.Row="5"  Margin="15 5" Click="btnEliminar_Click"/>
-        <Button x:Name="btnLimpiar" Content="Limpiar" Grid.Column="4" Grid.Row="9" Margin="40 5" Click="btnLimpiar_Click" />
-        <Button x:Name="btnAceptarModificacion" Content="Aceptar" Grid.Column="3" Grid.Row="3"  Margin="15 5" Click="btnAceptarModificacion_Click" Visibility="Hidden"/>
-        <Button x:Name="btnCancelarModificacion" Content="Cancelar" Grid.Column="5" Grid.Row="5"  Margin="15 5" Click="btnCancelarModificacion_Click" Visibility="Hidden" />
-        <Button x:Name="btnAceptarEliminacion" Content="Aceptar" Grid.Column="3" Grid.Row="3"  Margin="15 5" Click="btnAceptarEliminacion_Click" Visibility="Hidden"/>
-        <Button x:Name="btnCancelarEliminacion" Content="Cancelar" Grid.Column="5" Grid.Row="5"  Margin="15 5" Click="btnCancelarEliminacion_Click" Visibility="Hidden" />
+        <Button x:Name="btnModificar" Content="Modificar" Grid.Column="4" Grid.Row="3"  Margin="15 5" />
+        <Button x:Name="btnEliminar" Content="eliminar" Grid.Column="4" Grid.Row="5"  Margin="15 5" />
+        <Button x:Name="btnLimpiar" Content="Limpiar" Grid.Column="4" Grid.Row="9" Margin="40 5"/>
+        <Button x:Name="btnAceptarModificacion" Content="Aceptar" Grid.Column="3" Grid.Row="3"  Margin="15 5"  Visibility="Hidden"/>
+        <Button x:Name="btnCancelarModificacion" Content="Cancelar" Grid.Column="5" Grid.Row="5"  Margin="15 5"  Visibility="Hidden" />
+        <Button x:Name="btnAceptarEliminacion" Content="Aceptar" Grid.Column="3" Grid.Row="3"  Margin="15 5" Visibility="Hidden"/>
+        <Button x:Name="btnCancelarEliminacion" Content="Cancelar" Grid.Column="5" Grid.Row="5"  Margin="15 5" Visibility="Hidden" />
     </Grid>
 </Window>
