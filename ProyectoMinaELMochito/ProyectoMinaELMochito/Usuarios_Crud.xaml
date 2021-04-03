@@ -52,10 +52,18 @@
             <ComboBoxItem>Activo</ComboBoxItem>
         </ComboBox>
 
-
-        <DataGrid Name="dtgriduser" Grid.Row="2" Grid.Column="2" Grid.RowSpan="5" Grid.ColumnSpan="2" Margin="24,0,23,0">
-  
-  
+        <DataGrid Name="dtgriduser" Grid.Row="2" Grid.Column="2" Grid.RowSpan="5" Grid.ColumnSpan="2" Margin="0,0,23,0" HorizontalAlignment="Right" Width="353">
+            <DataGrid.Resources>
+                <Style TargetType="{x:Type DataGridColumnHeader}">
+                    <Setter Property="Background" Value="#00afb9"/>
+                    <Setter Property="FontWeight" Value="SemiBold"/>
+                    <Setter Property="BorderThickness" Value="0,0,1,2"/>
+                    <Setter Property="BorderBrush" Value="Black"/>
+                </Style>
+                <Style TargetType="{x:Type DataGridRow}">
+                    <Setter Property="Background" Value="WhiteSmoke"/>
+                </Style>
+            </DataGrid.Resources>
         </DataGrid>
 
         <Button Name="btnIngresar" Click="btnIngresar_Click" Content="Insertar" Grid.Column="0" Grid.Row="8" Width="150" Height="40">

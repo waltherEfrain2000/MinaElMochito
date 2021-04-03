@@ -77,14 +77,18 @@ namespace ProyectoMinaELMochito
             user.Username = txtnombre.Text;
             user.Password = pssPassword.Password;
             user.Rol = cmbRol.SelectedItem.ToString();
-            //if (cmbRol.SelectedItem.ToString() == "ADMINISTRADOR")
-            //{
-            //    user.Rol = "ADMINISTRADOR";
-            //}
-            //user.Rol = "EMPLEADODETURNO";
-
-            if (cmbEstado.SelectedItem == "Inactivo")
+            if (cmbRol.SelectedIndex == 0)
             {
+                MessageBox.Show("sera un admin");
+                user.Rol = "ADMINISTRADOR";
+            }
+            else { 
+            MessageBox.Show("sera un empleado normal");
+            user.Rol = "EMPLEADODETURNO";
+            }
+            if (cmbEstado.SelectedIndex == 0)
+            {
+                MessageBox.Show("sera un empleado inactivo");
                 user.Estado = false;
             }
             else
@@ -92,7 +96,15 @@ namespace ProyectoMinaELMochito
   
         }
 
+        private void limpiar()
+        {
+            txtnombre.Text = string.Empty;
+            txtusername.Text = String.Empty;
+            pssPassword.Password = String.Empty;
+            cmbEstado.SelectedIndex = -1;
+            cmbRol.SelectedIndex = -1;
 
+        }
 
         private void btnIngresar_Click(object sender, RoutedEventArgs e)
         {
@@ -110,6 +122,12 @@ namespace ProyectoMinaELMochito
                 {
 
                     MessageBox.Show( $"{f}");
+                }
+                finally
+                {
+                    limpiar();
+                    ObtenerUsuarios();
+                    
                 }
             }
         }
