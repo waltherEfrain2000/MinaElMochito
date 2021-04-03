@@ -114,7 +114,7 @@ namespace ProyectoMinaELMochito
                 // Crear el comando SQL
                 SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
 
-                // Obtener los datos de las habitaciones
+                // Obtener los datos de los usuarios
                 using (SqlDataReader rdr = sqlCommand.ExecuteReader())
                 {
                     while (rdr.Read())
@@ -155,6 +155,41 @@ namespace ProyectoMinaELMochito
 
                 sqlCommand.ExecuteNonQuery();
 
+            }
+            catch (Exception e)
+            {
+
+                throw e;
+            }
+            finally
+            {
+                sqlConnection.Close();
+            }
+        }
+        /// <summary>
+        /// aqui modificamos el usuario
+        /// </summary>
+        /// <param name="user"></param>
+        public void ModificarUsuario(User user)
+        {
+            try
+            {
+
+                string query = @"UPDATE Usuarios.Usuario
+                                 SET nombreCompleto = @nombreCompleto, username = @username,  password = @password, rol=@rol,estado=@estado
+                                 WHERE id = @id";
+
+                sqlConnection.Open();
+                SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
+
+                sqlCommand.Parameters.AddWithValue("@id", user.Id);
+                sqlCommand.Parameters.AddWithValue("@nombreCompleto", user.NombreCompleto);
+                sqlCommand.Parameters.AddWithValue("@username", user.Username);
+                sqlCommand.Parameters.AddWithValue("@password", user.Password);
+                sqlCommand.Parameters.AddWithValue("@rol", user.Rol);
+                sqlCommand.Parameters.AddWithValue("@estado", user.Estado);
+
+                sqlCommand.ExecuteNonQuery();  
             }
             catch (Exception e)
             {
