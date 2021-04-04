@@ -52,7 +52,9 @@
 
             </DataGrid.Columns>
         </DataGrid>
-        <DataGrid Name ="dgvVehiculos" HorizontalAlignment="Left" Height="197" Margin="121,57,0,0" Grid.Row="1" VerticalAlignment="Top" Width="397" Grid.ColumnSpan="2" Grid.RowSpan="2" Grid.Column="1">
+        <DataGrid Name ="dgvVehiculos" HorizontalAlignment="Left" Height="197" Margin="121,57,0,0"
+                  Grid.Row="1" VerticalAlignment="Top" Width="397" Grid.ColumnSpan="2" Grid.RowSpan="2" 
+                  Grid.Column="1">
 
             <DataGrid.Resources>
                 <Style TargetType="{x:Type DataGridColumnHeader}">

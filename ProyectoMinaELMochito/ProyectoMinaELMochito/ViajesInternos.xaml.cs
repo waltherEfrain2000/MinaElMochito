@@ -33,7 +33,6 @@ namespace ProyectoMinaELMochito
         /// Muestra la tabla en donde se encuentran los empleados
         /// de la mina, de aquí el usuario seleccionará uno para el viaje
         /// </summary>
-        /// <param name="empleado">El id del empleado</param>
         private void CargarDatos(object sender, RoutedEventArgs e)
         {
             try
