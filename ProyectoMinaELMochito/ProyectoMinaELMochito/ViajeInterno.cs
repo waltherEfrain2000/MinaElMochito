@@ -14,7 +14,7 @@ namespace ProyectoMinaELMochito
     class ViajeInterno
     {
         //Agregar las variables miembro que contienen la conexión con la base de datos
-        private static string connectionString = ConfigurationManager.ConnectionStrings["Proyecto___Mina_El_Mochito.Properties.Settings.MinaConnectionString"].ConnectionString;
+        private static string connectionString = ConfigurationManager.ConnectionStrings["ProyectoMinaELMochito.Properties.Settings.MinaConnectionString"].ConnectionString;
         private SqlConnection sqlConnection = new SqlConnection(connectionString);
 
         //Propiedades 
