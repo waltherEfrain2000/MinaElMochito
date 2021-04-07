@@ -1,0 +1,97 @@
+﻿<Window x:Class="ProyectoMinaELMochito.Inventario_Mineral"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+        xmlns:local="clr-namespace:ProyectoMinaELMochito"
+        mc:Ignorable="d"
+        d:DesignHeight="450" d:DesignWidth="800" 
+        d:DataContext="{d:DesignInstance local:Inventario_Mineral}"
+        AllowsTransparency="True" Background="Transparent" 
+        WindowStyle="None" ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen">
+
+    <Grid Background="#f2edf6f9">
+
+        <Label Content="Inventarios de los minerales por KIlo" HorizontalAlignment="Center" FontFamily="helvetica" FontSize="16" FontWeight="ExtraBold" Margin="236,38,265,-38" Foreground="Black"  />
+
+        <Border CornerRadius="10" >
+            <Border.Effect>
+                <BlurEffect/>
+            </Border.Effect>
+            <Border.Background>
+                <LinearGradientBrush >
+                    <GradientStop Color="#f2edf6f9"  />
+
+
+                </LinearGradientBrush>
+            </Border.Background>
+
+
+        </Border>
+        <Label Content="Inventario de los minerales por Kilo" HorizontalAlignment="Center" FontFamily="helvetica" FontSize="16" FontWeight="ExtraBold" Margin="236,38,265,-38" Foreground="Black"  />
+        <StackPanel Orientation="Vertical" Margin="412,120,50,24" RenderTransformOrigin="0.537,0.657">
+            <Label Content="Datos" HorizontalAlignment="Center" Name="lbdatos" FontFamily="helvetica" FontWeight="Heavy"/>
+            <Label Name="lbmineral"/>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
+                </Grid.RowDefinitions>
+                <Label Content=" Peso en kilos " HorizontalAlignment="Center" Grid.Column="0" Grid.Row="0" FontFamily="helvetica" FontWeight="Heavy"/>
+                <TextBox Name="txtpeso" Grid.Row="0" Grid.Column="1"  BorderThickness="0" FontFamily="helvetica" FontStretch="ExtraCondensed" FontStyle="Italic"
+                           Foreground="Black"
+                           Background="Transparent"
+                          HorizontalContentAlignment="Left" />
+                <Label Content=" Fecha de Modificacion " HorizontalAlignment="Center" Grid.Column="0" Grid.Row="1" FontFamily="helvetica" FontWeight="Heavy"/>
+                <TextBox Name="txtfecha" Grid.Row="1" Grid.Column="1" BorderThickness="0" FontFamily="helvetica" FontStretch="ExtraCondensed" FontStyle="Italic"
+                           Foreground="Black"
+                           Background="Transparent"
+                          HorizontalContentAlignment="Left"/>
+                <Label Content=" Total En $" HorizontalAlignment="Center" Grid.Column="0" Grid.Row="2" FontFamily="helvetica" FontWeight="Heavy"/>
+                <TextBox Name="txttotal" Grid.Row="2" Grid.Column="1" BorderThickness="0" FontFamily="helvetica" FontStretch="ExtraCondensed" FontStyle="Italic"
+                           Foreground="Black"
+                           Background="Transparent"
+                          HorizontalContentAlignment="Left" Focusable="True"  />
+
+            </Grid>
+            <Image Height="120" x:Name="imgmineral" Margin="125,0,0,0" RenderTransformOrigin="0.495,-0.011" />
+            <Label x:Name="LblDate" HorizontalContentAlignment="Center" Height="27" Margin="184,0,-127,0" RenderTransformOrigin="0.602,0.481" HorizontalAlignment="Left" Width="281" >
+                <Label.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform AngleX="-2.386"/>
+                        <RotateTransform/>
+                        <TranslateTransform X="0.479"/>
+                    </TransformGroup>
+                </Label.RenderTransform>
+            </Label>
+        </StackPanel>
+        <lvc:PieChart LegendLocation="Bottom" DataClick="Chart_OnDataClick" Hoverable="False" DataTooltip="{x:Null}" Margin="-175,81,250,0">
+            <lvc:PieChart.Series>
+                <lvc:PieSeries Title="Plata" Values="1" DataLabels="True" Name="pieplata" MouseEnter="pieplata_MouseEnter"  
+                               LabelPoint="{Binding PointLabel}"/>
+                <lvc:PieSeries Title="Plomo" Values="1" DataLabels="True" Name="pieplomo" 
+                               LabelPoint="{Binding PointLabel}"/>
+                <lvc:PieSeries Title="oro" Values="6" DataLabels="True" Name="pieoro" 
+                               LabelPoint="{Binding PointLabel}"/>
+                <lvc:PieSeries Title="Zinc" Values="2" DataLabels="True" Name="pieZinc" 
+                               LabelPoint="{Binding PointLabel}"/>
+                <lvc:PieSeries Title="Cobre" Values="2" DataLabels="True"  Name="pieCobre"  
+                               LabelPoint="{Binding PointLabel}"/>
+            </lvc:PieChart.Series>
+        </lvc:PieChart>
+
+
+    </Grid>
+
+</Window>
