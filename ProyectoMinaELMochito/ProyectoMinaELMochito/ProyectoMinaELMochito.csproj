@@ -40,12 +40,6 @@
     <Reference Include="FluentWPF, Version=0.9.0.1, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\FluentWPF.0.9.0\lib\net45\FluentWPF.dll</HintPath>
     </Reference>
-    <Reference Include="LiveCharts, Version=0.9.7.0, Culture=neutral, PublicKeyToken=0bc1f845d1ebb8df, processorArchitecture=MSIL">
-      <HintPath>..\packages\LiveCharts.0.9.7\lib\net45\LiveCharts.dll</HintPath>
-    </Reference>
-    <Reference Include="LiveCharts.Wpf, Version=0.9.7.0, Culture=neutral, PublicKeyToken=0bc1f845d1ebb8df, processorArchitecture=MSIL">
-      <HintPath>..\packages\LiveCharts.Wpf.0.9.7\lib\net45\LiveCharts.Wpf.dll</HintPath>
-    </Reference>
     <Reference Include="MahApps.Metro.IconPacks.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=0c0d510f9915137a, processorArchitecture=MSIL">
       <HintPath>..\packages\MahApps.Metro.IconPacks.Material.4.8.0\lib\net47\MahApps.Metro.IconPacks.Core.dll</HintPath>
     </Reference>
@@ -97,20 +91,19 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Inventario_Mineral.xaml.cs">
-      <DependentUpon>Inventario_Mineral.xaml</DependentUpon>
+    <Compile Include="Empleado.cs" />
+    <Compile Include="Empleados.xaml.cs">
+      <DependentUpon>Empleados.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Mineralinventario.cs" />
+    <Compile Include="menu.xaml.cs">
+      <DependentUpon>menu.xaml</DependentUpon>
+    </Compile>
     <Compile Include="User.cs" />
-    <Compile Include="Vehiculo.cs" />
-    <Compile Include="Vehiculos.xaml.cs">
-      <DependentUpon>Vehiculos.xaml</DependentUpon>
-    </Compile>
     <Page Include="ButtonModern.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Inventario_Mineral.xaml">
+    <Page Include="Empleados.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -126,7 +119,7 @@
       <DependentUpon>Login.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Vehiculos.xaml">
+    <Page Include="menu.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -160,12 +153,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="BdMinaMochito.sql" />
-    <Resource Include="ImagesMinerales\cobre.png" />
-    <Resource Include="ImagesMinerales\logo.png" />
-    <Resource Include="ImagesMinerales\oro.png" />
-    <Resource Include="ImagesMinerales\plata.png" />
-    <Resource Include="ImagesMinerales\plomo.png" />
-    <Resource Include="ImagesMinerales\Zinc.png" />
     <Resource Include="logo.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

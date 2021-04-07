@@ -1,0 +1,81 @@
+﻿<Window x:Class="ProyectoMinaELMochito.Empleados"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ProyectoMinaELMochito"
+        mc:Ignorable="d"
+        Title="Empleados" Height="450" Width="900">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        <ColumnDefinition Width="*" />
+    </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Label Content="Empleados" Grid.ColumnSpan="4" HorizontalAlignment="Center" FontSize="20" />
+
+        <Label Content="Empleado ID" Grid.Row="1" FontSize="15" Margin="5" />
+        <Label Content="Identidad" Grid.Row="2" FontSize="15" Margin="5" />
+        <Label Content="Nombre Completo" Grid.Row="3" FontSize="15" Margin="5" />
+        <Label Content="Edad" Grid.Row="4" FontSize="15" Margin="5" />
+        <Label Content="Genero" Grid.Row="5" FontSize="15" Margin="5" />
+        <Label Content="Cargo" Grid.Row="6"  FontSize="15" Margin="5" />
+        <Label Content="Salario" Grid.Row="7" FontSize="15" Margin="5" />
+        <Label Content="Direccion" Grid.Row="8" FontSize="15" Margin="5"  />
+
+        <TextBox Name="txtEmpleadoID" Grid.Row="1" Grid.Column="1" FontSize="15" Margin="7" IsReadOnly="True" />
+        <TextBox Name="txtIdentidad" Grid.Row="2" Grid.Column="1" FontSize="15" Margin="7"  KeyDown="txtIdentidad_KeyDown"/>
+        <TextBox Name="txtNombreCompleto" Grid.Row="3" Grid.Column="1" FontSize="15" Margin="7" />
+        <TextBox Name="txtEdad" Grid.Row="4" Grid.Column="1" FontSize="15" Margin="7" KeyDown="txtEdad_KeyDown" />
+
+        <TextBox Name="txtSalario" Grid.Row="7" Grid.Column="1" FontSize="15" Margin="7" KeyDown="txtSalario_KeyDown" />
+        <TextBox Name="txtDireccion" Grid.Row="8" Grid.Column="1" FontSize="15" Margin="7" Grid.RowSpan="2"/>
+
+        <ComboBox Name="cmbGenero" Grid.Row="5" Grid.Column="1" FontSize="15" Margin="7" />
+        <ComboBox Name="cmbCargo" Grid.Row="6" Grid.Column="1" FontSize="15" Margin="7" />
+
+        <Button x:Name="btnAgregar" Content="Agregar" Grid.Column="4" Grid.Row="2" Margin="15 5" Click="btnAgregar_Click"  />
+        <Button x:Name="btnModificar" Content="Modificar" Grid.Column="4" Grid.Row="4"  Margin="15 5" Click="btnModificar_Click"/>
+        <Button x:Name="btnAceptarModificacion" Content="Aceptar" Grid.Column="4" Grid.Row="3"  Margin="15 5" Click="btnAceptarModificacion_Click" Visibility="Hidden"/>
+        <Button x:Name="btnCancelarModificacion" Content="Cancelar" Grid.Column="4" Grid.Row="5"  Margin="15 5" Click="btnCancelarModificacion_Click" Visibility="Hidden" />
+
+        <Button x:Name="btnEliminar" Content="eliminar" Grid.Column="4" Grid.Row="5"  Margin="20.4,41,9.6,10.2" Click="btnEliminar_Click" Grid.RowSpan="2"/>
+        <Button x:Name="btnAceptarEliminacion" Content="Aceptar" Grid.Column="4" Grid.Row="3"  Margin="15 5" Click="btnAceptarEliminacion_Click" Visibility="Hidden"/>
+        <Button x:Name="btnCancelarEliminacion" Content="Cancelar" Grid.Column="4" Grid.Row="5"  Margin="15 5" Click="btnCancelarEliminacion_Click" Visibility="Hidden" />
+        <Button x:Name="btnLimpiar" Content="Limpiar" Grid.Column="4" Grid.Row="9" Margin="40 5" Click="btnLimpiar_Click" />
+
+        <DataGrid Name="DgvEmpleados" Grid.Row="1" Grid.Column="2" Margin="7" Grid.ColumnSpan="2" Grid.RowSpan="9" SelectionChanged="DgvEmpleados_SelectionChanged" IsReadOnly="True" >
+
+            <DataGrid.Resources>
+                <Style TargetType="{x:Type DataGridColumnHeader}">
+                </Style>
+            </DataGrid.Resources>
+
+        </DataGrid>
+    </Grid>
+</Window>

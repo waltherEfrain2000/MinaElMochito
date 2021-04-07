@@ -26,11 +26,11 @@ namespace ProyectoMinaELMochito.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=(local)\\sqlexpress;Initial Catalog=MinaElMochito;Integrated Security=" +
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=(local)\\SQLEXPRESS;Initial Catalog=MinaElMochito;Integrated Security=" +
             "True")]
-        public string VehiculoConnection {
+        public string MinaConnectionString {
             get {
-                return ((string)(this["VehiculoConnection"]));
+                return ((string)(this["MinaConnectionString"]));
             }
         }
     }
