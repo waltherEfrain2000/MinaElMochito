@@ -102,6 +102,10 @@
     </Compile>
     <Compile Include="Mineralinventario.cs" />
     <Compile Include="User.cs" />
+    <Compile Include="Vehiculo.cs" />
+    <Compile Include="Vehiculos.xaml.cs">
+      <DependentUpon>Vehiculos.xaml</DependentUpon>
+    </Compile>
     <Page Include="ButtonModern.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -122,6 +126,10 @@
       <DependentUpon>Login.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Vehiculos.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
