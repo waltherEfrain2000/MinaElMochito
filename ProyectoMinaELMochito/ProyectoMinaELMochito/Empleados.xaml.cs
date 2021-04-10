@@ -361,26 +361,27 @@ namespace ProyectoMinaELMochito
                 }
             }
         }
-
-        private void btnCancelarModificacion_Click(object sender, RoutedEventArgs e)
+        private void MostrarBotonesPrincipales()
         {
             btnModificar.Visibility = Visibility.Visible;
             btnAgregar.Visibility = Visibility.Visible;
             btnEliminar.Visibility = Visibility.Visible;
             btnAceptarModificacion.Visibility = Visibility.Hidden;
             btnCancelarModificacion.Visibility = Visibility.Hidden;
+            btnAceptarEliminacion.Visibility = Visibility.Hidden;
+            btnCancelarEliminacion.Visibility = Visibility.Hidden;
             LimpiarCasillas();
             edicionDeCasillas(false, 0);
         }
 
+        private void btnCancelarModificacion_Click(object sender, RoutedEventArgs e)
+        {
+            MostrarBotonesPrincipales();
+        }
+
         private void btnCancelarEliminacion_Click(object sender, RoutedEventArgs e)
         {
-            btnModificar.Visibility = Visibility.Visible;
-            btnAgregar.Visibility = Visibility.Visible;
-            btnEliminar.Visibility = Visibility.Visible;
-            btnAceptarModificacion.Visibility = Visibility.Hidden;
-            btnCancelarModificacion.Visibility = Visibility.Hidden;
-            LimpiarCasillas();
+            MostrarBotonesPrincipales();
         }
 
         private void btnLimpiar_Click(object sender, RoutedEventArgs e)
