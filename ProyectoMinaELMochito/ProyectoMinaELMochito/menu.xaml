@@ -39,7 +39,7 @@
 
                 <ListView FontSize="15">
 
-                    <ListViewItem Padding="1">
+                    <ListViewItem Background="#9900afb9" Padding="1">
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Foreground="White" Kind="Worker" Margin="15"/>
                             <TextBlock Text="Empleado" Foreground="White" VerticalAlignment="Center"/>
