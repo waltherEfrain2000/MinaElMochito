@@ -308,10 +308,7 @@ namespace ProyectoMinaELMochito
             BotonesCancelar();
         }
 
-        private void btnCancelarModificacion_Click_1(object sender, RoutedEventArgs e)
-        {
-            BotonesCancelar();
-        }
+     
 
         private void BotonesCancelar()
         {
@@ -325,6 +322,13 @@ namespace ProyectoMinaELMochito
             btnCancelarEliminacion.Visibility = Visibility.Hidden;
             LimpiarCasillas();
             edicionDeCasillas(false, 0);
+            DgvVehiculos.SelectedItem = null;
+        }
+
+        private void btnCancelarModificacion_Click(object sender, RoutedEventArgs e)
+        {
+            BotonesCancelar();
+            
         }
     }   
 }
