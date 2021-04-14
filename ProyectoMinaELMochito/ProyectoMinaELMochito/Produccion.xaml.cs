@@ -24,8 +24,15 @@ namespace ProyectoMinaELMochito
     /// </summary>
     public partial class Produccion : Window
     {
+        public Produccion()
+        {
+            InitializeComponent();
+
+            MostrarMinerales();
+        }
+
         //Vaiables miembro
-        //private Produccion produccion = new Produccion();
+        Producciion producciion = new Producciion();
 
         //Realizar la conexión a la base de datos
         private static string connectionString = ConfigurationManager.ConnectionStrings["ProyectoMinaELMochito.Properties.Settings.MinaConnectionString"].ConnectionString;
@@ -74,5 +81,18 @@ namespace ProyectoMinaELMochito
                 sqlConnection.Close();
             }
         }
+
+        /// <summary>
+        /// Con este método se llenará el comboBox trayendo sus datos desde
+        /// la base de datos 
+        /// </summary>
+        private void MostrarMinerales()
+        {
+            cmbMinerales.ItemsSource = producciion.LlenarComboBox();
+            cmbMinerales.DisplayMemberPath = "NombreMineral";
+            cmbMinerales.SelectedValuePath = "IdMineral";
+            
+        }
+
     }
 }

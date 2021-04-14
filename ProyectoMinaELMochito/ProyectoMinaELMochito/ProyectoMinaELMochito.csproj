@@ -113,6 +113,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Producciion.cs" />
     <Compile Include="Produccion.xaml.cs">
       <DependentUpon>Produccion.xaml</DependentUpon>
     </Compile>
