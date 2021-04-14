@@ -17,12 +17,110 @@ namespace ProyectoMinaELMochito
         private SqlConnection sqlConnection = new SqlConnection(connectionString);
 
         //Propiedades
+        public int IdViaje { get; set; }
+
         public int IdMineral { get; set; }
+
+        public decimal Peso { get; set; }
 
         public String NombreMineral { get; set; }
 
         public decimal Precio { get; set; }
 
+        //Constructores
+        public Producciion() { }
+
+        public Producciion(int numeroViaje, int numeroMineral, string tipoMineral, decimal precioMineral, decimal pesoMineral)
+        {
+            IdViaje = numeroViaje;
+            IdMineral = numeroMineral;
+            Peso = pesoMineral;
+            Precio = precioMineral;
+        }
+
+        //Métodos
+        /// <summary>
+        /// Crea una una producción según el viaje
+        /// </summary>
+        public void AgregarProduccion(Producciion producciion)
+        {
+            try
+            {
+                //Este query permitirá insertar una nueva producción
+                string queryProduccion = @"Inser Into Minas.Produccion(idViaje, idMineral, precio, peso)
+                                        Values(@idViaje, @idMineral, @precio, @peso)";
+
+                //Establecer la conexión con la base de datos
+                sqlConnection.Open();
+
+                //Crear el sqlCommand necesario
+                SqlCommand sqlCommand = new SqlCommand(queryProduccion, sqlConnection);
+
+                //Establecer los prámetros de las variables
+                sqlCommand.Parameters.AddWithValue("@idViaje", producciion.IdViaje);
+                sqlCommand.Parameters.AddWithValue("@idMineral", producciion.IdMineral);
+                sqlCommand.Parameters.AddWithValue("@precio", producciion.Precio);
+                sqlCommand.Parameters.AddWithValue("@peso", producciion.Peso);
+
+                //Ejecutar la insersición
+                sqlCommand.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                //Cerrar la conexión
+                sqlConnection.Close();
+            }
+        }
+
+        /// <summary>
+        /// Modifica solo los datos permitidos en la producción
+        /// </summary>
+        public void ModificarProduccion(Producciion producciion)
+        {
+            try
+            {
+                //Query que permitirá la actualización de datos en la tabla
+                string queryModificacion = @"Update Minas.Produccion 
+                                         Set idMineral = @idMineral, peso = @peso
+                                         Where idProduccion = @idProduccion";
+
+                //Establecer la conexión
+                sqlConnection.Open();
+
+                //Crear el sqlCommant
+                SqlCommand sqlCommand = new SqlCommand(queryModificacion, sqlConnection);
+
+                //Crear los parámetros que serán actualizados en la tabla
+                sqlCommand.Parameters.AddWithValue("@idMineral", producciion.IdMineral);
+                sqlCommand.Parameters.AddWithValue("@peso", producciion.Peso);
+
+                //Ejecutar el comando para la actualización de datos
+                sqlCommand.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                //Cerrar la conexión
+                sqlConnection.Close();
+            }
+        }
+
+        /// <summary>
+        /// Este método se encargará de abstraer los datos de la base de datos de la tabla
+        /// Minerales, este se encargará de llenar el comboBox con la abstracción del campo
+        /// descripción de esta tabla de mineral, y poder así visualizar estos elementos en 
+        /// el ComboBox
+        /// </summary>
+        /// <returns>Descripcion o tipo de Mineral</returns>
         public List<Producciion> LlenarComboBox()
         {
 
@@ -55,6 +153,39 @@ namespace ProyectoMinaELMochito
                 throw;
             }
 
+        }
+
+        public void BorrarProduccion(Producciion producciion)
+        {
+            try
+            {
+                //Query que permitirá la opción de eliminar una producción
+                string queryEliminacion = @"Delete From Minas.Produccion 
+                                      Where idProduccion = @idProduccion";
+
+                // Establecer la conexión
+                sqlConnection.Open();
+
+                //Crear el sqlCommant
+                SqlCommand sqlCommand = new SqlCommand(queryEliminacion, sqlConnection);
+
+                //Crear los parámetros que serán actualizados en la tabla
+                sqlCommand.Parameters.AddWithValue("@idViaje", producciion.IdViaje);
+
+
+                //Ejecutar el comando para la actualización de datos
+                sqlCommand.ExecuteNonQuery();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                //Cerrar la conexión
+                sqlConnection.Close();
+            }
         }
 
 
