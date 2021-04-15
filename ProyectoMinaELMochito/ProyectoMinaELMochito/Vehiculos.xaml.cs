@@ -32,8 +32,7 @@ namespace ProyectoMinaELMochito
         {
             InitializeComponent();
             MostrarVehiculo();
-            cmbEstado.Items.Add("Disponible");
-            cmbEstado.Items.Add("Reparacion");
+            MostrarEstados();
         }
 
         private void DgvVehiculos_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -328,7 +327,13 @@ namespace ProyectoMinaELMochito
         private void btnCancelarModificacion_Click(object sender, RoutedEventArgs e)
         {
             BotonesCancelar();
-            
+        }
+        private void MostrarEstados()
+        {
+            cmbEstado.ItemsSource = vehiculo.LlenarComboBoxEstados();
+            cmbEstado.DisplayMemberPath = "NombreEstado";
+            cmbEstado.SelectedValuePath = "Estado";
+
         }
     }   
 }
