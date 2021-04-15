@@ -5,13 +5,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
 using System.Configuration;
-
+using System.Data;
 namespace ProyectoMinaELMochito
 {
     class Mineralinventario
     {
 
-        private static string connectionString = ConfigurationManager.ConnectionStrings["ProyectoMinaELMochito.Properties.Settings.MinaMochitoConnection"].ConnectionString;
+        private static string connectionString = ConfigurationManager.ConnectionStrings["ProyectoMinaELMochito.Properties.Settings.MinaConnectionString"].ConnectionString;
+
         private SqlConnection sqlConnection = new SqlConnection(connectionString);
 
         // Propiedades

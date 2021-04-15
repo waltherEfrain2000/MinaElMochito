@@ -25,7 +25,7 @@ namespace ProyectoMinaELMochito
     public partial class Usuarios_Crud : Window 
     {
 
-        private static string connectionString = ConfigurationManager.ConnectionStrings["ProyectoMinaELMochito.Properties.Settings.MinaMochitoConnection"].ConnectionString;
+        private static string connectionString = ConfigurationManager.ConnectionStrings["ProyectoMinaELMochito.Properties.Settings.MinaConnectionString"].ConnectionString;
         private SqlConnection sqlConnection = new SqlConnection(connectionString);
 
         private User user = new User();

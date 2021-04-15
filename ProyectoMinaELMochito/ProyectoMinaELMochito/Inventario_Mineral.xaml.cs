@@ -68,7 +68,7 @@ namespace ProyectoMinaELMochito
                 txtfecha.Text = String.Format("{0}, a las :{1}", elmineral.FechaActualizacion.ToLongDateString(), elmineral.FechaActualizacion.ToLongTimeString());
                 txttotal.Text = elmineral.Total.ToString("N");
 
-                Uri uri = new Uri("ImagesMinerales/plata.png", UriKind.Relative);
+                Uri uri = new Uri("Image/plata.png", UriKind.Relative);
                 imgmineral.Source = new BitmapImage(uri);
                 lbdatos.Content = "Datos del mineral de plata ";
 
@@ -80,7 +80,7 @@ namespace ProyectoMinaELMochito
                 txtfecha.Text = String.Format("{0}, a las :{1}", elmineral.FechaActualizacion.ToLongDateString(), elmineral.FechaActualizacion.ToLongTimeString());
                 txttotal.Text = elmineral.Total.ToString("N");
 
-                Uri uri = new Uri("ImagesMinerales/oro.png", UriKind.Relative);
+                Uri uri = new Uri("Image/oro.png", UriKind.Relative);
                 imgmineral.Source = new BitmapImage(uri);
                 lbdatos.Content = "Datos del mineral de oro ";
             }
@@ -91,7 +91,7 @@ namespace ProyectoMinaELMochito
                 txtfecha.Text = String.Format("{0}, a las :{1}", elmineral.FechaActualizacion.ToLongDateString(), elmineral.FechaActualizacion.ToLongTimeString());
                 txttotal.Text = elmineral.Total.ToString("N");
 
-                Uri uri = new Uri("ImagesMinerales/cobre.png", UriKind.Relative);
+                Uri uri = new Uri("Image/cobre.png", UriKind.Relative);
                 imgmineral.Source = new BitmapImage(uri);
                 lbdatos.Content = "Datos del mineral de Cobre";
 
@@ -103,7 +103,7 @@ namespace ProyectoMinaELMochito
                 txtfecha.Text = String.Format("{0}, a las :{1}", elmineral.FechaActualizacion.ToLongDateString(), elmineral.FechaActualizacion.ToLongTimeString());
                 txttotal.Text = elmineral.Total.ToString("N");
 
-                Uri uri = new Uri("ImagesMinerales/plomo.png", UriKind.Relative);
+                Uri uri = new Uri("Image/plomo.png", UriKind.Relative);
                 imgmineral.Source = new BitmapImage(uri);
                 lbdatos.Content = "Datos del mineral de Plomo";
             }
@@ -115,7 +115,7 @@ namespace ProyectoMinaELMochito
                 txtfecha.Text = String.Format("{0}, a las :{1}", elmineral.FechaActualizacion.ToLongDateString(), elmineral.FechaActualizacion.ToLongTimeString());
                 txttotal.Text = elmineral.Total.ToString("N");
 
-                Uri uri = new Uri("ImagesMinerales/zinc.png", UriKind.Relative);
+                Uri uri = new Uri("Image/zinc.png", UriKind.Relative);
                 imgmineral.Source = new BitmapImage(uri);
                 lbdatos.Content = "Datos del mineral de Zinc";
             }
