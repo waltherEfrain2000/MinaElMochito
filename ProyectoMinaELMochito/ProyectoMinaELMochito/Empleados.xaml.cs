@@ -35,9 +35,11 @@ namespace ProyectoMinaELMochito
         {
             InitializeComponent();
             MostrarEmpleado();
-            cmbGenero.Items.Add("F");
-            cmbGenero.Items.Add("M");
-            cmbCargo.Items.Add("Gerente");
+            MostrarCargos();
+            MostrarGeneros();
+            //cmbGenero.Items.Add("F");
+            //cmbGenero.Items.Add("M");
+            //cmbCargo.Items.Add("Gerente");
         }
         private void LimpiarCasillas()
         {
@@ -388,5 +390,24 @@ namespace ProyectoMinaELMochito
         {
             LimpiarCasillas();
         }
+
+
+
+        private void MostrarCargos()
+        {
+            cmbCargo.ItemsSource = empleado.LlenarComboBoxCargo();
+            cmbCargo.DisplayMemberPath = "NombreCargo";
+            cmbCargo.SelectedValuePath = "Cargo";
+
+        }
+
+        private void MostrarGeneros()
+        {
+            cmbGenero.ItemsSource = empleado.LlenarComboBoxGenero();
+            cmbGenero.DisplayMemberPath = "NombreGenero";
+            cmbGenero.SelectedValuePath = "Genero";
+
+        }
+
     }
 }
