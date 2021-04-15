@@ -22,9 +22,10 @@
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="*" />
-        <ColumnDefinition Width="*" />
-    </Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
             <RowDefinition Height="*" />
             <RowDefinition Height="*" />
             <RowDefinition Height="*" />
@@ -37,7 +38,7 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <Label Content="Empleados" Grid.ColumnSpan="4" HorizontalAlignment="Center" FontSize="20" />
+        <Label Content="Empleados" Grid.ColumnSpan="5" HorizontalAlignment="Center" FontSize="20" />
 
         <Label Content="Empleado ID" Grid.Row="1" FontSize="15" Margin="5" />
         <Label Content="Identidad" Grid.Row="2" FontSize="15" Margin="5" />
@@ -59,17 +60,17 @@
         <ComboBox Name="cmbGenero" Grid.Row="5" Grid.Column="1" FontSize="15" Margin="7" />
         <ComboBox Name="cmbCargo" Grid.Row="6" Grid.Column="1" FontSize="15" Margin="7" />
 
-        <Button x:Name="btnAgregar" Content="Agregar" Grid.Column="4" Grid.Row="2" Margin="15 5" Click="btnAgregar_Click"  />
-        <Button x:Name="btnModificar" Content="Modificar" Grid.Column="4" Grid.Row="4"  Margin="15 5" Click="btnModificar_Click"/>
-        <Button x:Name="btnAceptarModificacion" Content="Aceptar" Grid.Column="4" Grid.Row="3"  Margin="15 5" Click="btnAceptarModificacion_Click" Visibility="Hidden"/>
-        <Button x:Name="btnCancelarModificacion" Content="Cancelar" Grid.Column="4" Grid.Row="5"  Margin="15 5" Click="btnCancelarModificacion_Click" Visibility="Hidden" />
+        <Button x:Name="btnAgregar" Content="Agregar" Grid.Column="1" Grid.Row="10" Margin="20 1" Click="btnAgregar_Click"  />
+        <Button x:Name="btnModificar" Content="Modificar" Grid.Column="2" Grid.Row="10"  Margin="20 1" Click="btnModificar_Click"/>
+        <Button x:Name="btnAceptarModificacion" Content="Aceptar" Grid.Column="1" Grid.Row="10"  Margin="20 1" Click="btnAceptarModificacion_Click" Visibility="Hidden"/>
+        <Button x:Name="btnCancelarModificacion" Content="Cancelar" Grid.Column="3" Grid.Row="10"  Margin="20 1" Click="btnCancelarModificacion_Click" Visibility="Hidden"/>
 
-        <Button x:Name="btnEliminar" Content="eliminar" Grid.Column="4" Grid.Row="5"  Margin="20.4,41,9.6,10.2" Click="btnEliminar_Click" Grid.RowSpan="2"/>
-        <Button x:Name="btnAceptarEliminacion" Content="Aceptar" Grid.Column="4" Grid.Row="3"  Margin="15 5" Click="btnAceptarEliminacion_Click" Visibility="Hidden"/>
-        <Button x:Name="btnCancelarEliminacion" Content="Cancelar" Grid.Column="4" Grid.Row="5"  Margin="15 5" Click="btnCancelarEliminacion_Click" Visibility="Hidden" />
-        <Button x:Name="btnLimpiar" Content="Limpiar" Grid.Column="4" Grid.Row="9" Margin="40 5" Click="btnLimpiar_Click" />
+        <Button x:Name="btnEliminar" Content="eliminar" Grid.Column="3" Grid.Row="10"  Margin="20 1" Click="btnEliminar_Click" Grid.RowSpan="2"/>
+        <Button x:Name="btnAceptarEliminacion" Content="Aceptar" Grid.Column="1" Grid.Row="10"  Margin="20 1" Click="btnAceptarEliminacion_Click" Visibility="Hidden"/>
+        <Button x:Name="btnCancelarEliminacion" Content="Cancelar" Grid.Column="3" Grid.Row="10"  Margin="20 1" Click="btnCancelarEliminacion_Click" Visibility="Hidden" />
+        <Button x:Name="btnLimpiar" Content="Limpiar" Grid.Column="4" Grid.Row="10" Margin="90 1 5 1" Click="btnLimpiar_Click" />
 
-        <DataGrid Name="DgvEmpleados" Grid.Row="1" Grid.Column="2" Margin="7" Grid.ColumnSpan="2" Grid.RowSpan="9" SelectionChanged="DgvEmpleados_SelectionChanged" IsReadOnly="True" >
+        <DataGrid Name="DgvEmpleados" Grid.Row="1" Grid.Column="2" Margin="10" Grid.ColumnSpan="3" Grid.RowSpan="9" SelectionChanged="DgvEmpleados_SelectionChanged" IsReadOnly="True" FontSize="15" >
 
             <DataGrid.Resources>
                 <Style TargetType="{x:Type DataGridColumnHeader}">

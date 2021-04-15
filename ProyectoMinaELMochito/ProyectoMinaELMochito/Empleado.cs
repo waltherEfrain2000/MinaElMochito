@@ -24,7 +24,10 @@ namespace ProyectoMinaELMochito
         public string NombreCompleto { get; set; }
         public int Edad { get; set; }
         public int Genero { get; set; }
+        public string NombreGenero { get; set; }
         public int Cargo { get; set; }
+
+        public string NombreCargo { get; set; }
         public string Estado { get; set; }
         public double Salario { get; set; }
         public string Direccion { get; set; }
@@ -159,6 +162,82 @@ namespace ProyectoMinaELMochito
                 sqlConnection.Close();
 
             }
+        }
+
+        public List<Empleado> LlenarComboBoxCargo()
+        {
+
+            try
+            {
+                //Realizar el query que cargará la información correspondiente
+                String query = @"Select * From Minas.cargo";
+
+                //Establecer la conexión
+                sqlConnection.Open();
+
+                SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
+
+                SqlDataReader reader = sqlCommand.ExecuteReader();
+                List<Empleado> cargos = new List<Empleado>();
+
+                while (reader.Read())
+                {
+                    cargos.Add(new Empleado
+                    {
+                        NombreCargo = reader["descripcion"].ToString(),
+                        Cargo = Convert.ToInt32(reader["idCargo"].ToString())
+                    });
+                }
+
+                return cargos;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                sqlConnection.Close();
+            }
+
+        }
+        public List<Empleado> LlenarComboBoxGenero()
+        {
+            try
+            {
+                //Realizar el query que cargará la información correspondiente
+                String query = @"Select * From Minas.Genero";
+
+                //Establecer la conexión
+                sqlConnection.Open();
+
+                SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
+
+                SqlDataReader reader = sqlCommand.ExecuteReader();
+                List<Empleado> generos = new List<Empleado>();
+
+                while (reader.Read())
+                {
+                    generos.Add(new Empleado
+                    {
+                        NombreGenero = reader["descripcion"].ToString(),
+                        Genero = Convert.ToInt32(reader["idGenero"].ToString())
+                    });
+                }
+
+                return generos;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                sqlConnection.Close();
+            }
+
         }
 
 
