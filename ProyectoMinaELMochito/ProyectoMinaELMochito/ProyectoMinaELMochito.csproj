@@ -108,6 +108,9 @@
       <DependentUpon>menu.xaml</DependentUpon>
     </Compile>
     <Compile Include="Mineralinventario.cs" />
+    <Compile Include="ComparacionHistoricos.xaml.cs">
+      <DependentUpon>ComparacionHistoricos.xaml</DependentUpon>
+    </Compile>
     <Compile Include="User.cs" />
     <Compile Include="Usuarios_Crud.xaml.cs">
       <DependentUpon>Usuarios_Crud.xaml</DependentUpon>
@@ -143,6 +146,10 @@
     <Page Include="menu.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ComparacionHistoricos.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Usuarios_Crud.xaml">
       <SubType>Designer</SubType>
