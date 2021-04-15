@@ -55,7 +55,7 @@
                  materialDesign:HintAssist.Hint="Precio producto" FontFamily="Aldine"
                  FontSize="14" ToolTip="Precio que tendrá el producto" TextAlignment="Center"/>
 
-        <DataGrid Name="dgvProduccion" Grid.ColumnSpan="2" Margin="272,10,29,15" Grid.Row="1" 
+        <DataGrid Name="dgvProduccion" Grid.ColumnSpan="2" Margin="250,10,51,15" Grid.Row="1" 
                   Grid.RowSpan="4" FontFamily="Aldine" Loaded="MuestraDatos">
 
             <DataGrid.Resources>

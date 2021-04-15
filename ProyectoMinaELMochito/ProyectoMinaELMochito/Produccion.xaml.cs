@@ -31,11 +31,15 @@ namespace ProyectoMinaELMochito
         //Vaiables miembro
         Producciion producciion = new Producciion();
 
+        public int IdViaje { get; internal set; }
+
         public Produccion()
         {
             InitializeComponent();
 
             MostrarMinerales();
+
+            AsignarUltimoId();
         }
 
         /// <summary>
@@ -140,7 +144,12 @@ namespace ProyectoMinaELMochito
         /// <summary>
         /// 
         /// </summary>
- 
+        public void AsignarUltimoId()
+        {
+            Producciion idUltimo = producciion.UltimoId();
+
+            txtNumeroViaje.Text = idUltimo.IdViaje.ToString();
+        }
        
 
         /// <summary>
@@ -183,10 +192,52 @@ namespace ProyectoMinaELMochito
                 finally
                 {
                     LimpiarCasillasDeDatos();
+
+                    MostrarDatosTabla();
                 }
             }
         }
 
+        public void MostrarDatosTabla()
+        {
+            try
+            {
+                //Realizar el query que mostrara la información
+                String queryProduccion = @"Select P.idProduccion as 'id Producción', P.idViaje as 'N° Viaje', 
+                                    M.descripcion as 'Mineral',P.precio as 'Precio', P.peso as 'Peso(T)'
+                                    From Minas.Produccion as P
+                                    Inner Join Minas.Mineral as M on P.idMineral = M.idMineral";
+
+                //Establecer la conexión
+                sqlConnection.Open();
+
+                // Crear el comando SQL tanto como para el query de emplados y de vehículos
+                SqlCommand sqlCommand = new SqlCommand(queryProduccion, sqlConnection);
+
+                //Se crea el sqlCommand para poder ejecuatar cada query
+                sqlCommand.ExecuteNonQuery();
+
+                //Crear el comando SQL
+                SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand);
+
+                //Crear el dataTable que contendrá las tablas desde la base
+                DataTable dataTable1 = new DataTable("Minas.Produccion");
+
+                //Llenar los datagrid con la información necesaria
+                sqlDataAdapter.Fill(dataTable1);
+                dgvProduccion.ItemsSource = dataTable1.DefaultView;
+                sqlDataAdapter.Update(dataTable1);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                sqlConnection.Close();
+            }
+        }
 
     }
 }

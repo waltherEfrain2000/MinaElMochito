@@ -47,7 +47,7 @@ namespace ProyectoMinaELMochito
             try
             {
                 //Este query permitirá insertar una nueva producción
-                string queryProduccion = @"Inser Into Minas.Produccion(idViaje, idMineral, precio, peso)
+                string queryProduccion = @"Insert Into Minas.Produccion(idViaje, idMineral, precio, peso)
                                         Values(@idViaje, @idMineral, @precio, @peso)";
 
                 //Establecer la conexión con la base de datos
@@ -73,6 +73,40 @@ namespace ProyectoMinaELMochito
             finally
             {
                 //Cerrar la conexión
+                sqlConnection.Close();
+            }
+        }
+
+        public Producciion UltimoId() 
+        {
+            Producciion ultimoId = new Producciion();
+
+            try
+            {
+                String query = @"Select top 1 [idViaje] from [Minas].[viajeInterno] 
+                                order by [idViaje] desc";
+
+                sqlConnection.Open();
+
+                SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
+
+                using (SqlDataReader rdr = sqlCommand.ExecuteReader())
+                {
+                    while (rdr.Read())
+                    {
+                        ultimoId.IdViaje = Convert.ToInt32(rdr["idViaje"]);
+                    }
+                }
+
+                return ultimoId;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
                 sqlConnection.Close();
             }
         }
@@ -140,9 +174,12 @@ namespace ProyectoMinaELMochito
 
                 while (reader.Read())
                 {
-                    minerales.Add(new Producciion { NombreMineral = reader["descripcion"].ToString(),
-                        Precio = Convert.ToDecimal(reader["precio"].ToString()), 
-                        IdMineral = Convert.ToInt32(reader["idMineral"].ToString())});   
+                    minerales.Add(new Producciion
+                    {
+                        NombreMineral = reader["descripcion"].ToString(),
+                        Precio = Convert.ToDecimal(reader["precio"].ToString()),
+                        IdMineral = Convert.ToInt32(reader["idMineral"].ToString())
+                    });
                 }
 
                 return minerales;
@@ -152,7 +189,10 @@ namespace ProyectoMinaELMochito
 
                 throw;
             }
-
+            finally
+            {
+                sqlConnection.Close();
+            }
         }
 
         public void BorrarProduccion(Producciion producciion)
