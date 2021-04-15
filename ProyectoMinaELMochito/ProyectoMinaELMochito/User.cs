@@ -13,7 +13,7 @@ namespace ProyectoMinaELMochito
     class User
     {
         // Variables miembro
-        private static string connectionString = ConfigurationManager.ConnectionStrings["ProyectoMinaELMochito.Properties.Settings.MinaMochitoConnection"].ConnectionString;
+        private static string connectionString = ConfigurationManager.ConnectionStrings["ProyectoMinaELMochito.Properties.Settings.MinaConnectionString"].ConnectionString;
         private SqlConnection sqlConnection = new SqlConnection(connectionString);
 
         // Propiedades
