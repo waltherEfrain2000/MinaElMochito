@@ -33,6 +33,7 @@ namespace ProyectoMinaELMochito
         public Historial_Entradas()
         {
             InitializeComponent();
+            ///cargamos los metodos respectivos por mineral de la clase entrada mineral que los contiene
             EntradaMineral elmineral = entradaMineral.CargarOro();
             EntradaMineral elmineralzinc = entradaMineral.CargarZinc();
             EntradaMineral elmineralplata = entradaMineral.CargarPlata();
@@ -40,21 +41,24 @@ namespace ProyectoMinaELMochito
             EntradaMineral elmineralPlomo = entradaMineral.CargarPlomo();
             SeriesCollection = new SeriesCollection
             {
+                // cada new pieseries es un pedazo de pastel(parte del grafico de dona)
                 new PieSeries
                 {
-
+                    //// aqui se le establecen los valores del objeto de cobre 
                     Title = $"Cobre , K:{elmineralcobre.Cantidad}, valor en ${elmineralcobre.Total.ToString("N")}",
                     Values = new ChartValues<ObservableValue> { new ObservableValue(Convert.ToDouble( elmineralcobre.Cantidad)), new  ObservableValue (Convert.ToDouble(elmineralcobre.Total)) },
                     DataLabels = true
                 },
                 new PieSeries
                 {
+                    //// aqui se le establecen los valores del objeto de plata
                     Title = $"Plata , K:{elmineralplata.Cantidad}, valor en ${elmineralplata.Total.ToString("N")}",
                     Values = new ChartValues<ObservableValue> { new ObservableValue(Convert.ToDouble(elmineralplata.Cantidad)) , new  ObservableValue (Convert.ToDouble(elmineralplata.Total))},
                     DataLabels = true
                 },
                 new PieSeries
                 {
+                    //// aqui se le establecen los valores del objeto de oro
                     Title = $"Oro, K:{elmineral.Cantidad}, valor en ${elmineral.Total.ToString("N")}",
                     Values = new ChartValues<ObservableValue> { new ObservableValue(Convert.ToDouble(elmineral.Cantidad)) , new  ObservableValue (Convert.ToDouble(elmineral.Total)) },
                     DataLabels = true,
@@ -62,12 +66,14 @@ namespace ProyectoMinaELMochito
                 },
                 new PieSeries
                 {
+                    //// aqui se le establecen los valores del objeto de sinc
                     Title =$"Zinc, K:{elmineralzinc.Cantidad}, valor en ${elmineralzinc.Total.ToString("N")}",
                     Values = new ChartValues<ObservableValue> { new ObservableValue(Convert.ToDouble(elmineralzinc.Cantidad)), new  ObservableValue (Convert.ToDouble(elmineralzinc.Total)) },
                     DataLabels = true
                 },
                 new PieSeries
                 {
+                    //// aqui se le establecen los valores del objeto de  plomo
                     Title =$"Plomo , K:{elmineralPlomo.Cantidad}, valor en ${elmineralPlomo.Total.ToString("N")}",
                     Values = new ChartValues<ObservableValue> { new ObservableValue(Convert.ToDouble(elmineralPlomo.Cantidad)), new  ObservableValue (Convert.ToDouble(elmineralPlomo.Total)) },
                     DataLabels = true
@@ -82,64 +88,7 @@ namespace ProyectoMinaELMochito
         }
         public SeriesCollection SeriesCollection { get; set; }
 
-        private void UpdateAllOnClick(object sender, RoutedEventArgs e)
-        {
-            var r = new Random();
 
-            foreach (var series in SeriesCollection)
-            {
-                foreach (var observable in series.Values.Cast<ObservableValue>())
-                {
-                    observable.Value = r.Next(0, 10);
-                }
-            }
-        }
 
-        private void AddSeriesOnClick(object sender, RoutedEventArgs e)
-        {
-            var r = new Random();
-            var c = SeriesCollection.Count > 0 ? SeriesCollection[0].Values.Count : 5;
-
-            var vals = new ChartValues<ObservableValue>();
-
-            for (var i = 0; i < c; i++)
-            {
-                vals.Add(new ObservableValue(r.Next(0, 10)));
-            }
-
-            SeriesCollection.Add(new PieSeries
-            {
-                Values = vals
-            });
-        }
-
-        private void RemoveSeriesOnClick(object sender, RoutedEventArgs e)
-        {
-            if (SeriesCollection.Count > 0)
-                SeriesCollection.RemoveAt(0);
-        }
-
-        private void AddValueOnClick(object sender, RoutedEventArgs e)
-        {
-            var r = new Random();
-            foreach (var series in SeriesCollection)
-            {
-                series.Values.Add(new ObservableValue(r.Next(0, 10)));
-            }
-        }
-
-        private void RemoveValueOnClick(object sender, RoutedEventArgs e)
-        {
-            foreach (var series in SeriesCollection)
-            {
-                if (series.Values.Count > 0)
-                    series.Values.RemoveAt(0);
-            }
-        }
-
-        private void RestartOnClick(object sender, RoutedEventArgs e)
-        {
-            Chart.Update(true, true);
-        }
-    }
+    }  
 }
