@@ -32,8 +32,7 @@ namespace ProyectoMinaELMochito
         {
             InitializeComponent();
             MostrarVehiculo();
-            cmbEstado.Items.Add("Disponible");
-            cmbEstado.Items.Add("Reparacion");
+            MostrarEstados();
         }
 
         private void DgvVehiculos_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -308,10 +307,7 @@ namespace ProyectoMinaELMochito
             BotonesCancelar();
         }
 
-        private void btnCancelarModificacion_Click_1(object sender, RoutedEventArgs e)
-        {
-            BotonesCancelar();
-        }
+     
 
         private void BotonesCancelar()
         {
@@ -325,6 +321,19 @@ namespace ProyectoMinaELMochito
             btnCancelarEliminacion.Visibility = Visibility.Hidden;
             LimpiarCasillas();
             edicionDeCasillas(false, 0);
+            DgvVehiculos.SelectedItem = null;
+        }
+
+        private void btnCancelarModificacion_Click(object sender, RoutedEventArgs e)
+        {
+            BotonesCancelar();
+        }
+        private void MostrarEstados()
+        {
+            cmbEstado.ItemsSource = vehiculo.LlenarComboBoxEstados();
+            cmbEstado.DisplayMemberPath = "NombreEstado";
+            cmbEstado.SelectedValuePath = "Estado";
+
         }
     }   
 }

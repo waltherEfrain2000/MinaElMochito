@@ -22,6 +22,7 @@ namespace ProyectoMinaELMochito
         public string Placa { get; set; }
         public string Color { get; set; }
         public int Estado { get; set; }
+        public string NombreEstado { get; set; }
 
         // Constructores
         public Vehiculo() { }
@@ -121,8 +122,45 @@ namespace ProyectoMinaELMochito
             finally
             {
                 sqlConnection.Close();
-
             }
+        }
+
+        public List<Vehiculo> LlenarComboBoxEstados()
+        {
+            try
+            {
+                //Realizar el query que cargará la información correspondiente
+                String query = @"Select * From Minas.EstadoVehiculo";
+
+                //Establecer la conexión
+                sqlConnection.Open();
+
+                SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
+
+                SqlDataReader reader = sqlCommand.ExecuteReader();
+                List<Vehiculo> estados = new List<Vehiculo>();
+
+                while (reader.Read())
+                {
+                    estados.Add(new Vehiculo
+                    {
+                        NombreEstado = reader["descripcion"].ToString(),
+                        Estado = Convert.ToInt32(reader["idEstado"].ToString())
+                    });
+                }
+
+                return estados;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                sqlConnection.Close();
+            }
+
         }
 
 
