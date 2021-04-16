@@ -10,8 +10,9 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
+
+
 using System.Data.SqlClient;
 using System.Configuration;
 using System.Data;
@@ -29,11 +30,17 @@ namespace ProyectoMinaELMochito
         private static string connectionString = ConfigurationManager.ConnectionStrings["ProyectoMinaELMochito.Properties.Settings.MinaConnectionString"].ConnectionString;
         private SqlConnection sqlConnection = new SqlConnection(connectionString);
 
+
+        public ViajesInternos()
+        {
+            InitializeComponent();
+            CargarDatos();
+        }
         /// <summary>
         /// Muestra la tabla en donde se encuentran los empleados
         /// de la mina, de aquí el usuario seleccionará uno para el viaje
         /// </summary>
-        private void CargarDatos(object sender, RoutedEventArgs e)
+        private void CargarDatos()
         {
             try
             {
@@ -303,6 +310,7 @@ namespace ProyectoMinaELMochito
             this.Close();
         }
 
+        
     }
 
 
