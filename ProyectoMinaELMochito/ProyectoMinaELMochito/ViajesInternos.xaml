@@ -1,0 +1,98 @@
+﻿<Window x:Class="ProyectoMinaELMochito.MainWindow"
+         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+         TextElement.FontWeight="Regular"
+         TextElement.FontSize="13"
+         TextOptions.TextFormattingMode="Ideal"
+         TextOptions.TextRenderingMode="Auto"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ProyectoMinaELMochito"
+        mc:Ignorable="d"
+        Title="Formulario Viajes Internos" Height="450" Width="800" 
+        Background="MistyRose" WindowStyle="None">
+    <Grid Loaded="CargarDatos">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="70"/>
+        </Grid.RowDefinitions>
+        <!-- Contenido del grid -->
+        <!-- Label -->
+        <Label Content="SISTEMA DE VIAJES INTERNOS" Grid.Row="0" HorizontalAlignment="Center"
+                FontSize="20" Margin="257,17,251,3" Width="284" FontFamily="Aldine" Grid.ColumnSpan="3"/>
+        <Label Content="Vehículo:" Grid.Column="1" Grid.Row="2" Margin="0,104,0,25" 
+               HorizontalAlignment="Right" FontSize="16" Width="82" FontFamily="Aldine"/>
+        <Label Content="Empleados" Grid.Row="1" Margin="136,20,34,111" FontSize="16" FontFamily="Aldine"/>
+        <Label Content="Vehículos" Grid.Row="1" Margin="252,20,193,111" Grid.ColumnSpan="2" Grid.Column="1"
+               FontSize="16" FontFamily="Aldine"/>
+        <Label Content="Empleado:" Grid.Row="2" Margin="0,108,153,27" HorizontalAlignment="Right" 
+            FontSize="16" Width="86" FontFamily="Aldine"/>
+
+        <!-- Data Grid - Tablas -->
+        <DataGrid Name ="dgvEmpleados" HorizontalAlignment="Left" Height="201" Margin="12,57,0,0" 
+                  Grid.Row="1" VerticalAlignment="Top" Width="349" Grid.ColumnSpan="2" 
+                  Grid.RowSpan="2" SelectionChanged="MostarEnTexBoxContenido" IsReadOnly="True">
+
+            <DataGrid.Resources>
+                <Style TargetType="{x:Type DataGridColumnHeader}">
+
+                </Style>
+            </DataGrid.Resources>
+
+            <DataGrid.Columns>
+
+            </DataGrid.Columns>
+        </DataGrid>
+        <DataGrid Name ="dgvVehiculos" HorizontalAlignment="Left" Height="197" Margin="121,57,0,0"
+                  Grid.Row="1" VerticalAlignment="Top" Width="397" Grid.ColumnSpan="2" Grid.RowSpan="2" 
+                  Grid.Column="1" IsReadOnly="True" SelectionChanged="MostrarVehiculosTextBox">
+
+            <DataGrid.Resources>
+                <Style TargetType="{x:Type DataGridColumnHeader}">
+
+                </Style>
+            </DataGrid.Resources>
+
+            <DataGrid.Columns>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button Name="btnSiguiente"  Height="40" Content="Siguiente"  Margin="73,10,42,20"
+               Click="btnSiguiente_Click" FontFamily="Aldine"    
+            Grid.Column="2" Grid.Row="3" AllowDrop="True">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="PaleVioletRed" Offset="0"/>
+                    <GradientStop Color="PaleVioletRed" Offset="1"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
+
+        <TextBox x:Name="txtnombreEmpleado" Grid.Row="2" Margin="115,109,24,26" FontSize="14" 
+            materialDesign:HintAssist.Hint="Nombre Empleado" HorizontalAlignment="Center"
+            Style="{StaticResource MaterialDesignTextBox}" IsReadOnly="True"
+            VerticalAlignment="Center" ToolTip="Ingrese el Id del Empleado" Width="125" KeyDown="SoloNumeros"/>
+        <TextBox x:Name="txtIdVehiculo" Grid.Row="2" Margin="145,104,43,31" Grid.Column="2" FontSize="14"
+            materialDesign:HintAssist.Hint="Id Vehiculo" HorizontalAlignment="Center" Visibility="Hidden"
+            Style="{StaticResource MaterialDesignTextBox}"
+            VerticalAlignment="Center" ToolTip="Ingrese el Id del vehiculo" Width="76"/>
+        <TextBox Name="txtIdEmpleado" Grid.Row="2" Margin="3,110,181,25" FontSize="14" 
+                 materialDesign:HintAssist.Hint="Id Empleado" HorizontalAlignment="Center" Visibility="Hidden"
+                 Style="{StaticResource MaterialDesignTextBox}"
+                 VerticalAlignment="Center" ToolTip="Ingrese el nombre del Empleado" Width="80" Grid.Column="1"/>
+        <TextBox Name="txtVehiculo" Grid.Row="2" Margin="260,105,151,30" Grid.Column="1" FontSize="14"
+                 materialDesign:HintAssist.Hint="Nombre Vehiculo" HorizontalAlignment="Center"
+                 Style="{StaticResource MaterialDesignTextBox}" IsReadOnly="True"
+                 VerticalAlignment="Center" ToolTip="Ingrese el nombre del vehiculo" Width="117" Grid.ColumnSpan="2" KeyDown="PermiteSoloNumeros"/>
+    </Grid>
+</Window>
+

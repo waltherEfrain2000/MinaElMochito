@@ -3,7 +3,6 @@
 use tempdb
 go
 
-
 create database MinaElMochito
 go
 
@@ -118,10 +117,11 @@ go
 create table Minas.Produccion
 (
 	idProduccion int identity not null,
-	idViaje int not null,
+	idViaje int not null unique,
 	idMineral int not null,
 	precio numeric(18,2),
 	peso numeric(18, 2),
+	total decimal(18, 2),
 	
 		
 	Constraint PK_Produccion_idProduccion
@@ -201,7 +201,7 @@ Create table Usuarios.Usuario
 )
 
 
-------------------------------restricciones
+------------------------------Restricciones
 ---para que el rol del usuario solo sea administrador o empleado de turno
 ALTER TABLE Usuarios.Usuario WITH CHECK
 	ADD CONSTRAINT CHK_Usuarios_USuarios$RolUsuario
@@ -222,7 +222,7 @@ ALTER TABLE Usuarios.Usuario WITH CHECK
 	
 GO
 
-----triggers -------------------------
+----Triggers -------------------------
 
 ---trigger para llenar Inventario mineral despues de una insercion en produccion
 create trigger Minas.ActualizarInventarioMinera
@@ -283,6 +283,22 @@ BEGIN
 	where [idMineral] = @idMineral
 END
 GO
+
+-- Trigger par calcular el total de una producción despues de insertar el peso
+Create Trigger Minas.TotalProduccion
+On Minas.Produccion
+After Insert
+As
+Begin
+	Declare @peso decimal, @precio decimal, @total decimal, @idProduccion int
+    Select @peso = peso from inserted
+	Select @precio = precio from inserted
+	Select @idProduccion = idProduccion from inserted
+	   Set @total = @peso * @precio
+    Update Minas.Produccion set @total = total where idProduccion = @idProduccion
+END
+Go
+
 ----------------------------------------------------------------Inserciones------------------------------------------------------
 
 
@@ -301,7 +317,8 @@ go
 
 
 insert into [Minas].[Mineral] ([descripcion],[precio]) values
-('ORO',1174.44)
+('ORO',1174.44),
+('PLATA', 10678.68)
 go
 
 insert into [Minas].[EstadoVehiculo] ([descripcion]) values
@@ -309,20 +326,24 @@ insert into [Minas].[EstadoVehiculo] ([descripcion]) values
 go 
 
 insert into [Minas].[Vehiculo] ([marca],[modelo],[placa],[color],[estado]) values
-('MACK', 'MACK 4X4','12wer12s','rojo',1)
+('MACK', 'MACK 4X4','12wer12s','rojo',1),
+('CAT', '795F CA','1567ygays','amarilloo',1)
 go
 
-insert into [Minas].[Empleado] ([identidad],[primerNombre],[segundoNombre],[primerApellido],[segundoApellido],[edad],[idGenero],direccion,[idCargo],[salario],[estado]) values 
-('0318200300249','lionel','ronaldo','messi','cuccittini','33',1,'barrio no te encuentro',1,10000,1)
+insert into [Minas].[Empleado] ([identidad],[primerNombre],[edad],[idGenero],direccion,[idCargo],[salario],[estado]) values 
+('0318200300249','lionel messi','33',1,'barrio no te encuentro',1,10000,1),
+('1627865479101','Victor Madrid','30',1,'Morazan',1,10678,1)
 go
 
 insert into [Minas].[viajeInterno]([idVehiculo],[idEmpleado])values 
-(1,1)
-
-insert into [Minas].[Produccion]([idViaje],[idMineral],[precio],[peso])Values
-(1,1,11411,11.5)
+(1,1),
+(2, 2)
 go
 
+delete from Minas.Produccion where idProduccion = 3
+insert into [Minas].[Produccion]([idViaje],[idMineral],[precio],[peso])Values
+(1,1,10678.68,11.5)
+go
 
 insert into [Minas].[InventarioMineral]([idMineral],[peso],[fechaActualizacion],[Total])values
 (1,0,GETDATE(),0)
