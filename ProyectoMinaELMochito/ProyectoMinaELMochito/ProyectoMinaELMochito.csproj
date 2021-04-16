@@ -56,6 +56,9 @@
     </StartupObject>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="FluentWPF, Version=0.9.0.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\FluentWPF.0.9.0\lib\net45\FluentWPF.dll</HintPath>
+    </Reference>
     <Reference Include="MaterialDesignColors, Version=2.0.0.2422, Culture=neutral, PublicKeyToken=df2a72020bd7962a, processorArchitecture=MSIL">
       <HintPath>..\packages\MaterialDesignColors.2.0.0\lib\net452\MaterialDesignColors.dll</HintPath>
     </Reference>
@@ -105,6 +108,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Salidas.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ViajesInternos.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -116,6 +123,10 @@
     <Compile Include="Producciion.cs" />
     <Compile Include="Produccion.xaml.cs">
       <DependentUpon>Produccion.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Salida.cs" />
+    <Compile Include="Salidas.xaml.cs">
+      <DependentUpon>Salidas.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViajeInterno.cs" />
     <Compile Include="ViajesInternos.xaml.cs">
