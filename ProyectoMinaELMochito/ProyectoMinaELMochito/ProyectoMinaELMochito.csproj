@@ -104,6 +104,30 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="ComparacionHistoricos.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Empleados.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="EntradasHistoricas.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Historial_Entradas.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Inventario_Mineral.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Login.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Produccion.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -111,6 +135,14 @@
     <Page Include="Salidas.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Usuarios_Crud.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Vehiculos.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="ViajesInternos.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -120,6 +152,27 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="ComparacionHistoricos.xaml.cs">
+      <DependentUpon>ComparacionHistoricos.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Empleado.cs" />
+    <Compile Include="Empleados.xaml.cs">
+      <DependentUpon>Empleados.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="EntradaMineral.cs" />
+    <Compile Include="EntradasHistoricas.xaml.cs">
+      <DependentUpon>EntradasHistoricas.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Historial_Entradas.xaml.cs">
+      <DependentUpon>Historial_Entradas.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Inventario_Mineral.xaml.cs">
+      <DependentUpon>Inventario_Mineral.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Login.xaml.cs">
+      <DependentUpon>Login.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Mineralinventario.cs" />
     <Compile Include="Producciion.cs" />
     <Compile Include="Produccion.xaml.cs">
       <DependentUpon>Produccion.xaml</DependentUpon>
@@ -127,6 +180,14 @@
     <Compile Include="Salida.cs" />
     <Compile Include="Salidas.xaml.cs">
       <DependentUpon>Salidas.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="User.cs" />
+    <Compile Include="Usuarios_Crud.xaml.cs">
+      <DependentUpon>Usuarios_Crud.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Vehiculo.cs" />
+    <Compile Include="Vehiculos.xaml.cs">
+      <DependentUpon>Vehiculos.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViajeInterno.cs" />
     <Compile Include="ViajesInternos.xaml.cs">
