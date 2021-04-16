@@ -40,7 +40,8 @@
 
         <!-- Data Grid - Tablas -->
         <DataGrid Name ="dgvEmpleados" HorizontalAlignment="Left" Height="201" Margin="12,57,0,0" 
-                  Grid.Row="1" VerticalAlignment="Top" Width="349" Grid.ColumnSpan="2" Grid.RowSpan="2" SelectionChanged="MostarEnTexBoxContenido">
+                  Grid.Row="1" VerticalAlignment="Top" Width="349" Grid.ColumnSpan="2" 
+                  Grid.RowSpan="2" SelectionChanged="MostarEnTexBoxContenido" IsReadOnly="True">
 
             <DataGrid.Resources>
                 <Style TargetType="{x:Type DataGridColumnHeader}">
@@ -54,7 +55,7 @@
         </DataGrid>
         <DataGrid Name ="dgvVehiculos" HorizontalAlignment="Left" Height="197" Margin="121,57,0,0"
                   Grid.Row="1" VerticalAlignment="Top" Width="397" Grid.ColumnSpan="2" Grid.RowSpan="2" 
-                  Grid.Column="1">
+                  Grid.Column="1" IsReadOnly="True" SelectionChanged="MostrarVehiculosTextBox">
 
             <DataGrid.Resources>
                 <Style TargetType="{x:Type DataGridColumnHeader}">
@@ -78,8 +79,8 @@
 
         <TextBox x:Name="txtnombreEmpleado" Grid.Row="2" Margin="115,109,24,26" FontSize="14" 
             materialDesign:HintAssist.Hint="Nombre Empleado" HorizontalAlignment="Center"
-            Style="{StaticResource MaterialDesignTextBox}"
-            VerticalAlignment="Center" ToolTip="Ingrese el Id del Empleado" Width="125"/>
+            Style="{StaticResource MaterialDesignTextBox}" IsReadOnly="True"
+            VerticalAlignment="Center" ToolTip="Ingrese el Id del Empleado" Width="125" KeyDown="SoloNumeros"/>
         <TextBox x:Name="txtIdVehiculo" Grid.Row="2" Margin="145,104,43,31" Grid.Column="2" FontSize="14"
             materialDesign:HintAssist.Hint="Id Vehiculo" HorizontalAlignment="Center" Visibility="Hidden"
             Style="{StaticResource MaterialDesignTextBox}"
@@ -90,8 +91,8 @@
                  VerticalAlignment="Center" ToolTip="Ingrese el nombre del Empleado" Width="80" Grid.Column="1"/>
         <TextBox Name="txtVehiculo" Grid.Row="2" Margin="260,105,151,30" Grid.Column="1" FontSize="14"
                  materialDesign:HintAssist.Hint="Nombre Vehiculo" HorizontalAlignment="Center"
-                 Style="{StaticResource MaterialDesignTextBox}"
-                 VerticalAlignment="Center" ToolTip="Ingrese el nombre del vehiculo" Width="117" Grid.ColumnSpan="2"/>
+                 Style="{StaticResource MaterialDesignTextBox}" IsReadOnly="True"
+                 VerticalAlignment="Center" ToolTip="Ingrese el nombre del vehiculo" Width="117" Grid.ColumnSpan="2" KeyDown="PermiteSoloNumeros"/>
     </Grid>
 </Window>
 

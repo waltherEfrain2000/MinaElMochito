@@ -39,7 +39,7 @@ namespace ProyectoMinaELMochito
             {
                 //Query para seleccionar los datos de la tabla
                 String queryEmpleado = @"Select IdEmpleado as 'Id Empleado', identidad as 'Identidad', 
-                               primerNombre as 'Nombre', primerApellido as 'Apellido'
+                               primerNombre as 'Nombre Empleado'
                                from Minas.Empleado";
 
                 String queryVehiculo = @"Select idVehiculo as 'Id Vehiculo', marca as 'Marca', 
@@ -75,10 +75,10 @@ namespace ProyectoMinaELMochito
                 sqlDataAdapter2.Update(dataTable2);
               
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
-                throw;
+                throw ex;
             }
             finally
             {
@@ -162,14 +162,12 @@ namespace ProyectoMinaELMochito
         /// Este método va a obtener las propiedades del datagrid
         /// y las va a pasar a los textBox
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void ObtienePropiedades(ViajeInterno viajeInterno)
         {
             this.txtIdEmpleado.Text = Convert.ToString(viajeinterno.IdEmpleado);
             this.txtnombreEmpleado.Text = Convert.ToString(viajeinterno.NombreEmpleado);
-            //this.txtIdVehiculo.Text = Convert.ToString(viajeInterno.IdVehiculo);
-            //this.txtVehiculo.Text = Convert.ToString(viajeInterno.Vehiculo);
+            this.txtIdVehiculo.Text = Convert.ToString(viajeInterno.IdVehiculo);
+            this.txtVehiculo.Text = Convert.ToString(viajeInterno.Vehiculo);
         }
 
         private void MostarEnTexBoxContenido(object sender, SelectionChangedEventArgs e)
@@ -181,7 +179,7 @@ namespace ProyectoMinaELMochito
             if (row_selected != null)
             {
                 txtIdEmpleado.Text = row_selected["Id Empleado"].ToString();
-                txtnombreEmpleado.Text = row_selected["Nombre"].ToString();
+                txtnombreEmpleado.Text = row_selected["Nombre Empleado"].ToString();
             }
             else
             {
@@ -189,5 +187,47 @@ namespace ProyectoMinaELMochito
             }
         }
 
+        private void MostrarVehiculosTextBox(object sender, SelectionChangedEventArgs e)
+        {
+            DataGrid dataGrid = (DataGrid)sender;
+            DataRowView row_selected = dataGrid.SelectedItem as DataRowView;
+
+            //Validar que realmente se esta seleccionando un elemento del datagrid
+            if (row_selected != null)
+            {
+                txtIdVehiculo.Text = row_selected["Id Vehiculo"].ToString();
+                txtVehiculo.Text = row_selected["Marca"].ToString();
+            }
+            else
+            {
+                MessageBox.Show("Por favor seleccione una fila del datagrid");
+            }
+        }
+
+        /// <summary>
+        /// Este evento permitirá que solo se pueda insertar datos de tipo 
+        /// númerico en el el textBox de Empleados
+        /// </summary>
+        private void SoloNumeros(object sender, KeyEventArgs e)
+        {
+            if (e.Key >= Key.D0 && e.Key <= Key.D9 || e.Key >= Key.NumPad0 && e.Key <= Key.NumPad9)
+                e.Handled = false;
+            else
+                e.Handled = true;
+        }
+
+        /// <summary>
+        /// Este evento permitirá que solo se pueda insertar datos de tipo 
+        /// númerico en el el textBox de Vehiculos
+        /// </summary>
+        private void PermiteSoloNumeros(object sender, KeyEventArgs e)
+        {
+            if (e.Key >= Key.D0 && e.Key <= Key.D9 || e.Key >= Key.NumPad0 && e.Key <= Key.NumPad9)
+                e.Handled = false;
+            else
+                e.Handled = true;
+        }
+
+       
     }
 }

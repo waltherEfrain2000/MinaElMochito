@@ -27,11 +27,14 @@ namespace ProyectoMinaELMochito
 
         public decimal Precio { get; set; }
 
+        public int IdProduccion { get; set; }
+
         //Constructores
         public Producciion() { }
 
-        public Producciion(int numeroViaje, int numeroMineral, string tipoMineral, decimal precioMineral, decimal pesoMineral)
+        public Producciion(int idProduccion, int numeroViaje, int numeroMineral, string tipoMineral, decimal precioMineral, decimal pesoMineral)
         {
+            IdProduccion = idProduccion;
             IdViaje = numeroViaje;
             IdMineral = numeroMineral;
             Peso = pesoMineral;
@@ -132,6 +135,7 @@ namespace ProyectoMinaELMochito
                 //Crear los parámetros que serán actualizados en la tabla
                 sqlCommand.Parameters.AddWithValue("@idMineral", producciion.IdMineral);
                 sqlCommand.Parameters.AddWithValue("@peso", producciion.Peso);
+                sqlCommand.Parameters.AddWithValue("@idProduccion", producciion.IdProduccion);
 
                 //Ejecutar el comando para la actualización de datos
                 sqlCommand.ExecuteNonQuery();

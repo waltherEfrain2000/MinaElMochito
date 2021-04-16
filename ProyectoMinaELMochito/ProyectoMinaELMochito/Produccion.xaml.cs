@@ -39,6 +39,8 @@ namespace ProyectoMinaELMochito
 
             MostrarMinerales();
 
+            MostrarDatosTabla();
+
             AsignarUltimoId();
         }
 
@@ -60,6 +62,7 @@ namespace ProyectoMinaELMochito
         //Obtener los datos ingresados del formulario
         private void ObtenerDatos()
         {
+            producciion.IdProduccion = Convert.ToInt32(txtIdProduccion.Text);
             producciion.IdViaje = Convert.ToInt32(txtNumeroViaje.Text);
             producciion.IdMineral = Convert.ToInt32(cmbMinerales.SelectedValue);
             producciion.Precio = Convert.ToDecimal(txtPrecio.Text);
@@ -97,49 +100,36 @@ namespace ProyectoMinaELMochito
             btnSalir.Visibility = ocultar;
         }
 
+        private void ObtienePropiedades(Producciion producciion)
+        {
+            this.txtCantidad.Text = Convert.ToString(producciion.Peso);
+            this.txtNumeroViaje.Text = Convert.ToString(producciion.IdViaje);
+            this.txtPrecio.Text = Convert.ToString(producciion.Precio);
+            this.cmbMinerales.SelectedItem = Convert.ToString(producciion.NombreMineral);
+        }
+
+        private void MostarContenidoEnCasillas(object sender, SelectionChangedEventArgs e)
+        {
+            DataGrid dataGrid = (DataGrid)sender;
+            DataRowView row_selected = dataGrid.SelectedItem as DataRowView;
+
+            //Validar que realmente se esta seleccionando un elemento del datagrid
+            if (row_selected != null)
+            {
+                txtNumeroViaje.Text = row_selected["IdViaje"].ToString();
+                txtCantidad.Text = row_selected["Peso"].ToString();
+                txtPrecio.Text = row_selected["Precio"].ToString();
+                cmbMinerales.SelectedItem = row_selected["NombreMineral"].ToString();
+            }
+            else
+            {
+                MessageBox.Show("Por favor seleccione una fila del datagrid");
+            }
+        }
+
         /// <summary>
         /// Al cargar el formulario esta función cargará la tabla de Producción
         /// </summary>
-        private void MuestraDatos(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                //Realizar el query que mostrara la información
-                String queryProduccion = @"Select P.idProduccion as 'id Producción', P.idViaje as 'N° Viaje', 
-                                    M.descripcion as 'Mineral',P.precio as 'Precio', P.peso as 'Peso(T)'
-                                    From Minas.Produccion as P
-                                    Inner Join Minas.Mineral as M on P.idMineral = M.idMineral";
-
-                //Establecer la conexión
-                sqlConnection.Open();
-
-                // Crear el comando SQL tanto como para el query de emplados y de vehículos
-                SqlCommand sqlCommand = new SqlCommand(queryProduccion, sqlConnection);
-
-                //Se crea el sqlCommand para poder ejecuatar cada query
-                sqlCommand.ExecuteNonQuery();
-
-                //Crear el comando SQL
-                SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand);
-
-                //Crear el dataTable que contendrá las tablas desde la base
-                DataTable dataTable1 = new DataTable("Minas.Produccion");
-
-                //Llenar los datagrid con la información necesaria
-                sqlDataAdapter.Fill(dataTable1);
-                dgvProduccion.ItemsSource = dataTable1.DefaultView;
-                sqlDataAdapter.Update(dataTable1);
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-            finally
-            {
-                sqlConnection.Close();
-            }
-        }
 
         /// <summary>
         /// 
@@ -203,8 +193,9 @@ namespace ProyectoMinaELMochito
             try
             {
                 //Realizar el query que mostrara la información
-                String queryProduccion = @"Select P.idProduccion as 'id Producción', P.idViaje as 'N° Viaje', 
-                                    M.descripcion as 'Mineral',P.precio as 'Precio', P.peso as 'Peso(T)'
+                String queryProduccion = @"Select P.idProduccion as 'Id Producción', P.idViaje as 'N° Viaje', 
+                                    M.descripcion as 'Mineral',P.precio as 'Precio', P.peso as 'Peso(Kg)',
+                                    P.total as 'Total' 
                                     From Minas.Produccion as P
                                     Inner Join Minas.Mineral as M on P.idMineral = M.idMineral";
 
@@ -239,5 +230,196 @@ namespace ProyectoMinaELMochito
             }
         }
 
+
+        private void Casillas(bool opcion, int operacion)
+        {
+            //Operacion se utiliza para distingir entre actualizar y activar o inabilitar todas las casillas
+            if (operacion == 0)
+            {
+                txtCantidad.IsReadOnly = opcion;
+                txtNumeroViaje.IsReadOnly = opcion;
+                cmbMinerales.IsReadOnly = opcion;
+            }
+            else
+            {
+                txtCantidad.IsReadOnly = opcion;
+                txtNumeroViaje.IsReadOnly = opcion;
+                cmbMinerales.IsReadOnly = opcion;
+            }
+
+        }
+
+        /// <summary>
+        /// Este método tiene la funcionaliad de pasar los datos que se seleccionan
+        /// en el datagridview a las acjas de texto
+        /// </summary>
+        private void DatosEnCasillas(object sender, SelectionChangedEventArgs e)
+        {
+            DataGrid dg = (DataGrid)sender;
+            DataRowView filaSeleccionada = dg.SelectedItem as DataRowView;
+
+            if(filaSeleccionada != null)
+            {
+                txtNumeroViaje.Text = filaSeleccionada["N° Viaje"].ToString();
+                cmbMinerales.Text = filaSeleccionada["Mineral"].ToString();
+                txtCantidad.Text = filaSeleccionada["Peso(Kg)"].ToString();
+                txtPrecio.Text = filaSeleccionada["Precio"].ToString();
+                txtIdProduccion.Text = filaSeleccionada["Id Producción"].ToString();
+            
+                Casillas(true, 0);
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private void BloquearEdicion(object sender, KeyEventArgs e)
+        {
+            if (e.Key >= Key.D0 && e.Key <= Key.D9 || e.Key >= Key.NumPad0 && e.Key <= Key.NumPad9)
+                e.Handled = false;
+            else
+                e.Handled = true;
+        }
+
+        /// <summary>
+        /// Precio
+        /// </summary>
+
+        private void NoPermitirEdicion(object sender, KeyEventArgs e)
+        {
+            
+        }
+        
+
+
+        private void btnModificar_Click(object sender, RoutedEventArgs e)
+        {
+            // Verificar que se ingresaron los valores requeridos
+            if (VerificacionDedatosRequeridos())
+            {
+                try
+                {
+                    //parametro 1 por que es actualizacion
+                    Casillas(false, 1);
+                    //ocultar todos los otones inecesarios
+                    btnModificar.Visibility = Visibility.Hidden;
+                    btnInsertar.Visibility = Visibility.Hidden;
+                    btnEliminar.Visibility = Visibility.Hidden;
+                    btnSalir.Visibility = Visibility.Hidden;
+                    btnAceptarCambios.Visibility = Visibility.Visible;
+                    btnDescartarCambios.Visibility = Visibility.Visible;
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+
+                }
+            }
+        }
+
+        private void btnAceptarCambios_Click(object sender, RoutedEventArgs e)
+        {
+            // Verificar que se ingresaron los valores requeridos
+            if (VerificacionDedatosRequeridos())
+            {
+                //ocultar todos los otones inecesarios
+                btnModificar.Visibility = Visibility.Visible;
+                btnInsertar.Visibility = Visibility.Visible;
+                btnEliminar.Visibility = Visibility.Visible;
+                btnSalir.Visibility = Visibility.Visible;
+                btnAceptarCambios.Visibility = Visibility.Hidden;
+                btnDescartarCambios.Visibility = Visibility.Hidden;
+                try
+                {
+                    //parametro 1 por que es actualizacion
+                    ObtenerDatos();
+                    producciion.ModificarProduccion(producciion);
+
+
+                    // Mensaje de inserción exitosa
+                    MessageBox.Show("¡Produccion modificado correctamente!");
+
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+
+                }
+                finally
+                {
+                    LimpiarCasillasDeDatos();
+                    MostrarDatosTabla();
+
+                    sqlConnection.Close();
+                }
+            }
+        }
+
+        private void btnDescartarCambios_Click(object sender, RoutedEventArgs e)
+        {
+            // Verificar que se ingresaron los valores requeridos
+            if (VerificacionDedatosRequeridos())
+            {
+                //ocultar todos los otones inecesarios
+                btnModificar.Visibility = Visibility.Visible;
+                btnInsertar.Visibility = Visibility.Visible;
+                btnEliminar.Visibility = Visibility.Visible;
+                btnSalir.Visibility = Visibility.Visible;
+                btnAceptarCambios.Visibility = Visibility.Hidden;
+                btnDescartarCambios.Visibility = Visibility.Hidden;
+                try
+                {
+                    //parametro 1 por que es actualizacion
+                    ObtenerDatos();
+                    producciion.BorrarProduccion(producciion);
+
+                    // Mensaje de inserción exitosa
+                    MessageBox.Show("¡El registro se eliminó correctamente!");
+
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+
+                }
+                finally
+                {
+                    LimpiarCasillasDeDatos();
+                    MostrarDatosTabla();
+                }
+            }
+        }
+
+        private void MostrarBotonesPrincipales()
+        {
+            btnModificar.Visibility = Visibility.Visible;
+            btnInsertar.Visibility = Visibility.Visible;
+            btnEliminar.Visibility = Visibility.Visible;
+            btnSalir.Visibility = Visibility.Visible;
+            btnAceptarCambios.Visibility = Visibility.Hidden;
+            btnDescartarCambios.Visibility = Visibility.Hidden;
+            LimpiarCasillasDeDatos();
+            Casillas(false, 0);
+        }
+
+        //Checked
+        private void ActualizarPrecio(object sender, RoutedEventArgs e)
+        {
+            txtPrecio.IsReadOnly = false;
+        }
+
+        //Uncheked
+        private void ActualizarElPrecio(object sender, RoutedEventArgs e)
+        {
+            txtPrecio.IsReadOnly = true;
+        }
+
+        private void btnCancelarEliminacion_Click(object sender, RoutedEventArgs e)
+        {
+            MostrarBotonesPrincipales();
+        }
     }
 }
