@@ -121,7 +121,7 @@ create table Minas.Produccion
 	idMineral int not null,
 	precio numeric(18,2),
 	peso numeric(18, 2),
-	total decimal(18, 2),
+	total as (precio * peso) persisted
 	
 		
 	Constraint PK_Produccion_idProduccion
@@ -279,7 +279,7 @@ BEGIN
 	set
 	[peso] =  [peso] - @cantidad,
 [fechaActualizacion]= SYSUTCDATETIME(),
-[Total]=[Total]-Total
+[Total]=[Total]-@Total
 	where [idMineral] = @idMineral
 END
 GO
