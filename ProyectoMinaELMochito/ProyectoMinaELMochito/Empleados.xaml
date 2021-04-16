@@ -14,69 +14,165 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ProyectoMinaELMochito"
         mc:Ignorable="d"
-        Title="Empleados" Height="450" Width="900">
-
+        xmlns:fw="clr-namespace:SourceChord.FluentWPF;assembly=FluentWPF"
+        fw:AcrylicWindow.Enabled="True" FontSize="15"  MouseDown="Window_MouseDown" Height="550" Width="1080" WindowStyle="None" ResizeMode="CanResizeWithGrip" WindowStartupLocation="CenterScreen" Title="menu">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="auto" />
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="220"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*" />
-            <RowDefinition Height="*" />
-            <RowDefinition Height="*" />
-            <RowDefinition Height="*" />
-            <RowDefinition Height="*" />
-            <RowDefinition Height="*" />
-            <RowDefinition Height="*" />
-            <RowDefinition Height="*" />
-            <RowDefinition Height="*" />
-            <RowDefinition Height="*" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
 
-        <Label Content="Empleados" Grid.ColumnSpan="5" HorizontalAlignment="Center" FontSize="20" />
+        <Grid fw:PointerTracker.Enabled="True" Background="#9900afb9">
+            <StackPanel>
+                <StackPanel Orientation="Horizontal">
 
-        <Label Content="Empleado ID" Grid.Row="1" FontSize="15" Margin="5" />
-        <Label Content="Identidad" Grid.Row="2" FontSize="15" Margin="5" />
-        <Label Content="Nombre Completo" Grid.Row="3" FontSize="15" Margin="5" />
-        <Label Content="Edad" Grid.Row="4" FontSize="15" Margin="5" />
-        <Label Content="Genero" Grid.Row="5" FontSize="15" Margin="5" />
-        <Label Content="Cargo" Grid.Row="6"  FontSize="15" Margin="5" />
-        <Label Content="Salario" Grid.Row="7" FontSize="15" Margin="5" />
-        <Label Content="Direccion" Grid.Row="8" FontSize="15" Margin="5"  />
+                    <Button Foreground="white" Background="{x:Null}" BorderBrush="{x:Null}">
+                        <materialDesign:PackIcon Kind="ArrowLeft"/>
+                    </Button>
 
-        <TextBox Name="txtEmpleadoID" Grid.Row="1" Grid.Column="1" FontSize="15" Margin="7" IsReadOnly="True" />
-        <TextBox Name="txtIdentidad" Grid.Row="2" Grid.Column="1" FontSize="15" Margin="7"  KeyDown="txtIdentidad_KeyDown"/>
-        <TextBox Name="txtNombreCompleto" Grid.Row="3" Grid.Column="1" FontSize="15" Margin="7" />
-        <TextBox Name="txtEdad" Grid.Row="4" Grid.Column="1" FontSize="15" Margin="7" KeyDown="txtEdad_KeyDown" />
+                    <TextBlock Text="" FontSize="12" Margin="10" VerticalAlignment="Center"/>
 
-        <TextBox Name="txtSalario" Grid.Row="7" Grid.Column="1" FontSize="15" Margin="7" KeyDown="txtSalario_KeyDown" />
-        <TextBox Name="txtDireccion" Grid.Row="8" Grid.Column="1" FontSize="15" Margin="7" Grid.RowSpan="2"/>
+                </StackPanel>
 
-        <ComboBox Name="cmbGenero" Grid.Row="5" Grid.Column="1" FontSize="15" Margin="7" />
-        <ComboBox Name="cmbCargo" Grid.Row="6" Grid.Column="1" FontSize="15" Margin="7" />
+                <ListViewItem MouseDoubleClick="ListViewItem_MouseDoubleClick"   Padding="0" Selected="ListViewItem_Selected_7">
 
-        <Button x:Name="btnAgregar" Content="Agregar" Grid.Column="1" Grid.Row="10" Margin="20 1" Click="btnAgregar_Click"  />
-        <Button x:Name="btnModificar" Content="Modificar" Grid.Column="2" Grid.Row="10"  Margin="20 1" Click="btnModificar_Click"/>
-        <Button x:Name="btnAceptarModificacion" Content="Aceptar" Grid.Column="1" Grid.Row="10"  Margin="20 1" Click="btnAceptarModificacion_Click" Visibility="Hidden"/>
-        <Button x:Name="btnCancelarModificacion" Content="Cancelar" Grid.Column="3" Grid.Row="10"  Margin="20 1" Click="btnCancelarModificacion_Click" Visibility="Hidden"/>
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Foreground="White" Kind="Home" Margin="15"/>
+                        <TextBlock Text="Inicio" Foreground="White" VerticalAlignment="Center"/>
+                    </StackPanel>
 
-        <Button x:Name="btnEliminar" Content="eliminar" Grid.Column="3" Grid.Row="10"  Margin="20 1" Click="btnEliminar_Click" Grid.RowSpan="2"/>
-        <Button x:Name="btnAceptarEliminacion" Content="Aceptar" Grid.Column="1" Grid.Row="10"  Margin="20 1" Click="btnAceptarEliminacion_Click" Visibility="Hidden"/>
-        <Button x:Name="btnCancelarEliminacion" Content="Cancelar" Grid.Column="3" Grid.Row="10"  Margin="20 1" Click="btnCancelarEliminacion_Click" Visibility="Hidden" />
-        <Button x:Name="btnLimpiar" Content="Limpiar" Grid.Column="4" Grid.Row="10" Margin="90 1 5 1" Click="btnLimpiar_Click" />
+                </ListViewItem>
 
-        <DataGrid Name="DgvEmpleados" Grid.Row="1" Grid.Column="2" Margin="10" Grid.ColumnSpan="3" Grid.RowSpan="9" SelectionChanged="DgvEmpleados_SelectionChanged" IsReadOnly="True" FontSize="15" >
+                <TextBlock Text="Sistema" Foreground="White" Margin="15" FontWeight="DemiBold"/>
 
-            <DataGrid.Resources>
-                <Style TargetType="{x:Type DataGridColumnHeader}">
-                </Style>
-            </DataGrid.Resources>
+                <ListView FontSize="15">
 
-        </DataGrid>
+                    <ListViewItem Background="#9900afb9" Padding="1" Selected="ListViewItem_Selected">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Foreground="White" Kind="Worker" Margin="15"/>
+                            <TextBlock Text="Empleado" Foreground="White" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </ListViewItem>
+
+                    <ListViewItem Padding="1" Selected="ListViewItem_Selected_1">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Foreground="White" Kind="DumpTruck" Margin="15"/>
+                            <TextBlock Text="Vehículos" Foreground="White" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </ListViewItem>
+
+                    <ListViewItem Padding="1" Selected="ListViewItem_Selected_2">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Foreground="White" Kind="Gold" Margin="15"/>
+                            <TextBlock Text="Inventario" Foreground="White" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </ListViewItem>
+
+                    <ListViewItem Padding="1" Selected="ListViewItem_Selected_3">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Foreground="White" Kind="Dollar" Margin="15"/>
+                            <TextBlock Text="Entrada" Foreground="White" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </ListViewItem>
+
+                    <ListViewItem Padding="1" Selected="ListViewItem_Selected_4">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Foreground="White" Kind="MoneyOff" Margin="15"/>
+                            <TextBlock Text="Salida" Foreground="White" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </ListViewItem>
+
+                    <ListViewItem Padding="1" Selected="ListViewItem_Selected_5">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Foreground="White" Kind="Abacus" Margin="15"/>
+                            <TextBlock Text="Producción" Foreground="White" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </ListViewItem>
+
+                    <ListViewItem Padding="1" Selected="ListViewItem_Selected_6" >
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Foreground="White" Kind="User" Margin="15"/>
+                            <TextBlock Text="Usuarios" Foreground="White" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </ListViewItem>
+
+                    <ListViewItem Padding="1" Selected="ListViewItem_Selected_8" >
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Foreground="White" Kind="Logout" Margin="15"/>
+                            <TextBlock Text="Cerrar Sesión" Foreground="White" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </ListViewItem>
+                </ListView>
+
+
+            </StackPanel>
+        </Grid>
+
+        <Grid Grid.Column="1" Background="White">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <Label Content="Empleados" Grid.ColumnSpan="5" HorizontalAlignment="Center" FontSize="20" />
+
+            <Label Content="Empleado ID" Grid.Row="1" FontSize="15" Margin="5" />
+            <Label Content="Identidad" Grid.Row="2" FontSize="15" Margin="5" />
+            <Label Content="Nombre Completo" Grid.Row="3" FontSize="15" Margin="5" />
+            <Label Content="Edad" Grid.Row="4" FontSize="15" Margin="5" />
+            <Label Content="Genero" Grid.Row="5" FontSize="15" Margin="5" />
+            <Label Content="Cargo" Grid.Row="6"  FontSize="15" Margin="5" />
+            <Label Content="Salario" Grid.Row="7" FontSize="15" Margin="5" />
+            <Label Content="Direccion" Grid.Row="8" FontSize="15" Margin="5"  />
+
+            <TextBox Name="txtEmpleadoID" Grid.Row="1" Grid.Column="1" FontSize="15" Margin="7" IsReadOnly="True" />
+            <TextBox Name="txtIdentidad" Grid.Row="2" Grid.Column="1" FontSize="15" Margin="7"  KeyDown="txtIdentidad_KeyDown"/>
+            <TextBox Name="txtNombreCompleto" Grid.Row="3" Grid.Column="1" FontSize="15" Margin="7" />
+            <TextBox Name="txtEdad" Grid.Row="4" Grid.Column="1" FontSize="15" Margin="7" KeyDown="txtEdad_KeyDown" />
+
+            <TextBox Name="txtSalario" Grid.Row="7" Grid.Column="1" FontSize="15" Margin="7" KeyDown="txtSalario_KeyDown" />
+            <TextBox Name="txtDireccion" Grid.Row="8" Grid.Column="1" FontSize="15" Margin="7" Grid.RowSpan="2"/>
+
+            <ComboBox Name="cmbGenero" Grid.Row="5" Grid.Column="1" FontSize="15" Margin="7" />
+            <ComboBox Name="cmbCargo" Grid.Row="6" Grid.Column="1" FontSize="15" Margin="7" />
+
+            <Button x:Name="btnAgregar" Background="#24a9b0" BorderBrush="#0082aa" Content="Agregar" Grid.Column="1" Grid.Row="10" Margin="20 1" Click="btnAgregar_Click"  />
+            <Button x:Name="btnModificar" Content="Modificar" Grid.Column="2" Grid.Row="10"  Margin="20 1" Click="btnModificar_Click"/>
+            <Button x:Name="btnAceptarModificacion" Content="Aceptar" Grid.Column="1" Grid.Row="10"  Margin="20 1" Click="btnAceptarModificacion_Click" Visibility="Hidden"/>
+            <Button x:Name="btnCancelarModificacion" Content="Cancelar" Grid.Column="3" Grid.Row="10"  Margin="20 1" Click="btnCancelarModificacion_Click" Visibility="Hidden"/>
+
+            <Button x:Name="btnEliminar" Content="eliminar" Grid.Column="3" Grid.Row="10"  Margin="20 1" Click="btnEliminar_Click" Grid.RowSpan="2"/>
+            <Button x:Name="btnAceptarEliminacion" Content="Aceptar" Grid.Column="1" Grid.Row="10"  Margin="20 1" Click="btnAceptarEliminacion_Click" Visibility="Hidden"/>
+            <Button x:Name="btnCancelarEliminacion" Content="Cancelar" Grid.Column="3" Grid.Row="10"  Margin="20 1" Click="btnCancelarEliminacion_Click" Visibility="Hidden" />
+            <Button x:Name="btnLimpiar" Content="Limpiar" Grid.Column="4" Grid.Row="10" Margin="90 1 5 1" Click="btnLimpiar_Click" />
+
+            <DataGrid Name="DgvEmpleados" Grid.Row="1" Grid.Column="2" Margin="10" Grid.ColumnSpan="3" Grid.RowSpan="9" SelectionChanged="DgvEmpleados_SelectionChanged" IsReadOnly="True" FontSize="15" >
+
+                <DataGrid.Resources>
+                    <Style TargetType="{x:Type DataGridColumnHeader}">
+                    </Style>
+                </DataGrid.Resources>
+
+            </DataGrid>
+
+        </Grid>
     </Grid>
 </Window>
+   

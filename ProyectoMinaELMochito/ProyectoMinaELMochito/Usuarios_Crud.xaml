@@ -6,97 +6,190 @@
         xmlns:local="clr-namespace:ProyectoMinaELMochito" xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
         xmlns:System="clr-namespace:System;assembly=mscorlib" x:Class="ProyectoMinaELMochito.Usuarios_Crud"
         mc:Ignorable="d"
-        Title="Usuarios_Crud" Height="450" Width="800"
          AllowsTransparency="True" Background="Transparent" 
-        WindowStyle="None" ResizeMode="NoResize"
-         WindowStartupLocation="CenterScreen">
-    <Grid Background="#f2006d77">
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:fw="clr-namespace:SourceChord.FluentWPF;assembly=FluentWPF"
+        fw:AcrylicWindow.Enabled="True" FontSize="15"  MouseDown="Window_MouseDown" Height="550" Width="1080" WindowStyle="None" ResizeMode="CanResizeWithGrip" WindowStartupLocation="CenterScreen" Title="menu">
+
+    <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="220"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="50"/>
-            <RowDefinition Height="50"/>
-            <RowDefinition Height="50"/>
-            <RowDefinition Height="50"/>
-            <RowDefinition Height="50"/>
-            <RowDefinition Height="50"/>
-            <RowDefinition Height="50"/>
-            <RowDefinition Height="50"/>
 
-        </Grid.RowDefinitions>
-        <Label x:Name="lbtitulo" Content="Usuarios" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" HorizontalAlignment="Center" FontFamily="Helvetica" FontSize="25"/>
-        <iconPacks:PackIconMaterial Kind="RobotConfused" 
+        <Grid fw:PointerTracker.Enabled="True" Background="#9900afb9">
+            <StackPanel>
+                <StackPanel Orientation="Horizontal">
+
+                    <Button Foreground="white" Background="{x:Null}" BorderBrush="{x:Null}">
+                        <materialDesign:PackIcon Kind="ArrowLeft"/>
+                    </Button>
+
+                    <TextBlock Text="" FontSize="12" Margin="10" VerticalAlignment="Center"/>
+
+                </StackPanel>
+
+                <ListViewItem MouseDoubleClick="ListViewItem_MouseDoubleClick" Padding="0" Selected="ListViewItem_Selected_7">
+
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Foreground="White" Kind="Home" Margin="15"/>
+                        <TextBlock Text="Inicio" Foreground="White" VerticalAlignment="Center"/>
+                    </StackPanel>
+
+                </ListViewItem>
+
+                <TextBlock Text="Sistema" Foreground="White" Margin="15" FontWeight="DemiBold"/>
+
+                <ListView FontSize="15">
+
+                    <ListViewItem Background="#9900afb9" Padding="1" Selected="ListViewItem_Selected">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Foreground="White" Kind="Worker" Margin="15"/>
+                            <TextBlock Text="Empleado" Foreground="White" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </ListViewItem>
+
+                    <ListViewItem Padding="1" Selected="ListViewItem_Selected_1">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Foreground="White" Kind="DumpTruck" Margin="15"/>
+                            <TextBlock Text="Vehículos" Foreground="White" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </ListViewItem>
+
+                    <ListViewItem Padding="1" Selected="ListViewItem_Selected_2">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Foreground="White" Kind="Gold" Margin="15"/>
+                            <TextBlock Text="Inventario" Foreground="White" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </ListViewItem>
+
+                    <ListViewItem Padding="1" Selected="ListViewItem_Selected_3">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Foreground="White" Kind="Dollar" Margin="15"/>
+                            <TextBlock Text="Entrada" Foreground="White" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </ListViewItem>
+
+                    <ListViewItem Padding="1" Selected="ListViewItem_Selected_4">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Foreground="White" Kind="MoneyOff" Margin="15"/>
+                            <TextBlock Text="Salida" Foreground="White" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </ListViewItem>
+
+                    <ListViewItem Padding="1" Selected="ListViewItem_Selected_9">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Foreground="White" Kind="Abacus" Margin="15"/>
+                            <TextBlock Text="Producción" Foreground="White" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </ListViewItem>
+
+                    <ListViewItem Padding="1" Selected="ListViewItem_Selected_6" >
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Foreground="White" Kind="User" Margin="15"/>
+                            <TextBlock Text="Usuarios" Foreground="White" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </ListViewItem>
+
+                    <ListViewItem Padding="1" Selected="ListViewItem_Selected_8" >
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Foreground="White" Kind="Logout" Margin="15"/>
+                            <TextBlock Text="Cerrar Sesión" Foreground="White" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </ListViewItem>
+
+                </ListView>
+            </StackPanel>
+        </Grid>
+
+        <Grid Grid.Column="1" Background="White">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+
+            </Grid.RowDefinitions>
+            <Label x:Name="lbtitulo" Content="Usuarios" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" HorizontalAlignment="Center" FontFamily="Helvetica" FontSize="25"/>
+            <iconPacks:PackIconMaterial Kind="RobotConfused" 
                                                 VerticalAlignment="Center" 
                                                 HorizontalAlignment="Left" 
                                                 Foreground="Black"
                                                 x:Name="icon"
                                                 Width="24" Visibility="Visible" Grid.Column="2" Grid.Row="0" Margin="58,10,0,15"   />
-        <Label x:Name="lbnombre" Content="Nombre Completo" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Center"/>
-        <TextBox x:Name="txtid" Grid.Row="1" Grid.Column="1" Visibility="Hidden"/>
-        <TextBox x:Name="txtnombre" Grid.Row="2" Grid.Column="1"/>
-        <Label x:Name="lbUsername" Content="Nombre de usuario" Grid.Row="3" Grid.Column="0" HorizontalAlignment="Center"/>
-        <TextBox x:Name="txtusername" Grid.Row="3" Grid.Column="1"/>
-        <Label x:Name="lbPassword" Content="Contraseña" Grid.Row="4" Grid.Column="0" HorizontalAlignment="Center"/>
-        <PasswordBox x:Name="pssPassword" Grid.Row="4" Grid.Column="1"/>
-        <Label x:Name="lbRol" Content="Rol" Grid.Row="5" Grid.Column="0" HorizontalAlignment="Center" />
-        <ComboBox x:Name="cmbRol" Grid.Column="1" Grid.Row="5" >
-            <ComboBoxItem Content="ADMINISTRADOR"/>
-            <ComboBoxItem Content="EMPLEADODETURNO"/>
-        </ComboBox>
-        <Label x:Name="lbestado" Content="Estado" Grid.Row="6" Grid.Column="0" HorizontalAlignment="Center"/>
-        <ComboBox x:Name="cmbEstado" Grid.Column="1" Grid.Row="6" >
-            <ComboBoxItem Content="Inactivo"/>
-            <ComboBoxItem Content="Activo"/>
-        </ComboBox>
+            <Label x:Name="lbnombre" Content="Nombre Completo" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Center"/>
+            <TextBox x:Name="txtid" Grid.Row="1" Grid.Column="1" Visibility="Hidden"/>
+            <TextBox x:Name="txtnombre" Grid.Row="2" Grid.Column="1"/>
+            <Label x:Name="lbUsername" Content="Nombre de usuario" Grid.Row="3" Grid.Column="0" HorizontalAlignment="Center"/>
+            <TextBox x:Name="txtusername" Grid.Row="3" Grid.Column="1"/>
+            <Label x:Name="lbPassword" Content="Contraseña" Grid.Row="4" Grid.Column="0" HorizontalAlignment="Center"/>
+            <PasswordBox x:Name="pssPassword" Grid.Row="4" Grid.Column="1"/>
+            <Label x:Name="lbRol" Content="Rol" Grid.Row="5" Grid.Column="0" HorizontalAlignment="Center" />
+            <ComboBox x:Name="cmbRol" Grid.Column="1" Grid.Row="5" >
+                <ComboBoxItem Content="ADMINISTRADOR"/>
+                <ComboBoxItem Content="EMPLEADODETURNO"/>
+            </ComboBox>
+            <Label x:Name="lbestado" Content="Estado" Grid.Row="6" Grid.Column="0" HorizontalAlignment="Center"/>
+            <ComboBox x:Name="cmbEstado" Grid.Column="1" Grid.Row="6" >
+                <ComboBoxItem Content="Inactivo"/>
+                <ComboBoxItem Content="Activo"/>
+            </ComboBox>
 
-        <DataGrid Name="dtgriduser" Grid.Row="2" Grid.Column="2" Grid.RowSpan="5" Grid.ColumnSpan="2" Margin="0,0,23,0" HorizontalAlignment="Right" Width="353" SelectionChanged="dtgriduser_SelectionChanged">
-            <DataGrid.Columns>
-            <!--<DataGridTextColumn x:Name="dgId" Header="Id" Binding="{Binding Path=Id}" Width="*"/>
+            <DataGrid Name="dtgriduser" Grid.Row="2" Grid.Column="2" Grid.RowSpan="5" Grid.ColumnSpan="2" Margin="0,0,23,0" HorizontalAlignment="Right" Width="353" SelectionChanged="dtgriduser_SelectionChanged">
+                <DataGrid.Columns>
+                    <!--<DataGridTextColumn x:Name="dgId" Header="Id" Binding="{Binding Path=Id}" Width="*"/>
             <DataGridTextColumn x:Name="dgnombreCompleto" Header="Nombre Completo" Binding="{Binding Path=NombreCompleto}" Width="*"/>
             <DataGridTextColumn x:Name="dgusername" Header="Username" Binding="{Binding Path=Username}" Width="*"/>-->
-            </DataGrid.Columns>
+                </DataGrid.Columns>
                 <DataGrid.Resources>
-                <Style TargetType="{x:Type DataGridColumnHeader}">
-                    <Setter Property="Background" Value="#00afb9"/>
-                    <Setter Property="FontWeight" Value="SemiBold"/>
-                    <Setter Property="BorderThickness" Value="0,0,1,2"/>
-                    <Setter Property="BorderBrush" Value="Black"/>
-                </Style>
-                <Style TargetType="{x:Type DataGridRow}">
-                    <Setter Property="Background" Value="WhiteSmoke"/>
-                </Style>
-            </DataGrid.Resources>
-            <DataGrid.Effect>
-                <DropShadowEffect/>
-            </DataGrid.Effect>
-            <DataGrid.SelectedItems>
-                <System:Object/>
-            </DataGrid.SelectedItems>
-        </DataGrid>
+                    <Style TargetType="{x:Type DataGridColumnHeader}">
+                        <Setter Property="Background" Value="#00afb9"/>
+                        <Setter Property="FontWeight" Value="SemiBold"/>
+                        <Setter Property="BorderThickness" Value="0,0,1,2"/>
+                        <Setter Property="BorderBrush" Value="Black"/>
+                    </Style>
+                    <Style TargetType="{x:Type DataGridRow}">
+                        <Setter Property="Background" Value="WhiteSmoke"/>
+                    </Style>
+                </DataGrid.Resources>
+                <DataGrid.Effect>
+                    <DropShadowEffect/>
+                </DataGrid.Effect>
+                <DataGrid.SelectedItems>
+                    <System:Object/>
+                </DataGrid.SelectedItems>
+            </DataGrid>
 
-        <Button x:Name="btnIngresar" Click="btnIngresar_Click" Content="Insertar" Grid.Column="0" Grid.Row="8" Width="150" Height="40"/>
-        <iconPacks:PackIconMaterial Kind="StarPlus" 
+            <Button x:Name="btnIngresar" Click="btnIngresar_Click" Content="Insertar" Grid.Column="0" Grid.Row="8" Width="150" Height="40"/>
+            <iconPacks:PackIconMaterial Kind="StarPlus" 
                                                 VerticalAlignment="Center" 
                                                 HorizontalAlignment="Left" 
                                                 Foreground="White"
                                                 x:Name="icon1"
                                                 Width="24" Visibility="Visible" Grid.Column="0" Grid.Row="8" Margin="130,10,0,15" RenderTransformOrigin="2.949,0.131"   />
 
-        <Button x:Name="btnModificar" Content="Modificar" Grid.Column="1" Grid.Row="8" Width="150" Height="40" Click="btnModificar_Click"/>
-        <iconPacks:PackIconMaterial Kind="StarCog"
+            <Button x:Name="btnModificar" Content="Modificar" Grid.Column="1" Grid.Row="8" Width="150" Height="40" Click="btnModificar_Click"/>
+            <iconPacks:PackIconMaterial Kind="StarCog"
                                                 VerticalAlignment="Center" 
                                                 HorizontalAlignment="Left" 
                                                 Foreground="White"
                                                 x:Name="icon2"
                                                 Width="24" Visibility="Visible" Grid.Column="1" Grid.Row="8" Margin="130,10,0,15" RenderTransformOrigin="2.949,0.131"   />
 
-        <Button x:Name="btnEliminar" Content="Eliminar" Grid.Column="2" Grid.Row="8" Width="150" Height="40" Click="btnEliminar_Click"/>
-        <iconPacks:PackIconMaterial Kind="StarMinus" 
+            <Button x:Name="btnEliminar" Content="Eliminar" Grid.Column="2" Grid.Row="8" Width="150" Height="40" Click="btnEliminar_Click"/>
+            <iconPacks:PackIconMaterial Kind="StarMinus" 
                                                 VerticalAlignment="Center" 
                                                 HorizontalAlignment="Left" 
                                                 Foreground="White"
@@ -104,14 +197,14 @@
                                                 Width="24" Visibility="Visible" Grid.Column="2" Grid.Row="8" Margin="130,10,0,15" RenderTransformOrigin="2.949,0.131"   />
 
 
-        <Button x:Name="btnsalir" Content="Salir" Grid.Column="3" Grid.Row="8" Width="150" Height="40" Click="btnsalir_Click"/>
-        <iconPacks:PackIconMaterial Kind="ExitToApp" 
+            <Button x:Name="btnsalir" Content="Salir" Grid.Column="3" Grid.Row="8" Width="150" Height="40" Click="btnsalir_Click"/>
+            <iconPacks:PackIconMaterial Kind="ExitToApp" 
                                                 VerticalAlignment="Center" 
                                                 HorizontalAlignment="Left" 
                                                 Foreground="White"
                                                 x:Name="icon4"
                                                 Width="24" Visibility="Visible" Grid.Column="3" Grid.Row="8" Margin="130,10,0,15" RenderTransformOrigin="2.949,0.131"   />
 
-
+        </Grid>
     </Grid>
 </Window>

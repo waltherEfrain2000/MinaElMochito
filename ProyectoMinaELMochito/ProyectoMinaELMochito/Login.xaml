@@ -1,4 +1,4 @@
-﻿<Window x:Class="ProyectoMinaELMochito.MainWindow"
+﻿<Window x:Class="ProyectoMinaELMochito.Login"
        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -23,7 +23,7 @@
                 </Border.Effect>
                 <Border.Background>
                     <LinearGradientBrush >
-                        <GradientStop Color="#f2edf6f9"  Offset="0.0" />
+                        <GradientStop Color="#f2edf6f9"  Offset="0." />
                         <GradientStop Color="#00afb9" Offset="1.1"/>
                         <GradientStop Color="#f2006d77" Offset="0.8"/>
 
@@ -35,8 +35,8 @@
 
             </Border>
             <StackPanel VerticalAlignment="Center">
-                <Image Source="logo.png" Width="200" />
-                <TextBlock Text="LOGIN "
+                <Image Source="logo.png" Margin="100,0,91,0" />
+                <TextBlock Text=" "
                            FontFamily="Helvetica"
                            FontWeight="Light"
                            FontSize="22"
@@ -59,7 +59,7 @@
                            Width="240"
                           HorizontalContentAlignment="Left"  
                            Opacity="0.5"
-                         Height="  25 "
+                         Height="41"
                              Margin="73,0,0,0"
                              Name="txtUsername" MouseDoubleClick="txtUsername_MouseDoubleClick"/>
                     <iconPacks:PackIconMaterial Kind="Account" 
@@ -90,7 +90,7 @@
                            Width="240"
                           HorizontalContentAlignment="Left"  
                            Opacity="0.5"
-                         Height="  25 "
+                         Height="38"
                              Margin="73,0,0,0" MouseDoubleClick="pwbPassword_MouseDoubleClick"  />
                     <TextBox FontFamily="HELVETICA"
                            FontWeight="Light"
@@ -133,8 +133,8 @@
 
                 <Border Width="250" Height="2" Background="White" Opacity="0.1"/>
                 <StackPanel Orientation="Horizontal" Margin="0,50,0,0">
-                    <Button Name="btnLogin"  Height="40" Content="Iniciar Sesión" Width="100"  Margin="65,0,60,0" Click="btnLogin_Click" MouseEnter="btnLogin_MouseEnter" />
-                    <Button Width="100" Height="40" Content="SALIR" Click="Button_Click"     />
+                    <Button Name="btnLogin"  Height="40" Content="Iniciar Sesión" Width="117"  Margin="65,0,60,0" Click="btnLogin_Click" MouseEnter="btnLogin_MouseEnter" />
+                    <Button Width="100" Height="40" Content="Salir" Click="Button_Click"     />
                 </StackPanel>
 
 

@@ -4,30 +4,128 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ProyectoMinaELMochito"
-      xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
-             mc:Ignorable="d" d:DataContext="{d:DesignInstance local:EntradasHistoricas}" Width="740" Height="483.754">
-    <Grid Margin="0,0,98,0">
+        xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+        xmlns:fw="clr-namespace:SourceChord.FluentWPF;assembly=FluentWPF"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        fw:AcrylicWindow.Enabled="True" FontSize="15"  MouseDown="Window_MouseDown" Height="550" Width="1080" WindowStyle="None" ResizeMode="CanResizeWithGrip" WindowStartupLocation="CenterScreen" 
+        mc:Ignorable="d" d:DataContext="{d:DesignInstance local:EntradasHistoricas}" >
+    
+    <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="215*"/>
-            <ColumnDefinition Width="419*"/>
+            <ColumnDefinition Width="220"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
-        </Grid.RowDefinitions>
-        <StackPanel Grid.Row="0" Margin="0,-10,0,333" Grid.RowSpan="2" Grid.ColumnSpan="2" >
-            <Label Content="Historial de Entradas " HorizontalAlignment="Center"  Width="300" Margin="324,0,10,0" Height="37" FontSize="20"/>
-            <TextBlock TextWrapping="Wrap" Text="Dona Central: Valor en Kilogramos    Done Exterior : Valor en $" Height="27" FontSize="15" Margin="187,0,0,0"/>
-        </StackPanel>
-        <lvc:PieChart Name="Chart" Grid.Row="1" Series="{Binding SeriesCollection}" 
+
+        <Grid fw:PointerTracker.Enabled="True" Background="#9900afb9">
+            <StackPanel>
+                <StackPanel Orientation="Horizontal">
+
+                    <Button Foreground="white" Background="{x:Null}" BorderBrush="{x:Null}">
+                        <materialDesign:PackIcon Kind="ArrowLeft"/>
+                    </Button>
+
+                    <TextBlock Text="" FontSize="12" Margin="10" VerticalAlignment="Center"/>
+
+                </StackPanel>
+
+                <ListViewItem MouseDoubleClick="ListViewItem_MouseDoubleClick" Padding="0" Selected="ListViewItem_Selected_7">
+
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Foreground="White" Kind="Home" Margin="15"/>
+                        <TextBlock Text="Inicio" Foreground="White" VerticalAlignment="Center"/>
+                    </StackPanel>
+
+                </ListViewItem>
+
+                <TextBlock Text="Sistema" Foreground="White" Margin="15" FontWeight="DemiBold"/>
+
+                <ListView FontSize="15">
+
+                    <ListViewItem Background="#9900afb9" Padding="1" Selected="ListViewItem_Selected">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Foreground="White" Kind="Worker" Margin="15"/>
+                            <TextBlock Text="Empleado" Foreground="White" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </ListViewItem>
+
+                    <ListViewItem Padding="1" Selected="ListViewItem_Selected_1">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Foreground="White" Kind="DumpTruck" Margin="15"/>
+                            <TextBlock Text="Vehículos" Foreground="White" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </ListViewItem>
+
+                    <ListViewItem Padding="1" Selected="ListViewItem_Selected_2">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Foreground="White" Kind="Gold" Margin="15"/>
+                            <TextBlock Text="Inventario" Foreground="White" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </ListViewItem>
+
+                    <ListViewItem Padding="1" Selected="ListViewItem_Selected_3">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Foreground="White" Kind="Dollar" Margin="15"/>
+                            <TextBlock Text="Entrada" Foreground="White" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </ListViewItem>
+
+                    <ListViewItem Padding="1" Selected="ListViewItem_Selected_4">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Foreground="White" Kind="MoneyOff" Margin="15"/>
+                            <TextBlock Text="Salida" Foreground="White" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </ListViewItem>
+
+                    <ListViewItem Padding="1" Selected="ListViewItem_Selected_5">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Foreground="White" Kind="Abacus" Margin="15"/>
+                            <TextBlock Text="Producción" Foreground="White" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </ListViewItem>
+
+                    <ListViewItem Padding="1" Selected="ListViewItem_Selected_6" >
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Foreground="White" Kind="User" Margin="15"/>
+                            <TextBlock Text="Usuarios" Foreground="White" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </ListViewItem>
+
+                    <ListViewItem Padding="1" Selected="ListViewItem_Selected_8" >
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Foreground="White" Kind="Logout" Margin="15"/>
+                            <TextBlock Text="Cerrar Sesión" Foreground="White" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </ListViewItem>
+                </ListView>
+
+
+            </StackPanel>
+        </Grid>
+
+        <Grid Grid.Column="1" Background="White">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="215*"/>
+                <ColumnDefinition Width="419*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Row="0" Margin="0,-10,0,333" Grid.RowSpan="2" Grid.ColumnSpan="2" >
+                <Label Content="Historial de Entradas " HorizontalAlignment="Center"  Width="300" Margin="324,0,10,0" Height="37" FontSize="20"/>
+                <TextBlock TextWrapping="Wrap" Text="Dona Central: Valor en Kilogramos    Done Exterior : Valor en $" Height="27" FontSize="15" Margin="187,0,0,0"/>
+            </StackPanel>
+            <lvc:PieChart Name="Chart" Grid.Row="1" Series="{Binding SeriesCollection}" 
                       LegendLocation="Right" InnerRadius="100" Margin="0,59,44,10" Grid.ColumnSpan="2">
-            <lvc:PieChart.ChartLegend>
-                <lvc:DefaultLegend BulletSize="20" Content="oro"></lvc:DefaultLegend>
-            </lvc:PieChart.ChartLegend>
-            <lvc:PieChart.DataTooltip>
-                <lvc:DefaultTooltip BulletSize="20"></lvc:DefaultTooltip>
-            </lvc:PieChart.DataTooltip>
-        </lvc:PieChart>
-        <Button Content="Mas Detalles" FontWeight="ExtraBlack" Foreground="Black"  HorizontalAlignment="Left" Margin="283.388,359,-32,0" Grid.Row="1" VerticalAlignment="Top" Width="168" Height="34" Grid.Column="1"/>
+                <lvc:PieChart.ChartLegend>
+                    <lvc:DefaultLegend BulletSize="20" Content="oro"></lvc:DefaultLegend>
+                </lvc:PieChart.ChartLegend>
+                <lvc:PieChart.DataTooltip>
+                    <lvc:DefaultTooltip BulletSize="20"></lvc:DefaultTooltip>
+                </lvc:PieChart.DataTooltip>
+            </lvc:PieChart>
+            <Button Content="Mas Detalles" FontWeight="ExtraBlack" Foreground="Black"  HorizontalAlignment="Left" Margin="283.388,359,-32,0" Grid.Row="1" VerticalAlignment="Top" Width="168" Height="34" Grid.Column="1" Click="Button_Click"/>
+        </Grid>
     </Grid>
 </Window>

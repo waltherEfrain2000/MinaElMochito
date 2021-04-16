@@ -12,7 +12,7 @@ namespace ProyectoMinaELMochito
     class Vehiculo
     {
         // Variables miembro
-        private static string connectionString = ConfigurationManager.ConnectionStrings["ProyectoMinaELMochito.Properties.Settings.VehiculoConnection"].ConnectionString;
+        private static string connectionString = ConfigurationManager.ConnectionStrings["ProyectoMinaELMochito.Properties.Settings.MinaConnectionString"].ConnectionString;
         private SqlConnection sqlConnection = new SqlConnection(connectionString);
 
         //Propiedades

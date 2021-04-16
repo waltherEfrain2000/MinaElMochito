@@ -18,13 +18,13 @@ namespace ProyectoMinaELMochito
     /// <summary>
     /// Lógica de interacción para MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class Login : Window
     {
 
         private User usuario = new User();
 
 
-        public MainWindow()
+        public Login()
         {
             InitializeComponent();
         }
@@ -57,19 +57,26 @@ namespace ProyectoMinaELMochito
                 {
                     // Verificar que la contraseña ingresada es igual a la contraseña
                     // almacenada en la base de datos
-                    if (elUsuario.Password == pwbPassword.Password && elUsuario.Estado && elUsuario.Rol != "EmpleadoDeTurno")
+                    if (elUsuario.Password == pwbPassword.Password && elUsuario.Estado && elUsuario.Rol == "ADMINISTRADOR")
                     {
                         // Mostrar el formulario de menú principal
                         //MenuPrincipal menu = new MenuPrincipal(elUsuario.NombreCompleto);
                         //menu.Show();
                         MessageBox.Show($"Bienvenido {elUsuario.NombreCompleto} eres un Usuario Administrador", "Usuario ADMINISTRADOR", MessageBoxButton.OK, MessageBoxImage.Information);
 
+                        menuPrincipal sld = new menuPrincipal();
+                        sld.Show();
+                        this.Close();
+
+
                         Close();
                     }
                     else if (elUsuario.Password == pwbPassword.Password && elUsuario.Estado)
                     {
                         MessageBox.Show($"Bienvenido {elUsuario.NombreCompleto} eres un Empleado de turno", "Usuario Emplado de Turno", MessageBoxButton.OK, MessageBoxImage.Information);
-
+                        menuEmpleado sld = new menuEmpleado();
+                        sld.Show();
+                        this.Close();
                         Close();
                     }
 
