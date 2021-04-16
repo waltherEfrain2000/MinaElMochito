@@ -97,7 +97,7 @@ namespace ProyectoMinaELMochito
             btnInsertar.Visibility = ocultar;
             btnModificar.Visibility = ocultar;
             btnEliminar.Visibility = ocultar;
-            btnSalir.Visibility = ocultar;
+            btnLimpiar.Visibility = ocultar;
         }
 
         private void ObtienePropiedades(Producciion producciion)
@@ -140,7 +140,7 @@ namespace ProyectoMinaELMochito
 
             txtNumeroViaje.Text = idUltimo.IdViaje.ToString();
         }
-       
+
 
         /// <summary>
         /// Con este método se llenará el comboBox trayendo 
@@ -151,7 +151,7 @@ namespace ProyectoMinaELMochito
             cmbMinerales.ItemsSource = producciion.LlenarComboBox();
             cmbMinerales.DisplayMemberPath = "NombreMineral";
             cmbMinerales.SelectedValuePath = "IdMineral";
-            
+
         }
 
         /// <summary>
@@ -258,14 +258,14 @@ namespace ProyectoMinaELMochito
             DataGrid dg = (DataGrid)sender;
             DataRowView filaSeleccionada = dg.SelectedItem as DataRowView;
 
-            if(filaSeleccionada != null)
+            if (filaSeleccionada != null)
             {
                 txtNumeroViaje.Text = filaSeleccionada["N° Viaje"].ToString();
                 cmbMinerales.Text = filaSeleccionada["Mineral"].ToString();
                 txtCantidad.Text = filaSeleccionada["Peso(Kg)"].ToString();
                 txtPrecio.Text = filaSeleccionada["Precio"].ToString();
                 txtIdProduccion.Text = filaSeleccionada["Id Producción"].ToString();
-            
+
                 Casillas(true, 0);
             }
         }
@@ -287,9 +287,9 @@ namespace ProyectoMinaELMochito
 
         private void NoPermitirEdicion(object sender, KeyEventArgs e)
         {
-            
+
         }
-        
+
 
 
         private void btnModificar_Click(object sender, RoutedEventArgs e)
@@ -302,12 +302,9 @@ namespace ProyectoMinaELMochito
                     //parametro 1 por que es actualizacion
                     Casillas(false, 1);
                     //ocultar todos los otones inecesarios
-                    btnModificar.Visibility = Visibility.Hidden;
-                    btnInsertar.Visibility = Visibility.Hidden;
-                    btnEliminar.Visibility = Visibility.Hidden;
-                    btnSalir.Visibility = Visibility.Hidden;
-                    btnAceptarCambios.Visibility = Visibility.Visible;
-                    btnDescartarCambios.Visibility = Visibility.Visible;
+                    OcultarBotonesOperaciones(Visibility.Hidden);
+                    btnAceptarModificacion.Visibility = Visibility.Visible;
+                    btnCancelarModificacion.Visibility = Visibility.Visible;
 
                 }
                 catch (Exception ex)
@@ -318,18 +315,39 @@ namespace ProyectoMinaELMochito
             }
         }
 
-        private void btnAceptarCambios_Click(object sender, RoutedEventArgs e)
+        private void MostrarBotonesPrincipales()
+        {
+            btnModificar.Visibility = Visibility.Visible;
+            btnInsertar.Visibility = Visibility.Visible;
+            btnEliminar.Visibility = Visibility.Visible;
+            btnLimpiar.Visibility = Visibility.Visible;
+            btnAceptarModificacion.Visibility = Visibility.Hidden;
+            btnCancelarModificacion.Visibility = Visibility.Hidden;
+            btnAceptarEliminacion.Visibility = Visibility.Hidden;
+            btnCancelarEliminacion.Visibility = Visibility.Hidden;
+            LimpiarCasillasDeDatos();
+            Casillas(false, 0);
+        }
+
+        //Checked
+        private void ActualizarPrecio(object sender, RoutedEventArgs e)
+        {
+            txtPrecio.IsReadOnly = false;
+        }
+
+        //Uncheked
+        private void ActualizarElPrecio(object sender, RoutedEventArgs e)
+        {
+            txtPrecio.IsReadOnly = true;
+        }
+
+        private void btnAceptarModificacion_Click(object sender, RoutedEventArgs e)
         {
             // Verificar que se ingresaron los valores requeridos
             if (VerificacionDedatosRequeridos())
             {
                 //ocultar todos los otones inecesarios
-                btnModificar.Visibility = Visibility.Visible;
-                btnInsertar.Visibility = Visibility.Visible;
-                btnEliminar.Visibility = Visibility.Visible;
-                btnSalir.Visibility = Visibility.Visible;
-                btnAceptarCambios.Visibility = Visibility.Hidden;
-                btnDescartarCambios.Visibility = Visibility.Hidden;
+                MostrarBotonesPrincipales();
                 try
                 {
                     //parametro 1 por que es actualizacion
@@ -357,18 +375,45 @@ namespace ProyectoMinaELMochito
             }
         }
 
-        private void btnDescartarCambios_Click(object sender, RoutedEventArgs e)
+        private void btnCancelarModificacion_Click(object sender, RoutedEventArgs e)
         {
-            // Verificar que se ingresaron los valores requeridos
+            MostrarBotonesPrincipales();
+        }
+
+        private void btnCancelarEliminacion_Click(object sender, RoutedEventArgs e)
+        {
+            MostrarBotonesPrincipales();
+        }
+
+        private void btnEliminar_Click(object sender, RoutedEventArgs e)
+        {
+            if (VerificacionDedatosRequeridos())
+            {
+                try
+                {
+                    //parametro 0 por que no es actualizacion
+                    Casillas(true, 0);
+                    //ocultar todos los otones inecesarios
+                    OcultarBotonesOperaciones(Visibility.Hidden);
+                    btnAceptarEliminacion.Visibility = Visibility.Visible;
+                    btnCancelarEliminacion.Visibility = Visibility.Visible;
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+
+                }
+            }
+
+        }
+
+        private void btnAceptarEliminacion_Click(object sender, RoutedEventArgs e)
+        {
             if (VerificacionDedatosRequeridos())
             {
                 //ocultar todos los otones inecesarios
-                btnModificar.Visibility = Visibility.Visible;
-                btnInsertar.Visibility = Visibility.Visible;
-                btnEliminar.Visibility = Visibility.Visible;
-                btnSalir.Visibility = Visibility.Visible;
-                btnAceptarCambios.Visibility = Visibility.Hidden;
-                btnDescartarCambios.Visibility = Visibility.Hidden;
+                MostrarBotonesPrincipales();
                 try
                 {
                     //parametro 1 por que es actualizacion
@@ -376,7 +421,7 @@ namespace ProyectoMinaELMochito
                     producciion.BorrarProduccion(producciion);
 
                     // Mensaje de inserción exitosa
-                    MessageBox.Show("¡El registro se eliminó correctamente!");
+                    MessageBox.Show("¡La producción se ha eliminado correctamente!");
 
 
                 }
@@ -389,37 +434,14 @@ namespace ProyectoMinaELMochito
                 {
                     LimpiarCasillasDeDatos();
                     MostrarDatosTabla();
+
                 }
             }
         }
 
-        private void MostrarBotonesPrincipales()
+        private void btnLimpiar_Click(object sender, RoutedEventArgs e)
         {
-            btnModificar.Visibility = Visibility.Visible;
-            btnInsertar.Visibility = Visibility.Visible;
-            btnEliminar.Visibility = Visibility.Visible;
-            btnSalir.Visibility = Visibility.Visible;
-            btnAceptarCambios.Visibility = Visibility.Hidden;
-            btnDescartarCambios.Visibility = Visibility.Hidden;
             LimpiarCasillasDeDatos();
-            Casillas(false, 0);
-        }
-
-        //Checked
-        private void ActualizarPrecio(object sender, RoutedEventArgs e)
-        {
-            txtPrecio.IsReadOnly = false;
-        }
-
-        //Uncheked
-        private void ActualizarElPrecio(object sender, RoutedEventArgs e)
-        {
-            txtPrecio.IsReadOnly = true;
-        }
-
-        private void btnCancelarEliminacion_Click(object sender, RoutedEventArgs e)
-        {
-            MostrarBotonesPrincipales();
         }
     }
 }

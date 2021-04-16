@@ -74,17 +74,22 @@
         <Button Name="btnModificar" Content="Modificar" Width="100" Height="28" Grid.Column="0"
                 Grid.Row="5" Margin="246,23,50,22" Click="btnModificar_Click"/>
         <Button Name="btnEliminar" Content="Eliminar" Width="100" Height="28" Grid.Column="1"
-                Grid.Row="5" Margin="50,23,246,22"/>
-        <Button Name="btnSalir" Content="Salir" Width="100" Height="28" Grid.Column="1"
-                Grid.Row="5" Margin="231,23,65,22"/>
-        <Button Name="btnAceptarCambios" Content="Aceptar Cambios" Width="150" Height="28"
-                Grid.Row="5" Margin="170,23,76,22" Click="btnAceptarCambios_Click" Visibility="Hidden"/>
-        <Button Name="btnDescartarCambios" Content="Descartar Cambios" Width="150" 
+                Grid.Row="5" Margin="50,23,246,22" Click="btnEliminar_Click"/>
+        <Button Name="btnLimpiar" Content="Limpiar" Width="100" Height="28" Grid.Column="1"
+                Grid.Row="5" Margin="231,23,65,22" Click="btnLimpiar_Click"/>
+        <Button Name="btnAceptarModificacion" Content="Aceptar" Width="150" Height="28"
+                Grid.Row="5" Margin="225,24,21,22" Click="btnAceptarModificacion_Click"
+                Visibility="Hidden"/>
+        <Button Name="btnCancelarModificacion" Content="Cancelar" Width="150" Click="btnCancelarModificacion_Click"
                 Height="28" Grid.Row="5" Margin="81,23,165,22" Grid.Column="1" Visibility="Hidden"
-                Click="btnDescartarCambios_Click"/>
-        <Button Name="btnCancelarEliminacion" Content="Cancelar Eliminación " Width="180"
-                Height="28" Margin="297,24,315,22" Grid.Row="5" Grid.ColumnSpan="2" 
-                Click="btnCancelarEliminacion_Click" Visibility="Hidden"/>
+                />
+        <Button Name="btnCancelarEliminacion" Content="Cancelar" Width="100"
+                Height="28" Margin="50,24,246,22" Grid.Row="5" Visibility="Hidden"
+                Click="btnCancelarEliminacion_Click" Grid.Column="1" />
+        
+        <Button Name="btnAceptarEliminacion" Content="Aceptar" Width="100" 
+                Visibility="Hidden" Click="btnAceptarEliminacion_Click"
+                Height="28" Grid.Column="0" Grid.Row="5" Margin="246,24,50,22" />
 
         <CheckBox Name="ckPrecio" Content="Actualizar" Grid.Column="0" Grid.Row="4" 
                   Margin="186,7,128,21" Checked="ActualizarPrecio" Unchecked="ActualizarElPrecio"/>

@@ -188,10 +188,10 @@ namespace ProyectoMinaELMochito
 
                 return minerales;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
-                throw;
+                throw ex;
             }
             finally
             {
@@ -215,7 +215,7 @@ namespace ProyectoMinaELMochito
 
                 //Crear los parámetros que serán actualizados en la tabla
                 sqlCommand.Parameters.AddWithValue("@idViaje", producciion.IdViaje);
-
+                sqlCommand.Parameters.AddWithValue("@idProduccion", producciion.IdProduccion);
 
                 //Ejecutar el comando para la actualización de datos
                 sqlCommand.ExecuteNonQuery();
