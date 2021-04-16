@@ -133,9 +133,9 @@ namespace ProyectoMinaELMochito
                 SqlCommand sqlCommand = new SqlCommand(queryModificacion, sqlConnection);
 
                 //Crear los parámetros que serán actualizados en la tabla
+                sqlCommand.Parameters.AddWithValue("@idProduccion", producciion.IdProduccion);
                 sqlCommand.Parameters.AddWithValue("@idMineral", producciion.IdMineral);
                 sqlCommand.Parameters.AddWithValue("@peso", producciion.Peso);
-                sqlCommand.Parameters.AddWithValue("@idProduccion", producciion.IdProduccion);
 
                 //Ejecutar el comando para la actualización de datos
                 sqlCommand.ExecuteNonQuery();

@@ -233,7 +233,8 @@ namespace ProyectoMinaELMochito
 
         private void Casillas(bool opcion, int operacion)
         {
-            //Operacion se utiliza para distingir entre actualizar y activar o inabilitar todas las casillas
+            //Operacion se utiliza para distingir entre actualizar y activar o
+            ////inabilitar todas las casillas
             if (operacion == 0)
             {
                 txtCantidad.IsReadOnly = opcion;
@@ -266,12 +267,12 @@ namespace ProyectoMinaELMochito
                 txtPrecio.Text = filaSeleccionada["Precio"].ToString();
                 txtIdProduccion.Text = filaSeleccionada["Id Producción"].ToString();
 
-                Casillas(true, 0);
+               
             }
         }
 
         /// <summary>
-        /// 
+        /// N° viaje
         /// </summary>
         private void BloquearEdicion(object sender, KeyEventArgs e)
         {
@@ -285,13 +286,6 @@ namespace ProyectoMinaELMochito
         /// Precio
         /// </summary>
 
-        private void NoPermitirEdicion(object sender, KeyEventArgs e)
-        {
-
-        }
-
-
-
         private void btnModificar_Click(object sender, RoutedEventArgs e)
         {
             // Verificar que se ingresaron los valores requeridos
@@ -299,12 +293,10 @@ namespace ProyectoMinaELMochito
             {
                 try
                 {
-                    //parametro 1 por que es actualizacion
-                    Casillas(false, 1);
-                    //ocultar todos los otones inecesarios
-                    OcultarBotonesOperaciones(Visibility.Hidden);
-                    btnAceptarModificacion.Visibility = Visibility.Visible;
-                    btnCancelarModificacion.Visibility = Visibility.Visible;
+                    ObtenerDatos();
+                    producciion.ModificarProduccion(producciion);
+
+                    MessageBox.Show("Datos Actualizados Correctamente!");
 
                 }
                 catch (Exception ex)
@@ -312,6 +304,11 @@ namespace ProyectoMinaELMochito
                     MessageBox.Show(ex.Message);
 
                 }
+                finally
+                {
+                    MostrarDatosTabla();
+                }
+
             }
         }
 
@@ -321,10 +318,6 @@ namespace ProyectoMinaELMochito
             btnInsertar.Visibility = Visibility.Visible;
             btnEliminar.Visibility = Visibility.Visible;
             btnLimpiar.Visibility = Visibility.Visible;
-            btnAceptarModificacion.Visibility = Visibility.Hidden;
-            btnCancelarModificacion.Visibility = Visibility.Hidden;
-            btnAceptarEliminacion.Visibility = Visibility.Hidden;
-            btnCancelarEliminacion.Visibility = Visibility.Hidden;
             LimpiarCasillasDeDatos();
             Casillas(false, 0);
         }
@@ -341,88 +334,22 @@ namespace ProyectoMinaELMochito
             txtPrecio.IsReadOnly = true;
         }
 
-        private void btnAceptarModificacion_Click(object sender, RoutedEventArgs e)
+        private void btnLimpiar_Click(object sender, RoutedEventArgs e)
         {
-            // Verificar que se ingresaron los valores requeridos
-            if (VerificacionDedatosRequeridos())
-            {
-                //ocultar todos los otones inecesarios
-                MostrarBotonesPrincipales();
-                try
-                {
-                    //parametro 1 por que es actualizacion
-                    ObtenerDatos();
-                    producciion.ModificarProduccion(producciion);
-
-
-                    // Mensaje de inserción exitosa
-                    MessageBox.Show("¡Produccion modificado correctamente!");
-
-
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-
-                }
-                finally
-                {
-                    LimpiarCasillasDeDatos();
-                    MostrarDatosTabla();
-
-                    sqlConnection.Close();
-                }
-            }
-        }
-
-        private void btnCancelarModificacion_Click(object sender, RoutedEventArgs e)
-        {
-            MostrarBotonesPrincipales();
-        }
-
-        private void btnCancelarEliminacion_Click(object sender, RoutedEventArgs e)
-        {
-            MostrarBotonesPrincipales();
+            LimpiarCasillasDeDatos();
         }
 
         private void btnEliminar_Click(object sender, RoutedEventArgs e)
         {
+            // Verificar que se ingresaron los valores requeridos
             if (VerificacionDedatosRequeridos())
             {
                 try
                 {
-                    //parametro 0 por que no es actualizacion
-                    Casillas(true, 0);
-                    //ocultar todos los otones inecesarios
-                    OcultarBotonesOperaciones(Visibility.Hidden);
-                    btnAceptarEliminacion.Visibility = Visibility.Visible;
-                    btnCancelarEliminacion.Visibility = Visibility.Visible;
-
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-
-                }
-            }
-
-        }
-
-        private void btnAceptarEliminacion_Click(object sender, RoutedEventArgs e)
-        {
-            if (VerificacionDedatosRequeridos())
-            {
-                //ocultar todos los otones inecesarios
-                MostrarBotonesPrincipales();
-                try
-                {
-                    //parametro 1 por que es actualizacion
                     ObtenerDatos();
                     producciion.BorrarProduccion(producciion);
 
-                    // Mensaje de inserción exitosa
-                    MessageBox.Show("¡La producción se ha eliminado correctamente!");
-
+                    MessageBox.Show("Se eliminaron Correctamente!");
 
                 }
                 catch (Exception ex)
@@ -432,16 +359,10 @@ namespace ProyectoMinaELMochito
                 }
                 finally
                 {
-                    LimpiarCasillasDeDatos();
                     MostrarDatosTabla();
-
                 }
-            }
-        }
 
-        private void btnLimpiar_Click(object sender, RoutedEventArgs e)
-        {
-            LimpiarCasillasDeDatos();
+            }
         }
     }
 }
