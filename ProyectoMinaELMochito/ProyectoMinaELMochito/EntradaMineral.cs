@@ -11,7 +11,6 @@ namespace ProyectoMinaELMochito
     class EntradaMineral
     {
 
-
         private static string connectionString = ConfigurationManager.ConnectionStrings["ProyectoMinaELMochito.Properties.Settings.MinaConnectionString"].ConnectionString;
         private SqlConnection sqlConnection = new SqlConnection(connectionString);
 

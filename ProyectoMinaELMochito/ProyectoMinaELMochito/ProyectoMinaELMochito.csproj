@@ -102,8 +102,8 @@
       <DependentUpon>Empleados.xaml</DependentUpon>
     </Compile>
     <Compile Include="EntradaMineral.cs" />
-    <Compile Include="Historial_Entradas.xaml.cs">
-      <DependentUpon>Historial_Entradas.xaml</DependentUpon>
+    <Compile Include="EntradasHistoricas.xaml.cs">
+      <DependentUpon>EntradasHistoricas.xaml</DependentUpon>
     </Compile>
     <Compile Include="Inventario_Mineral.xaml.cs">
       <DependentUpon>Inventario_Mineral.xaml</DependentUpon>
@@ -131,7 +131,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Historial_Entradas.xaml">
+    <Page Include="EntradasHistoricas.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
