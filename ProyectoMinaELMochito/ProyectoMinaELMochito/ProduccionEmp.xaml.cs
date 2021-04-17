@@ -11,18 +11,17 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-//Utilizar las extensiones necesarias
+
 using System.Data.SqlClient;
 using System.Configuration;
 using System.Data;
 
-
 namespace ProyectoMinaELMochito
 {
     /// <summary>
-    /// Interaction logic for Produccion.xaml
+    /// Lógica de interacción para ProduccionEmp.xaml
     /// </summary>
-    public partial class Produccion : Window
+    public partial class ProduccionEmp : Window
     {
         //Realizar la conexión a la base de datos
         private static string connectionString = ConfigurationManager.ConnectionStrings["ProyectoMinaELMochito.Properties.Settings.MinaConnectionString"].ConnectionString;
@@ -32,8 +31,7 @@ namespace ProyectoMinaELMochito
         Producciion producciion = new Producciion();
 
         public int IdViaje { get; internal set; }
-
-        public Produccion()
+        public ProduccionEmp()
         {
             InitializeComponent();
 
@@ -269,7 +267,7 @@ namespace ProyectoMinaELMochito
                 txtPrecio.Text = filaSeleccionada["Precio"].ToString();
                 txtIdProduccion.Text = filaSeleccionada["Id Producción"].ToString();
 
-               
+
             }
         }
 
@@ -375,70 +373,35 @@ namespace ProyectoMinaELMochito
 
         private void ListViewItem_Selected(object sender, RoutedEventArgs e)
         {
-            Empleados sld = new Empleados();
+            menuEmpleado sld = new menuEmpleado();
             sld.Show();
             this.Close();
         }
 
         private void ListViewItem_Selected_1(object sender, RoutedEventArgs e)
         {
-            Vehiculos sld = new Vehiculos();
+            ViajeInternoEmp sld = new ViajeInternoEmp();
             sld.Show();
             this.Close();
         }
 
         private void ListViewItem_Selected_2(object sender, RoutedEventArgs e)
         {
-            Inventario_Mineral sld = new Inventario_Mineral();
+            Login sld = new Login();
             sld.Show();
             this.Close();
         }
 
         private void ListViewItem_Selected_3(object sender, RoutedEventArgs e)
         {
-            EntradasHistoricas sld = new EntradasHistoricas();
-            sld.Show();
-            this.Close();
-        }
-
-        private void ListViewItem_Selected_4(object sender, RoutedEventArgs e)
-        {
-            Salidas sld = new Salidas();
-            sld.Show();
-            this.Close();
-        }
-
-        private void ListViewItem_Selected_5(object sender, RoutedEventArgs e)
-        {
             ViajesInternos sld = new ViajesInternos();
-            sld.Show();
-            this.Close();
-        }
-
-        private void ListViewItem_Selected_6(object sender, RoutedEventArgs e)
-        {
-            Usuarios_Crud sld = new Usuarios_Crud();
             sld.Show();
             this.Close();
         }
 
         private void ListViewItem_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            menuPrincipal sld = new menuPrincipal();
-            sld.Show();
-            this.Close();
-        }
-
-        private void ListViewItem_Selected_7(object sender, RoutedEventArgs e)
-        {
-            menuPrincipal sld = new menuPrincipal();
-            sld.Show();
-            this.Close();
-        }
-
-        private void ListViewItem_Selected_8(object sender, RoutedEventArgs e)
-        {
-            Login sld = new Login();
+            menuEmpleado sld = new menuEmpleado();
             sld.Show();
             this.Close();
         }

@@ -152,6 +152,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="ProduccionEmp.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Salidas.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -163,6 +167,10 @@
     <Page Include="Vehiculos.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ViajeInternoEmp.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ViajesInternos.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -203,6 +211,9 @@
     <Compile Include="Produccion.xaml.cs">
       <DependentUpon>Produccion.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ProduccionEmp.xaml.cs">
+      <DependentUpon>ProduccionEmp.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Salida.cs" />
     <Compile Include="Salidas.xaml.cs">
       <DependentUpon>Salidas.xaml</DependentUpon>
@@ -216,6 +227,9 @@
       <DependentUpon>Vehiculos.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViajeInterno.cs" />
+    <Compile Include="ViajeInternoEmp.xaml.cs">
+      <DependentUpon>ViajeInternoEmp.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViajesInternos.xaml.cs">
       <DependentUpon>ViajesInternos.xaml</DependentUpon>
       <SubType>Code</SubType>

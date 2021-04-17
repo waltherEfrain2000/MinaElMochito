@@ -452,7 +452,7 @@ namespace ProyectoMinaELMochito
 
         private void ListViewItem_Selected_5(object sender, RoutedEventArgs e)
         {
-            Produccion sld = new Produccion();
+            ViajesInternos sld = new ViajesInternos();
             sld.Show();
             this.Close();
         }

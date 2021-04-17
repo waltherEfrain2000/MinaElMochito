@@ -22,6 +22,7 @@ namespace ProyectoMinaELMochito
         public menuEmpleado()
         {
             InitializeComponent();
+            botonfecha.Content = string.Format("{0}", DateTime.Now.ToString());
         }
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
@@ -38,21 +39,28 @@ namespace ProyectoMinaELMochito
 
         private void ListViewItem_Selected_1(object sender, RoutedEventArgs e)
         {
-            Inventario_Mineral sld = new Inventario_Mineral();
+            ViajeInternoEmp sld = new ViajeInternoEmp();
             sld.Show();
             this.Close();
         }
 
         private void ListViewItem_Selected_2(object sender, RoutedEventArgs e)
         {
-            Salidas sld = new Salidas();
+            Login sld = new Login();
             sld.Show();
             this.Close();
         }
 
         private void ListViewItem_Selected_3(object sender, RoutedEventArgs e)
         {
-            Produccion sld = new Produccion();
+            ViajesInternos sld = new ViajesInternos();
+            sld.Show();
+            this.Close();
+        }
+
+        private void ListViewItem_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            menuEmpleado sld = new menuEmpleado();
             sld.Show();
             this.Close();
         }

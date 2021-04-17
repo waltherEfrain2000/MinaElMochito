@@ -12,7 +12,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-
 using System.Data.SqlClient;
 using System.Configuration;
 using System.Data;
@@ -20,9 +19,9 @@ using System.Data;
 namespace ProyectoMinaELMochito
 {
     /// <summary>
-    /// Lógica de interacción para MainWindow.xaml
+    /// Lógica de interacción para ViajeInternoEmp.xaml
     /// </summary>
-    public partial class ViajesInternos : Window
+    public partial class ViajeInternoEmp : Window
     {
         //Variables Miembro
         private ViajeInterno viajeinterno = new ViajeInterno();
@@ -30,18 +29,18 @@ namespace ProyectoMinaELMochito
         private static string connectionString = ConfigurationManager.ConnectionStrings["ProyectoMinaELMochito.Properties.Settings.MinaConnectionString"].ConnectionString;
         private SqlConnection sqlConnection = new SqlConnection(connectionString);
 
-
-        public ViajesInternos()
+        public ViajeInternoEmp()
         {
             InitializeComponent();
             CargarDatos();
             botonfecha.Content = string.Format("{0}", DateTime.Now.ToString());
+        }
+
+        private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
 
         }
-        /// <summary>
-        /// Muestra la tabla en donde se encuentran los empleados
-        /// de la mina, de aquí el usuario seleccionará uno para el viaje
-        /// </summary>
+
         private void CargarDatos()
         {
             try
@@ -82,7 +81,7 @@ namespace ProyectoMinaELMochito
                 sqlDataAdapter2.Fill(dataTable2);
                 dgvVehiculos.ItemsSource = dataTable2.DefaultView;
                 sqlDataAdapter2.Update(dataTable2);
-              
+
             }
             catch (Exception ex)
             {
@@ -155,7 +154,7 @@ namespace ProyectoMinaELMochito
                     //Si los datos se intertarón mostrar un mensje
                     MessageBox.Show("Los datos han sido ingresados correctamente!");
 
-                    Produccion sld = new Produccion();
+                    ProduccionEmp sld = new ProduccionEmp();
                     sld.Show();
                     this.Close();
                 }
@@ -255,7 +254,7 @@ namespace ProyectoMinaELMochito
 
         private void ListViewItem_Selected_1(object sender, RoutedEventArgs e)
         {
-            Vehiculos sld = new Vehiculos();
+            ViajeInternoEmp sld = new ViajeInternoEmp();
             sld.Show();
             this.Close();
         }
@@ -297,7 +296,7 @@ namespace ProyectoMinaELMochito
 
         private void ListViewItem_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            menuPrincipal sld = new menuPrincipal();
+            menuEmpleado sld = new menuEmpleado();
             sld.Show();
             this.Close();
         }
@@ -321,6 +320,4 @@ namespace ProyectoMinaELMochito
 
         }
     }
-
-
 }

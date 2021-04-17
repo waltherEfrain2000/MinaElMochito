@@ -7,26 +7,19 @@
         mc:Ignorable="d"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:fw="clr-namespace:SourceChord.FluentWPF;assembly=FluentWPF"
-        fw:AcrylicWindow.Enabled="True" FontSize="15"  MouseDown="Window_MouseDown" Height="500" Width="1080" WindowStyle="None" ResizeMode="CanResizeWithGrip" WindowStartupLocation="CenterScreen" Title="menu">
+        fw:AcrylicWindow.Enabled="True" FontSize="15"  MouseDown="Window_MouseDown" Height="550" Width="1080" WindowStyle="None" ResizeMode="CanResizeWithGrip" WindowStartupLocation="CenterScreen" Title="menu">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="220"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <Grid fw:PointerTracker.Enabled="True" Background="#9900afb9">
+        <Grid fw:PointerTracker.Enabled="True" Background="#9900afb9" Height="542" VerticalAlignment="Bottom">
             <StackPanel>
-                <StackPanel Orientation="Horizontal">
+                <TextBlock Text="" Foreground="White" Margin="1" FontWeight="DemiBold"/>
 
-                    <Button Foreground="white" Background="{x:Null}" BorderBrush="{x:Null}">
-                        <materialDesign:PackIcon Kind="ArrowLeft"/>
-                    </Button>
 
-                    <TextBlock Text="" FontSize="12" Margin="10" VerticalAlignment="Center"/>
-
-                </StackPanel>
-
-                <ListViewItem Padding="0" Selected="ListViewItem_Selected">
+                <ListViewItem MouseDoubleClick="ListViewItem_MouseDoubleClick" Padding="0" Selected="ListViewItem_Selected">
 
                     <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon Foreground="White" Kind="Home" Margin="15"/>
@@ -39,35 +32,29 @@
 
                 <ListView FontSize="15">
 
-
-
-
-
                     <ListViewItem Padding="1" Selected="ListViewItem_Selected_1">
-                        <StackPanel Orientation="Horizontal">
-                            <materialDesign:PackIcon Foreground="White" Kind="Gold" Margin="15"/>
-                            <TextBlock Text="Inventario" Foreground="White" VerticalAlignment="Center"/>
-                        </StackPanel>
-                    </ListViewItem>
-
-
-
-                    <ListViewItem Padding="1" Selected="ListViewItem_Selected_2">
-                        <StackPanel Orientation="Horizontal">
-                            <materialDesign:PackIcon Foreground="White" Kind="MoneyOff" Margin="15"/>
-                            <TextBlock Text="Salida" Foreground="White" VerticalAlignment="Center"/>
-                        </StackPanel>
-                    </ListViewItem>
-
-                    <ListViewItem Padding="1" Selected="ListViewItem_Selected_3">
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Foreground="White" Kind="Abacus" Margin="15"/>
                             <TextBlock Text="Producción" Foreground="White" VerticalAlignment="Center"/>
                         </StackPanel>
                     </ListViewItem>
+
+                    <ListViewItem Padding="1" Selected="ListViewItem_Selected_2" >
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Foreground="White" Kind="Logout" Margin="15"/>
+                            <TextBlock Text="Cerrar Sesión" Foreground="White" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </ListViewItem>
+
+                    <StackPanel Orientation="Horizontal">
+                        <Button x:Name="botonfecha" Foreground="white" Background="{x:Null}" BorderBrush="{x:Null}">
+                            <materialDesign:PackIcon Kind="Calendar"/>
+                        </Button>
+                        <TextBlock Text="" FontSize="12" Margin="10" VerticalAlignment="Center"/>
+                    </StackPanel>
+
+
                 </ListView>
-
-
             </StackPanel>
         </Grid>
 
