@@ -34,6 +34,7 @@ namespace ProyectoMinaELMochito
         {
             InitializeComponent();
             CargarDatos();
+            botonfecha.Content = string.Format("{0}", DateTime.Now.ToString());
 
         }
 
@@ -420,6 +421,11 @@ namespace ProyectoMinaELMochito
             ViajesInternos sld = new ViajesInternos();
             sld.Show();
             this.Close();
+        }
+
+        private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
     }
 }

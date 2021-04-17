@@ -34,6 +34,7 @@ namespace ProyectoMinaELMochito
         {
 
             InitializeComponent();
+            botonfecha.Content = string.Format("{0}", DateTime.Now.ToString());
             EntradaMineral elmineral = entradaMineral.CargarOro();
             EntradaMineral elmineralzinc = entradaMineral.CargarZinc();
             EntradaMineral elmineralplata = entradaMineral.CargarPlata();

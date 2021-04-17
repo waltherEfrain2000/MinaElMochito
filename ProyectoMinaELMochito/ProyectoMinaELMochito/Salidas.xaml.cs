@@ -48,7 +48,7 @@ namespace ProyectoMinaELMochito
         {
             InitializeComponent();
             MostrarMinerales();
-
+            botonfecha.Content = string.Format("{0}", DateTime.Now.ToString());
             MostrarInfoSalidas();
 
         }
@@ -372,6 +372,11 @@ namespace ProyectoMinaELMochito
             Login sld = new Login();
             sld.Show();
             this.Close();
+        }
+
+        private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
     }
 }

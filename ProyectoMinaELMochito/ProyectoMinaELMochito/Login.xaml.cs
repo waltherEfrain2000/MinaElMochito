@@ -140,5 +140,10 @@ namespace ProyectoMinaELMochito
         {
             Close();
         }
+
+        private void btnLogin_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            DragMove();
+        }
     }
 }

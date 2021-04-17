@@ -22,6 +22,7 @@ namespace ProyectoMinaELMochito
         public menuPrincipal()
         {
             InitializeComponent();
+            botonfecha.Content = string.Format("{0}", DateTime.Now.ToString());
         }
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
@@ -104,6 +105,11 @@ namespace ProyectoMinaELMochito
             ViajesInternos sld = new ViajesInternos();
             sld.Show();
             this.Close();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

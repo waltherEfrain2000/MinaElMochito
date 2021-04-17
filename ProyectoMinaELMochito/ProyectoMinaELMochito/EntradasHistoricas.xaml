@@ -9,24 +9,17 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         fw:AcrylicWindow.Enabled="True" FontSize="15"  MouseDown="Window_MouseDown" Height="550" Width="1080" WindowStyle="None" ResizeMode="CanResizeWithGrip" WindowStartupLocation="CenterScreen" 
         mc:Ignorable="d" d:DataContext="{d:DesignInstance local:EntradasHistoricas}" >
-    
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="220"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <Grid fw:PointerTracker.Enabled="True" Background="#9900afb9">
+        <Grid fw:PointerTracker.Enabled="True" Background="#9900afb9" Height="542" VerticalAlignment="Bottom">
             <StackPanel>
-                <StackPanel Orientation="Horizontal">
+                <TextBlock Text="" Foreground="White" Margin="1" FontWeight="DemiBold"/>
 
-                    <Button Foreground="white" Background="{x:Null}" BorderBrush="{x:Null}">
-                        <materialDesign:PackIcon Kind="ArrowLeft"/>
-                    </Button>
-
-                    <TextBlock Text="" FontSize="12" Margin="10" VerticalAlignment="Center"/>
-
-                </StackPanel>
 
                 <ListViewItem MouseDoubleClick="ListViewItem_MouseDoubleClick" Padding="0" Selected="ListViewItem_Selected_7">
 
@@ -41,7 +34,7 @@
 
                 <ListView FontSize="15">
 
-                    <ListViewItem Background="#9900afb9" Padding="1" Selected="ListViewItem_Selected">
+                    <ListViewItem Padding="1" Selected="ListViewItem_Selected">
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Foreground="White" Kind="Worker" Margin="15"/>
                             <TextBlock Text="Empleado" Foreground="White" VerticalAlignment="Center"/>
@@ -96,9 +89,16 @@
                             <TextBlock Text="Cerrar Sesión" Foreground="White" VerticalAlignment="Center"/>
                         </StackPanel>
                     </ListViewItem>
+
+                    <StackPanel Orientation="Horizontal">
+                        <Button x:Name="botonfecha" Foreground="white" Background="{x:Null}" BorderBrush="{x:Null}" Click="Button_Click">
+                            <materialDesign:PackIcon Kind="Calendar"/>
+                        </Button>
+                        <TextBlock Text="" FontSize="12" Margin="10" VerticalAlignment="Center"/>
+                    </StackPanel>
+
+
                 </ListView>
-
-
             </StackPanel>
         </Grid>
 
@@ -113,7 +113,7 @@
                 <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
             <StackPanel Grid.Row="0" Margin="0,-10,0,333" Grid.RowSpan="2" Grid.ColumnSpan="2" >
-                <Label Content="Historial de Entradas " HorizontalAlignment="Center"  Width="300" Margin="324,0,10,0" Height="37" FontSize="20"/>
+                <Label Content="Historial de Entradas " HorizontalAlignment="Center"  Width="300" Margin="433,0,119,0" Height="37" FontSize="20"/>
                 <TextBlock TextWrapping="Wrap" Text="Dona Central: Valor en Kilogramos    Done Exterior : Valor en $" Height="27" FontSize="15" Margin="187,0,0,0"/>
             </StackPanel>
             <lvc:PieChart Name="Chart" Grid.Row="1" Series="{Binding SeriesCollection}" 
@@ -125,7 +125,7 @@
                     <lvc:DefaultTooltip BulletSize="20"></lvc:DefaultTooltip>
                 </lvc:PieChart.DataTooltip>
             </lvc:PieChart>
-            <Button Content="Mas Detalles" FontWeight="ExtraBlack" Foreground="Black"  HorizontalAlignment="Left" Margin="283.388,359,-32,0" Grid.Row="1" VerticalAlignment="Top" Width="168" Height="34" Grid.Column="1" Click="Button_Click"/>
+            <Button Content="Mas Detalles" FontWeight="ExtraBlack" Foreground="White"  BorderBrush="#0082aa" HorizontalAlignment="Left" Margin="351,485,0,0" Grid.Row="1" VerticalAlignment="Top" Width="168" Height="34" Grid.Column="1" Click="Button_Click"/>
         </Grid>
     </Grid>
 </Window>

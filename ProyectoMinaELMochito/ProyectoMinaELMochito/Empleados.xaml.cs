@@ -37,6 +37,7 @@ namespace ProyectoMinaELMochito
             MostrarEmpleado();
             MostrarCargos();
             MostrarGeneros();
+            botonfecha.Content = string.Format("{0}", DateTime.Now.ToString());
             //cmbGenero.Items.Add("F");
             //cmbGenero.Items.Add("M");
             //cmbCargo.Items.Add("Gerente");
@@ -482,6 +483,11 @@ namespace ProyectoMinaELMochito
             Login sld = new Login();
             sld.Show();
             this.Close();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

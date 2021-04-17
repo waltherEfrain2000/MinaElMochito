@@ -8,6 +8,8 @@
         Title="MainWindow" Height="450" Width="400"
         AllowsTransparency="True" Background="Transparent" 
         WindowStyle="None" ResizeMode="NoResize"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:fw="clr-namespace:SourceChord.FluentWPF;assembly=FluentWPF"
         MouseDown="MainWindow_OnMouseDown" WindowStartupLocation="CenterScreen">
 
     <Grid>
@@ -90,7 +92,7 @@
                            Width="240"
                           HorizontalContentAlignment="Left"  
                            Opacity="0.5"
-                         Height="38"
+                         Height="36"
                              Margin="73,0,0,0" MouseDoubleClick="pwbPassword_MouseDoubleClick"  />
                     <TextBox FontFamily="HELVETICA"
                            FontWeight="Light"
@@ -104,7 +106,7 @@
                            Width="240"
                           HorizontalContentAlignment="Left"  
                            Opacity="0.5"
-                         Height="  25 "
+                         Height="  36 "
                              Margin="-236,0,0,0"
                              Name="txtpassword" Visibility="Hidden"/>
                     <iconPacks:PackIconMaterial Kind="FormTextboxPassword" 
@@ -133,8 +135,9 @@
 
                 <Border Width="250" Height="2" Background="White" Opacity="0.1"/>
                 <StackPanel Orientation="Horizontal" Margin="0,50,0,0">
-                    <Button Name="btnLogin"  Height="40" Content="Iniciar Sesión" Width="117"  Margin="65,0,60,0" Click="btnLogin_Click" MouseEnter="btnLogin_MouseEnter" />
-                    <Button Width="100" Height="40" Content="Salir" Click="Button_Click"     />
+
+                    <Button fw:PointerTracker.Enabled="True" Name="btnLogin" MouseDown="btnLogin_MouseDown" BorderThickness="2" BorderBrush="White" FontSize="16" Foreground="White" FontWeight="Light" Background="Transparent" FontFamily="helvetica" Height="40" Content="Iniciar Sesión" Width="117"  Margin="65,0,60,0" Click="btnLogin_Click" MouseEnter="btnLogin_MouseEnter"/>
+                    <Button fw:PointerTracker.Enabled="True" MouseDown="btnLogin_MouseDown" BorderThickness="2" BorderBrush="White" FontSize="16" Foreground="White" FontWeight="Light" Background="Transparent" FontFamily="helvetica" Width="100" Height="40" Content="Salir" Click="Button_Click"     />
                 </StackPanel>
 
 

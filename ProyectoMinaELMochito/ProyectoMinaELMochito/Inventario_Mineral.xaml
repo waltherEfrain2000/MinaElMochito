@@ -18,17 +18,10 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <Grid fw:PointerTracker.Enabled="True" Background="#9900afb9">
+        <Grid fw:PointerTracker.Enabled="True" Background="#9900afb9" Height="542" VerticalAlignment="Bottom">
             <StackPanel>
-                <StackPanel Orientation="Horizontal">
+                <TextBlock Text="" Foreground="White" Margin="1" FontWeight="DemiBold"/>
 
-                    <Button Foreground="white" Background="{x:Null}" BorderBrush="{x:Null}">
-                        <materialDesign:PackIcon Kind="ArrowLeft"/>
-                    </Button>
-
-                    <TextBlock Text="" FontSize="12" Margin="10" VerticalAlignment="Center"/>
-
-                </StackPanel>
 
                 <ListViewItem MouseDoubleClick="ListViewItem_MouseDoubleClick" Padding="0" Selected="ListViewItem_Selected_7">
 
@@ -43,7 +36,7 @@
 
                 <ListView FontSize="15">
 
-                    <ListViewItem Background="#9900afb9" Padding="1" Selected="ListViewItem_Selected">
+                    <ListViewItem Padding="1" Selected="ListViewItem_Selected">
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Foreground="White" Kind="Worker" Margin="15"/>
                             <TextBlock Text="Empleado" Foreground="White" VerticalAlignment="Center"/>
@@ -98,9 +91,16 @@
                             <TextBlock Text="Cerrar Sesión" Foreground="White" VerticalAlignment="Center"/>
                         </StackPanel>
                     </ListViewItem>
+
+                    <StackPanel Orientation="Horizontal">
+                        <Button x:Name="botonfecha" Foreground="white" Background="{x:Null}" BorderBrush="{x:Null}" Click="botonfecha_Click">
+                            <materialDesign:PackIcon Kind="Calendar"/>
+                        </Button>
+                        <TextBlock Text="" FontSize="12" Margin="10" VerticalAlignment="Center"/>
+                    </StackPanel>
+
+
                 </ListView>
-
-
             </StackPanel>
         </Grid>
 
@@ -122,14 +122,15 @@
 
 
             </Border>
-            <Label Content="Inventario de los minerales por Kilo" HorizontalAlignment="Center" FontFamily="helvetica" FontSize="16" FontWeight="ExtraBold" Margin="236,38,265,-38" Foreground="Black"  />
+            <Label Content="Inventario de los minerales por Kilo" HorizontalAlignment="Center" FontFamily="helvetica" FontSize="16" FontWeight="ExtraBold" Margin="267,20,304,-20" Foreground="Black"  />
             <StackPanel Orientation="Vertical" Margin="412,120,50,24" RenderTransformOrigin="0.537,0.657">
                 <Label Content="Datos" HorizontalAlignment="Center" Name="lbdatos" FontFamily="helvetica" FontWeight="Heavy"/>
                 <Label Name="lbmineral"/>
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="0*"/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
 
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
@@ -139,25 +140,25 @@
                         <RowDefinition Height="30"/>
                         <RowDefinition Height="30"/>
                     </Grid.RowDefinitions>
-                    <Label Content=" Peso en kilos " HorizontalAlignment="Center" Grid.Column="0" Grid.Row="0" FontFamily="helvetica" FontWeight="Heavy"/>
-                    <TextBox Name="txtpeso" Grid.Row="0" Grid.Column="1"  BorderThickness="0" FontFamily="helvetica" FontStretch="ExtraCondensed" FontStyle="Italic"
+                    <Label Content=" Peso en kilos " HorizontalAlignment="Center" Grid.Column="0" Grid.Row="0" FontFamily="helvetica" FontWeight="Heavy" Grid.ColumnSpan="2" Margin="44,0,43,0"/>
+                    <TextBox Name="txtpeso" Grid.Row="0" Grid.Column="2"  BorderThickness="0" FontFamily="helvetica" FontStretch="ExtraCondensed" FontStyle="Italic"
                            Foreground="Black"
                            Background="Transparent"
-                          HorizontalContentAlignment="Left" />
-                    <Label Content=" Fecha de Modificacion " HorizontalAlignment="Center" Grid.Column="0" Grid.Row="1" FontFamily="helvetica" FontWeight="Heavy"/>
-                    <TextBox Name="txtfecha" Grid.Row="1" Grid.Column="1" BorderThickness="0" FontFamily="helvetica" FontStretch="ExtraCondensed" FontStyle="Italic"
+                          HorizontalContentAlignment="Left" Margin="35,0,-34,0" />
+                    <Label Content=" Fecha de Modificacion " HorizontalAlignment="Center" Grid.Column="0" Grid.Row="1" FontFamily="helvetica" FontWeight="Heavy" Margin="0,0,18,0" Grid.ColumnSpan="2"/>
+                    <TextBox Name="txtfecha" Grid.Row="1" Grid.Column="2" BorderThickness="0" FontFamily="helvetica" FontStretch="ExtraCondensed" FontStyle="Italic"
                            Foreground="Black"
                            Background="Transparent"
                           HorizontalContentAlignment="Left"/>
-                    <Label Content=" Total En $" HorizontalAlignment="Center" Grid.Column="0" Grid.Row="2" FontFamily="helvetica" FontWeight="Heavy"/>
-                    <TextBox Name="txttotal" Grid.Row="2" Grid.Column="1" BorderThickness="0" FontFamily="helvetica" FontStretch="ExtraCondensed" FontStyle="Italic"
+                    <Label Content=" Total En $" HorizontalAlignment="Center" Grid.Column="0" Grid.Row="2" FontFamily="helvetica" FontWeight="Heavy" Grid.ColumnSpan="2" Margin="57,0"/>
+                    <TextBox Name="txttotal" Grid.Row="2" Grid.Column="2" BorderThickness="0" FontFamily="helvetica" FontStretch="ExtraCondensed" FontStyle="Italic"
                            Foreground="Black"
                            Background="Transparent"
                           HorizontalContentAlignment="Left" Focusable="True"  />
 
                 </Grid>
-                <Image Height="120" x:Name="imgmineral" Margin="125,0,0,0" RenderTransformOrigin="0.495,-0.011" />
-                <Label x:Name="LblDate" HorizontalContentAlignment="Center" Height="27" Margin="184,0,-127,0" RenderTransformOrigin="0.602,0.481" HorizontalAlignment="Left" Width="281" >
+                <Image Height="120" x:Name="imgmineral" Margin="10,0,0,0" RenderTransformOrigin="0.495,-0.011" />
+                <Label x:Name="LblDate" HorizontalContentAlignment="Center" Height="27" Margin="1,0,-1,0" RenderTransformOrigin="0.602,0.481" HorizontalAlignment="Left" Width="398" >
                     <Label.RenderTransform>
                         <TransformGroup>
                             <ScaleTransform/>
@@ -168,7 +169,7 @@
                     </Label.RenderTransform>
                 </Label>
             </StackPanel>
-            <lvc:PieChart LegendLocation="Bottom" DataClick="Chart_OnDataClick" Hoverable="False" DataTooltip="{x:Null}" Margin="-175,81,250,0" >
+            <lvc:PieChart LegendLocation="Bottom" DataClick="Chart_OnDataClick" Hoverable="False" DataTooltip="{x:Null}" Margin="0,86,399,44" Loaded="PieChart_Loaded" >
                 <lvc:PieChart.Series>
                     <lvc:PieSeries Title="Plata" Values="1" DataLabels="True" Name="pieplata" MouseEnter="pieplata_MouseEnter"  
                                LabelPoint="{Binding PointLabel}"/>

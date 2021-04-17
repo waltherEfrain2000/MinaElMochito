@@ -17,17 +17,10 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <Grid fw:PointerTracker.Enabled="True" Background="#9900afb9">
+        <Grid fw:PointerTracker.Enabled="True" Background="#9900afb9" Height="542" VerticalAlignment="Bottom">
             <StackPanel>
-                <StackPanel Orientation="Horizontal">
+                <TextBlock Text="" Foreground="White" Margin="1" FontWeight="DemiBold"/>
 
-                    <Button Foreground="white" Background="{x:Null}" BorderBrush="{x:Null}">
-                        <materialDesign:PackIcon Kind="ArrowLeft"/>
-                    </Button>
-
-                    <TextBlock Text="" FontSize="12" Margin="10" VerticalAlignment="Center"/>
-
-                </StackPanel>
 
                 <ListViewItem MouseDoubleClick="ListViewItem_MouseDoubleClick" Padding="0" Selected="ListViewItem_Selected_7">
 
@@ -40,9 +33,9 @@
 
                 <TextBlock Text="Sistema" Foreground="White" Margin="15" FontWeight="DemiBold"/>
 
-                <ListView FontSize="15">
+                <ListView FontSize="15" SelectionChanged="ListView_SelectionChanged">
 
-                    <ListViewItem Background="#9900afb9" Padding="1" Selected="ListViewItem_Selected">
+                    <ListViewItem Padding="1" Selected="ListViewItem_Selected">
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Foreground="White" Kind="Worker" Margin="15"/>
                             <TextBlock Text="Empleado" Foreground="White" VerticalAlignment="Center"/>
@@ -98,6 +91,14 @@
                         </StackPanel>
                     </ListViewItem>
 
+                    <StackPanel Orientation="Horizontal">
+                        <Button x:Name="botonfecha" Foreground="white" Background="{x:Null}" BorderBrush="{x:Null}">
+                            <materialDesign:PackIcon Kind="Calendar"/>
+                        </Button>
+                        <TextBlock Text="" FontSize="12" Margin="10" VerticalAlignment="Center"/>
+                    </StackPanel>
+
+
                 </ListView>
             </StackPanel>
         </Grid>
@@ -123,10 +124,9 @@
 
             </Grid.RowDefinitions>
             <Label x:Name="lbtitulo" Content="Usuarios" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" HorizontalAlignment="Center" FontFamily="Helvetica" FontSize="25"/>
-            <iconPacks:PackIconMaterial Kind="RobotConfused" 
+            <iconPacks:PackIconMaterial Kind="RobotConfused" Foreground="Cyan"
                                                 VerticalAlignment="Center" 
-                                                HorizontalAlignment="Left" 
-                                                Foreground="Black"
+                                                HorizontalAlignment="Left"
                                                 x:Name="icon"
                                                 Width="24" Visibility="Visible" Grid.Column="2" Grid.Row="0" Margin="58,10,0,15"   />
             <Label x:Name="lbnombre" Content="Nombre Completo" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Center"/>
@@ -148,48 +148,30 @@
             </ComboBox>
 
             <DataGrid Name="dtgriduser" Grid.Row="2" Grid.Column="2" Grid.RowSpan="5" Grid.ColumnSpan="2" Margin="0,0,23,0" HorizontalAlignment="Right" Width="353" SelectionChanged="dtgriduser_SelectionChanged">
-                <DataGrid.Columns>
-                    <!--<DataGridTextColumn x:Name="dgId" Header="Id" Binding="{Binding Path=Id}" Width="*"/>
+                <!--<DataGridTextColumn x:Name="dgId" Header="Id" Binding="{Binding Path=Id}" Width="*"/>
             <DataGridTextColumn x:Name="dgnombreCompleto" Header="Nombre Completo" Binding="{Binding Path=NombreCompleto}" Width="*"/>
             <DataGridTextColumn x:Name="dgusername" Header="Username" Binding="{Binding Path=Username}" Width="*"/>-->
-                </DataGrid.Columns>
-                <DataGrid.Resources>
-                    <Style TargetType="{x:Type DataGridColumnHeader}">
-                        <Setter Property="Background" Value="#00afb9"/>
-                        <Setter Property="FontWeight" Value="SemiBold"/>
-                        <Setter Property="BorderThickness" Value="0,0,1,2"/>
-                        <Setter Property="BorderBrush" Value="Black"/>
-                    </Style>
-                    <Style TargetType="{x:Type DataGridRow}">
-                        <Setter Property="Background" Value="WhiteSmoke"/>
-                    </Style>
-                </DataGrid.Resources>
-                <DataGrid.Effect>
-                    <DropShadowEffect/>
-                </DataGrid.Effect>
-                <DataGrid.SelectedItems>
-                    <System:Object/>
-                </DataGrid.SelectedItems>
+                
             </DataGrid>
 
-            <Button x:Name="btnIngresar" Click="btnIngresar_Click" Content="Insertar" Grid.Column="0" Grid.Row="8" Width="150" Height="40"/>
-            <iconPacks:PackIconMaterial Kind="StarPlus" 
+            <Button x:Name="btnIngresar" Click="btnIngresar_Click" Content="Insertar" Grid.Column="0" Grid.Row="8" Width="150" Height="40"  Foreground="White"  BorderBrush="#0082aa"/>
+            <iconPacks:PackIconMaterial 
                                                 VerticalAlignment="Center" 
                                                 HorizontalAlignment="Left" 
                                                 Foreground="White"
                                                 x:Name="icon1"
                                                 Width="24" Visibility="Visible" Grid.Column="0" Grid.Row="8" Margin="130,10,0,15" RenderTransformOrigin="2.949,0.131"   />
 
-            <Button x:Name="btnModificar" Content="Modificar" Grid.Column="1" Grid.Row="8" Width="150" Height="40" Click="btnModificar_Click"/>
-            <iconPacks:PackIconMaterial Kind="StarCog"
+            <Button x:Name="btnModificar" Content="Modificar" Grid.Column="1" Grid.Row="8" Width="150" Height="40" Click="btnModificar_Click"  Foreground="White"  BorderBrush="#0082aa"/>
+            <iconPacks:PackIconMaterial
                                                 VerticalAlignment="Center" 
                                                 HorizontalAlignment="Left" 
                                                 Foreground="White"
                                                 x:Name="icon2"
                                                 Width="24" Visibility="Visible" Grid.Column="1" Grid.Row="8" Margin="130,10,0,15" RenderTransformOrigin="2.949,0.131"   />
 
-            <Button x:Name="btnEliminar" Content="Eliminar" Grid.Column="2" Grid.Row="8" Width="150" Height="40" Click="btnEliminar_Click"/>
-            <iconPacks:PackIconMaterial Kind="StarMinus" 
+            <Button x:Name="btnEliminar" Content="Eliminar" Grid.Column="2" Grid.Row="8" Width="150" Height="40" Click="btnEliminar_Click"  Foreground="White"  BorderBrush="#0082aa"/>
+            <iconPacks:PackIconMaterial 
                                                 VerticalAlignment="Center" 
                                                 HorizontalAlignment="Left" 
                                                 Foreground="White"
@@ -197,8 +179,8 @@
                                                 Width="24" Visibility="Visible" Grid.Column="2" Grid.Row="8" Margin="130,10,0,15" RenderTransformOrigin="2.949,0.131"   />
 
 
-            <Button x:Name="btnsalir" Content="Salir" Grid.Column="3" Grid.Row="8" Width="150" Height="40" Click="btnsalir_Click"/>
-            <iconPacks:PackIconMaterial Kind="ExitToApp" 
+            <Button x:Name="btnsalir" Content="Salir" Grid.Column="3" Grid.Row="8" Width="150" Height="40" Click="btnsalir_Click"  Foreground="White"  BorderBrush="#0082aa"/>
+            <iconPacks:PackIconMaterial 
                                                 VerticalAlignment="Center" 
                                                 HorizontalAlignment="Left" 
                                                 Foreground="White"

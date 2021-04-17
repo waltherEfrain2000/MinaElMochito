@@ -33,6 +33,7 @@ namespace ProyectoMinaELMochito
             InitializeComponent();
             MostrarVehiculo();
             MostrarEstados();
+            botonfecha.Content = string.Format("{0}", DateTime.Now.ToString());
         }
 
         private void DgvVehiculos_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -409,6 +410,11 @@ namespace ProyectoMinaELMochito
             Login sld = new Login();
             sld.Show();
             this.Close();
+        }
+
+        private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
     }
 }

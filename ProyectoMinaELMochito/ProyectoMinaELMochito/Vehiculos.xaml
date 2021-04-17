@@ -1,11 +1,5 @@
 ﻿<Window x:Class="ProyectoMinaELMochito.Vehiculos"
-        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
-        TextElement.FontWeight="Regular"
-        TextElement.FontSize="13"
-        TextOptions.TextFormattingMode="Ideal"
-        TextOptions.TextRenderingMode="Auto"
-        Background="{DynamicResource MaterialDesignPaper}"
-        FontFamily="{DynamicResource MaterialDesignFont}"
+
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -21,17 +15,10 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <Grid fw:PointerTracker.Enabled="True" Background="#9900afb9">
+        <Grid fw:PointerTracker.Enabled="True" Background="#9900afb9" Height="542" VerticalAlignment="Bottom">
             <StackPanel>
-                <StackPanel Orientation="Horizontal">
+                <TextBlock Text="" Foreground="White" Margin="1" FontWeight="DemiBold"/>
 
-                    <Button Foreground="white" Background="{x:Null}" BorderBrush="{x:Null}">
-                        <materialDesign:PackIcon Kind="ArrowLeft"/>
-                    </Button>
-
-                    <TextBlock Text="" FontSize="12" Margin="10" VerticalAlignment="Center"/>
-
-                </StackPanel>
 
                 <ListViewItem MouseDoubleClick="ListViewItem_MouseDoubleClick" Padding="0" Selected="ListViewItem_Selected_7">
 
@@ -44,9 +31,9 @@
 
                 <TextBlock Text="Sistema" Foreground="White" Margin="15" FontWeight="DemiBold"/>
 
-                <ListView FontSize="15">
+                <ListView FontSize="15" SelectionChanged="ListView_SelectionChanged">
 
-                    <ListViewItem Background="#9900afb9" Padding="1" Selected="ListViewItem_Selected">
+                    <ListViewItem  Padding="1" Selected="ListViewItem_Selected">
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Foreground="White" Kind="Worker" Margin="15"/>
                             <TextBlock Text="Empleado" Foreground="White" VerticalAlignment="Center"/>
@@ -101,9 +88,16 @@
                             <TextBlock Text="Cerrar Sesión" Foreground="White" VerticalAlignment="Center"/>
                         </StackPanel>
                     </ListViewItem>
+
+                    <StackPanel Orientation="Horizontal">
+                        <Button x:Name="botonfecha" Foreground="white" Background="{x:Null}" BorderBrush="{x:Null}">
+                            <materialDesign:PackIcon Kind="Calendar"/>
+                        </Button>
+                        <TextBlock Text="" FontSize="12" Margin="10" VerticalAlignment="Center"/>
+                    </StackPanel>
+
+
                 </ListView>
-
-
             </StackPanel>
         </Grid>
 
@@ -144,15 +138,15 @@
 
             <ComboBox Name="cmbEstado" Grid.Row="6" Grid.Column="1" FontSize="15" Margin="10" />
 
-            <Button x:Name="btnAgregar" Content="Agregar" Grid.Column="1" Grid.Row="10" Margin="20 1" Click="btnAgregar_Click"  />
-            <Button x:Name="btnModificar" Content="Modificar" Grid.Column="2" Grid.Row="10"  Margin="20 1" Click="btnModificar_Click"/>
-            <Button x:Name="btnAceptarModificacion" Content="Aceptar" Grid.Column="1" Grid.Row="10"  Margin="20 1" Click="btnAceptarModificacion_Click" Visibility="Hidden"/>
+            <Button x:Name="btnAgregar" Content="Agregar" Foreground="White"  BorderBrush="#0082aa" Grid.Column="1" Grid.Row="10" Margin="20 1" Click="btnAgregar_Click"  />
+            <Button x:Name="btnModificar" Content="Modificar" Foreground="White"  BorderBrush="#0082aa" Grid.Column="2" Grid.Row="10"  Margin="20 1" Click="btnModificar_Click"/>
+            <Button x:Name="btnAceptarModificacion"  Content="Aceptar" Grid.Column="1" Grid.Row="10"  Margin="20 1" Click="btnAceptarModificacion_Click" Visibility="Hidden"/>
             <Button x:Name="btnCancelarModificacion" Content="Cancelar" Grid.Column="3" Grid.Row="10"  Margin="20 1" Click="btnCancelarModificacion_Click" Visibility="Hidden"/>
 
-            <Button x:Name="btnEliminar" Content="eliminar" Grid.Column="3" Grid.Row="10"  Margin="20 1" Click="btnEliminar_Click" Grid.RowSpan="2"/>
+            <Button x:Name="btnEliminar" Foreground="White"  BorderBrush="#0082aa" Content="eliminar" Grid.Column="3" Grid.Row="10"  Margin="20 1" Click="btnEliminar_Click" Grid.RowSpan="2"/>
             <Button x:Name="btnAceptarEliminacion" Content="Aceptar" Grid.Column="1" Grid.Row="10"  Margin="20 1" Click="btnAceptarEliminacion_Click" Visibility="Hidden"/>
             <Button x:Name="btnCancelarEliminacion" Content="Cancelar" Grid.Column="3" Grid.Row="10"  Margin="20 1" Click="btnCancelarEliminacion_Click" Visibility="Hidden" />
-            <Button x:Name="btnLimpiar" Content="Limpiar" Grid.Column="4" Grid.Row="10" Margin="90 1 5 1" Click="btnLimpiar_Click" />
+            <Button x:Name="btnLimpiar" Foreground="White"  BorderBrush="#0082aa" Content="Limpiar" Grid.Column="4" Grid.Row="10" Margin="20 1" Click="btnLimpiar_Click" />
 
             <DataGrid Name="DgvVehiculos" Grid.Row="1" Grid.Column="2" Margin="7" Grid.ColumnSpan="3" Grid.RowSpan="6" SelectionChanged="DgvVehiculos_SelectionChanged" IsReadOnly="True" FontSize="15">
                 <DataGrid.Resources>

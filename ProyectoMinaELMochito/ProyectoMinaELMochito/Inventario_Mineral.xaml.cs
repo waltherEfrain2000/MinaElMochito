@@ -31,6 +31,7 @@ namespace ProyectoMinaELMochito
 
 
             InitializeComponent();
+            botonfecha.Content = string.Format("{0}", DateTime.Now.ToString());
             LblDate.Content = $"Hoy es: {DateTime.Now.ToLongDateString()}";
             PointLabel = chartPoint =>
                 string.Format("{0} ({1:P})", chartPoint.Y, chartPoint.Participation);
@@ -68,7 +69,7 @@ namespace ProyectoMinaELMochito
                 txtfecha.Text = String.Format("{0}, a las :{1}", elmineral.FechaActualizacion.ToLongDateString(), elmineral.FechaActualizacion.ToLongTimeString());
                 txttotal.Text = elmineral.Total.ToString("N");
 
-                Uri uri = new Uri("Image/plata.png", UriKind.Relative);
+                Uri uri = new Uri("plata.png", UriKind.Relative);
                 imgmineral.Source = new BitmapImage(uri);
                 lbdatos.Content = "Datos del mineral de plata ";
 
@@ -80,7 +81,7 @@ namespace ProyectoMinaELMochito
                 txtfecha.Text = String.Format("{0}, a las :{1}", elmineral.FechaActualizacion.ToLongDateString(), elmineral.FechaActualizacion.ToLongTimeString());
                 txttotal.Text = elmineral.Total.ToString("N");
 
-                Uri uri = new Uri("Image/oro.png", UriKind.Relative);
+                Uri uri = new Uri("oro.png", UriKind.Relative);
                 imgmineral.Source = new BitmapImage(uri);
                 lbdatos.Content = "Datos del mineral de oro ";
             }
@@ -91,7 +92,7 @@ namespace ProyectoMinaELMochito
                 txtfecha.Text = String.Format("{0}, a las :{1}", elmineral.FechaActualizacion.ToLongDateString(), elmineral.FechaActualizacion.ToLongTimeString());
                 txttotal.Text = elmineral.Total.ToString("N");
 
-                Uri uri = new Uri("Image/cobre.png", UriKind.Relative);
+                Uri uri = new Uri("cobre.png", UriKind.Relative);
                 imgmineral.Source = new BitmapImage(uri);
                 lbdatos.Content = "Datos del mineral de Cobre";
 
@@ -103,7 +104,7 @@ namespace ProyectoMinaELMochito
                 txtfecha.Text = String.Format("{0}, a las :{1}", elmineral.FechaActualizacion.ToLongDateString(), elmineral.FechaActualizacion.ToLongTimeString());
                 txttotal.Text = elmineral.Total.ToString("N");
 
-                Uri uri = new Uri("Image/plomo.png", UriKind.Relative);
+                Uri uri = new Uri("plomo.png", UriKind.Relative);
                 imgmineral.Source = new BitmapImage(uri);
                 lbdatos.Content = "Datos del mineral de Plomo";
             }
@@ -115,7 +116,7 @@ namespace ProyectoMinaELMochito
                 txtfecha.Text = String.Format("{0}, a las :{1}", elmineral.FechaActualizacion.ToLongDateString(), elmineral.FechaActualizacion.ToLongTimeString());
                 txttotal.Text = elmineral.Total.ToString("N");
 
-                Uri uri = new Uri("Image/zinc.png", UriKind.Relative);
+                Uri uri = new Uri("zinc.png", UriKind.Relative);
                 imgmineral.Source = new BitmapImage(uri);
                 lbdatos.Content = "Datos del mineral de Zinc";
             }
@@ -291,6 +292,16 @@ namespace ProyectoMinaELMochito
             Login sld = new Login();
             sld.Show();
             this.Close();
+        }
+
+        private void PieChart_Loaded(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void botonfecha_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

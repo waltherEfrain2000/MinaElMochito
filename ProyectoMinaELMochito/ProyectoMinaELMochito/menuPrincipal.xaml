@@ -15,17 +15,10 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <Grid fw:PointerTracker.Enabled="True" Background="#9900afb9">
+        <Grid fw:PointerTracker.Enabled="True" Background="#9900afb9" Height="542" VerticalAlignment="Bottom">
             <StackPanel>
-                <StackPanel Orientation="Horizontal">
+                <TextBlock Text="" Foreground="White" Margin="1" FontWeight="DemiBold"/>
 
-                    <Button Foreground="white" Background="{x:Null}" BorderBrush="{x:Null}">
-                        <materialDesign:PackIcon Kind="ArrowLeft"/>
-                    </Button>
-
-                    <TextBlock Text="" FontSize="12" Margin="10" VerticalAlignment="Center"/>
-
-                </StackPanel>
 
                 <ListViewItem MouseDoubleClick="ListViewItem_MouseDoubleClick" Padding="0" Selected="ListViewItem_Selected_7">
 
@@ -40,7 +33,7 @@
 
                 <ListView FontSize="15">
 
-                    <ListViewItem Background="#9900afb9" Padding="1" Selected="ListViewItem_Selected">
+                    <ListViewItem Padding="1" Selected="ListViewItem_Selected">
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Foreground="White" Kind="Worker" Margin="15"/>
                             <TextBlock Text="Empleado" Foreground="White" VerticalAlignment="Center"/>
@@ -96,6 +89,14 @@
                         </StackPanel>
                     </ListViewItem>
 
+                    <StackPanel Orientation="Horizontal">
+                        <Button x:Name="botonfecha" Foreground="white" Background="{x:Null}" BorderBrush="{x:Null}" Click="Button_Click">
+                            <materialDesign:PackIcon Kind="Calendar"/>
+                        </Button>
+                        <TextBlock Text="" FontSize="12" Margin="10" VerticalAlignment="Center"/>
+                    </StackPanel>
+                    
+                    
                 </ListView>
             </StackPanel>
         </Grid>
