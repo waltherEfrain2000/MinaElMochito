@@ -51,7 +51,7 @@ namespace ProyectoMinaELMochito
         private void LimpiarCasillasDeDatos()
         {
             //Cajas de texto
-            txtNumeroViaje.Text = string.Empty;
+            //txtNumeroViaje.Text = string.Empty;
             txtPrecio.Text = string.Empty;
             txtCantidad.Text = string.Empty;
 
@@ -60,9 +60,13 @@ namespace ProyectoMinaELMochito
         }
 
         //Obtener los datos ingresados del formulario
-        private void ObtenerDatos()
+        private void ObtenerDatos(int operacion)
         {
-            producciion.IdProduccion = Convert.ToInt32(txtIdProduccion.Text);
+            if (operacion == 1)
+            {
+                producciion.IdProduccion = Convert.ToInt32(txtIdProduccion.Text);
+            }
+
             producciion.IdViaje = Convert.ToInt32(txtNumeroViaje.Text);
             producciion.IdMineral = Convert.ToInt32(cmbMinerales.SelectedValue);
             producciion.Precio = Convert.ToDecimal(txtPrecio.Text);
@@ -166,7 +170,7 @@ namespace ProyectoMinaELMochito
                 try
                 {
                     //Vamos a obtener los valores ingresados para la tabla
-                    ObtenerDatos();
+                    ObtenerDatos(0);
 
                     //Insertamos los valores en la tabla
                     producciion.AgregarProduccion(producciion);
@@ -293,7 +297,7 @@ namespace ProyectoMinaELMochito
             {
                 try
                 {
-                    ObtenerDatos();
+                    ObtenerDatos(1);
                     producciion.ModificarProduccion(producciion);
 
                     MessageBox.Show("Datos Actualizados Correctamente!");
@@ -346,7 +350,7 @@ namespace ProyectoMinaELMochito
             {
                 try
                 {
-                    ObtenerDatos();
+                    ObtenerDatos(1);
                     producciion.BorrarProduccion(producciion);
 
                     MessageBox.Show("Se eliminaron Correctamente!");

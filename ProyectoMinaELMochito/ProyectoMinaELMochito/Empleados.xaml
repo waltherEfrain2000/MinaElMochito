@@ -149,12 +149,12 @@
 
             <Button x:Name="btnAgregar" Foreground="White"  BorderBrush="#0082aa" Content="Agregar" Grid.Column="1" Grid.Row="10" Margin="20 1" Click="btnAgregar_Click"  />
             <Button x:Name="btnModificar" Foreground="White" BorderBrush="#0082aa" Content="Modificar" Grid.Column="2" Grid.Row="10"  Margin="20 1" Click="btnModificar_Click"/>
-            <Button x:Name="btnAceptarModificacion" Content="Aceptar" Grid.Column="1" Grid.Row="10"  Margin="20 1" Click="btnAceptarModificacion_Click" Visibility="Hidden"/>
-            <Button x:Name="btnCancelarModificacion" Content="Cancelar" Grid.Column="3" Grid.Row="10"  Margin="20 1" Click="btnCancelarModificacion_Click" Visibility="Hidden"/>
+            <Button x:Name="btnAceptarModificacion" Foreground="White"  BorderBrush="#0082aa" Content="Aceptar" Grid.Column="1" Grid.Row="10"  Margin="20 1" Click="btnAceptarModificacion_Click" Visibility="Hidden"/>
+            <Button x:Name="btnCancelarModificacion" Foreground="White"  BorderBrush="#0082aa" Content="Cancelar" Grid.Column="3" Grid.Row="10"  Margin="20 1" Click="btnCancelarModificacion_Click" Visibility="Hidden"/>
 
             <Button x:Name="btnEliminar" Foreground="White" BorderBrush="#0082aa" Content="Eliminar" Grid.Column="3" Grid.Row="10"  Margin="20 1" Click="btnEliminar_Click" Grid.RowSpan="2"/>
-            <Button x:Name="btnAceptarEliminacion" Content="Aceptar" Grid.Column="1" Grid.Row="10"  Margin="20 1" Click="btnAceptarEliminacion_Click" Visibility="Hidden"/>
-            <Button x:Name="btnCancelarEliminacion" Content="Cancelar" Grid.Column="3" Grid.Row="10"  Margin="20 1" Click="btnCancelarEliminacion_Click" Visibility="Hidden" />
+            <Button x:Name="btnAceptarEliminacion" Foreground="White"  BorderBrush="#0082aa" Content="Aceptar" Grid.Column="1" Grid.Row="10"  Margin="20 1" Click="btnAceptarEliminacion_Click" Visibility="Hidden"/>
+            <Button x:Name="btnCancelarEliminacion" Foreground="White"  BorderBrush="#0082aa" Content="Cancelar" Grid.Column="3" Grid.Row="10"  Margin="20 1" Click="btnCancelarEliminacion_Click" Visibility="Hidden" />
             <Button x:Name="btnLimpiar" Foreground="White" BorderBrush="#0082aa" Content="Limpiar" Grid.Column="4" Grid.Row="10" Margin="20 1" Click="btnLimpiar_Click" />
 
             <DataGrid Name="DgvEmpleados" Grid.Row="1" Grid.Column="2" Margin="10" Grid.ColumnSpan="3" Grid.RowSpan="9" SelectionChanged="DgvEmpleados_SelectionChanged" IsReadOnly="True" FontSize="15" >

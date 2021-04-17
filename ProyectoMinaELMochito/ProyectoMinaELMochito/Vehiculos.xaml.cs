@@ -42,7 +42,7 @@ namespace ProyectoMinaELMochito
             DataRowView filaSeleccionada = dg.SelectedItem as DataRowView;
             if (filaSeleccionada != null)
             {
-                txtVehiculoID.Text = filaSeleccionada["Vehiculo ID"].ToString();
+                txtVehiculoID.Text = filaSeleccionada["VehiculoID"].ToString();
                 txtMarca.Text = filaSeleccionada["Marca"].ToString();
                 txtModelo.Text = filaSeleccionada["Modelo"].ToString();
                 txtPlaca.Text = filaSeleccionada["Placa"].ToString();
@@ -101,6 +101,7 @@ namespace ProyectoMinaELMochito
             if (operacion == 1)
             {
                 vehiculo.VehiculoID = Convert.ToInt32(txtVehiculoID.Text);
+
             }
 
             vehiculo.Marca = txtMarca.Text;
@@ -131,7 +132,7 @@ namespace ProyectoMinaELMochito
         {
             try
             {
-                string query = @"SELECT V.idVehiculo  AS 'Vehiculo ID',V.marca AS 'Marca', V.modelo AS 'Modelo',
+                string query = @"SELECT V.idVehiculo  AS 'VehiculoID',V.marca AS 'Marca', V.modelo AS 'Modelo',
                                 V.placa AS 'Placa',V.color,EV.descripcion  AS 'Estado'FROM  Minas.Vehiculo V INNER JOIN Minas.EstadoVehiculo EV
 								ON EV.idEstado = V.estado
 								where V.estado = 1 or V.estado = 2";
@@ -320,7 +321,6 @@ namespace ProyectoMinaELMochito
             btnCancelarModificacion.Visibility = Visibility.Hidden;
             btnAceptarEliminacion.Visibility = Visibility.Hidden;
             btnCancelarEliminacion.Visibility = Visibility.Hidden;
-            LimpiarCasillas();
             edicionDeCasillas(false, 0);
             DgvVehiculos.SelectedItem = null;
         }

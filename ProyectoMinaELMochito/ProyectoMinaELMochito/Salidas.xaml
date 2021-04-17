@@ -138,7 +138,7 @@
 
                 <TextBox Name="txtPrecio" Text="{Binding ElementName=cmbIdMineral, Path=SelectedItem.Precio}" Grid.Row="5" Grid.Column="1" FontSize="15" Margin="7" Foreground="Black" Background="#dee2e6" Visibility="Hidden" BorderBrush="#6c757d"/>
 
-                <TextBox Name="txtDetalle" Grid.Row="6" Grid.Column="1" FontSize="15" Margin="7" Grid.RowSpan="7" />
+                <TextBox Name="txtDetalle" Grid.Row="6" Grid.Column="1" FontSize="15" Margin="7" Grid.RowSpan="7" TextChanged="txtDetalle_TextChanged" />
 
                 <DataGrid Name="dgvSalida" Grid.Row="1" Grid.Column="2" Margin="7" Grid.ColumnSpan="5" Grid.RowSpan="5" SelectionChanged="dgvSalida_SelectionChanged" IsReadOnly="True" FontSize="15">
                     <DataGrid.Resources>

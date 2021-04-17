@@ -117,7 +117,7 @@ go
 create table Minas.Produccion
 (
 	idProduccion int identity not null,
-	idViaje int not null unique,
+	idViaje int not null,
 	idMineral int not null,
 	precio numeric(18,2),
 	peso numeric(18, 2),
@@ -329,31 +329,51 @@ go
 --select * from Minas.Genero
 
 insert into Minas.cargo values
-('Gerente'),('Secretarios'),('Supervisor de Area'),('Guardia'),('Conductor'),('Minero'),('conductor Maquinaria')
+('Gerente'),
+('Secretarios'),
+('Supervisor de Area'),
+('Guardia'),
+('Conductor'),
+('Minero'),
+('conductor Maquinaria')
 go
 
-insert into minas.EstadoVehiculo values ('Activo'),('Reparacion'),('Inactivo')insert into minas.Vehiculo values ('Caterpillar','Retroexcabadora','AQE1265','Amarillo',1),('Caterpillar','Retroexcabadora','QQXSQ23','Amarillo',2),('XCMG','Retroexcabadora','ASDJU15','Amarillo',1),('Caterpillar','Cargadora','QQXSQ23','Naranja',1),('xcmg','Billdozers','OTIR159','Amarillo',2),('xcmg','Billdozers','NVJGO84','Amarillo',1),('xcmg','Motoniveladoras','PYNGI10','Amarillo',1)
+insert into minas.EstadoVehiculo values 
+('Activo'),
+('Reparacion'),
+('Inactivo')
+
+
+insert into minas.Vehiculo values 
+('Caterpillar','Retroexcabadora','AQE1265','Amarillo',1),
+('Caterpillar','Retroexcabadora','QQXSQ23','Amarillo',2),
+('XCMG','Retroexcabadora','ASDJU15','Amarillo',1),
+('Caterpillar','Cargadora','QQXSQ23','Naranja',1),
+('xcmg','Billdozers','OTIR159','Amarillo',2),
+('xcmg','Billdozers','NVJGO84','Amarillo',1),
+('xcmg','Motoniveladoras','PYNGI10','Amarillo',1)
 go
 
 insert into [Minas].[Mineral] ([descripcion],[precio]) values
-('Oro',56182.88),('Zinc',2809.50),('Plomo',1984.50),('Plata',836.88),('Cobre',9187.50)
+('Oro',56182.88),
+('Zinc',2809.50),
+('Plomo',1984.50),
+('Plata',836.88),
+('Cobre',9187.50)
 go
 
 insert into [Minas].[InventarioMineral] ([idMineral],[peso], [fechaActualizacion], [Total]) values
-(1,00,null,00),
-(2,00,null,00),
-(3,00,null,00),
-(4,00,null,00),
-(5,00,null,00)
+(1,00,GETDATE(),00),
+(2,00,GETDATE(),00),
+(3,00,GETDATE(),00),
+(4,00,GETDATE(),00),
+(5,00,GETDATE(),00)
 go
 
-insert into [Minas].[EstadoVehiculo] ([descripcion]) values
-('Disponible')
-go 
 
 insert into [Minas].[Empleado] ([identidad],[primerNombre],[edad],[idGenero],direccion,[idCargo],[salario],[estado]) values 
-('0318200300249','lionel messi','33',1,'Barrio Guamilito',1,10000,1),
-('1627865479101','Victor Madrid','30',1,'Barrio Morazan',1,10678,1)
+('0318200300249','lionel messi','33',1,'Barrio Guamilito',1,10000,'Activo'),
+('1627865479101','Victor Madrid','30',1,'Barrio Morazan',1,10678,'Activo')
 go
 
 insert into [Minas].[viajeInterno]([idVehiculo],[idEmpleado])values 
@@ -365,17 +385,12 @@ insert into [Minas].[Produccion]([idViaje],[idMineral],[precio],[peso])Values
 (1,1,56182.88,11.5)
 go
 
-insert into [Minas].[InventarioMineral]([idMineral],[peso],[fechaActualizacion],[Total])values
-(1,0,GETDATE(),0)
+
+--Insert into Minas.Salida ([idmineral],[cantidad],[Total],[detalleVenta],[fechaSalida]) values 
+--(1, 1, 56182.88, 'Salio 1 kg de oro', GETDATE())
+--go
+
+insert into [Usuarios].[Usuario] values
+('Messi Andres Cuccitini','Admin','MinaMochito2021','ADMINISTRADOR', 1),
+('Ronaldo Santo Aveiro','Cr7','siuuuuu','EMPLEADODETURNO', 1)
 go
-
-
-Insert into Minas.Salida ([idmineral],[cantidad],[Total],[detalleVenta],[fechaSalida]) values 
-(1, 1, 56182.88, 'Salio 1 kg de oro', GETDATE())
-go
-
-
-delete from Minas.Produccion where idProduccion = 1
-
-
-

@@ -123,9 +123,6 @@
             <Button Name="btnLimpiar" Content="Limpiar" Width="100" Height="28" Grid.Column="1" Foreground="White"  BorderBrush="#0082aa"
                 Grid.Row="5" Margin="231,23,65,22" Click="btnLimpiar_Click"/>
 
-            <CheckBox Name="ckPrecio" Content="Actualizar" Grid.Column="0" Grid.Row="4" 
-                  Margin="193,4,121,24" Checked="ActualizarPrecio" Unchecked="ActualizarElPrecio" RenderTransformOrigin="0.963,0.435"/>
-
 
             <ComboBox Name="cmbMinerales" HorizontalAlignment="Left" Margin="84,15,0,0" Grid.Row="2" 
                   VerticalAlignment="Top" Width="120" />

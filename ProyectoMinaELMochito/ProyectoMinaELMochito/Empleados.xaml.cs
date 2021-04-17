@@ -106,6 +106,21 @@ namespace ProyectoMinaELMochito
                 case 1:
                     empleado.Cargo = 2;
                     break;
+                case 2:
+                    empleado.Cargo = 3;
+                    break;
+                case 3:
+                    empleado.Cargo = 4;
+                    break;
+                case 4:
+                    empleado.Cargo = 5;
+                    break;
+                case 5:
+                    empleado.Cargo = 6;
+                    break;
+                case 6:
+                    empleado.Cargo = 7;
+                    break;
                 default:
                     break;
             }

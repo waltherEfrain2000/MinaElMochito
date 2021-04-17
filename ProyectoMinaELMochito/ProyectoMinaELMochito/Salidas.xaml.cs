@@ -267,20 +267,28 @@ namespace ProyectoMinaELMochito
 
         private void txtTotal_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            if (txtCantidad.Text == string.Empty)
+            try
             {
-                MessageBox.Show("Favor, ingresar una cantidad a calcular!");
+                if (txtCantidad.Text == string.Empty)
+                {
+                    MessageBox.Show("Favor, ingresar una cantidad a calcular!");
+                }
+                else
+                {
+                    decimal precio, cantidad, total;
+
+                    precio = Convert.ToDecimal(txtPrecio.Text, CultureInfo.InvariantCulture);
+                    cantidad = Convert.ToDecimal(txtCantidad.Text, CultureInfo.InvariantCulture);
+
+                    total = precio * cantidad;
+                    txtTotal.Text = total.ToString("0000.00", CultureInfo.InvariantCulture);
+                }
             }
-            else
+            catch (Exception ex)
             {
-                decimal precio, cantidad, total;
-
-                precio = Convert.ToDecimal(txtPrecio.Text, CultureInfo.InvariantCulture);
-                cantidad = Convert.ToDecimal(txtCantidad.Text, CultureInfo.InvariantCulture);
-
-                total = precio * cantidad;
-                txtTotal.Text = total.ToString("0000.00", CultureInfo.InvariantCulture);
+                MessageBox.Show(ex.Message);
             }
+           
 
 
         }
@@ -375,6 +383,11 @@ namespace ProyectoMinaELMochito
         }
 
         private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void txtDetalle_TextChanged(object sender, TextChangedEventArgs e)
         {
 
         }
