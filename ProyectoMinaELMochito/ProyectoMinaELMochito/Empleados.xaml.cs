@@ -73,6 +73,12 @@ namespace ProyectoMinaELMochito
                 MessageBox.Show("Por favor selecciona el Cargo del empleado");
                 return false;
             }
+            else if (Convert.ToInt32(txtEdad.Text) < 18 || Convert.ToInt32(txtEdad.Text) > 100)
+            {
+                MessageBox.Show("Por favor selecciona una edad valida!");
+                return false;
+            }
+           
 
             return true;
         }
@@ -164,10 +170,10 @@ namespace ProyectoMinaELMochito
             try
             {
                 string query = @"SELECT E.IdEmpleado AS 'Empleado ID',E.identidad, E.primerNombre AS 'Nombre Completo', E.edad, G.descripcion AS 'Genero', 
-                                E.direccion,C.descripcion AS 'Cargo', E.salario  FROM  Minas.Empleado E INNER JOIN Minas.cargo C 
+                                E.direccion,C.descripcion AS 'Cargo', E.estado as 'Estado', E.salario  FROM  Minas.Empleado E INNER JOIN Minas.cargo C 
                                 ON C.idCargo = E.idCargo INNER JOIN Minas.Genero G
                                 ON G.idGenero = E.idGenero	
-                                WHERE E.estado = 'activo'";
+                                ";
 
                 sqlConnection.Open();
 
@@ -198,7 +204,7 @@ namespace ProyectoMinaELMochito
             //operacion sirve para distingir entre actualizar y activar o inabilitar todas las casillas
             if (operacion == 0)
             {
-                txtIdentidad.IsReadOnly = opcion;
+                //txtIdentidad.IsReadOnly = opcion;
                 txtNombreCompleto.IsReadOnly = opcion;
                 txtEdad.IsReadOnly = opcion;
                 cmbGenero.IsReadOnly = opcion;
@@ -503,6 +509,19 @@ namespace ProyectoMinaELMochito
         private void Button_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void txtNombreCompleto_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void txtNombreCompleto_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key >= Key.D0 && e.Key <= Key.D9 || e.Key >= Key.NumPad0 && e.Key <= Key.NumPad9)
+                e.Handled = true;
+            else
+                e.Handled = false;
         }
     }
 }
