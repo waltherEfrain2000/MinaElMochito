@@ -222,6 +222,12 @@ ALTER TABLE Usuarios.Usuario WITH CHECK
 	
 GO
 
+ALTER TABLE Minas.Vehiculo
+	ADD CONSTRAINT AK_Minas_Vehiculo_placa
+	UNIQUE NONCLUSTERED (placa)
+
+GO
+
 ----Triggers -------------------------
 
 ---trigger para llenar Inventario mineral despues de una insercion en produccion
