@@ -78,7 +78,7 @@ create table Minas.Empleado
 	idGenero int ,
 	direccion  varchar(50),
 	idCargo int,
-	salario decimal,
+	salario decimal(18,2),
 	estado  varchar(15)
 
 	Constraint PK_Empleado_id

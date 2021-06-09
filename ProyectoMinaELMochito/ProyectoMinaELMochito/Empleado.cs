@@ -29,14 +29,14 @@ namespace ProyectoMinaELMochito
 
         public string NombreCargo { get; set; }
         public string Estado { get; set; }
-        public double Salario { get; set; }
+        public decimal Salario { get; set; }
         public string Direccion { get; set; }
 
         // Constructores
         public Empleado() { }
 
 
-        public Empleado(string identidad, string nombreCompleto, int edad, int genero, int cargo, string estado, double salario, string direccion)
+        public Empleado(string identidad, string nombreCompleto, int edad, int genero, int cargo, string estado, decimal salario, string direccion)
         {
 
             Identidad = identidad;
@@ -48,7 +48,7 @@ namespace ProyectoMinaELMochito
             Salario = salario;
             Direccion = direccion;
         }
-        public Empleado(int ID, string identidad, string nombreCompleto, int edad, int genero, int cargo, string estado, double salario, string direccion)
+        public Empleado(int ID, string identidad, string nombreCompleto, int edad, int genero, int cargo, string estado, decimal salario, string direccion)
         {
             EmpledoID = ID;
             Identidad = identidad;

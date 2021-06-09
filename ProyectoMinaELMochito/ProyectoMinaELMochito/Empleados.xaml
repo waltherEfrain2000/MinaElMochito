@@ -137,17 +137,18 @@
             <Label Content="Direccion" Grid.Row="8" FontSize="15" Margin="5"  />
 
             <TextBox Name="txtEmpleadoID" Grid.Row="1" Grid.Column="1" FontSize="15" Margin="7" IsReadOnly="True" />
-            <TextBox Name="txtIdentidad" Grid.Row="2" Grid.Column="1" FontSize="15" Margin="7"  KeyDown="txtIdentidad_KeyDown"/>
-            <TextBox Name="txtNombreCompleto" Grid.Row="3" Grid.Column="1" FontSize="15" Margin="7" />
-            <TextBox Name="txtEdad" Grid.Row="4" Grid.Column="1" FontSize="15" Margin="7" KeyDown="txtEdad_KeyDown" TextChanged="txtEdad_TextChanged" />
+            <TextBox Name="txtIdentidad" Grid.Row="2" Grid.Column="1" FontSize="15" Margin="7"  KeyDown="txtIdentidad_KeyDown" MaxLength="13" />
+            <TextBox Name="txtNombreCompleto" Grid.Row="3" Grid.Column="1" FontSize="15" Margin="7" TextChanged="txtNombreCompleto_TextChanged" KeyDown="txtNombreCompleto_KeyDown" MaxLength="50"/>
+            <TextBox Name="txtEdad" Grid.Row="4" Grid.Column="1" FontSize="15" Margin="7" KeyDown="txtEdad_KeyDown" />
 
             <TextBox Name="txtSalario" Grid.Row="7" Grid.Column="1" FontSize="15" Margin="7" KeyDown="txtSalario_KeyDown" TextChanged="txtSalario_TextChanged" />
-            <TextBox Name="txtDireccion" Grid.Row="8" Grid.Column="1" FontSize="15" Margin="7,7,7,0"/>
+            <TextBox Name="txtDireccion" Grid.Row="8" Grid.Column="1" FontSize="15" Margin="7" MaxLength="50" Grid.RowSpan="2"/>
+            
 
-            <ComboBox Name="cmbGenero" Grid.Row="5" Grid.Column="1" FontSize="15" Margin="7" />
-            <ComboBox Name="cmbCargo" Grid.Row="6" Grid.Column="1" FontSize="15" Margin="7" />
+            <ComboBox Name="cmbGenero" Grid.Row="5" Grid.Column="1" FontSize="15" Margin="7" SelectionChanged="cmbGenero_SelectionChanged" />
+            <ComboBox Name="cmbCargo" Grid.Row="6" Grid.Column="1" FontSize="15" Margin="7,10,0,10" HorizontalAlignment="Left" Width="164" />
 
-            <Button x:Name="btnAgregar" Foreground="White"  BorderBrush="#0082aa" Content="Agregar" Grid.Column="1" Grid.Row="10" Margin="20,0,20,8" Click="btnAgregar_Click" VerticalAlignment="Bottom"  />
+            <Button x:Name="btnAgregar" Foreground="White"  BorderBrush="#0082aa" Content="Agregar" Grid.Column="1" Grid.Row="10" Margin="20 1" Click="btnAgregar_Click"  />
             <Button x:Name="btnModificar" Foreground="White" BorderBrush="#0082aa" Content="Modificar" Grid.Column="2" Grid.Row="10"  Margin="20 1" Click="btnModificar_Click"/>
             <Button x:Name="btnAceptarModificacion" Foreground="White"  BorderBrush="#0082aa" Content="Aceptar" Grid.Column="1" Grid.Row="10"  Margin="20 1" Click="btnAceptarModificacion_Click" Visibility="Hidden"/>
             <Button x:Name="btnCancelarModificacion" Foreground="White"  BorderBrush="#0082aa" Content="Cancelar" Grid.Column="3" Grid.Row="10"  Margin="20 1" Click="btnCancelarModificacion_Click" Visibility="Hidden"/>

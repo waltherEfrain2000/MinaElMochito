@@ -15,6 +15,8 @@ using System.Windows.Shapes;
 using System.Data.SqlClient;
 using System.Configuration;
 using System.Data;
+using System.Globalization;
+
 
 namespace ProyectoMinaELMochito
 {
@@ -58,23 +60,30 @@ namespace ProyectoMinaELMochito
 
         private bool VerificarCamposLlenos()
         {
-            if (txtIdentidad.Text == string.Empty || txtNombreCompleto.Text == string.Empty || txtEdad.Text == string.Empty || txtSalario.Text == string.Empty || txtDireccion.Text == string.Empty)
-            {
-                MessageBox.Show("Por favor ingresa todos los valores en las cajas de texto");
-                return false;
-            }
-            else if (cmbGenero.SelectedValue == null)
-            {
-                MessageBox.Show("Por favor selecciona el Genero del empleado");
-                return false;
-            }
-            else if (cmbCargo.SelectedValue == null)
-            {
-                MessageBox.Show("Por favor selecciona el Cargo del empleado");
-                return false;
-            }
+                if (txtIdentidad.Text == string.Empty || txtNombreCompleto.Text == string.Empty || txtEdad.Text == string.Empty || txtSalario.Text == string.Empty || txtDireccion.Text == string.Empty)
+                {
+                    MessageBox.Show("Por favor ingresa todos los valores en las cajas de texto");
+                    return false;
+                }
+                else if (cmbGenero.SelectedValue == null)
+                {
+                    MessageBox.Show("Por favor selecciona el Genero del empleado");
+                    return false;
+                }
+                else if (cmbCargo.SelectedValue == null)
+                {
+                    MessageBox.Show("Por favor selecciona el Cargo del empleado");
+                    return false;
+                }
 
-            return true;
+                else if (Convert.ToInt32(txtEdad.Text) < 18 || Convert.ToInt32(txtEdad.Text) > 100)
+                {
+                    MessageBox.Show("Por favor selecciona una edad valida!");
+                    return false;
+                }
+
+                return true;
+            
         }
         private void ExtraerInformacionFormulario(int operacion)
         {
@@ -125,9 +134,43 @@ namespace ProyectoMinaELMochito
                     break;
             }
 
-            empleado.Salario = Convert.ToDouble(txtSalario.Text);
+            //try
+            //{
+            //    if (txtSalario.Text == string.Empty)
+            //    {
+            //        int a = 1;
+            //    }
+            //    else
+            //    {
+
+            //        //precio = Convert.ToDecimal(txtPrecio.Text, CultureInfo.InvariantCulture);
+            //        //cantidad = Convert.ToDecimal(txtCantidad.Text, CultureInfo.InvariantCulture);
+
+            //        //total = precio * cantidad;
+            //    }
+            //}
+            //catch (Exception ex)
+            //{
+            //    MessageBox.Show(ex.Message);
+            //}
+
+            //decimal precio, cantidad, total, salario;
+            //salario = Convert.ToDecimal(txtSalario.Text, CultureInfo.InvariantCulture);
+
+            decimal monto = Convert.ToDecimal(txtSalario.Text);
+            
+
+            if (!decimal.TryParse(txtSalario.Text, out monto))
+            {
+                MessageBox.Show("Ingrese un monto válido...");
+                return; //Salimos del método o evento
+            }
+
+            empleado.Salario = Convert.ToDecimal(txtSalario.Text);
             empleado.Estado = "activo";
             empleado.Direccion = txtDireccion.Text;
+            //txtSalario.Text = salario.ToString("0000.00", CultureInfo.InvariantCulture);
+
         }
 
 
@@ -164,10 +207,10 @@ namespace ProyectoMinaELMochito
             try
             {
                 string query = @"SELECT E.IdEmpleado AS 'Empleado ID',E.identidad, E.primerNombre AS 'Nombre Completo', E.edad, G.descripcion AS 'Genero', 
-                                E.direccion,C.descripcion AS 'Cargo', E.salario  FROM  Minas.Empleado E INNER JOIN Minas.cargo C 
+                                E.direccion,C.descripcion AS 'Cargo', E.estado as 'Estado', E.salario  FROM  Minas.Empleado E INNER JOIN Minas.cargo C 
                                 ON C.idCargo = E.idCargo INNER JOIN Minas.Genero G
                                 ON G.idGenero = E.idGenero	
-                                WHERE E.estado = 'activo'";
+                                ";
 
                 sqlConnection.Open();
 
@@ -198,7 +241,7 @@ namespace ProyectoMinaELMochito
             //operacion sirve para distingir entre actualizar y activar o inabilitar todas las casillas
             if (operacion == 0)
             {
-                txtIdentidad.IsReadOnly = opcion;
+                //txtIdentidad.IsReadOnly = opcion;
                 txtNombreCompleto.IsReadOnly = opcion;
                 txtEdad.IsReadOnly = opcion;
                 cmbGenero.IsReadOnly = opcion;
@@ -253,10 +296,11 @@ namespace ProyectoMinaELMochito
 
         private void txtSalario_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.Key >= Key.D0 && e.Key <= Key.D9 || e.Key >= Key.NumPad0 && e.Key <= Key.NumPad9)
-                e.Handled = false;
+            if (e.Key >= Key.D0 && e.Key <= Key.D9 || e.Key >= Key.NumPad0 && e.Key <= Key.NumPad9  || e.Key == Key.OemComma)
+            { e.Handled = false; }
+
             else
-                e.Handled = true;
+            { e.Handled = true; }
         }
 
 
@@ -505,14 +549,61 @@ namespace ProyectoMinaELMochito
 
         }
 
+        private void txtNombreCompleto_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void txtNombreCompleto_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key >= Key.D0 && e.Key <= Key.D9 || e.Key >= Key.NumPad0 && e.Key <= Key.NumPad9)
+                e.Handled = true;
+            else
+                e.Handled = false;
+        }
+
+        private void cmbGenero_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void txtEstado_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
         private void txtSalario_TextChanged(object sender, TextChangedEventArgs e)
         {
-
-        }
-
-        private void txtEdad_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
+            txtSalario.MaxLength = 12;
+            double Valor = 0;
+            try
+            {
+                if (txtSalario.Text == string.Empty || (Convert.ToDouble(txtSalario.Text) == Valor))
+                {
+                    txtSalario.Text = "";
+                }
+                //else if (txtSalario.Text == string.Empty)
+                //{
+                //    MessageBoxResult result = MessageBox.Show("Debe seleccionar un mineral",
+                //      "Confirmar", MessageBoxButton.OK, MessageBoxImage.Warning);
+                //    txtSalario.Text = "";
+                //}
+                else
+                {
+                    //double Total;
+                    //double Cantidad, precio;
+                    //Cantidad = Convert.ToDouble(txtSalario.Text);
+                    //precio = Convert.ToDouble(txtSalario.Text);
+                    //Total = Cantidad * precio;
+                    //txtSalario.Text = Cantidad.ToString();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBoxResult result = MessageBox.Show("No puede ingresar dos puntos deguidos",
+                      "Confirmar", MessageBoxButton.OK, MessageBoxImage.Warning);
+                txtSalario.Text = "";
+            }
         }
     }
-}
+    }
