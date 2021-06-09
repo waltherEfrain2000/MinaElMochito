@@ -71,7 +71,10 @@ namespace ProyectoMinaELMochito
             producciion.IdMineral = Convert.ToInt32(cmbMinerales.SelectedValue);
             producciion.Precio = Convert.ToDecimal(txtPrecio.Text);
             producciion.Peso = Convert.ToDecimal(txtCantidad.Text);
+
         }
+
+
 
         //Valores del formulario objeto
         private void ValoresFormularioObjeto()
@@ -92,6 +95,15 @@ namespace ProyectoMinaELMochito
                    "Confirmar", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return false;
             }
+            //else if(producciion.Peso < 0)
+            //{
+            //    MessageBoxResult result = MessageBox.Show("Error!" +
+            //        " No se pueden ingresar números negativos!",
+            //       "Confirmar", MessageBoxButton.OK, MessageBoxImage.Warning);
+            //    txtCantidad.Text = string.Empty;
+            //    return false;
+            //}
+            //else
             return true;
         }
 
@@ -165,7 +177,7 @@ namespace ProyectoMinaELMochito
         private void btnInsertar_Click(object sender, RoutedEventArgs e)
         {
             //Primero verificamos que las casillas no estén vacías
-            if (VerificacionDedatosRequeridos())
+            if (VerificacionDedatosRequeridos() && VerificarNegativos())
             {
                 try
                 {
@@ -289,11 +301,40 @@ namespace ProyectoMinaELMochito
         /// <summary>
         /// Precio
         /// </summary>
+        
+        private bool VerificarNegativos()
+        {
+            try
+            {
+                producciion.Peso = Convert.ToDecimal(txtCantidad.Text);
 
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message);
+                txtCantidad.Text = string.Empty;
+                return false;
+            }
+            finally
+            {
+
+                MostrarDatosTabla();
+            }
+            
+            if (producciion.Peso < 0)
+            {
+                MessageBoxResult result = MessageBox.Show("Error!" +
+                    " Los números no pueden ser negativos!",
+                   "Confirmar", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return false;
+            }
+            return true;
+        }
         private void btnModificar_Click(object sender, RoutedEventArgs e)
         {
             // Verificar que se ingresaron los valores requeridos
-            if (VerificacionDedatosRequeridos())
+            if (VerificacionDedatosRequeridos() && VerificarNegativos())
             {
                 try
                 {
