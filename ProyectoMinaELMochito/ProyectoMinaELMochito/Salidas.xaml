@@ -131,16 +131,27 @@
                 <Label Content="Detalle de Salida" Grid.Row="6" FontSize="15" Margin="12"/>
 
                 <TextBox Name="txtIdSalida" Grid.Row="1" Grid.Column="1" FontSize="15" Margin="7" IsReadOnly="True"/>
-                <ComboBox Name="cmbIdMineral" Grid.Row="2" Grid.Column="1" FontSize="15" Margin="7"  SelectionChanged="cmbIdMineral_SelectionChanged"/>
-                <TextBox Name="txtCantidad" Grid.Row="3" Grid.Column="1" FontSize="15" Margin="7"   TextChanged="txtCantidad_TextChanged" KeyDown="txtCantidad_KeyDown" />
-                <TextBox Name="txtTotal" Grid.Row="4" Grid.Column="1" FontSize="15" Margin="7" IsReadOnly="False" TextChanged="txtTotal_TextChanged" MouseDoubleClick="txtTotal_MouseDoubleClick"/>
-                <TextBox Name="txtFecha" Grid.Row="5" Grid.Column="1" FontSize="15" Margin="7" />
+                <ComboBox Name="cmbIdMineral" Grid.Row="2" Grid.Column="1" FontSize="15" Margin="7"  />
+                <TextBox Name="txtCantidad" Grid.Row="3" Grid.Column="1"  FontSize="15" Margin="7"   KeyDown="txtCantidad_KeyDown" TextChanged="txtCantidad_TextChanged" Text="{Binding Cantidad, Mode=TwoWay, ValidatesOnExceptions=True}" />
+                <TextBox Name="txtTotal" ToolTip="Dar doble click para obtener el valor " Grid.Row="4" Grid.Column="1" FontSize="15" Margin="7" IsReadOnly="False" KeyDown="txtTotal_KeyDown" MouseDoubleClick="txtTotal_MouseDoubleClick" TextChanged="txtTotal_TextChanged"/>
 
+
+
+                <DatePicker  Name="FSalida" Grid.Row="5"  Grid.Column="1" ToolTip="Selet date" FontSize="15" Margin="7" Foreground="Black" Background="Transparent" 
+                     DisplayDateStart="2021-01-01" DisplayDateEnd="2021-12-31" Height="30" SelectedDateFormat="Short"   >
+
+                    <DatePicker.BlackoutDates>
+                        <CalendarDateRange Start="2021-01-01" End="2021-06-08" />
+
+
+                    </DatePicker.BlackoutDates>
+
+                </DatePicker>
                 <TextBox Name="txtPrecio" Text="{Binding ElementName=cmbIdMineral, Path=SelectedItem.Precio}" Grid.Row="5" Grid.Column="1" FontSize="15" Margin="7" Foreground="Black" Background="#dee2e6" Visibility="Hidden" BorderBrush="#6c757d"/>
 
-                <TextBox Name="txtDetalle" Grid.Row="6" Grid.Column="1" FontSize="15" Margin="7" Grid.RowSpan="7" TextChanged="txtDetalle_TextChanged" />
+                <TextBox Name="txtDetalle" Grid.Row="6" Grid.Column="1" FontSize="15"  Margin="7,7,7,25" Grid.RowSpan="2" TextChanged="txtDetalle_TextChanged" MaxLength="50" />
 
-                <DataGrid Name="dgvSalida" Grid.Row="1" Grid.Column="2" Margin="7" Grid.ColumnSpan="5" Grid.RowSpan="5" SelectionChanged="dgvSalida_SelectionChanged" IsReadOnly="True" FontSize="15">
+                <DataGrid Name="dgvSalida" Grid.Row="1" Grid.Column="2" Margin="7" Grid.ColumnSpan="5" Grid.RowSpan="5" SelectionChanged="dgvSalida_SelectionChanged" IsReadOnly="True" FontSize="15"  SelectionMode="Single">
                     <DataGrid.Resources>
                         <Style TargetType="{x:Type DataGridColumnHeader}">
                         </Style>
@@ -151,6 +162,7 @@
                 <Button x:Name="btnModificar" Content="Modificar" Grid.Column="3" Grid.Row="6" Margin="7" Click="btnModificar_Click" Foreground="White"  BorderBrush="#0082aa"/>
                 <Button x:Name="btnEliminar" Content="Eliminar" Grid.Column="4" Grid.Row="6" Margin="7" Click="btnEliminar_Click" Foreground="White"  BorderBrush="#0082aa"/>
                 <Button x:Name="btnLimpiar" Content="Limpiar" Grid.Column="5" Grid.Row="6" Margin="7" Click="btnLimpiar_Click" Foreground="White"  BorderBrush="#0082aa"/>
+
 
             </Grid>
         </Grid>

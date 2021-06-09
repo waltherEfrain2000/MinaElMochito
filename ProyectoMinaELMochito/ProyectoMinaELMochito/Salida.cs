@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
 using System.Data.SqlClient;
 using System.Configuration;
 
-namespace ProyectoMinaELMochito
+
+namespace ProyectoMinaELMochito 
 {
-    class Salida
-    {
+    class Salida 
+{
         // Variable miembro
         private static string connectionString = ConfigurationManager.ConnectionStrings["ProyectoMinaELMochito.Properties.Settings.MinaConnectionString"].ConnectionString;
         private SqlConnection sqlConnection = new SqlConnection(connectionString);
@@ -25,8 +25,18 @@ namespace ProyectoMinaELMochito
         public DateTime FechaSalida { get; set; }
         public string DetalleSalida { get; set; }
 
+      
+
+
+
         // Constructores
-        public Salida() { }
+        public Salida()
+
+        {
+
+          
+
+        }
 
         public Salida(int idSalida, int idMineral, decimal cantidad, decimal total, DateTime fecha, string detalle)
         {
@@ -53,7 +63,7 @@ namespace ProyectoMinaELMochito
                 sqlCommand.Parameters.AddWithValue("@cantidad", salidas.Cantidad);
                 sqlCommand.Parameters.AddWithValue("@Total", salidas.Total);
                 sqlCommand.Parameters.AddWithValue("@detalleVenta", salidas.DetalleSalida);
-                sqlCommand.Parameters.AddWithValue("@fechaSalida", salidas.FechaSalida);
+                sqlCommand.Parameters.AddWithValue("@fechaSalida", salidas.FechaSalida.ToString("yyyy-MM-dd "));
 
                 sqlCommand.ExecuteNonQuery();
 
@@ -90,7 +100,7 @@ namespace ProyectoMinaELMochito
                 sqlCommand.Parameters.AddWithValue("@cantidad", salidas.Cantidad);
                 sqlCommand.Parameters.AddWithValue("@Total", salidas.Total);
                 sqlCommand.Parameters.AddWithValue("@detalleVenta", salidas.DetalleSalida);
-                sqlCommand.Parameters.AddWithValue("@fechaSalida", salidas.FechaSalida);
+                sqlCommand.Parameters.AddWithValue("@fechaSalida", salidas.FechaSalida.ToString("yyyy-MM-dd "));
                 sqlCommand.Parameters.AddWithValue("@idSalida", salidas.IDsalida);
 
 
