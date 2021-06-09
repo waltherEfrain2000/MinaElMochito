@@ -323,6 +323,8 @@ namespace ProyectoMinaELMochito
             this.Close();
         }
 
+
+
         private void txtCantidad_KeyDown(object sender, KeyEventArgs e)
         {
             //Para definir el ancho de caracteres que debe aceptar el textbox
