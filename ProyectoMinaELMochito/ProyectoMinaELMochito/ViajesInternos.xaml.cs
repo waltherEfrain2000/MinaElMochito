@@ -48,12 +48,16 @@ namespace ProyectoMinaELMochito
             {
                 //Query para seleccionar los datos de la tabla
                 String queryEmpleado = @"Select IdEmpleado as 'Id Empleado', identidad as 'Identidad', 
-                               primerNombre as 'Nombre Empleado'
-                               from Minas.Empleado";
+                               primerNombre as 'Nombre Empleado', C.descripcion AS 'Cargo'
+                               from Minas.Empleado  E INNER JOIN Minas.cargo C 
+                                ON C.idCargo = E.idCargo 
+                                WHERE E.estado = 'activo' and C.idcargo= 7";
 
                 String queryVehiculo = @"Select idVehiculo as 'Id Vehiculo', marca as 'Marca', 
                                         modelo as 'Modelo', placa as 'Placa', color as 'Color'
-                                         from Minas.Vehiculo";
+                                        from Minas.Vehiculo V INNER JOIN Minas.EstadoVehiculo EV
+								        ON EV.idEstado = V.estado
+								        where V.estado = 1";
 
                 //Establecer la conexion
                 sqlConnection.Open();
