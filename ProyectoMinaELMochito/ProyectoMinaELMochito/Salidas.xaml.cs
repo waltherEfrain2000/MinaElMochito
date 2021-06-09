@@ -323,7 +323,7 @@ namespace ProyectoMinaELMochito
             this.Close();
         }
         
-
+        
 
         private void txtCantidad_KeyDown(object sender, KeyEventArgs e)
         {
