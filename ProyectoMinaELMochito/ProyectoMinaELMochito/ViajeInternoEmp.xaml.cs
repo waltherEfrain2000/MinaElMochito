@@ -261,7 +261,7 @@ namespace ProyectoMinaELMochito
 
         private void ListViewItem_Selected_2(object sender, RoutedEventArgs e)
         {
-            Inventario_Mineral sld = new Inventario_Mineral();
+            Login sld = new Login();
             sld.Show();
             this.Close();
         }
