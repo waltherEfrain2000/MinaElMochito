@@ -56,6 +56,7 @@ namespace ProyectoMinaELMochito
             //txtNumeroViaje.Text = string.Empty;
             txtPrecio.Text = string.Empty;
             txtCantidad.Text = string.Empty;
+            txtTotal.Text = string.Empty;
 
             //ComboBox
             cmbMinerales.SelectedValue = null;
@@ -86,11 +87,15 @@ namespace ProyectoMinaELMochito
         //Se verificará que todos los campos estén llenoss antes de realizar cualquier acción
         private bool VerificacionDedatosRequeridos()
         {
+            int Valor = 0;
             if (txtCantidad.Text == string.Empty || txtPrecio.Text == string.Empty || cmbMinerales.SelectedValue == null)
             {
                 MessageBoxResult result = MessageBox.Show("Por favor!, Verifique que las casillas" +
                     " contengan la infromación requerida!",
                    "Confirmar", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return false;
+            }else if (txtCantidad.Text == string.Empty || txtPrecio.Text == string.Empty || cmbMinerales.SelectedValue == null)
+            {
                 return false;
             }
             return true;
@@ -282,7 +287,7 @@ namespace ProyectoMinaELMochito
         /// </summary>
         private void BloquearEdicion(object sender, KeyEventArgs e)
         {
-            if (e.Key >= Key.D0 && e.Key <= Key.D9 || e.Key >= Key.NumPad0 && e.Key <= Key.NumPad9)
+            if (e.Key >= Key.D0 && e.Key <= Key.D9 || e.Key >= Key.NumPad0 && e.Key <= Key.NumPad9 || e.Key == Key.OemComma || e.Key == Key.Decimal)
                 e.Handled = false;
             else
                 e.Handled = true;
@@ -446,6 +451,51 @@ namespace ProyectoMinaELMochito
             sld.Show();
             this.Close();
         }
+
+        private void txtCantidad_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key >= Key.D0 && e.Key <= Key.D9 || e.Key >= Key.NumPad0 && e.Key <= Key.NumPad9 || e.Key == Key.OemPeriod || e.Key == Key.Decimal)
+                e.Handled = false;
+            else
+                e.Handled = true;
+        }
+
+
+        private void txtCantidad_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            txtCantidad.MaxLength = 7;
+            double Valor = 0;
+            try
+            {
+                if (txtCantidad.Text == string.Empty || (Convert.ToDouble(txtCantidad.Text) == Valor))
+                {
+                    txtCantidad.Text = "";
+                    txtTotal.Text = "";
+                }
+                else if (txtPrecio.Text == string.Empty)
+                {
+                    MessageBoxResult result = MessageBox.Show("Debe seleccionar un mineral",
+                      "Confirmar", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    txtCantidad.Text = "";
+                }
+                else
+                {
+                    double Total;
+                    double Cantidad, precio;
+                    Cantidad = Convert.ToDouble(txtCantidad.Text);
+                    precio = Convert.ToDouble(txtPrecio.Text);
+                    Total = Cantidad * precio;
+                    txtTotal.Text = Total.ToString();
+                }
+            }
+            catch(Exception ex)
+            {
+                MessageBoxResult result = MessageBox.Show("No puede ingresar dos puntos deguidos",
+                      "Confirmar", MessageBoxButton.OK, MessageBoxImage.Warning);
+                txtCantidad.Text = "";
+            }
+        }
+
         //Fin del programa
     }
 }

@@ -504,5 +504,15 @@ namespace ProyectoMinaELMochito
         {
 
         }
+
+        private void txtSalario_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void txtEdad_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
     }
 }
