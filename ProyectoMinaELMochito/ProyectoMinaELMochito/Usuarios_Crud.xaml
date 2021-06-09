@@ -131,7 +131,7 @@
                                                 Width="24" Visibility="Visible" Grid.Column="2" Grid.Row="0" Margin="58,10,0,15"   />
             <Label x:Name="lbnombre" Content="Nombre Completo" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Center"/>
             <TextBox x:Name="txtid" Grid.Row="1" Grid.Column="1" Visibility="Hidden"/>
-            <TextBox x:Name="txtnombre" Grid.Row="2" Grid.Column="1"/>
+            <TextBox x:Name="txtnombre" Grid.Row="2" Grid.Column="1" KeyDown="txtnombre_KeyDown"/>
             <Label x:Name="lbUsername" Content="Nombre de usuario" Grid.Row="3" Grid.Column="0" HorizontalAlignment="Center"/>
             <TextBox x:Name="txtusername" Grid.Row="3" Grid.Column="1"/>
             <Label x:Name="lbPassword" Content="Contraseña" Grid.Row="4" Grid.Column="0" HorizontalAlignment="Center"/>
@@ -147,7 +147,7 @@
                 <ComboBoxItem Content="Activo"/>
             </ComboBox>
 
-            <DataGrid Name="dtgriduser" Grid.Row="2" Grid.Column="2" Grid.RowSpan="5" Grid.ColumnSpan="2" Margin="0,0,23,0" HorizontalAlignment="Right" Width="353" SelectionChanged="dtgriduser_SelectionChanged">
+            <DataGrid Name="dtgriduser" Grid.Row="2" Grid.Column="2" Grid.RowSpan="5" Grid.ColumnSpan="2" Margin="0,0,23,0" HorizontalAlignment="Right" Width="353" SelectionChanged="dtgriduser_SelectionChanged" CurrentCellChanged="dtgriduser_CurrentCellChanged">
                 <!--<DataGridTextColumn x:Name="dgId" Header="Id" Binding="{Binding Path=Id}" Width="*"/>
             <DataGridTextColumn x:Name="dgnombreCompleto" Header="Nombre Completo" Binding="{Binding Path=NombreCompleto}" Width="*"/>
             <DataGridTextColumn x:Name="dgusername" Header="Username" Binding="{Binding Path=Username}" Width="*"/>-->

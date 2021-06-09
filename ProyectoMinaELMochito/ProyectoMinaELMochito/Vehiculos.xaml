@@ -132,7 +132,7 @@
             <TextBox Name="txtMarca" Grid.Row="2" Grid.Column="1" FontSize="15" Margin="10"/>
             <TextBox Name="txtModelo" Grid.Row="3" Grid.Column="1" FontSize="15" Margin="10" />
             <TextBox Name="txtPlaca" Grid.Row="4" Grid.Column="1" FontSize="15" Margin="10"/>
-            <TextBox Name="txtColor" Grid.Row="5" Grid.Column="1" FontSize="15" Margin="10"/>
+            <TextBox Name="txtColor" Grid.Row="5" Grid.Column="1" FontSize="15" Margin="10" KeyDown="txtColor_KeyDown"/>
 
             <ComboBox Name="cmbEstado" Grid.Row="6" Grid.Column="1" FontSize="15" Margin="10" />
 
