@@ -48,7 +48,7 @@ namespace ProyectoMinaELMochito
                 //Query para seleccionar los datos de la tabla
                 String queryEmpleado = @"Select IdEmpleado as 'Id Empleado', identidad as 'Identidad', 
                                primerNombre as 'Nombre Empleado'
-                               from Minas.Empleado where estado = 'Activo'";
+                               from Minas.Empleado where estado = 'Activo' And idCargo = 7";
 
                 String queryVehiculo = @"Select idVehiculo as 'Id Vehiculo', marca as 'Marca', 
                                         modelo as 'Modelo', placa as 'Placa', color as 'Color'
