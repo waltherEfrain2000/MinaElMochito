@@ -16,7 +16,9 @@ using System.Data.SqlClient;
 using System.Configuration;
 using System.Data;
 
-
+/* este software es de calidad (CEro OpNiOnEz)
+ De tu critica nace mi fama !!!! brrrrrrrrrrrrrrr
+ */
 namespace ProyectoMinaELMochito
 {
     /// <summary>
