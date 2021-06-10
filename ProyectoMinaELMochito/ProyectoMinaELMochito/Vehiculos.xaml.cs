@@ -160,7 +160,7 @@ namespace ProyectoMinaELMochito
             catch (Exception ex)
             {
 
-                throw ex;
+                MessageBox.Show("Ha Ocurrido Un Error! Revisas tus datos.");
             }
             finally
             {
@@ -184,7 +184,7 @@ namespace ProyectoMinaELMochito
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message);
+                    MessageBox.Show("Ha Ocurrido Un Error! Revisas tus datos.");
 
                 }
                 finally

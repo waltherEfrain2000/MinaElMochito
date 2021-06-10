@@ -191,7 +191,7 @@ namespace ProyectoMinaELMochito
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message);
+                    MessageBox.Show("Ha Ocurrido Un Error! Revisas tus datos.");
 
                 }
                 finally
@@ -229,7 +229,8 @@ namespace ProyectoMinaELMochito
             catch (Exception ex)
             {
 
-                throw ex;
+                MessageBox.Show("Ha Ocurrido Un Error! Revisas tus datos.");
+
             }
             finally
             {
@@ -605,5 +606,20 @@ namespace ProyectoMinaELMochito
                 txtSalario.Text = "";
             }
         }
+
+        private void TextBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (((TextBox)sender).Text.Length < 13)
+            {
+                MessageBox.Show("NO se permiten menos de 13 caracteres");
+                txtIdentidad.Text = "";
+            }
+        }
+
+
     }
-    }
+
+
+    
+
+}

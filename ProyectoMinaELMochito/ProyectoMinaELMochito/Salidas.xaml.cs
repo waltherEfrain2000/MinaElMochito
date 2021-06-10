@@ -301,6 +301,7 @@ namespace ProyectoMinaELMochito
 
                     total = precio * cantidad;
                     txtTotal.Text = total.ToString("0000.00", CultureInfo.InvariantCulture);
+
                    
                 }
             }
@@ -309,8 +310,9 @@ namespace ProyectoMinaELMochito
                 MessageBoxResult result = MessageBox.Show("Error no ingresar mas de 1 punto",
                       "Confirmar", MessageBoxButton.OK, MessageBoxImage.Warning);
                 txtCantidad.Text = "";
+                txtTotal.Text = " ";
             }
-           
+
 
 
         }
