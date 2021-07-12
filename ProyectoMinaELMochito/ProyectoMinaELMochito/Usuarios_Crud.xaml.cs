@@ -15,18 +15,14 @@ using System.Windows.Shapes;
 using System.Data.SqlClient;
 using System.Configuration;
 
-namespace ProyectoMinaELMochito 
+namespace ProyectoMinaELMochito
 {
-    /// <summary>
-    /// Lógica de interacción para Usuarios_Crud.xaml
-    /// </summary>
-    /// 
 
-    public partial class Usuarios_Crud : Window 
+
+    public partial class Usuarios_Crud : Window
     {
 
-        private static string connectionString = ConfigurationManager.ConnectionStrings["ProyectoMinaELMochito.Properties.Settings.MinaConnectionString"].ConnectionString;
-        private SqlConnection sqlConnection = new SqlConnection(connectionString);
+        private Validaciones validaciones = new Validaciones();
 
         private User user = new User();
         private List<User> users;
@@ -56,7 +52,8 @@ namespace ProyectoMinaELMochito
 
         private bool VerificarValores()
         {
-            if (txtnombre.Text == string.Empty || txtusername.Text == string.Empty)
+
+            if (txtnombre.Text == "" || txtusername.Text == "")
             {
                 MessageBox.Show("Por favor ingresa todos los valores en las cajas de texto");
                 return false;
@@ -74,6 +71,7 @@ namespace ProyectoMinaELMochito
 
             }
 
+
             return true;
         }
 
@@ -84,13 +82,14 @@ namespace ProyectoMinaELMochito
             user.NombreCompleto = txtnombre.Text;
             user.Username = txtusername.Text;
             user.Password = pssPassword.Password;
-      
+
             if (cmbRol.SelectedIndex == 0)
             {
                 MessageBox.Show("sera un admin");
                 user.Rol = "ADMINISTRADOR";
             }
-            else {
+            else
+            {
                 MessageBox.Show("sera un empleado normal");
                 user.Rol = "EMPLEADODETURNO";
             }
@@ -106,7 +105,7 @@ namespace ProyectoMinaELMochito
         private void ObtenerValoresFormularioModify()
         {
 
-            user.Id =Convert.ToInt32( txtid.Text);
+            user.Id = Convert.ToInt32(txtid.Text);
             user.NombreCompleto = txtnombre.Text;
             user.Username = txtusername.Text;
             user.Password = pssPassword.Password;
@@ -135,25 +134,25 @@ namespace ProyectoMinaELMochito
         {
 
             user.Id = Convert.ToInt32(txtid.Text);
-         
+
             if (cmbEstado.SelectedIndex == 0)
             {
                 MessageBox.Show("El usuario ya esta invalidado, no se puede hacer nada");
-        
+
             }
-            else 
+            else
 
                 user.Estado = false;
 
         }
         private void limpiar()
         {
-            txtnombre.Text = string.Empty;
-            txtusername.Text = String.Empty;
-            pssPassword.Password = String.Empty;
-            cmbEstado.SelectedIndex = -1;
-            cmbRol.SelectedIndex = -1;
-            txtid.Text = string.Empty;
+            txtnombre.Text = "";
+            txtusername.Text = "";
+            pssPassword.Password = "";
+            cmbEstado.Text = "";
+            cmbRol.Text = "";
+            txtid.Text = "";
 
         }
 
@@ -169,10 +168,11 @@ namespace ProyectoMinaELMochito
                     MessageBox.Show("Nuevo usuario ingresados correctamente");
 
                 }
-                catch (Exception f)
+                catch (Exception ex)
                 {
 
-                    MessageBox.Show($"{f}");
+                    MessageBox.Show($"Error al momento de ingresar el Usuario...{ex}");
+
                 }
                 finally
                 {
@@ -229,76 +229,70 @@ namespace ProyectoMinaELMochito
 
                 throw;
             }
-          
+
 
         }
         private void dtgriduser_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            //if (dtgriduser.SelectedIndex==-1)
-            //{
-            //    User userselected = this.dtgriduser.SelectedItem as User;
-            //    SetUsuario(userselected);
-            //}
 
-            //else
-            //{
-            //    MessageBox.Show("Favor seleccion el usuario");
-            //}
             DataGrid dataGrid = (DataGrid)sender;
             DataRowView dataRowView = dataGrid.SelectedItem as DataRowView;
 
-            
+
 
             if (dataRowView != null)
             {
+                string estado;
+
                 txtid.Text = dataRowView["ID"].ToString();
                 txtnombre.Text = dataRowView["Nombre Completo"].ToString();
                 txtusername.Text = dataRowView["Nombre de Usuario"].ToString();
                 pssPassword.Password = dataRowView["Contraseña"].ToString();
                 cmbRol.Text = dataRowView["Rol"].ToString();
-                cmbEstado.Text = dataRowView["Estado"].ToString();
+                estado = dataRowView["Estado"].ToString();
 
-
-
-                //if (dataRowView["Rol"].ToString()== "ADMINISTRADOR")
-                //{
-                //    cmbRol.SelectedIndex = 0;
-                //}
-                //cmbRol.SelectedIndex = 1;
+                if (estado == "True")
+                {
+                    cmbEstado.Text = "Activo";
+                }
+                else
+                {
+                    cmbEstado.Text = "Inactivo";
+                }
 
 
             }
 
         }
 
-       private void CargarDatos()
+        private void CargarDatos()
         {
+            conexion cn = new conexion();
+            Validaciones val = new Validaciones();
             try
             {
                 //Query para seleccionar los datos de la tabla
-                String queryUser = @"select	id as 'ID',nombreCompleto as 'Nombre Completo',username as 'Nombre de Usuario',
-                                   password as 'Contraseña',rol as 'Rol',estado as 'Estado' from Usuarios.Usuario";
 
 
-                //Establecer la conexion
-                sqlConnection.Open();
+                SqlCommand cmd = new SqlCommand("MostrarUsuarios", cn.Conectarbd);
+                cmd.CommandType = CommandType.StoredProcedure;
 
                 // Crear el comando SQL
-                SqlCommand sqlCommand1 = new SqlCommand(queryUser, sqlConnection);
- 
-                sqlCommand1.ExecuteNonQuery();
-              
 
-                SqlDataAdapter sqlDataAdapter1 = new SqlDataAdapter(sqlCommand1);
- 
+                cn.abrir();
+                cmd.ExecuteNonQuery();
+
+
+                SqlDataAdapter sqlDataAdapter1 = new SqlDataAdapter(cmd);
+
                 DataTable dataTable1 = new DataTable("Usuarios.Usuario");
-         
+
 
                 sqlDataAdapter1.Fill(dataTable1);
                 dtgriduser.ItemsSource = dataTable1.DefaultView;
                 sqlDataAdapter1.Update(dataTable1);
 
-     
+
 
             }
             catch (Exception)
@@ -307,7 +301,7 @@ namespace ProyectoMinaELMochito
             }
             finally
             {
-                sqlConnection.Close();
+                cn.cerrar();
             }
         }
 
@@ -432,10 +426,7 @@ namespace ProyectoMinaELMochito
 
         private void txtnombre_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.Key >= Key.D0 && e.Key <= Key.D9 || e.Key >= Key.NumPad0 && e.Key <= Key.NumPad9)
-                e.Handled = true;
-            else
-                e.Handled = false;
+            validaciones.validarTxtSinNumeros(e);
         }
 
         private void dtgriduser_CurrentCellChanged(object sender, EventArgs e)
@@ -443,7 +434,11 @@ namespace ProyectoMinaELMochito
             dtgriduser.IsReadOnly = true;
         }
 
- 
+        private void btnLimpiar_Click(object sender, RoutedEventArgs e)
+        {
+            limpiar();
+        }
+
+
     }
 }
-

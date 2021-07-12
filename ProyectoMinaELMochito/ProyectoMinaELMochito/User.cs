@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
 using System.Data.SqlClient;
 using System.Configuration;
 using System.Data;
@@ -13,8 +12,7 @@ namespace ProyectoMinaELMochito
     class User
     {
         // Variables miembro
-        private static string connectionString = ConfigurationManager.ConnectionStrings["ProyectoMinaELMochito.Properties.Settings.MinaConnectionString"].ConnectionString;
-        private SqlConnection sqlConnection = new SqlConnection(connectionString);
+
 
         // Propiedades
         public int Id { get; set; }
@@ -40,6 +38,7 @@ namespace ProyectoMinaELMochito
             Estado = estado;
         }
 
+
         // Métodos
 
         /// <summary>
@@ -51,24 +50,33 @@ namespace ProyectoMinaELMochito
         {
             // Crear el objeto que almacena la información de los resultados
             User usuario = new User();
-
+            conexion cn = new conexion();
+            Validaciones val = new Validaciones();
             try
             {
                 // Query de selección
-                string query = @"SELECT * FROM Usuarios.Usuario
-                                 WHERE username = @username";
 
 
-                // Establecer la conexión
-                sqlConnection.Open();
+                SqlCommand cmd = new SqlCommand("buscarUsusario", cn.Conectarbd);
+                cmd.CommandType = CommandType.StoredProcedure;
 
-                // Crear el comando SQL
-                SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
+                cmd.Parameters.AddWithValue("@username", username);
 
-                // Establecer los valores de los parámetros
-                sqlCommand.Parameters.AddWithValue("@username", username);
 
-                using (SqlDataReader rdr = sqlCommand.ExecuteReader())
+                cn.abrir();
+
+                SqlDataAdapter adp = new SqlDataAdapter();
+                adp.SelectCommand = cmd;
+                DataTable tabla = new DataTable();
+                adp.Fill(tabla);
+
+                cn.abrir();
+
+                cmd.ExecuteNonQuery();
+
+
+
+                using (SqlDataReader rdr = cmd.ExecuteReader())
                 {
                     while (rdr.Read())
                     {
@@ -92,7 +100,7 @@ namespace ProyectoMinaELMochito
             finally
             {
                 // Cerrar la conexión
-                sqlConnection.Close();
+                cn.cerrar();
             }
         }
 
@@ -100,25 +108,39 @@ namespace ProyectoMinaELMochito
         /// aqui creamos una lista con los datos de los usuarios existentes
         /// </summary>
         /// <returns>los datos de los usuarios</returns>
-       public   List<User> MostrarUsuario()
+        public List<User> MostrarUsuario()
         {
             List<User> users = new List<User>();
+
+            conexion cn = new conexion();
+            Validaciones val = new Validaciones();
             try
             {
                 // Query de selección
-                string query = @"select	id,nombreCompleto,username, password,rol,estado from Usuarios.Usuario";
 
-                // Establecer la conexión
-                sqlConnection.Open();
 
-                // Crear el comando SQL
-                SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
+                SqlCommand cmd = new SqlCommand("MostrarUsuarios", cn.Conectarbd);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cn.abrir();
+
+                SqlDataAdapter adp = new SqlDataAdapter();
+                adp.SelectCommand = cmd;
+                DataTable tabla = new DataTable();
+                adp.Fill(tabla);
+
+                cn.abrir();
+
+                cmd.ExecuteNonQuery();
+
+
+
 
                 // Obtener los datos de los usuarios
-                using (SqlDataReader rdr = sqlCommand.ExecuteReader())
+                using (SqlDataReader rdr = cmd.ExecuteReader())
                 {
                     while (rdr.Read())
-                        users.Add(new User { Id = Convert.ToInt32(rdr["id"]), NombreCompleto = rdr["nombreCompleto"].ToString(), Username = rdr["username"].ToString(), Password=rdr["password"].ToString(), Rol = rdr["rol"].ToString(), Estado =Convert.ToBoolean( rdr["estado"] )});
+                        users.Add(new User { Id = Convert.ToInt32(rdr["id"]), NombreCompleto = rdr["nombreCompleto"].ToString(), Username = rdr["username"].ToString(), Password = rdr["password"].ToString(), Rol = rdr["rol"].ToString(), Estado = Convert.ToBoolean(rdr["estado"]) });
                 }
 
                 return users;
@@ -130,7 +152,7 @@ namespace ProyectoMinaELMochito
             finally
             {
                 // Cerrar la conexión
-                sqlConnection.Close();
+                cn.cerrar();
             }
 
         }
@@ -138,22 +160,33 @@ namespace ProyectoMinaELMochito
 
         public void CrearUsuario(User user)
         {
+            conexion cn = new conexion();
+            Validaciones val = new Validaciones();
             try
             {
-                string query = @"INSERT INTO Usuarios.Usuario (nombreCompleto, username, password, rol,estado)
-                                 VALUES (@nombreCompleto, @username, @password,@rol,@estado)";
 
-                sqlConnection.Open();
 
-                SqlCommand sqlCommand= new SqlCommand(query, sqlConnection);
+                SqlCommand cmd = new SqlCommand("InsertarUsuario", cn.Conectarbd);
+                cmd.CommandType = CommandType.StoredProcedure;
 
-                sqlCommand.Parameters.AddWithValue("@nombreCompleto", user.NombreCompleto);
-                sqlCommand.Parameters.AddWithValue("@username", user.Username);
-                sqlCommand.Parameters.AddWithValue("@password", user.Password);
-                sqlCommand.Parameters.AddWithValue("@rol", user.Rol);
-                sqlCommand.Parameters.AddWithValue("@estado", user.Estado);
+                cmd.Parameters.AddWithValue("@nombreCompleto", user.NombreCompleto);
+                cmd.Parameters.AddWithValue("@username", user.Username);
+                cmd.Parameters.AddWithValue("@password", user.Password);
+                cmd.Parameters.AddWithValue("@rol", user.Rol);
+                cmd.Parameters.AddWithValue("@estado", user.Estado);
 
-                sqlCommand.ExecuteNonQuery();
+                cn.abrir();
+
+                SqlDataAdapter adp = new SqlDataAdapter();
+                adp.SelectCommand = cmd;
+                DataTable tabla = new DataTable();
+                adp.Fill(tabla);
+
+                cn.abrir();
+
+                cmd.ExecuteNonQuery();
+
+
 
             }
             catch (Exception e)
@@ -163,7 +196,7 @@ namespace ProyectoMinaELMochito
             }
             finally
             {
-                sqlConnection.Close();
+                cn.cerrar();
             }
         }
         /// <summary>
@@ -172,24 +205,34 @@ namespace ProyectoMinaELMochito
         /// <param name="user"></param>
         public void ModificarUsuario(User user)
         {
+            conexion cn = new conexion();
+            Validaciones val = new Validaciones();
             try
             {
 
-                string query = @"UPDATE Usuarios.Usuario
-                                 SET nombreCompleto = @nombreCompleto, username = @username,  password = @password, rol=@rol,estado=@estado
-                                 WHERE id = @id";
 
-                sqlConnection.Open();
-                SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
 
-                sqlCommand.Parameters.AddWithValue("@id", user.Id);
-                sqlCommand.Parameters.AddWithValue("@nombreCompleto", user.NombreCompleto);
-                sqlCommand.Parameters.AddWithValue("@username", user.Username);
-                sqlCommand.Parameters.AddWithValue("@password", user.Password);
-                sqlCommand.Parameters.AddWithValue("@rol", user.Rol);
-                sqlCommand.Parameters.AddWithValue("@estado", user.Estado);
+                SqlCommand cmd = new SqlCommand("ModificarUsuario", cn.Conectarbd);
+                cmd.CommandType = CommandType.StoredProcedure;
 
-                sqlCommand.ExecuteNonQuery();  
+                cmd.Parameters.AddWithValue("@nombreCompleto", user.NombreCompleto);
+                cmd.Parameters.AddWithValue("@username", user.Username);
+                cmd.Parameters.AddWithValue("@password", user.Password);
+                cmd.Parameters.AddWithValue("@rol", user.Rol);
+                cmd.Parameters.AddWithValue("@estado", user.Estado);
+
+                cn.abrir();
+
+                SqlDataAdapter adp = new SqlDataAdapter();
+                adp.SelectCommand = cmd;
+                DataTable tabla = new DataTable();
+                adp.Fill(tabla);
+
+                cn.abrir();
+
+                cmd.ExecuteNonQuery();
+
+
             }
             catch (Exception e)
             {
@@ -198,7 +241,7 @@ namespace ProyectoMinaELMochito
             }
             finally
             {
-                sqlConnection.Close();
+                cn.cerrar();
             }
         }
 
@@ -206,21 +249,30 @@ namespace ProyectoMinaELMochito
 
         public void InvalidarUsuario(User user)
         {
+            conexion cn = new conexion();
+            Validaciones val = new Validaciones();
             try
             {
 
-                string query = @"UPDATE Usuarios.Usuario
-                                 SET estado=@estado
-                                 WHERE id = @id";
 
-                sqlConnection.Open();
-                SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
+                SqlCommand cmd = new SqlCommand("EliminarUsuario", cn.Conectarbd);
+                cmd.CommandType = CommandType.StoredProcedure;
 
-                sqlCommand.Parameters.AddWithValue("@id", user.Id);
-  
-                sqlCommand.Parameters.AddWithValue("@estado", user.Estado);
+                cmd.Parameters.AddWithValue("@id", user.Id);
+                cmd.Parameters.AddWithValue("@estado", user.Estado);
 
-                sqlCommand.ExecuteNonQuery();
+                cn.abrir();
+
+                SqlDataAdapter adp = new SqlDataAdapter();
+                adp.SelectCommand = cmd;
+                DataTable tabla = new DataTable();
+                adp.Fill(tabla);
+
+                cn.abrir();
+
+                cmd.ExecuteNonQuery();
+
+                cn.cerrar();
             }
             catch (Exception e)
             {
@@ -229,7 +281,7 @@ namespace ProyectoMinaELMochito
             }
             finally
             {
-                sqlConnection.Close();
+                cn.cerrar();
             }
         }
 
