@@ -30,9 +30,12 @@ namespace ProyectoMinaELMochito
         // Variables miembros
         private static string connectionString = ConfigurationManager.ConnectionStrings["ProyectoMinaELMochito.Properties.Settings.MinaConnectionString"].ConnectionString;
         private SqlConnection sqlConnection = new SqlConnection(connectionString);
-        //Hola
 
+        // conexiones con clases
         private Empleado empleado = new Empleado();
+        private Procedimientos procedimientos = new Procedimientos();
+        private Validaciones validaciones = new Validaciones();
+
         public Empleados()
         {
             InitializeComponent();
@@ -44,145 +47,16 @@ namespace ProyectoMinaELMochito
             //cmbGenero.Items.Add("M");
             //cmbCargo.Items.Add("Gerente");
         }
-        private void LimpiarCasillas()
-        {
-            txtEmpleadoID.Text = string.Empty;
-            txtIdentidad.Text = string.Empty;
-            txtNombreCompleto.Text = string.Empty;
-            txtEdad.Text = string.Empty;
-            txtSalario.Text = string.Empty;
-            txtDireccion.Text = string.Empty;
-
-            cmbGenero.SelectedValue = null;
-            cmbCargo.SelectedValue = null;
-            edicionDeCasillas(false, 0);
-        }
-
-        private bool VerificarCamposLlenos()
-        {
-                if (txtIdentidad.Text == string.Empty || txtNombreCompleto.Text == string.Empty || txtEdad.Text == string.Empty || txtSalario.Text == string.Empty || txtDireccion.Text == string.Empty)
-                {
-                    MessageBox.Show("Por favor ingresa todos los valores en las cajas de texto");
-                    return false;
-                }
-                else if (cmbGenero.SelectedValue == null)
-                {
-                    MessageBox.Show("Por favor selecciona el Genero del empleado");
-                    return false;
-                }
-                else if (cmbCargo.SelectedValue == null)
-                {
-                    MessageBox.Show("Por favor selecciona el Cargo del empleado");
-                    return false;
-                }
-
-                else if (Convert.ToInt32(txtEdad.Text) < 18 || Convert.ToInt32(txtEdad.Text) > 100)
-                {
-                    MessageBox.Show("Por favor selecciona una edad valida!");
-                    return false;
-                }
-
-                return true;
-            
-        }
-        private void ExtraerInformacionFormulario(int operacion)
-        {
-            //entra si va extraer informacion para actualizar
-            if (operacion == 1)
-            {
-                empleado.EmpledoID = Convert.ToInt32(txtEmpleadoID.Text);
-            }
-
-            empleado.Identidad = txtIdentidad.Text;
-            empleado.NombreCompleto = txtNombreCompleto.Text;
-            empleado.Edad = Convert.ToInt32(txtEdad.Text);
-            switch (cmbGenero.SelectedIndex)
-            {
-                case 0:
-                    empleado.Genero = 1;
-                    break;
-                case 1:
-                    empleado.Genero = 2;
-                    break;
-                default:
-                    break;
-            }
-            switch (cmbCargo.SelectedIndex)
-            {
-                case 0:
-                    empleado.Cargo = 1;
-                    break;
-                case 1:
-                    empleado.Cargo = 2;
-                    break;
-                case 2:
-                    empleado.Cargo = 3;
-                    break;
-                case 3:
-                    empleado.Cargo = 4;
-                    break;
-                case 4:
-                    empleado.Cargo = 5;
-                    break;
-                case 5:
-                    empleado.Cargo = 6;
-                    break;
-                case 6:
-                    empleado.Cargo = 7;
-                    break;
-                default:
-                    break;
-            }
-
-            //try
-            //{
-            //    if (txtSalario.Text == string.Empty)
-            //    {
-            //        int a = 1;
-            //    }
-            //    else
-            //    {
-
-            //        //precio = Convert.ToDecimal(txtPrecio.Text, CultureInfo.InvariantCulture);
-            //        //cantidad = Convert.ToDecimal(txtCantidad.Text, CultureInfo.InvariantCulture);
-
-            //        //total = precio * cantidad;
-            //    }
-            //}
-            //catch (Exception ex)
-            //{
-            //    MessageBox.Show(ex.Message);
-            //}
-
-            //decimal precio, cantidad, total, salario;
-            //salario = Convert.ToDecimal(txtSalario.Text, CultureInfo.InvariantCulture);
-
-            decimal monto = Convert.ToDecimal(txtSalario.Text);
-            
-
-            if (!decimal.TryParse(txtSalario.Text, out monto))
-            {
-                MessageBox.Show("Ingrese un monto válido...");
-                return; //Salimos del método o evento
-            }
-
-            empleado.Salario = Convert.ToDecimal(txtSalario.Text);
-            empleado.Estado = "activo";
-            empleado.Direccion = txtDireccion.Text;
-            //txtSalario.Text = salario.ToString("0000.00", CultureInfo.InvariantCulture);
-
-        }
-
-
+        // -----------------------------------------    BOTONES    --------------------------------------------- //
         private void btnAgregar_Click(object sender, RoutedEventArgs e)
         {
             // Verificar que se ingresaron los valores requeridos
-            if (VerificarCamposLlenos())
+            if (procedimientos.VerificarCamposLlenos(txtIdentidad.Text, txtNombreCompleto.Text, txtEdad.Text, txtSalario.Text, txtDireccion.Text, cmbGenero.SelectedValue, cmbCargo.SelectedValue))
             {
                 try
                 {
                     //parametro 0 por que no es actualizacion
-                    ExtraerInformacionFormulario(0);
+                    procedimientos.ExtraerInformacionFormulario(0, txtEmpleadoID.Text, txtIdentidad.Text, txtNombreCompleto.Text, txtEdad.Text, cmbGenero.SelectedIndex, cmbCargo.SelectedIndex, txtSalario.Text);
                     empleado.CrearEmpleado(empleado);
 
                     // Mensaje de inserción exitosa
@@ -191,7 +65,7 @@ namespace ProyectoMinaELMochito
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Ha Ocurrido Un Error! Revisas tus datos.");
+                    MessageBox.Show(ex.Message);
 
                 }
                 finally
@@ -201,114 +75,10 @@ namespace ProyectoMinaELMochito
                 }
             }
         }
-
-        private void MostrarEmpleado()
-        {
-            try
-            {
-                string query = @"SELECT E.IdEmpleado AS 'Empleado ID',E.identidad, E.primerNombre AS 'Nombre Completo', E.edad, G.descripcion AS 'Genero', 
-                                E.direccion,C.descripcion AS 'Cargo', E.estado as 'Estado', E.salario  FROM  Minas.Empleado E INNER JOIN Minas.cargo C 
-                                ON C.idCargo = E.idCargo INNER JOIN Minas.Genero G
-                                ON G.idGenero = E.idGenero	
-                                ";
-
-                sqlConnection.Open();
-
-
-                SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
-
-                sqlCommand.ExecuteNonQuery();
-                SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand);
-
-                DataTable dataTable = new DataTable("Minas.Empleado");
-                sqlDataAdapter.Fill(dataTable);
-                DgvEmpleados.ItemsSource = dataTable.DefaultView;
-                sqlDataAdapter.Update(dataTable);
-
-            }
-            catch (Exception ex)
-            {
-
-                MessageBox.Show("Ha Ocurrido Un Error! Revisas tus datos.");
-
-            }
-            finally
-            {
-                sqlConnection.Close();
-            }
-        }
-        private void edicionDeCasillas(bool opcion, int operacion)
-        {
-            //operacion sirve para distingir entre actualizar y activar o inabilitar todas las casillas
-            if (operacion == 0)
-            {
-                //txtIdentidad.IsReadOnly = opcion;
-                txtNombreCompleto.IsReadOnly = opcion;
-                txtEdad.IsReadOnly = opcion;
-                cmbGenero.IsReadOnly = opcion;
-                cmbCargo.IsReadOnly = opcion;
-                txtSalario.IsReadOnly = opcion;
-                txtDireccion.IsReadOnly = opcion;
-            }
-            else
-            {
-                txtNombreCompleto.IsReadOnly = opcion;
-                txtEdad.IsReadOnly = opcion;
-                cmbCargo.IsReadOnly = opcion;
-                txtSalario.IsReadOnly = opcion;
-                txtDireccion.IsReadOnly = opcion;
-            }
-
-        }
-        private void DgvEmpleados_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            DataGrid dg = (DataGrid)sender;
-            DataRowView filaSeleccionada = dg.SelectedItem as DataRowView;
-            if (filaSeleccionada != null)
-            {
-                txtEmpleadoID.Text = filaSeleccionada["Empleado ID"].ToString();
-                txtIdentidad.Text = filaSeleccionada["identidad"].ToString();
-                txtNombreCompleto.Text = filaSeleccionada["Nombre Completo"].ToString();
-                txtEdad.Text = filaSeleccionada["edad"].ToString();
-                cmbGenero.Text = filaSeleccionada["Genero"].ToString();
-                txtDireccion.Text = filaSeleccionada["direccion"].ToString();
-                cmbCargo.Text = filaSeleccionada["cargo"].ToString();
-                txtSalario.Text = filaSeleccionada["salario"].ToString();
-
-                edicionDeCasillas(true, 0);
-            }
-        }
-
-        private void txtIdentidad_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.Key >= Key.D0 && e.Key <= Key.D9 || e.Key >= Key.NumPad0 && e.Key <= Key.NumPad9)
-                e.Handled = false;
-            else
-                e.Handled = true;
-        }
-
-        private void txtEdad_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.Key >= Key.D0 && e.Key <= Key.D9 || e.Key >= Key.NumPad0 && e.Key <= Key.NumPad9)
-                e.Handled = false;
-            else
-                e.Handled = true;
-        }
-
-        private void txtSalario_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.Key >= Key.D0 && e.Key <= Key.D9 || e.Key >= Key.NumPad0 && e.Key <= Key.NumPad9  || e.Key == Key.OemComma)
-            { e.Handled = false; }
-
-            else
-            { e.Handled = true; }
-        }
-
-
         private void btnModificar_Click(object sender, RoutedEventArgs e)
         {
             // Verificar que se ingresaron los valores requeridos
-            if (VerificarCamposLlenos())
+            if (procedimientos.VerificarCamposLlenos(txtIdentidad.Text, txtNombreCompleto.Text, txtEdad.Text, txtSalario.Text, txtDireccion.Text, cmbGenero.SelectedValue, cmbCargo.SelectedValue))
             {
                 try
                 {
@@ -329,11 +99,10 @@ namespace ProyectoMinaELMochito
                 }
             }
         }
-
         private void btnAceptarModificacion_Click(object sender, RoutedEventArgs e)
         {
             // Verificar que se ingresaron los valores requeridos
-            if (VerificarCamposLlenos())
+            if (procedimientos.VerificarCamposLlenos(txtIdentidad.Text, txtNombreCompleto.Text, txtEdad.Text, txtSalario.Text, txtDireccion.Text, cmbGenero.SelectedValue, cmbCargo.SelectedValue))
             {
                 //ocultar todos los otones inecesarios
                 btnModificar.Visibility = Visibility.Visible;
@@ -344,7 +113,7 @@ namespace ProyectoMinaELMochito
                 try
                 {
                     //parametro 1 por que es actualizacion
-                    ExtraerInformacionFormulario(1);
+                    procedimientos.ExtraerInformacionFormulario(1, txtEmpleadoID.Text, txtIdentidad.Text, txtNombreCompleto.Text, txtEdad.Text, cmbGenero.SelectedIndex, cmbCargo.SelectedIndex, txtSalario.Text);
                     empleado.ActualizarEmpleado(empleado);
 
 
@@ -368,7 +137,7 @@ namespace ProyectoMinaELMochito
         private void btnEliminar_Click(object sender, RoutedEventArgs e)
         {
             // Verificar que se ingresaron los valores requeridos
-            if (VerificarCamposLlenos())
+            if (procedimientos.VerificarCamposLlenos(txtIdentidad.Text, txtNombreCompleto.Text, txtEdad.Text, txtSalario.Text, txtDireccion.Text, cmbGenero.SelectedValue, cmbCargo.SelectedValue))
             {
                 try
                 {
@@ -389,11 +158,10 @@ namespace ProyectoMinaELMochito
                 }
             }
         }
-
         private void btnAceptarEliminacion_Click(object sender, RoutedEventArgs e)
         {
             // Verificar que se ingresaron los valores requeridos
-            if (VerificarCamposLlenos())
+            if (procedimientos.VerificarCamposLlenos(txtIdentidad.Text, txtNombreCompleto.Text, txtEdad.Text, txtSalario.Text, txtDireccion.Text, cmbGenero.SelectedValue, cmbCargo.SelectedValue))
             {
                 //ocultar todos los otones inecesarios
                 btnModificar.Visibility = Visibility.Visible;
@@ -404,7 +172,7 @@ namespace ProyectoMinaELMochito
                 try
                 {
                     //parametro 1 por que es actualizacion
-                    ExtraerInformacionFormulario(1);
+                    procedimientos.ExtraerInformacionFormulario(1, txtEmpleadoID.Text, txtIdentidad.Text, txtNombreCompleto.Text, txtEdad.Text, cmbGenero.SelectedIndex, cmbCargo.SelectedIndex, txtSalario.Text);
                     empleado.EliminarEmpleado(empleado);
 
                     // Mensaje de inserción exitosa
@@ -424,6 +192,102 @@ namespace ProyectoMinaELMochito
                 }
             }
         }
+        // -----------------------------------------    FUNCIONES DE TEXTBOXES    --------------------------------------------- //
+        private void LimpiarCasillas()
+        {
+            txtEmpleadoID.Text = string.Empty;
+            txtIdentidad.Text = string.Empty;
+            txtNombreCompleto.Text = string.Empty;
+            txtEdad.Text = string.Empty;
+            txtSalario.Text = string.Empty;
+            txtDireccion.Text = string.Empty;
+
+            cmbGenero.SelectedValue = null;
+            cmbCargo.SelectedValue = null;
+            edicionDeCasillas(false, 0);
+        }
+
+        private void edicionDeCasillas(bool opcion, int operacion)
+        {
+            //operacion sirve para distingir entre actualizar y activar o inabilitar todas las casillas
+            if (operacion == 0)
+            {
+                //txtIdentidad.IsReadOnly = opcion;
+                txtNombreCompleto.IsReadOnly = opcion;
+                txtEdad.IsReadOnly = opcion;
+                cmbGenero.IsReadOnly = opcion;
+                cmbCargo.IsReadOnly = opcion;
+                txtSalario.IsReadOnly = opcion;
+                txtDireccion.IsReadOnly = opcion;
+            }
+            else
+            {
+                txtNombreCompleto.IsReadOnly = opcion;
+                txtEdad.IsReadOnly = opcion;
+                cmbCargo.IsReadOnly = opcion;
+                txtSalario.IsReadOnly = opcion;
+                txtDireccion.IsReadOnly = opcion;
+            }
+
+        }
+        // -----------------------------------------    POSIBLE CONEXION    --------------------------------------------- //
+        // esto puede ir en conexiones
+        private void MostrarEmpleado()
+        {
+            try
+            {
+                string query = @"exec mostrarEmpleado";
+
+                sqlConnection.Open();
+
+
+                SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
+
+                sqlCommand.ExecuteNonQuery();
+                SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand);
+
+                DataTable dataTable = new DataTable("Minas.Empleado");
+                sqlDataAdapter.Fill(dataTable);
+                DgvEmpleados.ItemsSource = dataTable.DefaultView;
+                sqlDataAdapter.Update(dataTable);
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                sqlConnection.Close();
+            }
+        }
+        // -----------------------------------------    MOSTRAR INFORMACION    --------------------------------------------- //
+
+        private void DgvEmpleados_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            DataGrid dg = (DataGrid)sender;
+            DataRowView filaSeleccionada = dg.SelectedItem as DataRowView;
+            if (filaSeleccionada != null)
+            {
+                txtEmpleadoID.Text = filaSeleccionada["Empleado ID"].ToString();
+                txtIdentidad.Text = filaSeleccionada["identidad"].ToString();
+                txtNombreCompleto.Text = filaSeleccionada["Nombre Completo"].ToString();
+                txtEdad.Text = filaSeleccionada["edad"].ToString();
+                cmbGenero.Text = filaSeleccionada["Genero"].ToString();
+                txtDireccion.Text = filaSeleccionada["direccion"].ToString();
+                cmbCargo.Text = filaSeleccionada["cargo"].ToString();
+                txtSalario.Text = filaSeleccionada["salario"].ToString();
+
+                edicionDeCasillas(true, 0);
+            }
+        }
+        private void MostrarCargos()
+        {
+            cmbCargo.ItemsSource = empleado.LlenarComboBoxCargo();
+            cmbCargo.DisplayMemberPath = "NombreCargo";
+            cmbCargo.SelectedValuePath = "Cargo";
+        }
         private void MostrarBotonesPrincipales()
         {
             btnModificar.Visibility = Visibility.Visible;
@@ -436,32 +300,6 @@ namespace ProyectoMinaELMochito
             LimpiarCasillas();
             edicionDeCasillas(false, 0);
         }
-
-        private void btnCancelarModificacion_Click(object sender, RoutedEventArgs e)
-        {
-            MostrarBotonesPrincipales();
-        }
-
-        private void btnCancelarEliminacion_Click(object sender, RoutedEventArgs e)
-        {
-            MostrarBotonesPrincipales();
-        }
-
-        private void btnLimpiar_Click(object sender, RoutedEventArgs e)
-        {
-            LimpiarCasillas();
-        }
-
-
-
-        private void MostrarCargos()
-        {
-            cmbCargo.ItemsSource = empleado.LlenarComboBoxCargo();
-            cmbCargo.DisplayMemberPath = "NombreCargo";
-            cmbCargo.SelectedValuePath = "Cargo";
-
-        }
-
         private void MostrarGeneros()
         {
             cmbGenero.ItemsSource = empleado.LlenarComboBoxGenero();
@@ -469,11 +307,50 @@ namespace ProyectoMinaELMochito
             cmbGenero.SelectedValuePath = "Genero";
 
         }
+        // -----------------------------------------    EVENTOS KEYDOWN    --------------------------------------------- //
 
+        private void txtIdentidad_KeyDown(object sender, KeyEventArgs e)
+        {
+            validaciones.validarTxtSinLetras(e);
+        }
+        private void txtEdad_KeyDown(object sender, KeyEventArgs e)
+        {
+            validaciones.validarTxtSinLetras(e);
+        }
+        private void txtSalario_KeyDown(object sender, KeyEventArgs e)
+        {
+            validaciones.validarTxtSinLetrasConCommas(e);
+        }
+        private void txtNombreCompleto_KeyDown(object sender, KeyEventArgs e)
+        {
+
+            validaciones.validarTxtSinNumeros(e);
+        }
+
+        // -----------------------------------------    EVENTOS CLICK    --------------------------------------------- //
+
+        private void btnCancelarModificacion_Click(object sender, RoutedEventArgs e)
+        {
+            MostrarBotonesPrincipales();
+        }
+        private void btnCancelarEliminacion_Click(object sender, RoutedEventArgs e)
+        {
+            MostrarBotonesPrincipales();
+        }
+        private void btnLimpiar_Click(object sender, RoutedEventArgs e)
+        {
+            LimpiarCasillas();
+        }
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+        // -----------------------------------------    EVENTOS MOUSEDOWN    --------------------------------------------- //
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
             DragMove();
         }
+        // -----------------------------------------    EVENTOS SELECTED (CAMBIOS DE FORMULARIOS)    --------------------------------------------- //
 
         private void ListViewItem_Selected(object sender, RoutedEventArgs e)
         {
@@ -481,98 +358,65 @@ namespace ProyectoMinaELMochito
             sld.Show();
             this.Close();
         }
-
         private void ListViewItem_Selected_1(object sender, RoutedEventArgs e)
         {
             Vehiculos sld = new Vehiculos();
             sld.Show();
             this.Close();
         }
-
         private void ListViewItem_Selected_2(object sender, RoutedEventArgs e)
         {
             Inventario_Mineral sld = new Inventario_Mineral();
             sld.Show();
             this.Close();
         }
-
         private void ListViewItem_Selected_3(object sender, RoutedEventArgs e)
         {
             EntradasHistoricas sld = new EntradasHistoricas();
             sld.Show();
             this.Close();
         }
-
         private void ListViewItem_Selected_4(object sender, RoutedEventArgs e)
         {
             Salidas sld = new Salidas();
             sld.Show();
             this.Close();
         }
-
         private void ListViewItem_Selected_5(object sender, RoutedEventArgs e)
         {
             ViajesInternos sld = new ViajesInternos();
             sld.Show();
             this.Close();
         }
-
         private void ListViewItem_Selected_6(object sender, RoutedEventArgs e)
         {
             Usuarios_Crud sld = new Usuarios_Crud();
             sld.Show();
             this.Close();
         }
-
         private void ListViewItem_Selected_7(object sender, RoutedEventArgs e)
         {
             menuPrincipal sld = new menuPrincipal();
             sld.Show();
             this.Close();
         }
-
         private void ListViewItem_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             menuPrincipal sld = new menuPrincipal();
             sld.Show();
-            this.Close(); 
+            this.Close();
         }
-
         private void ListViewItem_Selected_8(object sender, RoutedEventArgs e)
         {
             Login sld = new Login();
             sld.Show();
             this.Close();
         }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
+        // -----------------------------------------    EVENTOS TEXTCHANGED    --------------------------------------------- //
         private void txtNombreCompleto_TextChanged(object sender, TextChangedEventArgs e)
         {
 
         }
-
-        private void txtNombreCompleto_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.Key >= Key.D0 && e.Key <= Key.D9 || e.Key >= Key.NumPad0 && e.Key <= Key.NumPad9)
-                e.Handled = true;
-            else
-                e.Handled = false;
-        }
-
-        private void cmbGenero_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
-
-        private void txtEstado_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
-
         private void txtSalario_TextChanged(object sender, TextChangedEventArgs e)
         {
             txtSalario.MaxLength = 12;
@@ -606,20 +450,15 @@ namespace ProyectoMinaELMochito
                 txtSalario.Text = "";
             }
         }
-
-        private void TextBox_LostFocus(object sender, RoutedEventArgs e)
+        // -----------------------------------------    EVENTOS SELECTION CHANGED   --------------------------------------------- //
+        private void cmbGenero_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (((TextBox)sender).Text.Length < 13)
-            {
-                MessageBox.Show("NO se permiten menos de 13 caracteres");
-                txtIdentidad.Text = "";
-            }
+
         }
 
+        private void txtEstado_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
 
+        }
     }
-
-
-    
-
 }
