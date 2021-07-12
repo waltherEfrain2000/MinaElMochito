@@ -207,6 +207,7 @@
       <DependentUpon>menuPrincipal.xaml</DependentUpon>
     </Compile>
     <Compile Include="Mineralinventario.cs" />
+    <Compile Include="Procedimientos.cs" />
     <Compile Include="Producciion.cs" />
     <Compile Include="Produccion.xaml.cs">
       <DependentUpon>Produccion.xaml</DependentUpon>
@@ -222,6 +223,7 @@
     <Compile Include="Usuarios_Crud.xaml.cs">
       <DependentUpon>Usuarios_Crud.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Validaciones.cs" />
     <Compile Include="Vehiculo.cs" />
     <Compile Include="Vehiculos.xaml.cs">
       <DependentUpon>Vehiculos.xaml</DependentUpon>
