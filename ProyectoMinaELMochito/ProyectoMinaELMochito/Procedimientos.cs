@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 using System.Windows;
-using LiveCharts;
+
 
 namespace ProyectoMinaELMochito
 {
@@ -84,7 +85,7 @@ namespace ProyectoMinaELMochito
                 case 4:
                     empleado.Cargo = 5;
                     break;
-                case 5:
+                 case 5:
                     empleado.Cargo = 6;
                     break;
                 case 6:
@@ -107,5 +108,78 @@ namespace ProyectoMinaELMochito
             empleado.Direccion = salario;
             //txtSalario.Text = salario.ToString("0000.00", CultureInfo.InvariantCulture);
         }
+
+        Salida salidas = new Salida();
+
+
+        public void infoFormulario(int operacion, string IDsalida, string Cantidad, string Total, string FSalida, string Detalle, int cmbIdMineral)
+        {
+
+            if (operacion == 1)
+            {
+                salidas.IDsalida = Convert.ToInt32(IDsalida);
+            }
+
+            salidas.Cantidad = Convert.ToDecimal(Cantidad);
+            salidas.Total = Convert.ToDecimal(Total);
+            salidas.FechaSalida = Convert.ToDateTime(FSalida);
+            salidas.DetalleSalida = Detalle;
+
+            switch (cmbIdMineral)
+            {
+                case 0:
+                    salidas.IDMineral = 1;
+                    break;
+                case 1:
+                    salidas.IDMineral = 2;
+                    break;
+                case 2:
+                    salidas.IDMineral = 3;
+                    break;
+                case 3:
+                    salidas.IDMineral = 4;
+                    break;
+                case 4:
+                    salidas.IDMineral = 5;
+                    break;
+
+                default:
+                    break;
+            }
+
+        }
+
+        public void txtTotal(string Cantidad, string Precio, string Total)
+        {
+            try
+            {
+                if (Cantidad == string.Empty)
+                {
+                    MessageBox.Show("Favor, ingresar una cantidad a calcular!");
+                }
+                else
+                {
+
+                    decimal precio, cantidad, total;
+
+                    precio = Convert.ToDecimal(Precio, CultureInfo.InvariantCulture);
+                    cantidad = Convert.ToDecimal(Cantidad, CultureInfo.InvariantCulture);
+
+                    total = precio * cantidad;
+                    Total = total.ToString("0000.00", CultureInfo.InvariantCulture);
+
+                }
+            }
+            catch (Exception)
+            {
+                MessageBoxResult result = MessageBox.Show("Error no ingresar mas de 1 punto",
+                      "Confirmar", MessageBoxButton.OK, MessageBoxImage.Warning);
+                Cantidad = "";
+            }
+
+
+
+        }
+
     }
 }

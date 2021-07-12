@@ -132,8 +132,8 @@
 
                 <TextBox Name="txtIdSalida" Grid.Row="1" Grid.Column="1" FontSize="15" Margin="7" IsReadOnly="True"/>
                 <ComboBox Name="cmbIdMineral" Grid.Row="2" Grid.Column="1" FontSize="15" Margin="7"  />
-                <TextBox Name="txtCantidad" Grid.Row="3" Grid.Column="1"  FontSize="15" Margin="7"   KeyDown="txtCantidad_KeyDown" TextChanged="txtCantidad_TextChanged" Text="{Binding Cantidad, Mode=TwoWay, ValidatesOnExceptions=True}" />
-                <TextBox Name="txtTotal" ToolTip="Dar doble click para obtener el valor " Grid.Row="4" Grid.Column="1" FontSize="15" Margin="7" IsReadOnly="True" KeyDown="txtTotal_KeyDown" MouseDoubleClick="txtTotal_MouseDoubleClick" TextChanged="txtTotal_TextChanged" />
+                <TextBox Name="txtCantidad" Grid.Row="3" Grid.Column="1"  FontSize="15" Margin="7"    Text="{Binding Cantidad, Mode=TwoWay, ValidatesOnExceptions=True}" />
+                <TextBox Name="txtTotal" ToolTip="Dar doble click para obtener el valor " Grid.Row="4" Grid.Column="1" FontSize="15" Margin="7" IsReadOnly="True"  MouseDoubleClick="txtTotal_MouseDoubleClick" />
 
 
 

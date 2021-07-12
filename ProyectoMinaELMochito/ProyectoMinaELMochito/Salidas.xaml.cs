@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -32,6 +33,9 @@ namespace ProyectoMinaELMochito
         private SqlConnection sqlConnection = new SqlConnection(connectionString);
 
         private Salida salidas = new Salida();
+        private Validaciones validaciones = new Validaciones();
+        private Procedimientos procedimientos = new Procedimientos();
+
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
@@ -51,8 +55,6 @@ namespace ProyectoMinaELMochito
             MostrarMinerales();
             botonfecha.Content = string.Format("{0}", DateTime.Now.ToString());
             MostrarInfoSalidas();
-           
- 
 
         }
 
@@ -67,39 +69,6 @@ namespace ProyectoMinaELMochito
 
             //edicionDeCasillas(false, 0);
         }
-
-        private bool CamposVacios()
-        {
-            Double Valor = 0;
-            
-            if (txtCantidad.Text == string.Empty || txtTotal.Text == string.Empty || FSalida.Text == string.Empty)
-            {
-                MessageBox.Show("Favor no dejar vacío ningún campo...");
-                return false;
-            }
-
-            else if (cmbIdMineral.SelectedValue == null)
-            {
-                MessageBox.Show("Favor, seleccionar un valor mineral!");
-                return false;
-            }
-            else if (Convert.ToDouble(txtCantidad.Text) == Valor) 
-            {
-                MessageBoxResult result = MessageBox.Show("La cantidad no puede ser 0",
-                  "Confirmar", MessageBoxButton.OK, MessageBoxImage.Warning);
-                return false;
-            }
-            else if (Convert.ToDouble(txtTotal.Text ) == Valor)
-            {
-                MessageBoxResult result = MessageBox.Show("El total no puede ser 0",
-                  "Confirmar", MessageBoxButton.OK, MessageBoxImage.Warning);
-                return false;
-            }
-            return true;
-           
-
-        }
-
 
 
         private void MostrarInfoSalidas()
@@ -134,44 +103,6 @@ namespace ProyectoMinaELMochito
                 sqlConnection.Close();
             }
         }
-        private void infoFormulario(int operacion)
-        {
-
-
-            if (operacion == 1)
-            {
-                salidas.IDsalida = Convert.ToInt32(txtIdSalida.Text);
-            }
-
-            salidas.Cantidad = Convert.ToDecimal(txtCantidad.Text);
-            salidas.Total = Convert.ToDecimal(txtTotal.Text);
-            salidas.FechaSalida = Convert.ToDateTime(FSalida.Text);
-            salidas.DetalleSalida = txtDetalle.Text;
-
-            switch (cmbIdMineral.SelectedIndex)
-            {
-                case 0:
-                    salidas.IDMineral = 1;
-                    break;
-                case 1:
-                    salidas.IDMineral = 2;
-                    break;
-                case 2:
-                    salidas.IDMineral = 3;
-                    break;
-                case 3:
-                    salidas.IDMineral = 4;
-                    break;
-                case 4:
-                    salidas.IDMineral = 5;
-                    break;
-
-                default:
-                    break;
-            }
-        }
-
-
 
         private void dgvSalida_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -190,11 +121,16 @@ namespace ProyectoMinaELMochito
 
         private void btnIngresar_Click(object sender, RoutedEventArgs e)
         {
-            if (CamposVacios() )
+
+            if (validaciones.VerificarCamposLlenos(txtCantidad.Text, txtDetalle.Text, cmbIdMineral.Text, txtTotal.Text, FSalida.Text)) ;
             {
                 try
                 {
-                    infoFormulario(0);
+                    //Para definir el ancho de caracteres que debe aceptar el textbox
+                    txtDetalle.MaxLength = 50;
+
+
+                    procedimientos.infoFormulario(0, txtIdSalida.Text, txtCantidad.Text, txtTotal.Text, FSalida.Text, txtDetalle.Text, cmbIdMineral.SelectedIndex);
                     salidas.ingresarSalidas(salidas);
 
                     MessageBox.Show("Salida Ingresada");
@@ -210,17 +146,19 @@ namespace ProyectoMinaELMochito
                 {
                     limpiarTexto();
                     MostrarInfoSalidas();
+
                 }
+
             }
         }
 
         private void btnModificar_Click(object sender, RoutedEventArgs e)
         {
-            if (CamposVacios())
+            if (validaciones.VerificarCamposLlenos(txtCantidad.Text, txtDetalle.Text, cmbIdMineral.Text, txtTotal.Text, FSalida.Text)) ;
             {
                 try
                 {
-                    infoFormulario(1);
+
                     salidas.ActualizarSalidas(salidas);
 
                     MessageBox.Show("Salida Modificada");
@@ -245,7 +183,7 @@ namespace ProyectoMinaELMochito
         {
             try
             {
-                infoFormulario(1);
+
                 salidas.EliminarSalidas(salidas);
 
                 MessageBox.Show("Salida Eliminada");
@@ -270,7 +208,7 @@ namespace ProyectoMinaELMochito
             txtIdSalida.IsReadOnly = true;
         }
 
-      
+
 
         private void MostrarMinerales()
         {
@@ -280,101 +218,53 @@ namespace ProyectoMinaELMochito
 
         }
 
-        
 
+
+        /* private void txtTotal_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+         {
+             try
+             {
+                 if (txtCantidad.Text == string.Empty)
+                 {
+                     MessageBox.Show("Favor, ingresar una cantidad a calcular!");
+                 }
+                 else
+                 {
+
+                     decimal precio, cantidad, total;
+
+                     precio = Convert.ToDecimal(txtPrecio.Text, CultureInfo.InvariantCulture);
+                     cantidad = Convert.ToDecimal(txtCantidad.Text, CultureInfo.InvariantCulture);
+
+                     total = precio * cantidad;
+                     txtTotal.Text = total.ToString("0000.00", CultureInfo.InvariantCulture);
+
+                 }
+             }
+             catch (Exception ex)
+             {
+                 MessageBoxResult result = MessageBox.Show("Error no ingresar mas de 1 punto",
+                       "Confirmar", MessageBoxButton.OK, MessageBoxImage.Warning);
+                 txtCantidad.Text = "";
+             }
+
+
+
+         }
+        */
         private void txtTotal_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            try
-            {
-                if (txtCantidad.Text == string.Empty)
-                {
-                    MessageBox.Show("Favor, ingresar una cantidad a calcular!");
-                }
-                else
-                {
 
-                    
-                    decimal precio, cantidad, total;
-
-                    precio = Convert.ToDecimal(txtPrecio.Text, CultureInfo.InvariantCulture);
-                    cantidad = Convert.ToDecimal(txtCantidad.Text, CultureInfo.InvariantCulture);
-
-                    total = precio * cantidad;
-                    txtTotal.Text = total.ToString("0000.00", CultureInfo.InvariantCulture);
-
-                   
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBoxResult result = MessageBox.Show("Error no ingresar mas de 1 punto",
-                      "Confirmar", MessageBoxButton.OK, MessageBoxImage.Warning);
-                txtCantidad.Text = "";
-                txtTotal.Text = " ";
-            }
-
-
-
+            procedimientos.txtTotal(txtCantidad.Text, txtPrecio.Text, txtTotal.Text);
         }
-       
 
         private void ListViewItem_Selected(object sender, RoutedEventArgs e)
         {
-            menuPrincipal sld = new menuPrincipal ();
+            menuPrincipal sld = new menuPrincipal();
             sld.Show();
             this.Close();
         }
-        
-        
 
-        private void txtCantidad_KeyDown(object sender, KeyEventArgs e)
-        {
-            //Para definir el ancho de caracteres que debe aceptar el textbox
-            txtDetalle.MaxLength = 50;
-           
-            if (e.Key >= Key.D0 && e.Key <= Key.D9 || e.Key >= Key.NumPad0 && e.Key <= Key.NumPad9 || e.Key == Key.OemPeriod || e.Key == Key.Decimal)
-                e.Handled = false;
-            else 
-                e.Handled = true;
-          
-
-        }
-  
-        private void txtTotal_KeyDown(object sender, KeyEventArgs e)
-        {
-            
-          
-            if (e.Key >= Key.D0 && e.Key <= Key.D9 || e.Key >= Key.NumPad0 && e.Key <= Key.NumPad9  )
-                e.Handled = false;
-            else
-                e.Handled = true;
-
-
-        }
-        private void txtTotal_Keyup(object sender, KeyEventArgs e)
-        {
-          
-
-        }
-
-
-
-
-        private void txtIdSalida_KeyDown(object sender, KeyEventArgs e)
-        {
-       
-            if (e.Key >= Key.D0 && e.Key <= Key.D9 || e.Key >= Key.NumPad0 && e.Key <= Key.NumPad9 )
-            {
-                e.Handled = false;
-            }
-
-         
-            else
-                e.Handled = true;
-
-        }
-      
-    
 
         private void ListViewItem_Selected_1(object sender, RoutedEventArgs e)
         {
@@ -439,19 +329,13 @@ namespace ProyectoMinaELMochito
 
         private void txtDetalle_TextChanged(object sender, TextChangedEventArgs e)
         {
-            
+
         }
 
-        private void txtCantidad_TextChanged(object sender, TextChangedEventArgs e)
+        private void txtCantidad_KeyDown(object sender, KeyEventArgs e)
         {
-           
-        }
-
-        private void txtTotal_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            
+            validaciones.ValidarLetras(e);
 
         }
-      
     }
 }
