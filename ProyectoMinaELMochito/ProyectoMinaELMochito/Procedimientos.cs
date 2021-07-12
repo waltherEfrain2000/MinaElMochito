@@ -4,6 +4,9 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+// Agregar los namespaces requeridos
+using System.Data.SqlClient;
+using System.Configuration;
 
 using System.Windows;
 
@@ -17,6 +20,107 @@ namespace ProyectoMinaELMochito
         // conexion con clases
         Empleado empleado = new Empleado();
         Mineralinventario mineralinventario = new Mineralinventario();
+
+        // ----------------------------------    PROCEDIMIENTOS PARA VEHICULOS  -------------------------------- //
+
+        private static string connectionString = ConfigurationManager.ConnectionStrings["ProyectoMinaELMochito.Properties.Settings.MinaConnectionString"].ConnectionString;
+        private SqlConnection sqlConnection = new SqlConnection(connectionString);
+        private Vehiculo elVehiculo = new Vehiculo();
+
+        public void CrearVehiculo(Procedimientos vehiculo)
+        {
+            try
+            {
+                string query = @"EXEC InsertarVehiculo @marca,@modelo,@placa,@color,@estado";
+
+                sqlConnection.Open();
+
+
+                SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
+
+                sqlCommand.Parameters.AddWithValue("@marca", elVehiculo.Marca);
+                sqlCommand.Parameters.AddWithValue("@modelo", elVehiculo.Modelo);
+                sqlCommand.Parameters.AddWithValue("@placa", elVehiculo.Placa);
+                sqlCommand.Parameters.AddWithValue("@color", elVehiculo.Color);
+                sqlCommand.Parameters.AddWithValue("@estado", elVehiculo.Estado);
+
+                sqlCommand.ExecuteNonQuery();
+
+            }
+            catch (Exception e)
+            {
+
+                throw e;
+            }
+            finally
+            {
+                sqlConnection.Close();
+
+            }
+        }
+        public void ActualizarVehiculo(Procedimientos vehiculo)
+        {
+            try
+            {
+                string query = @"EXEC ModificarVehiculo @marca,@modelo,@placa,@color,@estado,@idVehiculo";
+
+                sqlConnection.Open();
+
+
+                SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
+
+                sqlCommand.Parameters.AddWithValue("@idVehiculo", elVehiculo.VehiculoID);
+                sqlCommand.Parameters.AddWithValue("@marca", elVehiculo.Marca);
+                sqlCommand.Parameters.AddWithValue("@modelo", elVehiculo.Modelo);
+                sqlCommand.Parameters.AddWithValue("@placa", elVehiculo.Marca);
+                sqlCommand.Parameters.AddWithValue("@color", elVehiculo.Color);
+                sqlCommand.Parameters.AddWithValue("@estado", elVehiculo.Estado);
+
+                sqlCommand.ExecuteNonQuery();
+            }
+            catch (Exception e)
+            {
+
+                throw e;
+            }
+            finally
+            {
+                sqlConnection.Close();
+
+            }
+        }
+
+
+        public void EliminarVehiculo(Procedimientos vehiculo)
+        {
+            try
+            {
+                string query = @"EXEC EliminarVehiculo @estado, @idvehiculo ";
+
+                sqlConnection.Open();
+
+                SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
+
+                sqlCommand.Parameters.AddWithValue("@idVehiculo", elVehiculo.VehiculoID);
+                sqlCommand.Parameters.AddWithValue("@estado", 3);
+
+                sqlCommand.ExecuteNonQuery();
+
+            }
+            catch (Exception e)
+            {
+
+                throw e;
+            }
+            finally
+            {
+                sqlConnection.Close();
+            }
+        }
+
+
+
+
 
         // ----------------------------------    PROCEDIMIENTOS PARA EMPLEADOS   -------------------------------- //
         public bool VerificarCamposLlenos(string identidad, string nombre, string edad, string salario, string direccion, object genero, object cargo)
