@@ -165,7 +165,7 @@
             <TextBox x:Name="txtnombreEmpleado" Grid.Row="2" Margin="115,109,24,26" FontSize="14" 
             materialDesign:HintAssist.Hint="Nombre Empleado" HorizontalAlignment="Center"
             Style="{StaticResource MaterialDesignTextBox}" IsReadOnly="True"
-            VerticalAlignment="Center" ToolTip="Ingrese el Id del Empleado" Width="125" KeyDown="SoloNumeros"/>
+            VerticalAlignment="Center" ToolTip="Ingrese el Id del Empleado" Width="125"/>
             <TextBox x:Name="txtIdVehiculo" Grid.Row="2" Margin="145,104,43,31" Grid.Column="2" FontSize="14"
             materialDesign:HintAssist.Hint="Id Vehiculo" HorizontalAlignment="Center" Visibility="Hidden"
             Style="{StaticResource MaterialDesignTextBox}"
@@ -177,8 +177,7 @@
             <TextBox Name="txtVehiculo" Grid.Row="2" Margin="260,105,151,30" Grid.Column="1" FontSize="14"
                  materialDesign:HintAssist.Hint="Nombre Vehiculo" HorizontalAlignment="Center"
                  Style="{StaticResource MaterialDesignTextBox}" IsReadOnly="True"
-                 VerticalAlignment="Center" ToolTip="Ingrese el nombre del vehiculo" Width="117" Grid.ColumnSpan="2" KeyDown="PermiteSoloNumeros"/>
-
+                 VerticalAlignment="Center" ToolTip="Ingrese el nombre del vehiculo" Width="117" Grid.ColumnSpan="2"/>
         </Grid>
     </Grid>
 </Window>

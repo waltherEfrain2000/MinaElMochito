@@ -16,9 +16,7 @@ using System.Data.SqlClient;
 using System.Configuration;
 using System.Data;
 
-/* este software es de calidad (CEro OpNiOnEz)
- De tu critica nace mi fama !!!! brrrrrrrrrrrrrrr
- */
+
 namespace ProyectoMinaELMochito
 {
     /// <summary>
@@ -32,6 +30,8 @@ namespace ProyectoMinaELMochito
 
         //Vaiables miembro
         Producciion producciion = new Producciion();
+        Validaciones Validacion = new Validaciones();
+        Procedimientos Procedimiento = new Procedimientos();
 
         public int IdViaje { get; internal set; }
 
@@ -47,6 +47,11 @@ namespace ProyectoMinaELMochito
             botonfecha.Content = string.Format("{0}", DateTime.Now.ToString());
 
         }
+
+        /*-----------------------------------------------------------------------------------------------------------------------------------------
+      -------------------------------------------------------LIMPIAR OBTENER---------------------------------------------------------
+     ----------------------------------------------------------------------------------------------------------------------------------------- */
+
 
         /// <summary>
         /// Este método eliminará los datos que estén en las casillas en 
@@ -86,22 +91,6 @@ namespace ProyectoMinaELMochito
             cmbMinerales.SelectedValue = producciion.IdMineral;
         }
 
-        //Se verificará que todos los campos estén llenoss antes de realizar cualquier acción
-        private bool VerificacionDedatosRequeridos()
-        {
-            int Valor = 0;
-            if (txtCantidad.Text == string.Empty || txtPrecio.Text == string.Empty || cmbMinerales.SelectedValue == null)
-            {
-                MessageBoxResult result = MessageBox.Show("Por favor!, Verifique que las casillas" +
-                    " contengan la infromación requerida!",
-                   "Confirmar", MessageBoxButton.OK, MessageBoxImage.Warning);
-                return false;
-            }else if (txtCantidad.Text == string.Empty || txtPrecio.Text == string.Empty || cmbMinerales.SelectedValue == null)
-            {
-                return false;
-            }
-            return true;
-        }
 
         //Ocultar los botones
         private void OcultarBotonesOperaciones(Visibility ocultar)
@@ -119,6 +108,49 @@ namespace ProyectoMinaELMochito
             this.txtPrecio.Text = Convert.ToString(producciion.Precio);
             this.cmbMinerales.SelectedItem = Convert.ToString(producciion.NombreMineral);
         }
+        /// <summary>
+        /// Este método tiene la funcionaliad de pasar los datos que se seleccionan
+        /// en el datagridview a las acjas de texto
+        /// </summary>
+        private void DatosEnCasillas(object sender, SelectionChangedEventArgs e)
+        {
+            DataGrid dg = (DataGrid)sender;
+            DataRowView filaSeleccionada = dg.SelectedItem as DataRowView;
+
+            if (filaSeleccionada != null)
+            {
+                txtNumeroViaje.Text = filaSeleccionada["N° Viaje"].ToString();
+                cmbMinerales.Text = filaSeleccionada["Mineral"].ToString();
+                txtCantidad.Text = filaSeleccionada["Peso(Kg)"].ToString();
+                txtPrecio.Text = filaSeleccionada["Precio"].ToString();
+                txtIdProduccion.Text = filaSeleccionada["Id Producción"].ToString();
+
+
+            }
+        }
+
+        private void Casillas(bool opcion, int operacion)
+        {
+            //Operacion se utiliza para distingir entre actualizar y activar o
+            ////inabilitar todas las casillas
+            if (operacion == 0)
+            {
+                txtCantidad.IsReadOnly = opcion;
+                txtNumeroViaje.IsReadOnly = opcion;
+                cmbMinerales.IsReadOnly = opcion;
+            }
+            else
+            {
+                txtCantidad.IsReadOnly = opcion;
+                txtNumeroViaje.IsReadOnly = opcion;
+                cmbMinerales.IsReadOnly = opcion;
+            }
+
+        }
+
+        /*-----------------------------------------------------------------------------------------------------------------------------------------
+      -------------------------------------------------------MOSTRAR---------------------------------------------------------
+     ----------------------------------------------------------------------------------------------------------------------------------------- */
 
         private void MostarContenidoEnCasillas(object sender, SelectionChangedEventArgs e)
         {
@@ -148,7 +180,7 @@ namespace ProyectoMinaELMochito
         /// </summary>
         public void AsignarUltimoId()
         {
-            
+
             Producciion idUltimo = producciion.UltimoId();
 
             txtNumeroViaje.Text = idUltimo.IdViaje.ToString();
@@ -167,50 +199,12 @@ namespace ProyectoMinaELMochito
 
         }
 
-        /// <summary>
-        /// Método que realiza la operación de insertar datos
-        /// a la tabla de Minas.Producción
-        /// </summary>
-        private void btnInsertar_Click(object sender, RoutedEventArgs e)
-        {
-            //Primero verificamos que las casillas no estén vacías
-            if (VerificacionDedatosRequeridos())
-            {
-                try
-                {
-                    //Vamos a obtener los valores ingresados para la tabla
-                    ObtenerDatos(0);
-
-                    //Insertamos los valores en la tabla
-                    producciion.AgregarProduccion(producciion);
-
-                    //Si los datos se intertarón mostrar un mensje
-                    MessageBox.Show("Los datos han sido ingresados correctamente!");
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Ha ocurrido un error al momento de insertar los datos...");
-                    Console.WriteLine(ex.Message);
-                }
-                finally
-                {
-                    LimpiarCasillasDeDatos();
-
-                    MostrarDatosTabla();
-                }
-            }
-        }
-
         public void MostrarDatosTabla()
         {
             try
             {
                 //Realizar el query que mostrara la información
-                String queryProduccion = @"Select P.idProduccion as 'Id Producción', P.idViaje as 'N° Viaje', 
-                                    M.descripcion as 'Mineral',P.precio as 'Precio', P.peso as 'Peso(Kg)',
-                                    P.total as 'Total' 
-                                    From Minas.Produccion as P
-                                    Inner Join Minas.Mineral as M on P.idMineral = M.idMineral";
+                String queryProduccion = @"execute MostrarDatosTabla";
 
                 //Establecer la conexión
                 sqlConnection.Open();
@@ -243,57 +237,56 @@ namespace ProyectoMinaELMochito
             }
         }
 
-
-        private void Casillas(bool opcion, int operacion)
+        private void MostrarBotonesPrincipales()
         {
-            //Operacion se utiliza para distingir entre actualizar y activar o
-            ////inabilitar todas las casillas
-            if (operacion == 0)
-            {
-                txtCantidad.IsReadOnly = opcion;
-                txtNumeroViaje.IsReadOnly = opcion;
-                cmbMinerales.IsReadOnly = opcion;
-            }
-            else
-            {
-                txtCantidad.IsReadOnly = opcion;
-                txtNumeroViaje.IsReadOnly = opcion;
-                cmbMinerales.IsReadOnly = opcion;
-            }
-
+            btnModificar.Visibility = Visibility.Visible;
+            btnInsertar.Visibility = Visibility.Visible;
+            btnEliminar.Visibility = Visibility.Visible;
+            btnLimpiar.Visibility = Visibility.Visible;
+            LimpiarCasillasDeDatos();
+            Casillas(false, 0);
         }
+
+        /*-----------------------------------------------------------------------------------------------------------------------------------------
+  -------------------------------------------------------BOTONES---------------------------------------------------------
+ ----------------------------------------------------------------------------------------------------------------------------------------- */
+
 
         /// <summary>
-        /// Este método tiene la funcionaliad de pasar los datos que se seleccionan
-        /// en el datagridview a las acjas de texto
+        /// Método que realiza la operación de insertar datos
+        /// a la tabla de Minas.Producción
         /// </summary>
-        private void DatosEnCasillas(object sender, SelectionChangedEventArgs e)
+        private void btnInsertar_Click(object sender, RoutedEventArgs e)
         {
-            DataGrid dg = (DataGrid)sender;
-            DataRowView filaSeleccionada = dg.SelectedItem as DataRowView;
-
-            if (filaSeleccionada != null)
+            //Primero verificamos que las casillas no estén vacías
+            if (Validacion.VerificacionDedatosRequeridos(txtCantidad.Text, txtPrecio.Text, cmbMinerales.Text))
             {
-                txtNumeroViaje.Text = filaSeleccionada["N° Viaje"].ToString();
-                cmbMinerales.Text = filaSeleccionada["Mineral"].ToString();
-                txtCantidad.Text = filaSeleccionada["Peso(Kg)"].ToString();
-                txtPrecio.Text = filaSeleccionada["Precio"].ToString();
-                txtIdProduccion.Text = filaSeleccionada["Id Producción"].ToString();
+                try
+                {
+                    //Vamos a obtener los valores ingresados para la tabla
+                    ObtenerDatos(0);
 
-               
+                    //Insertamos los valores en la tabla
+                    producciion.AgregarProduccion(producciion);
+
+                    //Si los datos se intertarón mostrar un mensje
+                    MessageBox.Show("Los datos han sido ingresados correctamente!");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Ha ocurrido un error al momento de insertar los datos...");
+                    Console.WriteLine(ex.Message);
+                }
+                finally
+                {
+                    LimpiarCasillasDeDatos();
+
+                    MostrarDatosTabla();
+                }
             }
         }
 
-        /// <summary>
-        /// N° viaje
-        /// </summary>
-        private void BloquearEdicion(object sender, KeyEventArgs e)
-        {
-            if (e.Key >= Key.D0 && e.Key <= Key.D9 || e.Key >= Key.NumPad0 && e.Key <= Key.NumPad9 || e.Key == Key.OemComma || e.Key == Key.Decimal)
-                e.Handled = false;
-            else
-                e.Handled = true;
-        }
+
 
         /// <summary>
         /// Precio
@@ -302,7 +295,7 @@ namespace ProyectoMinaELMochito
         private void btnModificar_Click(object sender, RoutedEventArgs e)
         {
             // Verificar que se ingresaron los valores requeridos
-            if (VerificacionDedatosRequeridos())
+            if (Validacion.VerificacionDedatosRequeridos(txtCantidad.Text, txtPrecio.Text, cmbMinerales.Text))
             {
                 try
                 {
@@ -325,16 +318,8 @@ namespace ProyectoMinaELMochito
             }
         }
 
-        private void MostrarBotonesPrincipales()
-        {
-            btnModificar.Visibility = Visibility.Visible;
-            btnInsertar.Visibility = Visibility.Visible;
-            btnEliminar.Visibility = Visibility.Visible;
-            btnLimpiar.Visibility = Visibility.Visible;
-            LimpiarCasillasDeDatos();
-            Casillas(false, 0);
-        }
 
+        //---------------------------------------------------------------------------------------------------------------------------
         //Checked
         private void ActualizarPrecio(object sender, RoutedEventArgs e)
         {
@@ -355,7 +340,7 @@ namespace ProyectoMinaELMochito
         private void btnEliminar_Click(object sender, RoutedEventArgs e)
         {
             // Verificar que se ingresaron los valores requeridos
-            if (VerificacionDedatosRequeridos())
+            if (Validacion.VerificacionDedatosRequeridos(txtCantidad.Text, txtPrecio.Text, cmbMinerales.Text))
             {
                 try
                 {

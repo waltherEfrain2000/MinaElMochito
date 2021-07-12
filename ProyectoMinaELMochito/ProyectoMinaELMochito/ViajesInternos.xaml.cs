@@ -26,6 +26,7 @@ namespace ProyectoMinaELMochito
     {
         //Variables Miembro
         private ViajeInterno viajeinterno = new ViajeInterno();
+        Validaciones validaciones = new Validaciones();
 
         private static string connectionString = ConfigurationManager.ConnectionStrings["ProyectoMinaELMochito.Properties.Settings.MinaConnectionString"].ConnectionString;
         private SqlConnection sqlConnection = new SqlConnection(connectionString);
@@ -38,6 +39,42 @@ namespace ProyectoMinaELMochito
             botonfecha.Content = string.Format("{0}", DateTime.Now.ToString());
 
         }
+        /*-----------------------------------------------------------------------------------------------------------------------------------------
+        ------------------------------------------------------------------------------------------------------------------------------------
+       ----------------------------------------------------------------------------------------------------------------------------------------- */
+
+        //Limpiar las cajas de texto
+        private void LimpiarCasillas()
+        {
+            txtIdEmpleado.Text = string.Empty;
+            txtIdVehiculo.Text = string.Empty;
+            txtnombreEmpleado.Text = string.Empty;
+            txtVehiculo.Text = string.Empty;
+        }
+
+        //Obtener los datos de las cajas de texto
+        private void ObtenerDatos()
+        {
+            viajeinterno.IdEmpleado = Convert.ToInt32(txtIdEmpleado.Text);
+            viajeinterno.IdVehiculo = Convert.ToInt32(txtIdVehiculo.Text);
+        }
+
+        //Valores formulario desde el objeto
+        private void ValoresFormularioObjeto()
+        {
+            txtIdEmpleado.Text = viajeinterno.IdEmpleado.ToString();
+            txtIdVehiculo.Text = viajeinterno.IdVehiculo.ToString();
+            txtnombreEmpleado.Text = viajeinterno.NombreEmpleado;
+            txtVehiculo.Text = viajeinterno.Vehiculo;
+        }
+
+
+
+
+
+        /*------------------------------------------------------------------------------------------------------------------------
+        ---------------------------------------------- CARGAR---------------------------------------------------------------------
+        -------------------------------------------------------------------------------------------------------------------------*/
         /// <summary>
         /// Muestra la tabla en donde se encuentran los empleados
         /// de la mina, de aquí el usuario seleccionará uno para el viaje
@@ -47,17 +84,9 @@ namespace ProyectoMinaELMochito
             try
             {
                 //Query para seleccionar los datos de la tabla
-                String queryEmpleado = @"Select IdEmpleado as 'Id Empleado', identidad as 'Identidad', 
-                               primerNombre as 'Nombre Empleado', C.descripcion AS 'Cargo'
-                               from Minas.Empleado  E INNER JOIN Minas.cargo C 
-                                ON C.idCargo = E.idCargo 
-                                WHERE E.estado = 'activo' and C.idcargo= 7";
+                String queryEmpleado = @"execute CargarDatosEmpleado";
 
-                String queryVehiculo = @"Select idVehiculo as 'Id Vehiculo', marca as 'Marca', 
-                                        modelo as 'Modelo', placa as 'Placa', color as 'Color'
-                                        from Minas.Vehiculo V INNER JOIN Minas.EstadoVehiculo EV
-								        ON EV.idEstado = V.estado
-								        where V.estado = 1";
+                String queryVehiculo = @"execute CargarDatosVehiculo";
 
                 //Establecer la conexion
                 sqlConnection.Open();
@@ -86,7 +115,7 @@ namespace ProyectoMinaELMochito
                 sqlDataAdapter2.Fill(dataTable2);
                 dgvVehiculos.ItemsSource = dataTable2.DefaultView;
                 sqlDataAdapter2.Update(dataTable2);
-              
+
             }
             catch (Exception ex)
             {
@@ -99,82 +128,9 @@ namespace ProyectoMinaELMochito
             }
         }
 
-        //Limpiar las cajas de texto
-        private void LimpiarCasillas()
-        {
-            txtIdEmpleado.Text = string.Empty;
-            txtIdVehiculo.Text = string.Empty;
-            txtnombreEmpleado.Text = string.Empty;
-            txtVehiculo.Text = string.Empty;
-        }
-
-        //Obtener los datos de las cajas de texto
-        private void ObtenerDatos()
-        {
-            viajeinterno.IdEmpleado = Convert.ToInt32(txtIdEmpleado.Text);
-            viajeinterno.IdVehiculo = Convert.ToInt32(txtIdVehiculo.Text);
-        }
-
-        //Valores formulario desde el objeto
-        private void ValoresFormularioObjeto()
-        {
-            txtIdEmpleado.Text = viajeinterno.IdEmpleado.ToString();
-            txtIdVehiculo.Text = viajeinterno.IdVehiculo.ToString();
-            txtnombreEmpleado.Text = viajeinterno.NombreEmpleado;
-            txtVehiculo.Text = viajeinterno.Vehiculo;
-        }
-
-        //Vamos a verificar que todas las casillas estén llenas
-        private bool VerificacionCasillas()
-        {
-            if (txtIdEmpleado.Text == string.Empty || txtIdVehiculo.Text == string.Empty)
-            {
-                MessageBoxResult result = MessageBox.Show("Por favor!, Verifique que las casillas contengan la infromación requerida!",
-                    "Confirmar", MessageBoxButton.OK, MessageBoxImage.Warning);
-                return false;
-            }
-
-            //Si hay valores en las casillas entonces se retornará verdadero
-            return true;
-        }
-
-        /// <summary>
-        /// En el momento en que el usuario decida presionar el botón siguiente 
-        /// automáticamente se agregarán los datos en la tabla de viajeInterno para
-        /// así guardar el registro de quién y en qué vehículo se exportará el material
-        /// </summary>
-        private void btnSiguiente_Click(object sender, RoutedEventArgs e)
-        {
-            //Primero verificamos que las casillas no estén vacías
-            if (VerificacionCasillas())
-            {
-                try
-                {
-                    //Vamos a obtener los valores ingresados para la tabla
-                    ObtenerDatos();
-
-                    //Insertamos los valores en la tabla
-                    viajeinterno.AgregarDatosAViajeInterno(viajeinterno);
-
-                    //Si los datos se intertarón mostrar un mensje
-                    MessageBox.Show("Los datos han sido ingresados correctamente!");
-
-                    Produccion sld = new Produccion();
-                    sld.Show();
-                    this.Close();
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Ha ocurrido un error al momento de insertar los datos...");
-                    Console.WriteLine(ex.Message);
-                }
-                finally
-                {
-                    LimpiarCasillas();
-                }
-            }
-        }
-
+        /*------------------------------------------------------------------------------------------------------------------------
+         ---------------------------------------------- MOSTRAR-----------------------------------------------------------
+         -------------------------------------------------------------------------------------------------------------------------*/
         /// <summary>
         /// Este método va a obtener las propiedades del datagrid
         /// y las va a pasar a los textBox
@@ -221,28 +177,44 @@ namespace ProyectoMinaELMochito
             }
         }
 
+        /*------------------------------------------------------------------------------------------------------------------------
+         ---------------------------------------------- BOTONES-----------------------------------------------------------
+         -------------------------------------------------------------------------------------------------------------------------*/
         /// <summary>
-        /// Este evento permitirá que solo se pueda insertar datos de tipo 
-        /// númerico en el el textBox de Empleados
+        /// En el momento en que el usuario decida presionar el botón siguiente 
+        /// automáticamente se agregarán los datos en la tabla de viajeInterno para
+        /// así guardar el registro de quién y en qué vehículo se exportará el material
         /// </summary>
-        private void SoloNumeros(object sender, KeyEventArgs e)
+        private void btnSiguiente_Click(object sender, RoutedEventArgs e)
         {
-            if (e.Key >= Key.D0 && e.Key <= Key.D9 || e.Key >= Key.NumPad0 && e.Key <= Key.NumPad9)
-                e.Handled = false;
-            else
-                e.Handled = true;
-        }
+            //Primero verificamos que las casillas no estén vacías
+            if (validaciones.VerificarCamposLlenos(txtIdEmpleado.Text, txtIdVehiculo.Text))
+            {
+                try
+                {
+                    //Vamos a obtener los valores ingresados para la tabla
+                    ObtenerDatos();
 
-        /// <summary>
-        /// Este evento permitirá que solo se pueda insertar datos de tipo 
-        /// númerico en el el textBox de Vehiculos
-        /// </summary>
-        private void PermiteSoloNumeros(object sender, KeyEventArgs e)
-        {
-            if (e.Key >= Key.D0 && e.Key <= Key.D9 || e.Key >= Key.NumPad0 && e.Key <= Key.NumPad9)
-                e.Handled = false;
-            else
-                e.Handled = true;
+                    //Insertamos los valores en la tabla
+                    viajeinterno.AgregarDatosAViajeInterno(viajeinterno);
+
+                    //Si los datos se intertarón mostrar un mensje
+                    MessageBox.Show("Los datos han sido ingresados correctamente!");
+
+                    Produccion sld = new Produccion();
+                    sld.Show();
+                    this.Close();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Ha ocurrido un error al momento de insertar los datos...");
+                    Console.WriteLine(ex.Message);
+                }
+                finally
+                {
+                    LimpiarCasillas();
+                }
+            }
         }
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)

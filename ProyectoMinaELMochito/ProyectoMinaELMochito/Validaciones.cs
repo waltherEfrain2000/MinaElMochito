@@ -96,6 +96,39 @@ namespace ProyectoMinaELMochito
             return true;
         }
 
+        //--------------------------------------------------Viajes Intenos-----------------------------------------------------------------
+        public bool VerificarCamposLlenos(string txtIdEmpleado, string txtIdVehiculo)
+        {
+            if (txtIdEmpleado == string.Empty || txtIdVehiculo == string.Empty)
+            {
+                MessageBoxResult result = MessageBox.Show("Por favor!, Verifique que las casillas contengan la infromación requerida!",
+                    "Confirmar", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return false;
+            }
+            //Si hay valores en las casillas entonces se retornará verdadero
+            return true;
+        }
+
+
+
+        //-----------------------------------------------------------------Produccion Admin---------------------------------------------------------
+
+        public bool VerificacionDedatosRequeridos(string Cantidad, string Precio, string cmbMinerales)
+        {
+            int Valor = 0;
+            if (Cantidad == string.Empty || Precio == string.Empty || cmbMinerales == null)
+            {
+                MessageBoxResult result = MessageBox.Show("Por favor!, Verifique que las casillas" +
+                    " contengan la infromación requerida!",
+                   "Confirmar", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return false;
+            }
+            else if (Cantidad == string.Empty || Precio == string.Empty || cmbMinerales == null)
+            {
+                return false;
+            }
+            return true;
+        }
     }
 
 }
