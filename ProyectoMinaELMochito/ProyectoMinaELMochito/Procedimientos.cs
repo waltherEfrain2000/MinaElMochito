@@ -180,6 +180,18 @@ namespace ProyectoMinaELMochito
 
 
         }
+        public bool VerificacionDeDatos(string cantidad, string precio, object mineral)
+        {
+
+            if (cantidad == string.Empty || precio == string.Empty || mineral == null)
+            {
+                MessageBoxResult result = MessageBox.Show("Por favor!, Verifique que las casillas" +
+                    " contengan la infromación requerida!",
+                   "Confirmar", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return false;
+            }
+            return true;
+        }
 
     }
 }
