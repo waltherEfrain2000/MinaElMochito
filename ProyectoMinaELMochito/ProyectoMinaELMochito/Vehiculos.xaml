@@ -8,14 +8,14 @@
         mc:Ignorable="d"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:fw="clr-namespace:SourceChord.FluentWPF;assembly=FluentWPF"
-        fw:AcrylicWindow.Enabled="True" FontSize="15"  MouseDown="Window_MouseDown" Height="550" Width="1080" WindowStyle="None" ResizeMode="CanResizeWithGrip" WindowStartupLocation="CenterScreen" Title="menu">
+        fw:AcrylicWindow.Enabled="True" FontSize="15"  MouseDown="Window_MouseDown" Height="650" Width="1400" WindowStyle="None" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Title=" ">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="220"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <Grid fw:PointerTracker.Enabled="True" Background="#9900afb9" Height="542" VerticalAlignment="Bottom">
+        <Grid fw:PointerTracker.Enabled="True" Background="#9900afb9" Height="650" VerticalAlignment="Bottom">
             <StackPanel>
                 <TextBlock Text="" Foreground="White" Margin="1" FontWeight="DemiBold"/>
 
@@ -111,48 +111,47 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
+                <RowDefinition Height="50" />
+                <RowDefinition Height="50" />
+                <RowDefinition Height="50" />
+                <RowDefinition Height="50" />
+                <RowDefinition Height="50" />
                 <RowDefinition Height="*" />
                 <RowDefinition Height="*" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
-            <Label Content="Vehiculos" Grid.ColumnSpan="5" HorizontalAlignment="Center" FontSize="20" />
+            <Label Content="Vehiculos" Grid.ColumnSpan="5" HorizontalAlignment="Center" FontSize="30" />
+            <TextBox Name="txtMarca" Grid.Row="2" Grid.Column="1" FontSize="15" Margin="25,20,25,20"/>
+            <TextBox Name="txtModelo" Grid.Row="3" Grid.Column="1" FontSize="15" Margin="25,20,25,20" />
+            <TextBox Name="txtPlaca" Grid.Column="3" FontSize="15" Margin="25,20,25,20" Grid.Row="1"/>
+            <TextBox Name="txtColor" Grid.Row="2" Grid.Column="3" FontSize="15" Margin="25,20,25,20"/>
 
-            <Label Content="Vehiculo ID" Grid.Row="1" FontSize="15" Margin="10" />
-            <Label Content="Marca" Grid.Row="2" FontSize="15" Margin="10" />
-            <Label Content="Modelo" Grid.Row="3" FontSize="15" Margin="10" />
-            <Label Content="Placa" Grid.Row="4" FontSize="15" Margin="10" />
-            <Label Content="Color" Grid.Row="5" FontSize="15" Margin="10" />
-            <Label Content="Estado" Grid.Row="6"  FontSize="15" Margin="10" />
-            <TextBox Name="txtMarca" Grid.Row="2" Grid.Column="1" FontSize="15" Margin="10"/>
-            <TextBox Name="txtModelo" Grid.Row="3" Grid.Column="1" FontSize="15" Margin="10" />
-            <TextBox Name="txtPlaca" Grid.Row="4" Grid.Column="1" FontSize="15" Margin="10"/>
-            <TextBox Name="txtColor" Grid.Row="5" Grid.Column="1" FontSize="15" Margin="10"/>
+            <ComboBox Name="cmbEstado" Grid.Row="3" Grid.Column="3" FontSize="15" Margin="25,20,25,20" />
 
-            <ComboBox Name="cmbEstado" Grid.Row="6" Grid.Column="1" FontSize="15" Margin="10" />
+            <Button x:Name="btnAgregar" Content="Agregar" Foreground="White"  BorderBrush="#0082aa" Grid.Column="4" Grid.Row="1" Margin="60,5,30,10" Click="btnAgregar_Click"  />
+            <Button x:Name="btnModificar" Content="Modificar" Foreground="White"  BorderBrush="#0082aa" Grid.Column="4" Grid.Row="2"  Margin="60,5,30,10" Click="btnModificar_Click"/>
+            <Button x:Name="btnAceptarModificacion"  Content="Aceptar" Grid.Column="4" Grid.Row="1" Foreground="White"  BorderBrush="#0082aa"  Margin="60,5,30,10" Click="btnAceptarModificacion_Click" Visibility="Hidden"/>
+            <Button x:Name="btnCancelarModificacion" Content="Cancelar" Grid.Column="4" Grid.Row="2"  Foreground="White"  BorderBrush="#0082aa" Margin="60,5,30,10" Click="btnCancelarModificacion_Click" Visibility="Hidden"/>
 
-            <Button x:Name="btnAgregar" Content="Agregar" Foreground="White"  BorderBrush="#0082aa" Grid.Column="1" Grid.Row="10" Margin="20 1" Click="btnAgregar_Click"  />
-            <Button x:Name="btnModificar" Content="Modificar" Foreground="White"  BorderBrush="#0082aa" Grid.Column="2" Grid.Row="10"  Margin="20 1" Click="btnModificar_Click"/>
-            <Button x:Name="btnAceptarModificacion"  Content="Aceptar" Grid.Column="1" Grid.Row="10" Foreground="White"  BorderBrush="#0082aa"  Margin="20 1" Click="btnAceptarModificacion_Click" Visibility="Hidden"/>
-            <Button x:Name="btnCancelarModificacion" Content="Cancelar" Grid.Column="3" Grid.Row="10"  Foreground="White"  BorderBrush="#0082aa" Margin="20 1" Click="btnCancelarModificacion_Click" Visibility="Hidden"/>
+            <Button x:Name="btnEliminar" Foreground="White"  BorderBrush="#0082aa" Content="Eliminar" Grid.Column="4" Grid.Row="3"  Margin="60,5,30,10" Click="btnEliminar_Click"/>
+            <Button x:Name="btnAceptarEliminacion" Content="Aceptar" Grid.Column="4" Foreground="White"  BorderBrush="#0082aa" Grid.Row="1"  Margin="60,5,30,10" Click="btnAceptarEliminacion_Click" Visibility="Hidden"/>
+            <Button x:Name="btnCancelarEliminacion" Content="Cancelar" Grid.Column="4" Foreground="White"  BorderBrush="#0082aa" Grid.Row="2"  Margin="60,5,30,10" Click="btnCancelarEliminacion_Click" Visibility="Hidden" />
+            <Button x:Name="btnLimpiar" Foreground="White"  BorderBrush="#0082aa" Content="Limpiar" Grid.Column="4" Grid.Row="4" Margin="60,5,30,10" Click="btnLimpiar_Click" />
 
-            <Button x:Name="btnEliminar" Foreground="White"  BorderBrush="#0082aa" Content="Eliminar" Grid.Column="3" Grid.Row="10"  Margin="20 1" Click="btnEliminar_Click" Grid.RowSpan="2"/>
-            <Button x:Name="btnAceptarEliminacion" Content="Aceptar" Grid.Column="1" Foreground="White"  BorderBrush="#0082aa" Grid.Row="10"  Margin="20 1" Click="btnAceptarEliminacion_Click" Visibility="Hidden"/>
-            <Button x:Name="btnCancelarEliminacion" Content="Cancelar" Grid.Column="3" Foreground="White"  BorderBrush="#0082aa" Grid.Row="10"  Margin="20 1" Click="btnCancelarEliminacion_Click" Visibility="Hidden" />
-            <Button x:Name="btnLimpiar" Foreground="White"  BorderBrush="#0082aa" Content="Limpiar" Grid.Column="4" Grid.Row="10" Margin="20 1" Click="btnLimpiar_Click" />
-
-            <DataGrid Name="DgvVehiculos" Grid.Row="1" Grid.Column="2" Margin="7" Grid.ColumnSpan="3" Grid.RowSpan="6" SelectionChanged="DgvVehiculos_SelectionChanged" IsReadOnly="True" FontSize="15">
+            <DataGrid Name="DgvVehiculos" Grid.Row="4" Margin="30,35,0,35" Grid.RowSpan="4" SelectionChanged="DgvVehiculos_SelectionChanged" IsReadOnly="True" FontSize="15" Grid.ColumnSpan="4">
                 <DataGrid.Resources>
                     <Style TargetType="{x:Type DataGridColumnHeader}">
                     </Style>
                 </DataGrid.Resources>
             </DataGrid>
-            <TextBox x:Name="txtVehiculoID" Grid.Row="1" Grid.Column="1" FontSize="15" Margin="10" IsReadOnly="True"/>
+            <TextBox x:Name="txtVehiculoID" Grid.Column="1" FontSize="15" Margin="25,20,25,20" IsReadOnly="True" Grid.Row="1"/>
+            <Label Content="Código" Grid.Row="1" FontSize="15" Margin="30,10,10,0" Height="39" VerticalAlignment="Top" />
+            <Label Content="Marca" Grid.Row="2" FontSize="15" Margin="30,10,10,0" Grid.RowSpan="2" />
+            <Label Content="Modelo" Grid.Row="3" FontSize="15" Margin="30,10,10,0" Grid.RowSpan="2" />
+            <Label Content="Placa" Grid.Row="1" FontSize="15" Margin="200,10,10,8" Grid.Column="2" />
+            <Label Content="Color" Grid.Row="2" FontSize="15" Margin="200,10,10,8" Grid.Column="2" Grid.RowSpan="2" />
+            <Label Content="Estado" Grid.Row="3"  FontSize="15" Margin="200,10,10,8" Grid.Column="2" />
 
         </Grid>
     </Grid>

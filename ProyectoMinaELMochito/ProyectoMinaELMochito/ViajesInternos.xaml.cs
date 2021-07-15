@@ -49,11 +49,11 @@ namespace ProyectoMinaELMochito
                 //Query para seleccionar los datos de la tabla
                 String queryEmpleado = @"Select IdEmpleado as 'Id Empleado', identidad as 'Identidad', 
                                primerNombre as 'Nombre Empleado'
-                               from Minas.Empleado";
+                               from Minas.Empleado where estado = 'activo' AND idCargo = 7";
 
                 String queryVehiculo = @"Select idVehiculo as 'Id Vehiculo', marca as 'Marca', 
                                         modelo as 'Modelo', placa as 'Placa', color as 'Color'
-                                         from Minas.Vehiculo";
+                                         from Minas.Vehiculo where estado = 1";
 
                 //Establecer la conexion
                 sqlConnection.Open();

@@ -206,10 +206,9 @@ namespace ProyectoMinaELMochito
         {
             try
             {
-                string query = @"SELECT E.IdEmpleado AS 'Empleado ID',E.identidad, E.primerNombre AS 'Nombre Completo', E.edad, G.descripcion AS 'Genero', 
-                                E.direccion,C.descripcion AS 'Cargo', E.estado as 'Estado', E.salario  FROM  Minas.Empleado E INNER JOIN Minas.cargo C 
-                                ON C.idCargo = E.idCargo INNER JOIN Minas.Genero G
-                                ON G.idGenero = E.idGenero	
+                string query = @"SELECT E.IdEmpleado AS 'Código',E.identidad, E.primerNombre AS 'Nombre', E.edad as 'Edad', 
+                                E.direccion as 'Dirección' ,C.descripcion AS 'Cargo', E.salario as 'Salario', E.estado as 'Estado'  FROM  Minas.Empleado E INNER JOIN Minas.cargo C 
+                                ON C.idCargo = E.idCargo 
                                 ";
 
                 sqlConnection.Open();
@@ -604,6 +603,35 @@ namespace ProyectoMinaELMochito
                       "Confirmar", MessageBoxButton.OK, MessageBoxImage.Warning);
                 txtSalario.Text = "";
             }
+        }
+
+        private void Setter_ColorChanged(object sender, RoutedPropertyChangedEventArgs<Color> e)
+        {
+
+        }
+
+        private void Window_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            
+        }
+
+        private void Window_Closed(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            //if (MessageBox.Show("¿Está seguro que desea salir?", "Salir", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+            //{
+            //    this.Hide();
+            //}
+            //else
+            //{
+            //    Empleados emp = new Empleados();
+            //    emp.Show();
+            //    //this.Hide();
+            //}
         }
     }
     }
