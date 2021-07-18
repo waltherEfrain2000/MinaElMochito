@@ -247,6 +247,8 @@ namespace ProyectoMinaELMochito
             DataGrid dataGrid = (DataGrid)sender;
             DataRowView dataRowView = dataGrid.SelectedItem as DataRowView;
 
+            
+
             if (dataRowView != null)
             {
                 txtid.Text = dataRowView["ID"].ToString();
@@ -427,6 +429,21 @@ namespace ProyectoMinaELMochito
         {
 
         }
+
+        private void txtnombre_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key >= Key.D0 && e.Key <= Key.D9 || e.Key >= Key.NumPad0 && e.Key <= Key.NumPad9)
+                e.Handled = true;
+            else
+                e.Handled = false;
+        }
+
+        private void dtgriduser_CurrentCellChanged(object sender, EventArgs e)
+        {
+            dtgriduser.IsReadOnly = true;
+        }
+
+ 
     }
 }
 

@@ -121,16 +121,16 @@
             <!-- Label -->
             <Label Content="SISTEMA DE VIAJES INTERNOS" Grid.Row="0" HorizontalAlignment="Center"
                 FontSize="20" Margin="257,17,251,3" Width="284" FontFamily="Aldine" Grid.ColumnSpan="3"/>
-            <Label Content="Vehículo:" Grid.Column="1" Grid.Row="2" Margin="0,104,0,25" 
+            <Label Content="Vehículo:" Grid.Column="1" Grid.Row="2" Margin="0,129,0,0" 
                HorizontalAlignment="Right" FontSize="16" Width="82" FontFamily="Aldine"/>
             <Label Content="Empleados" Grid.Row="1" Margin="136,20,34,111" FontSize="16" FontFamily="Aldine"/>
             <Label Content="Vehículos" Grid.Row="1" Margin="252,20,193,111" Grid.ColumnSpan="2" Grid.Column="1"
                FontSize="16" FontFamily="Aldine"/>
-            <Label Content="Empleado:" Grid.Row="2" Margin="0,108,153,27" HorizontalAlignment="Right" 
+            <Label Content="Empleado:" Grid.Row="2" Margin="0,133,159,2" HorizontalAlignment="Right" 
             FontSize="16" Width="86" FontFamily="Aldine"/>
 
             <!-- Data Grid - Tablas -->
-            <DataGrid Name ="dgvEmpleados" HorizontalAlignment="Left" Height="201" Margin="12,57,0,0" 
+            <DataGrid Name ="dgvEmpleados" HorizontalAlignment="Left" Height="239" Margin="12,57,0,0" 
                   Grid.Row="1" VerticalAlignment="Top" Width="349" Grid.ColumnSpan="2" 
                   Grid.RowSpan="2" SelectionChanged="MostarEnTexBoxContenido" IsReadOnly="True" >
 
@@ -144,7 +144,7 @@
 
                 </DataGrid.Columns>
             </DataGrid>
-            <DataGrid Name ="dgvVehiculos" HorizontalAlignment="Left" Height="197" Margin="121,57,0,0"
+            <DataGrid Name ="dgvVehiculos" HorizontalAlignment="Left" Height="239" Margin="121,57,0,0"
                   Grid.Row="1" VerticalAlignment="Top" Width="397" Grid.ColumnSpan="2" Grid.RowSpan="2" 
                   Grid.Column="1" IsReadOnly="True" SelectionChanged="MostrarVehiculosTextBox">
 
