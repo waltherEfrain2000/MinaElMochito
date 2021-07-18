@@ -137,7 +137,7 @@
             <Button x:Name="btnEliminar" Foreground="White"  BorderBrush="#0082aa" Content="Eliminar" Grid.Column="4" Grid.Row="3"  Margin="60,5,30,10" Click="btnEliminar_Click"/>
             <Button x:Name="btnAceptarEliminacion" Content="Aceptar" Grid.Column="4" Foreground="White"  BorderBrush="#0082aa" Grid.Row="1"  Margin="60,5,30,10" Click="btnAceptarEliminacion_Click" Visibility="Hidden"/>
             <Button x:Name="btnCancelarEliminacion" Content="Cancelar" Grid.Column="4" Foreground="White"  BorderBrush="#0082aa" Grid.Row="2"  Margin="60,5,30,10" Click="btnCancelarEliminacion_Click" Visibility="Hidden" />
-            <Button x:Name="btnLimpiar" Foreground="White"  BorderBrush="#0082aa" Content="Limpiar" Grid.Column="4" Grid.Row="4" Margin="60,5,30,10" Click="btnLimpiar_Click" />
+            <Button x:Name="btnLimpiar" Foreground="White"  BorderBrush="#0082aa" Content="Limpiar" Grid.Column="4" Grid.Row="4" Margin="60,10,30,8" Click="btnLimpiar_Click" />
 
             <DataGrid Name="DgvVehiculos" Grid.Row="4" Margin="30,35,0,35" Grid.RowSpan="4" SelectionChanged="DgvVehiculos_SelectionChanged" IsReadOnly="True" FontSize="15" Grid.ColumnSpan="4">
                 <DataGrid.Resources>
