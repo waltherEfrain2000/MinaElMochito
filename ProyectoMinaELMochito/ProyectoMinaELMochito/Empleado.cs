@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-// Agregar los namespaces requeridos
 using System.Data.SqlClient;
 using System.Configuration;
+using System.Data;
+
 
 //hola
 
@@ -21,12 +22,14 @@ namespace ProyectoMinaELMochito
         //Propiedades
         public int EmpledoID { get; set; }
         public string Identidad { get; set; }
-        public string NombreCompleto { get; set; }
-        public int Edad { get; set; }
+        public string PrimerNombre { get; set; }
+        public string SegundoNombre { get; set; }
+        public string PrimerApellido { get; set; }
+        public string SegundoApellido { get; set; }
+        public string FechaNacimiento { get; set; }
         public int Genero { get; set; }
         public string NombreGenero { get; set; }
         public int Cargo { get; set; }
-
         public string NombreCargo { get; set; }
         public string Estado { get; set; }
         public decimal Salario { get; set; }
@@ -36,24 +39,15 @@ namespace ProyectoMinaELMochito
         public Empleado() { }
 
 
-        public Empleado(string identidad, string nombreCompleto, int edad, int genero, int cargo, string estado, decimal salario, string direccion)
+        public Empleado(string identidad, string primerNombre, string segundoNombre, string primerApellido, string segundoApellido, string fechaNacimiento , int genero, int cargo, string estado, decimal salario, string direccion)
         {
 
             Identidad = identidad;
-            NombreCompleto = nombreCompleto;
-            Edad = edad;
-            Genero = genero;
-            Cargo = cargo;
-            Estado = estado;
-            Salario = salario;
-            Direccion = direccion;
-        }
-        public Empleado(int ID, string identidad, string nombreCompleto, int edad, int genero, int cargo, string estado, decimal salario, string direccion)
-        {
-            EmpledoID = ID;
-            Identidad = identidad;
-            NombreCompleto = nombreCompleto;
-            Edad = edad;
+            PrimerNombre = primerNombre;
+            SegundoNombre = segundoNombre;
+            PrimerApellido = primerApellido;
+            SegundoApellido = segundoApellido;
+            FechaNacimiento = fechaNacimiento;
             Genero = genero;
             Cargo = cargo;
             Estado = estado;
@@ -63,25 +57,33 @@ namespace ProyectoMinaELMochito
 
         public void CrearEmpleado(Empleado empleado)
         {
+            conexion cn = new conexion();
             try
             {
-                string query = @"INSERT	INTO Minas.Empleado values (@identidad,@primerNombre,@edad,@idGenero,@direccion,@idCargo,@salario,@estado)";
+                SqlCommand cmd = new SqlCommand("ingresarEmpleado", cn.Conectarbd);
+                cmd.CommandType = CommandType.StoredProcedure;
 
-                sqlConnection.Open();
+                cmd.Parameters.AddWithValue("@identidad", empleado.Identidad);
+                cmd.Parameters.AddWithValue("@primerNombre", empleado.PrimerNombre);
+                cmd.Parameters.AddWithValue("@segundoNombre", empleado.SegundoNombre);
+                cmd.Parameters.AddWithValue("@primerApellido", empleado.PrimerApellido);
+                cmd.Parameters.AddWithValue("@segundoApellido", empleado.SegundoApellido);
+                cmd.Parameters.AddWithValue("@fechaNacimiento", empleado.FechaNacimiento);
+                cmd.Parameters.AddWithValue("@idGenero", empleado.Genero);
+                cmd.Parameters.AddWithValue("@direccion", empleado.Direccion);
+                cmd.Parameters.AddWithValue("@idCargo", empleado.Cargo);
+                cmd.Parameters.AddWithValue("@salario", empleado.Salario);
 
+                cn.abrir();
 
-                SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
+                SqlDataAdapter adp = new SqlDataAdapter();
+                adp.SelectCommand = cmd;
+                DataTable tabla = new DataTable();
+                adp.Fill(tabla);
 
-                sqlCommand.Parameters.AddWithValue("@identidad", empleado.Identidad);
-                sqlCommand.Parameters.AddWithValue("@primerNombre", empleado.NombreCompleto);
-                sqlCommand.Parameters.AddWithValue("@edad", empleado.Edad);
-                sqlCommand.Parameters.AddWithValue("@idGenero", empleado.Genero);
-                sqlCommand.Parameters.AddWithValue("@direccion", empleado.Direccion);
-                sqlCommand.Parameters.AddWithValue("@idCargo", empleado.Cargo);
-                sqlCommand.Parameters.AddWithValue("@salario", empleado.Salario);
-                sqlCommand.Parameters.AddWithValue("@estado", empleado.Estado);
+                cn.abrir();
 
-                sqlCommand.ExecuteNonQuery();
+                cmd.ExecuteNonQuery();
 
             }
             catch (Exception e)
@@ -91,36 +93,40 @@ namespace ProyectoMinaELMochito
             }
             finally
             {
-                sqlConnection.Close();
-
+                cn.cerrar();
             }
         }
 
         public void ActualizarEmpleado(Empleado empleado)
         {
+            conexion cn = new conexion();
             try
             {
-                string query = @"UPDATE	Minas.Empleado SET primerNombre = @primerNombre, 
-                                                           edad = @edad,
-                                                           direccion = @direccion,
-                                                           idCargo = @idCargo,
-                                                           salario = @salario
-                                                            Where idEmpleado = @idEmpleado";
+                SqlCommand cmd = new SqlCommand("actualizarEmpleado", cn.Conectarbd);
+                cmd.CommandType = CommandType.StoredProcedure;
 
-                sqlConnection.Open();
+                cmd.Parameters.AddWithValue("@id", empleado.EmpledoID);
+                cmd.Parameters.AddWithValue("@identidad", empleado.Identidad);
+                cmd.Parameters.AddWithValue("@primerNombre", empleado.PrimerNombre);
+                cmd.Parameters.AddWithValue("@segundoNombre", empleado.SegundoNombre);
+                cmd.Parameters.AddWithValue("@primerApellido", empleado.PrimerApellido);
+                cmd.Parameters.AddWithValue("@segundoApellido", empleado.SegundoApellido);
+                cmd.Parameters.AddWithValue("@fechaNacimiento", empleado.FechaNacimiento);
+                cmd.Parameters.AddWithValue("@idGenero", empleado.Genero);
+                cmd.Parameters.AddWithValue("@direccion", empleado.Direccion);
+                cmd.Parameters.AddWithValue("@idCargo", empleado.Cargo);
+                cmd.Parameters.AddWithValue("@salario", empleado.Salario);
 
+                cn.abrir();
 
-                SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
+                SqlDataAdapter adp = new SqlDataAdapter();
+                adp.SelectCommand = cmd;
+                DataTable tabla = new DataTable();
+                adp.Fill(tabla);
 
-                sqlCommand.Parameters.AddWithValue("@idEmpleado", empleado.EmpledoID);
-                sqlCommand.Parameters.AddWithValue("@primerNombre", empleado.NombreCompleto);
-                sqlCommand.Parameters.AddWithValue("@edad", empleado.Edad);
-                sqlCommand.Parameters.AddWithValue("@direccion", empleado.Direccion);
-                sqlCommand.Parameters.AddWithValue("@idCargo", empleado.Cargo);
-                sqlCommand.Parameters.AddWithValue("@salario", empleado.Salario);
+                cn.abrir();
 
-
-                sqlCommand.ExecuteNonQuery();
+                cmd.ExecuteNonQuery();
 
             }
             catch (Exception e)
@@ -130,26 +136,31 @@ namespace ProyectoMinaELMochito
             }
             finally
             {
-                sqlConnection.Close();
-
+                //sqlConnection.Close();
+                cn.cerrar();
             }
         }
 
         public void EliminarEmpleado(Empleado empleado)
         {
+            conexion cn = new conexion();
             try
             {
-                string query = @"UPDATE	Minas.Empleado SET estado = @estado Where idEmpleado = @idEmpleado";
+                SqlCommand cmd = new SqlCommand("elimiarEmpleado", cn.Conectarbd);
+                cmd.CommandType = CommandType.StoredProcedure;
 
-                sqlConnection.Open();
+                cmd.Parameters.AddWithValue("@id", empleado.EmpledoID);
 
+                cn.abrir();
 
-                SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
+                SqlDataAdapter adp = new SqlDataAdapter();
+                adp.SelectCommand = cmd;
+                DataTable tabla = new DataTable();
+                adp.Fill(tabla);
 
-                sqlCommand.Parameters.AddWithValue("@idEmpleado", empleado.EmpledoID);
-                sqlCommand.Parameters.AddWithValue("@estado", "inactivo");
+                cn.abrir();
 
-                sqlCommand.ExecuteNonQuery();
+                cmd.ExecuteNonQuery();
 
             }
             catch (Exception e)
@@ -159,8 +170,7 @@ namespace ProyectoMinaELMochito
             }
             finally
             {
-                sqlConnection.Close();
-
+                cn.cerrar();
             }
         }
 
@@ -170,7 +180,7 @@ namespace ProyectoMinaELMochito
             try
             {
                 //Realizar el query que cargará la información correspondiente
-                String query = @"Select * From Minas.cargo";
+                String query = @"Select * From Empleados.cargo";
 
                 //Establecer la conexión
                 sqlConnection.Open();
@@ -207,7 +217,7 @@ namespace ProyectoMinaELMochito
             try
             {
                 //Realizar el query que cargará la información correspondiente
-                String query = @"Select * From Minas.Genero";
+                String query = @"Select * From Empleados.Genero";
 
                 //Establecer la conexión
                 sqlConnection.Open();
@@ -239,11 +249,5 @@ namespace ProyectoMinaELMochito
             }
 
         }
-
-
-
-
-
-
     }
 }
