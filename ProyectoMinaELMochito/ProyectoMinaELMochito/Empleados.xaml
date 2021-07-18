@@ -7,7 +7,7 @@
         xmlns:local="clr-namespace:ProyectoMinaELMochito"
         mc:Ignorable="d"
         xmlns:fw="clr-namespace:SourceChord.FluentWPF;assembly=FluentWPF"
-        fw:AcrylicWindow.Enabled="True" FontSize="15" MouseDown="Window_MouseDown" Height="650" Width="1400" WindowStyle="None" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Title=" ">
+        fw:AcrylicWindow.Enabled="True" FontSize="15" MouseDown="Window_MouseDown" AllowsTransparency="true" Background="Transparent" Height="650" Width="1400" WindowStyle="None" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Title=" ">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="220"/>

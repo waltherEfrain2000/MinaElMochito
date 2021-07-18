@@ -52,7 +52,7 @@
                     <TextBox FontFamily="HELVETICA"
                            FontWeight="Light"
                          FontSize="25"
-                           Text="Username"
+                           Text="Usuario"
                            ToolTip="Ingrese el nombre de usuario"
                            HorizontalAlignment="Left"
                          BorderThickness="0"

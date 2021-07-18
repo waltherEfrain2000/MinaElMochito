@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:fw="clr-namespace:SourceChord.FluentWPF;assembly=FluentWPF"
-        fw:AcrylicWindow.Enabled="True" FontSize="15"  MouseDown="Window_MouseDown" Height="650" Width="1400" WindowStyle="None" ResizeMode="CanResizeWithGrip" WindowStartupLocation="CenterScreen" Title="menu">
+        fw:AcrylicWindow.Enabled="True" FontSize="15"  MouseDown="Window_MouseDown" Height="650" Width="1400" WindowStyle="None" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Title=" ">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="220"/>
