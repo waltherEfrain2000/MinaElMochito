@@ -116,6 +116,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Cargos.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ComparacionHistoricos.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -180,9 +184,14 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Cargocrud.cs" />
+    <Compile Include="Cargos.xaml.cs">
+      <DependentUpon>Cargos.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ComparacionHistoricos.xaml.cs">
       <DependentUpon>ComparacionHistoricos.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Conexion.cs" />
     <Compile Include="Empleado.cs" />
     <Compile Include="Empleados.xaml.cs">
       <DependentUpon>Empleados.xaml</DependentUpon>
