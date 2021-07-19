@@ -24,9 +24,15 @@ namespace ProyectoMinaELMochito
     public partial class ProduccionEmp : Window
     {
         //Realizar la conexión a la base de datos
+        private Validaciones validacion = new Validaciones();
+        private Procedimientos procedimiento = new Procedimientos();
+        //Realizar la conexión a la base de datos
         private static string connectionString = ConfigurationManager.ConnectionStrings["ProyectoMinaELMochito.Properties.Settings.MinaConnectionString"].ConnectionString;
         private SqlConnection sqlConnection = new SqlConnection(connectionString);
 
+        //ProyectoMinaELMochito.Properties.Settings.MinaConnectionString
+
+        //Data Source = (local)\SQLEXPRESS;Initial Catalog = MinaElMochitoVersion2; Integrated Security = True
         //Vaiables miembro
         Producciion producciion = new Producciion();
 
@@ -40,6 +46,8 @@ namespace ProyectoMinaELMochito
             MostrarDatosTabla();
 
             AsignarUltimoId();
+
+
             botonfecha.Content = string.Format("{0}", DateTime.Now.ToString());
 
         }
@@ -73,57 +81,6 @@ namespace ProyectoMinaELMochito
             producciion.Peso = Convert.ToDecimal(txtCantidad.Text);
 
         }
-
-
-
-        //Valores del formulario objeto
-        private void ValoresFormularioObjeto()
-        {
-            txtNumeroViaje.Text = producciion.IdViaje.ToString();
-            txtPrecio.Text = producciion.Precio.ToString();
-            txtCantidad.Text = producciion.Peso.ToString();
-            cmbMinerales.SelectedValue = producciion.IdMineral;
-        }
-
-        //Se verificará que todos los campos estén llenoss antes de realizar cualquier acción
-        private bool VerificacionDedatosRequeridos()
-        {
-            if (txtCantidad.Text == string.Empty || txtPrecio.Text == string.Empty || cmbMinerales.SelectedValue == null)
-            {
-                MessageBoxResult result = MessageBox.Show("Por favor!, Verifique que las casillas" +
-                    " contengan la infromación requerida!",
-                   "Confirmar", MessageBoxButton.OK, MessageBoxImage.Warning);
-                return false;
-            }
-            //else if(producciion.Peso < 0)
-            //{
-            //    MessageBoxResult result = MessageBox.Show("Error!" +
-            //        " No se pueden ingresar números negativos!",
-            //       "Confirmar", MessageBoxButton.OK, MessageBoxImage.Warning);
-            //    txtCantidad.Text = string.Empty;
-            //    return false;
-            //}
-            //else
-            return true;
-        }
-
-        //Ocultar los botones
-        private void OcultarBotonesOperaciones(Visibility ocultar)
-        {
-            btnInsertar.Visibility = ocultar;
-            btnModificar.Visibility = ocultar;
-            btnEliminar.Visibility = ocultar;
-            btnLimpiar.Visibility = ocultar;
-        }
-
-        private void ObtienePropiedades(Producciion producciion)
-        {
-            this.txtCantidad.Text = Convert.ToString(producciion.Peso);
-            this.txtNumeroViaje.Text = Convert.ToString(producciion.IdViaje);
-            this.txtPrecio.Text = Convert.ToString(producciion.Precio);
-            this.cmbMinerales.SelectedItem = Convert.ToString(producciion.NombreMineral);
-        }
-
         private void MostarContenidoEnCasillas(object sender, SelectionChangedEventArgs e)
         {
             DataGrid dataGrid = (DataGrid)sender;
@@ -177,7 +134,7 @@ namespace ProyectoMinaELMochito
         private void btnInsertar_Click(object sender, RoutedEventArgs e)
         {
             //Primero verificamos que las casillas no estén vacías
-            if (VerificacionDedatosRequeridos() && VerificarNegativos())
+            if (procedimiento.VerificacionDeDatos(txtCantidad.Text, txtPrecio.Text, cmbMinerales.SelectedValue) && validacion.VerificarNegativos(txtCantidad.Text))
             {
                 try
                 {
@@ -210,9 +167,8 @@ namespace ProyectoMinaELMochito
             {
                 //Realizar el query que mostrara la información
                 String queryProduccion = @"Select P.idProduccion as 'Id Producción', P.idViaje as 'N° Viaje', 
-                                    M.descripcion as 'Mineral',P.precio as 'Precio', P.peso as 'Peso(Kg)',
-                                    P.total as 'Total' 
-                                    From Minas.Produccion as P
+                                    M.descripcion as 'Mineral',P.precio as 'Precio', P.peso as 'Peso(Kg)'
+                                    From Producciones.Produccion as P
                                     Inner Join Minas.Mineral as M on P.idMineral = M.idMineral";
 
                 //Establecer la conexión
@@ -228,7 +184,7 @@ namespace ProyectoMinaELMochito
                 SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand);
 
                 //Crear el dataTable que contendrá las tablas desde la base
-                DataTable dataTable1 = new DataTable("Minas.Produccion");
+                DataTable dataTable1 = new DataTable("Producciones.Produccion");
 
                 //Llenar los datagrid con la información necesaria
                 sqlDataAdapter.Fill(dataTable1);
@@ -298,46 +254,15 @@ namespace ProyectoMinaELMochito
                 e.Handled = true;
         }
 
-        /// <summary>
-        /// Precio
-        /// </summary>
-        
-        private bool VerificarNegativos()
-        {
-            try
-            {
-                producciion.Peso = Convert.ToDecimal(txtCantidad.Text);
-
-            }
-            catch (Exception ex)
-            {
-
-                MessageBox.Show(ex.Message);
-                txtCantidad.Text = string.Empty;
-                return false;
-            }
-            finally
-            {
-
-                MostrarDatosTabla();
-            }
-            
-            if (producciion.Peso < 0)
-            {
-                MessageBoxResult result = MessageBox.Show("Error!" +
-                    " Los números no pueden ser negativos!",
-                   "Confirmar", MessageBoxButton.OK, MessageBoxImage.Warning);
-                return false;
-            }
-            return true;
-        }
         private void btnModificar_Click(object sender, RoutedEventArgs e)
         {
-            // Verificar que se ingresaron los valores requeridos
-            if (VerificacionDedatosRequeridos() && VerificarNegativos())
+            //Primero verificamos que las casillas no estén vacías
+            if (procedimiento.VerificacionDeDatos(txtCantidad.Text, txtPrecio.Text, cmbMinerales.SelectedValue) && validacion.VerificarNegativos(txtCantidad.Text))
             {
                 try
                 {
+                    /*ObtenerDatos(1)*/
+                    ;
                     ObtenerDatos(1);
                     producciion.ModificarProduccion(producciion);
 
@@ -357,17 +282,6 @@ namespace ProyectoMinaELMochito
             }
         }
 
-        private void MostrarBotonesPrincipales()
-        {
-            btnModificar.Visibility = Visibility.Visible;
-            btnInsertar.Visibility = Visibility.Visible;
-            btnEliminar.Visibility = Visibility.Visible;
-            btnLimpiar.Visibility = Visibility.Visible;
-            LimpiarCasillasDeDatos();
-            Casillas(false, 0);
-        }
-
-        //Checked
         private void ActualizarPrecio(object sender, RoutedEventArgs e)
         {
             txtPrecio.IsReadOnly = false;
@@ -387,11 +301,14 @@ namespace ProyectoMinaELMochito
         private void btnEliminar_Click(object sender, RoutedEventArgs e)
         {
             // Verificar que se ingresaron los valores requeridos
-            if (VerificacionDedatosRequeridos())
+            if (procedimiento.VerificacionDeDatos(txtCantidad.Text, txtPrecio.Text, cmbMinerales.SelectedValue))
             {
                 try
                 {
+                    /* ObtenerDatos(1)*/
+                    ;
                     ObtenerDatos(1);
+
                     producciion.BorrarProduccion(producciion);
 
                     MessageBox.Show("Se eliminaron Correctamente!");

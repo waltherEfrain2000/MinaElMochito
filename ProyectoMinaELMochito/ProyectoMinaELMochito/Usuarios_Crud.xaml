@@ -9,7 +9,8 @@
          AllowsTransparency="True" Background="Transparent" 
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:fw="clr-namespace:SourceChord.FluentWPF;assembly=FluentWPF"
-        fw:AcrylicWindow.Enabled="True" FontSize="15"  MouseDown="Window_MouseDown" Height="550" Width="1080" WindowStyle="None" ResizeMode="CanResizeWithGrip" WindowStartupLocation="CenterScreen" Title="menu">
+        fw:AcrylicWindow.Enabled="True" FontSize="15"  MouseDown="Window_MouseDown" Height="650" Width="1400
+    " WindowStyle="None" ResizeMode="CanResizeWithGrip" WindowStartupLocation="CenterScreen" Title="">
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -17,9 +18,9 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <Grid fw:PointerTracker.Enabled="True" Background="#9900afb9" Height="542" VerticalAlignment="Bottom">
+        <Grid fw:PointerTracker.Enabled="True" Background="#9900afb9" Height="642" VerticalAlignment="Bottom">
             <StackPanel>
-                <TextBlock Text="" Foreground="White" Margin="1" FontWeight="DemiBold"/>
+                <TextBlock Text="" Foreground="White" Margin="1" FontWeight="DemiBold" Height="19"/>
 
 
                 <ListViewItem MouseDoubleClick="ListViewItem_MouseDoubleClick" Padding="0" Selected="ListViewItem_Selected_7">
@@ -117,7 +118,7 @@
             </StackPanel>
         </Grid>
 
-        <Grid Grid.Column="1" Background="White">
+        <Grid Grid.Column="1" Background="White" Margin="0,-4,0,4">
 
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
@@ -137,38 +138,36 @@
                 <RowDefinition Height="50"/>
 
             </Grid.RowDefinitions>
-            <Label x:Name="lbtitulo" Content="Usuarios" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" HorizontalAlignment="Center" FontFamily="Helvetica" FontSize="25"/>
+            <Label x:Name="lbtitulo" Content="Usuarios" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" FontFamily="Helvetica" FontSize="25" Margin="162,0,0,0"/>
             <iconPacks:PackIconMaterial Kind="RobotConfused" Foreground="Cyan"
                                                 VerticalAlignment="Center" 
                                                 HorizontalAlignment="Left"
                                                 x:Name="icon"
-                                                Width="24" Visibility="Visible" Grid.Column="2" Grid.Row="0" Margin="58,10,0,15"   />
-            <Label x:Name="lbnombre" Content="Nombre Completo" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Center"/>
+                                                Width="24" Visibility="Visible" Grid.Column="2" Grid.Row="0" Margin="58,10,0,15" RenderTransformOrigin="-1.417,0.406"   />
+            <Label x:Name="lbnombre" Content="Primer Nombre
+                   " Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right" Height="29" Margin="0,22,109,0" VerticalAlignment="Top" Width="144"/>
             <TextBox x:Name="txtid" Grid.Row="1" Grid.Column="1" Visibility="Hidden"/>
-            <TextBox x:Name="txtnombre" Grid.Row="2" Grid.Column="1" KeyDown="txtnombre_KeyDown"/>
-            <Label x:Name="lbUsername" Content="Nombre de usuario" Grid.Row="3" Grid.Column="0" HorizontalAlignment="Center"/>
-            <TextBox x:Name="txtusername" Grid.Row="3" Grid.Column="1"/>
-            <Label x:Name="lbPassword" Content="Contraseña" Grid.Row="4" Grid.Column="0" HorizontalAlignment="Center"/>
-            <PasswordBox x:Name="pssPassword" Grid.Row="4" Grid.Column="1"/>
-            <Label x:Name="lbRol" Content="Rol" Grid.Row="5" Grid.Column="0" HorizontalAlignment="Center" />
-            <ComboBox x:Name="cmbRol" Grid.Column="1" Grid.Row="5" >
-                <ComboBoxItem Content="ADMINISTRADOR"/>
-                <ComboBoxItem Content="EMPLEADODETURNO"/>
-            </ComboBox>
-            <Label x:Name="lbestado" Content="Estado" Grid.Row="6" Grid.Column="0" HorizontalAlignment="Center"/>
-            <ComboBox x:Name="cmbEstado" Grid.Column="1" Grid.Row="6" >
+            <TextBox x:Name="txtnombre" Grid.Row="1" KeyDown="txtnombre_KeyDown" Margin="239,10,164,3" RenderTransformOrigin="0.446,-0.098" Grid.ColumnSpan="2" TextChanged="txtnombre_TextChanged"/>
+            <Label x:Name="lbUsername" Content="Primer Apellido" Grid.Row="3" Grid.Column="0" HorizontalAlignment="Center" Margin="40,23,109,0" Width="146"/>
+            <TextBox x:Name="txtApellido" Grid.Row="3" Margin="239,11,164,2" Grid.ColumnSpan="2" KeyDown="txtApellido_KeyDown"/>
+            <Label x:Name="lbPassword" Content="Segundo Apellido" Grid.Row="4" Grid.Column="0" HorizontalAlignment="Center" Margin="44,23,109,0" RenderTransformOrigin="-0.102,0.437" Width="142"/>
+            <PasswordBox x:Name="pssPassword" Grid.Row="2" Margin="58,9,50,0" Height="38" VerticalAlignment="Top" RenderTransformOrigin="0.503,-0.422" Grid.Column="2"/>
+            <Label x:Name="lbRol" Content="Rol" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Center" Margin="187,22,62,3" Width="46" />
+            <ComboBox x:Name="cmbRol" Grid.Column="2" Grid.Row="3" Margin="58,13,50,1" Height="37" />
+            <Label x:Name="lbestado" Content="Estado" Grid.Row="4" Grid.Column="1" HorizontalAlignment="Left" Margin="187,19,0,6" Width="68" RenderTransformOrigin="0.478,0.48"/>
+            <ComboBox x:Name="cmbEstado" Grid.Column="2" Grid.Row="4" Margin="58,11,50,2" Height="38" >
                 <ComboBoxItem Content="Inactivo"/>
                 <ComboBoxItem Content="Activo"/>
             </ComboBox>
 
-            <DataGrid Name="dtgriduser" Grid.Row="2" Grid.Column="2" Grid.RowSpan="5" Grid.ColumnSpan="2" Margin="0,0,23,0" HorizontalAlignment="Right" Width="353" SelectionChanged="dtgriduser_SelectionChanged" CurrentCellChanged="dtgriduser_CurrentCellChanged">
+            <DataGrid Name="dtgriduser" Grid.Row="5" Grid.RowSpan="4" Grid.ColumnSpan="4" Margin="0,20,30,-159" HorizontalAlignment="Right" Width="1110" SelectionChanged="dtgriduser_SelectionChanged" CurrentCellChanged="dtgriduser_CurrentCellChanged">
                 <!--<DataGridTextColumn x:Name="dgId" Header="Id" Binding="{Binding Path=Id}" Width="*"/>
             <DataGridTextColumn x:Name="dgnombreCompleto" Header="Nombre Completo" Binding="{Binding Path=NombreCompleto}" Width="*"/>
             <DataGridTextColumn x:Name="dgusername" Header="Username" Binding="{Binding Path=Username}" Width="*"/>-->
-                
+
             </DataGrid>
 
-            <Button x:Name="btnIngresar" Click="btnIngresar_Click" Content="Insertar" Grid.Column="0" Grid.Row="8" Width="150" Height="40"  Foreground="White"  BorderBrush="#0082aa"/>
+            <Button x:Name="btnIngresar" Click="btnIngresar_Click" Content="Insertar" Grid.Column="3" Grid.Row="1" Height="40"  Foreground="White"  BorderBrush="#0082aa" RenderTransformOrigin="0.51,0.525" Margin="37,10,30,1"/>
             <iconPacks:PackIconMaterial 
                                                 VerticalAlignment="Center" 
                                                 HorizontalAlignment="Left" 
@@ -176,7 +175,7 @@
                                                 x:Name="icon1"
                                                 Width="24" Visibility="Visible" Grid.Column="0" Grid.Row="8" Margin="130,10,0,15" RenderTransformOrigin="2.949,0.131"   />
 
-            <Button x:Name="btnModificar" Content="Modificar" Grid.Column="1" Grid.Row="8" Width="150" Height="40" Click="btnModificar_Click"  Foreground="White"  BorderBrush="#0082aa"/>
+            <Button x:Name="btnModificar" Content="Modificar" Grid.Column="3" Grid.Row="2" Height="40" Click="btnModificar_Click"  Foreground="White"  BorderBrush="#0082aa" Margin="37,10,30,1"/>
             <iconPacks:PackIconMaterial
                                                 VerticalAlignment="Center" 
                                                 HorizontalAlignment="Left" 
@@ -184,7 +183,7 @@
                                                 x:Name="icon2"
                                                 Width="24" Visibility="Visible" Grid.Column="1" Grid.Row="8" Margin="130,10,0,15" RenderTransformOrigin="2.949,0.131"   />
 
-            <Button x:Name="btnEliminar" Content="Eliminar" Grid.Column="2" Grid.Row="8" Width="150" Height="40" Click="btnEliminar_Click"  Foreground="White"  BorderBrush="#0082aa"/>
+            <Button x:Name="btnEliminar" Content="Eliminar" Grid.Column="3" Grid.Row="3" Height="40" Click="btnEliminar_Click"  Foreground="White"  BorderBrush="#0082aa" Margin="37,10,30,1"/>
             <iconPacks:PackIconMaterial 
                                                 VerticalAlignment="Center" 
                                                 HorizontalAlignment="Left" 
@@ -193,13 +192,21 @@
                                                 Width="24" Visibility="Visible" Grid.Column="2" Grid.Row="8" Margin="130,10,0,15" RenderTransformOrigin="2.949,0.131"   />
 
 
-            <Button x:Name="btnsalir" Content="Salir" Grid.Column="3" Grid.Row="8" Width="150" Height="40" Click="btnsalir_Click"  Foreground="White"  BorderBrush="#0082aa"/>
+            <Button x:Name="btnsalir" Content="Limpiar" Grid.Column="3" Grid.Row="4" Height="40" Click="btnsalir_Click"  Foreground="White"  BorderBrush="#0082aa" Margin="37,11,30,0"/>
             <iconPacks:PackIconMaterial 
                                                 VerticalAlignment="Center" 
                                                 HorizontalAlignment="Left" 
                                                 Foreground="White"
                                                 x:Name="icon4"
                                                 Width="24" Visibility="Visible" Grid.Column="3" Grid.Row="8" Margin="130,10,0,15" RenderTransformOrigin="2.949,0.131"   />
+            <Label x:Name="lbnombre_Copy" Content="Segundo Nombre " Grid.Row="2" Grid.Column="0" HorizontalAlignment="Right" Height="29" Margin="0,18,111,0" VerticalAlignment="Top" Width="144"/>
+            <TextBox x:Name="txtsegNombre" Grid.Row="2" KeyDown="txtnombre_KeyDown" Margin="239,9,164,4" TextChanged="txtnombre_TextChanged" RenderTransformOrigin="0.446,-0.098" Grid.ColumnSpan="2"/>
+            <Label x:Name="lbPassword_Copy" Content="Contraseña
+                   " Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center" Margin="187,23,10,0" RenderTransformOrigin="-0.102,0.437" Width="98"/>
+            <TextBox x:Name="txtSegApellido" Grid.Row="4" Margin="239,9,164,4" Grid.ColumnSpan="2" KeyDown="txtSegApellido_KeyDown"/>
+            <Label x:Name="lbPassword_Copy1" Content="Nombre de Usuario
+                   " Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" Margin="187,20,261,3" RenderTransformOrigin="-0.102,0.437" Width="142" Grid.ColumnSpan="2"/>
+            <TextBox x:Name="txtusername" Grid.Row="1" Margin="58,10,50,3" Grid.Column="2"/>
 
         </Grid>
     </Grid>

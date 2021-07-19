@@ -50,7 +50,7 @@ namespace ProyectoMinaELMochito
             try
             {
                 //Este query permitirá insertar una nueva producción
-                string queryProduccion = @"Insert Into Minas.Produccion(idViaje, idMineral, precio, peso)
+                string queryProduccion = @"Insert Into Producciones.Produccion(idViaje, idMineral, precio, peso)
                                         Values(@idViaje, @idMineral, @precio, @peso)";
 
                 //Establecer la conexión con la base de datos
@@ -80,13 +80,13 @@ namespace ProyectoMinaELMochito
             }
         }
 
-        public Producciion UltimoId() 
+        public Producciion UltimoId()
         {
             Producciion ultimoId = new Producciion();
 
             try
             {
-                String query = @"Select top 1 [idViaje] from [Minas].[viajeInterno] 
+                String query = @"Select top 1 [idViaje] from [Vehiculos].[viajeInterno] 
                                 order by [idViaje] desc";
 
                 sqlConnection.Open();
@@ -122,7 +122,7 @@ namespace ProyectoMinaELMochito
             try
             {
                 //Query que permitirá la actualización de datos en la tabla
-                string queryModificacion = @"Update Minas.Produccion 
+                string queryModificacion = @"Update Producciones.Produccion 
                                          Set idMineral = @idMineral, peso = @peso
                                          Where idProduccion = @idProduccion";
 
@@ -204,7 +204,7 @@ namespace ProyectoMinaELMochito
             try
             {
                 //Query que permitirá la opción de eliminar una producción
-                string queryEliminacion = @"Delete From Minas.Produccion 
+                string queryEliminacion = @"Delete From Producciones.Produccion 
                                       Where idProduccion = @idProduccion";
 
                 // Establecer la conexión
