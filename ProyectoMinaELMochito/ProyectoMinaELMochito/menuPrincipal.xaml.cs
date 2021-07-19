@@ -111,5 +111,12 @@ namespace ProyectoMinaELMochito
         {
 
         }
+
+        private void ListViewItem_Selected_10(object sender, RoutedEventArgs e)
+        {
+            Cargos cargos = new Cargos();
+            cargos.Show();
+            this.Close();
+        }
     }
 }
