@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 // Agregar los namespaces requeridos
+using System.Data;
 using System.Data.SqlClient;
 using System.Configuration;
 
@@ -21,6 +22,72 @@ namespace ProyectoMinaELMochito
         Conexion cn = new Conexion();
         Empleado empleado = new Empleado();
         Mineralinventario mineralinventario = new Mineralinventario();
+
+
+
+
+        public void CrearMarca(string Marca)
+        {
+            Conexion cn = new Conexion();
+
+            try
+            {
+                SqlCommand crearMarca = new SqlCommand("AdministrarMarca", cn.Conectarbd);
+                crearMarca.CommandType = CommandType.StoredProcedure;
+
+                crearMarca.Parameters.AddWithValue("@TipoConsulta", 1);
+                crearMarca.Parameters.AddWithValue("@idMarca", 1);
+                crearMarca.Parameters.AddWithValue("@nombreMarca", Marca);
+
+                cn.abrir();
+
+                crearMarca.ExecuteNonQuery();
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            finally
+            {
+                cn.cerrar();
+            }
+
+        }
+
+
+        public void ActualizarMarca(string Marca, int idMarca)
+        {
+            Conexion cn = new Conexion();
+
+            try
+            {
+                SqlCommand crearMarca = new SqlCommand("AdministrarMarca", cn.Conectarbd);
+                crearMarca.CommandType = CommandType.StoredProcedure;
+
+                crearMarca.Parameters.AddWithValue("@TipoConsulta", 3);
+                crearMarca.Parameters.AddWithValue("@idMarca", idMarca);
+                crearMarca.Parameters.AddWithValue("@nombreMarca", Marca);
+
+                cn.abrir();
+
+                crearMarca.ExecuteNonQuery();
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            finally
+            {
+                cn.cerrar();
+            }
+
+        }
+
+
+
+
+
+
 
         // ----------------------------------    PROCEDIMIENTOS PARA VEHICULOS  -------------------------------- //
 

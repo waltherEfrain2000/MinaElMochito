@@ -9,7 +9,7 @@ using System.Configuration;
 
 namespace ProyectoMinaELMochito
 {
-    class Vehiculo
+    class Marcas
     {
         // Variables miembro
         Conexion cn = new Conexion();
@@ -17,41 +17,37 @@ namespace ProyectoMinaELMochito
         //Propiedades
         public int VehiculoID { get; set; }
         public string Marca { get; set; }
-        public string NombreMarca { get; set; }
         public string Modelo { get; set; }
         public string Placa { get; set; }
         public string Color { get; set; }
-        public int Estado { get; set; }
-        public string NombreEstado { get; set; }
+        public int elCodigoMarca { get; set; }
+        public string NombreMarca { get; set; }
 
         // Constructores
-        public Vehiculo() { }
+        public Marcas() { }
 
 
-        public Vehiculo(int vehiculoID, string marca, string modelo, string placa, string color, int estado)
+        public Marcas(int vehiculoID, int codigoMarca, string modelo, string placa, string color, int estado)
         {
             VehiculoID = vehiculoID;
-            Marca = marca;
+            codigoMarca = elCodigoMarca;
             Modelo = modelo;
             Placa = placa;
             Color = color;
-            Estado = estado;
         }
 
 
-        public List<Vehiculo> LlenarComboBoxEstados()
+        public List<Vehiculo> LlenarComboBoxModelos()
         {
             try
             {
                 //Realizar el query que cargará la información correspondiente
-                String query = @"EXEC MostrarVehiculo @tipoMostrar";
+                String query = @"EXEC MostrarMarcas";
 
                 //Establecer la conexión
                 cn.abrir();
 
                 SqlCommand sqlCommand = new SqlCommand(query, cn.Conectarbd);
-
-                sqlCommand.Parameters.AddWithValue("@tipoMostrar", 1);
 
                 SqlDataReader reader = sqlCommand.ExecuteReader();
                 List<Vehiculo> estados = new List<Vehiculo>();
@@ -60,8 +56,8 @@ namespace ProyectoMinaELMochito
                 {
                     estados.Add(new Vehiculo
                     {
-                        NombreEstado = reader["descripcion"].ToString(),
-                        Estado = Convert.ToInt32(reader["idEstado"].ToString())
+                        NombreMarca = reader["nombreMarca"].ToString(),
+                        codigoMarca = Convert.ToInt32(reader["idMarca"].ToString())
                     });
                 }
 

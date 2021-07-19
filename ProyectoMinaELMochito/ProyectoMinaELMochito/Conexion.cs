@@ -14,9 +14,9 @@ namespace ProyectoMinaELMochito
 {
     class Conexion : Window
     {
-        String Cadena = " Data Source=(local)\\SQLEXPRESS;Initial Catalog=MinaElMochito;Integrated Security=True ";
+        String Cadena = " Data Source=(local)\\SQLEXPRESS;Initial Catalog=MinaElMochitoVersion2;Integrated Security=True ";
 
-        public static string connectionString = ConfigurationManager.ConnectionStrings["ProyectoMinaELMochito.Properties.Settings.MinaConnectionString"].ConnectionString;
+        //public static string connectionString = ConfigurationManager.ConnectionStrings["ProyectoMinaELMochito.Properties.Settings.MinaConnectionString"].ConnectionString;
         public SqlConnection Conectarbd = new SqlConnection();
 
         public Conexion()

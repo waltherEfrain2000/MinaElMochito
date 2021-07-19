@@ -164,6 +164,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="MarcaVehiculo.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Vehiculos.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -225,7 +229,11 @@
       <DependentUpon>Usuarios_Crud.xaml</DependentUpon>
     </Compile>
     <Compile Include="Validaciones.cs" />
+    <Compile Include="Marca.cs" />
     <Compile Include="Vehiculo.cs" />
+    <Compile Include="MarcaVehiculo.xaml.cs">
+      <DependentUpon>MarcaVehiculo.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Vehiculos.xaml.cs">
       <DependentUpon>Vehiculos.xaml</DependentUpon>
     </Compile>
