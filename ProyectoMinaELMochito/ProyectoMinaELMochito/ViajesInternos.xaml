@@ -107,7 +107,7 @@
                     </ListViewItem>
 
                     <StackPanel Orientation="Horizontal">
-                        <Button x:Name="botonfecha" Foreground="white" Background="{x:Null}" BorderBrush="{x:Null}" Click="Button_Click">
+                        <Button x:Name="botonfecha" Foreground="white" Background="{x:Null}" BorderBrush="{x:Null}">
                             <materialDesign:PackIcon Kind="Calendar"/>
                         </Button>
                         <TextBlock Text="" FontSize="12" Margin="10" VerticalAlignment="Center"/>

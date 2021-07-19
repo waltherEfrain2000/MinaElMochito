@@ -116,7 +116,7 @@
             </StackPanel>
         </Grid>
 
-        <Grid Grid.Column="1" Background="White" Margin="0,10,0,-10">
+        <Grid Grid.Column="1" Background="White" Margin="0,0,0,10">
 
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="60"/>
@@ -144,19 +144,19 @@
                     VerticalAlignment="Center" 
                     HorizontalAlignment="Left" x:Name="icon"
                       Width="24" Visibility="Visible" Grid.Column="2" Grid.Row="0" Margin="58,10,0,15" RenderTransformOrigin="-1.417,0.406"   />
-            <Label x:Name="lbcodigo" Content="Código" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center" Height="28" Margin="10,42,111,0" VerticalAlignment="Top" Width="144"/>
+            <Label x:Name="lbcodigo" Content="Código" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center" Height="28" Margin="202,42,184,0" VerticalAlignment="Top" Width="144" Grid.ColumnSpan="2"/>
             <TextBox x:Name="txtid" Grid.Row="1" Grid.Column="1" Visibility="Hidden"/>
-            <TextBox x:Name="txtcodigo" IsReadOnly="True"  Grid.Row="2"  Margin="224,20,28,10" RenderTransformOrigin="0.446,-0.098" Grid.Column="1" Grid.ColumnSpan="2"/>
-            <Label x:Name="lbRol" Content="Nombre del cargo" Grid.Row="3" HorizontalAlignment="Center" Margin="10,39,79,10" Width="176" Grid.Column="1" />
+            <TextBox x:Name="txtcodigo" IsReadOnly="True"  Grid.Row="2"  Margin="223,20,29,10" RenderTransformOrigin="0.446,-0.098" Grid.Column="2" Grid.ColumnSpan="2"/>
+            <Label x:Name="lbRol" Content="Nombre del cargo" Grid.Row="3" HorizontalAlignment="Center" Margin="202,39,152,10" Width="176" Grid.Column="1" Grid.ColumnSpan="2" />
 
-            <DataGrid Name="dtgridcargo" Grid.Row="2" Grid.RowSpan="5" Grid.ColumnSpan="2" Margin="0,20,0,0" HorizontalAlignment="Right" Width="523" SelectionChanged="dtgriduser_SelectionChanged" Grid.Column="3" >
+            <DataGrid Name="dtgridcargo" Grid.Row="4" Grid.RowSpan="5" Grid.ColumnSpan="3" Margin="0,10,29,56" HorizontalAlignment="Right" Width="564" SelectionChanged="dtgriduser_SelectionChanged" Grid.Column="1" >
                 <!--<DataGridTextColumn x:Name="dgId" Header="Id" Binding="{Binding Path=Id}" Width="*"/>
             <DataGridTextColumn x:Name="dgnombreCompleto" Header="Nombre Completo" Binding="{Binding Path=NombreCompleto}" Width="*"/>
             <DataGridTextColumn x:Name="dgusername" Header="Username" Binding="{Binding Path=Username}" Width="*"/>-->
 
             </DataGrid>
 
-            <Button x:Name="btnIngresar" Click="btnIngresar_Click" Content="Insertar" Grid.Column="1" Grid.Row="7" Height="40"  Foreground="White"  BorderBrush="#0082aa" RenderTransformOrigin="0.51,0.525" Margin="27,40,40,0"/>
+            <Button x:Name="btnIngresar" Click="btnIngresar_Click" Content="Insertar" Grid.Column="4" Grid.Row="2" Height="40"  Foreground="White"  BorderBrush="#0082aa" RenderTransformOrigin="0.51,0.525" Margin="37,30,30,10"/>
             <iconPacks:PackIconMaterial 
                VerticalAlignment="Center" 
                HorizontalAlignment="Left" 
@@ -164,7 +164,7 @@
                x:Name="icon1"
                Width="24" Visibility="Visible" Grid.Column="0" Grid.Row="8" Margin="130,10,0,15" RenderTransformOrigin="2.949,0.131"   />
 
-            <Button x:Name="btnModificar" Content="Modificar" Grid.Row="7" Height="40" Click="btnModificar_Click"  Foreground="White"  BorderBrush="#0082aa" Margin="39,40,28,0" Grid.Column="2" VerticalAlignment="Top"/>
+            <Button x:Name="btnModificar" Content="Modificar" Grid.Row="3" Height="40" Click="btnModificar_Click"  Foreground="White"  BorderBrush="#0082aa" Margin="37,30,30,10" Grid.Column="4" VerticalAlignment="Top"/>
             <iconPacks:PackIconMaterial
                  VerticalAlignment="Center" 
                  HorizontalAlignment="Left" 
@@ -172,7 +172,7 @@
                  x:Name="icon2"
                  Width="24" Visibility="Visible" Grid.Column="1" Grid.Row="8" Margin="130,10,0,15" RenderTransformOrigin="2.949,0.131"   />
 
-            <Button x:Name="btnEliminar" Content="Eliminar" Grid.Column="3" Grid.Row="7" Height="40" Click="btnEliminar_Click"  Foreground="White"  BorderBrush="#0082aa" Margin="34,40,32,0"/>
+            <Button x:Name="btnEliminar" Content="Eliminar" Grid.Column="4" Grid.Row="4" Height="40" Click="btnEliminar_Click"  Foreground="White"  BorderBrush="#0082aa" Margin="37,30,30,10"/>
             <iconPacks:PackIconMaterial 
                  VerticalAlignment="Center" 
                  HorizontalAlignment="Left" 
@@ -181,13 +181,13 @@
                  Width="24" Visibility="Visible" Grid.Column="2" Grid.Row="8" Margin="130,10,0,15" RenderTransformOrigin="2.949,0.131"   />
 
 
-             <iconPacks:PackIconMaterial 
+            <iconPacks:PackIconMaterial 
                  VerticalAlignment="Center" 
                  HorizontalAlignment="Left" 
                  Foreground="White"
                 x:Name="icon4"
                  Width="24" Visibility="Visible" Grid.Column="3" Grid.Row="8" Margin="130,10,0,15" RenderTransformOrigin="2.949,0.131"   />
-            <TextBox x:Name="txtnombre" Grid.Row="3"  Margin="224,20,28,10" RenderTransformOrigin="0.446,-0.098" Grid.Column="1" Grid.ColumnSpan="2" TextChanged="txtnombre_TextChanged"/>
+            <TextBox x:Name="txtnombre" Grid.Row="3"  Margin="223,20,29,10" RenderTransformOrigin="0.446,-0.098" Grid.Column="2" Grid.ColumnSpan="2" TextChanged="txtnombre_TextChanged"/>
 
         </Grid>
     </Grid>
