@@ -116,6 +116,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="AsignarHerramientas.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Cargos.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -129,6 +133,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="EntradasHistoricas.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Herramientas.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -184,6 +192,9 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="AsignarHerramientas.xaml.cs">
+      <DependentUpon>AsignarHerramientas.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Cargocrud.cs" />
     <Compile Include="Cargos.xaml.cs">
       <DependentUpon>Cargos.xaml</DependentUpon>
@@ -199,6 +210,10 @@
     <Compile Include="EntradaMineral.cs" />
     <Compile Include="EntradasHistoricas.xaml.cs">
       <DependentUpon>EntradasHistoricas.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Herramienta.cs" />
+    <Compile Include="Herramientas.xaml.cs">
+      <DependentUpon>Herramientas.xaml</DependentUpon>
     </Compile>
     <Compile Include="Historial_Entradas.xaml.cs">
       <DependentUpon>Historial_Entradas.xaml</DependentUpon>
@@ -231,6 +246,7 @@
     <Compile Include="Usuarios_Crud.xaml.cs">
       <DependentUpon>Usuarios_Crud.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Validaciones.cs" />
     <Compile Include="Vehiculo.cs" />
     <Compile Include="Vehiculos.xaml.cs">
       <DependentUpon>Vehiculos.xaml</DependentUpon>

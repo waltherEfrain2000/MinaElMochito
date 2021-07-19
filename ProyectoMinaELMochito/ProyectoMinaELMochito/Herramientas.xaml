@@ -32,10 +32,17 @@
 
                 <ListView FontSize="15">
 
-                    <ListViewItem  Padding="1" Selected="ListViewItem_Selected">
+                    <ListViewItem Padding="1" Selected="ListViewItem_Selected">
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Foreground="White" Kind="Worker" Margin="15"/>
                             <TextBlock Text="Empleado" Foreground="White" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </ListViewItem>
+
+                    <ListViewItem Padding="1" Selected="ListViewItem_Selected_10" >
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Foreground="White" Kind="Work" Margin="15"/>
+                            <TextBlock Text="Cargo" Foreground="White" VerticalAlignment="Center"/>
                         </StackPanel>
                     </ListViewItem>
 
@@ -67,7 +74,7 @@
                         </StackPanel>
                     </ListViewItem>
 
-                    <ListViewItem Padding="1" Selected="ListViewItem_Selected_5">
+                    <ListViewItem Padding="1" Selected="ListViewItem_Selected_9">
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Foreground="White" Kind="Abacus" Margin="15"/>
                             <TextBlock Text="Producción" Foreground="White" VerticalAlignment="Center"/>
@@ -81,7 +88,7 @@
                         </StackPanel>
                     </ListViewItem>
 
-                    <ListViewItem Padding="1" Selected="ListViewItem_Selected_9" >
+                    <ListViewItem Padding="1" Selected="ListViewItem_Selected_11"  >
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Foreground="White" Kind="Pickaxe" Margin="15"/>
                             <TextBlock Text="Equipo" Foreground="White" VerticalAlignment="Center"/>

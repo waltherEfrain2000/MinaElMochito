@@ -44,6 +44,13 @@
                         </StackPanel>
                     </ListViewItem>
 
+                    <ListViewItem Padding="1" Selected="ListViewItem_Selected_10" >
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Foreground="White" Kind="Work" Margin="15"/>
+                            <TextBlock Text="Cargo" Foreground="White" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </ListViewItem>
+
                     <ListViewItem Padding="1" Selected="ListViewItem_Selected_1">
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Foreground="White" Kind="DumpTruck" Margin="15"/>
@@ -72,7 +79,7 @@
                         </StackPanel>
                     </ListViewItem>
 
-                    <ListViewItem Padding="1" Selected="ListViewItem_Selected_5">
+                    <ListViewItem Padding="1" Selected="ListViewItem_Selected_9">
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Foreground="White" Kind="Abacus" Margin="15"/>
                             <TextBlock Text="Producción" Foreground="White" VerticalAlignment="Center"/>
@@ -86,6 +93,13 @@
                         </StackPanel>
                     </ListViewItem>
 
+                    <ListViewItem Padding="1" Selected="ListViewItem_Selected_11"  >
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Foreground="White" Kind="Pickaxe" Margin="15"/>
+                            <TextBlock Text="Equipo" Foreground="White" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </ListViewItem>
+
                     <ListViewItem Padding="1" Selected="ListViewItem_Selected_8" >
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Foreground="White" Kind="Logout" Margin="15"/>
@@ -94,7 +108,7 @@
                     </ListViewItem>
 
                     <StackPanel Orientation="Horizontal">
-                        <Button x:Name="botonfecha" Foreground="white" Background="{x:Null}" BorderBrush="{x:Null}" >
+                        <Button x:Name="botonfecha" Foreground="white" Background="{x:Null}" BorderBrush="{x:Null}" Click="Button_Click">
                             <materialDesign:PackIcon Kind="Calendar"/>
                         </Button>
                         <TextBlock Text="" FontSize="12" Margin="10" VerticalAlignment="Center"/>

@@ -89,6 +89,13 @@
                         </StackPanel>
                     </ListViewItem>
 
+                    <ListViewItem Padding="1" Selected="ListViewItem_Selected_11"  >
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Foreground="White" Kind="Pickaxe" Margin="15"/>
+                            <TextBlock Text="Equipo" Foreground="White" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </ListViewItem>
+
                     <ListViewItem Padding="1" Selected="ListViewItem_Selected_8" >
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Foreground="White" Kind="Logout" Margin="15"/>

@@ -34,7 +34,7 @@ namespace ProyectoMinaELMochito
 
         public void CrearCargo(Cargocrud Cargo)
         {
-            Conexion cn = new Conexion();
+            conexion cn = new conexion();
             try
             {  
                 SqlCommand cmd = new SqlCommand("insertarCargos", cn.Conectarbd);
@@ -62,7 +62,7 @@ namespace ProyectoMinaELMochito
         }
         public void ActualizarCargo(Cargocrud Cargo)
         {
-            Conexion cn = new Conexion();
+            conexion cn = new conexion();
             try
             {
                 SqlCommand cmd = new SqlCommand("ActualizarCargos", cn.Conectarbd);
@@ -96,7 +96,7 @@ namespace ProyectoMinaELMochito
 
         public void EliminarCargo(Cargocrud Cargo)
         {
-            Conexion cn = new Conexion();
+            conexion cn = new conexion();
             try
             {
                 SqlCommand cmd = new SqlCommand("EliminarCargo", cn.Conectarbd);
