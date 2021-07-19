@@ -76,13 +76,6 @@ namespace ProyectoMinaELMochito
 
                 cn.abrir();
 
-                SqlDataAdapter adp = new SqlDataAdapter();
-                adp.SelectCommand = cmd;
-                DataTable tabla = new DataTable();
-                adp.Fill(tabla);
-
-                cn.abrir();
-
                 cmd.ExecuteNonQuery();
 
             }
