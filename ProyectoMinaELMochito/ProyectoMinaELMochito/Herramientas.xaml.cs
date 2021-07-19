@@ -196,6 +196,11 @@ namespace ProyectoMinaELMochito
                 txtEquipamiento.Text = filaSeleccionada["Herramienta"].ToString();
                 txtCantidad.Text = filaSeleccionada["Inventario"].ToString();
                 txtValorUnitario.Text = filaSeleccionada["Precio de compra"].ToString();
+                txtinversion.Text = filaSeleccionada["Herramientas en uso"].ToString();
+                pb1.Value = Convert.ToInt32(txtCantidad.Text);
+                //pb2.Value = Convert.ToDecimal(txtinversion.Text);
+                pb3.Maximum = Convert.ToInt32(txtCantidad.Text);
+                pb3.Value = Convert.ToInt32(txtinversion.Text);
             }
         }
 
@@ -310,6 +315,11 @@ namespace ProyectoMinaELMochito
         private void btnActualizar_Click(object sender, RoutedEventArgs e)
         {
             MostrarHerramienta();
+        }
+
+        private void pb1_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+
         }
     }
 }
