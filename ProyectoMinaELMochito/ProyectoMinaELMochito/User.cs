@@ -82,10 +82,10 @@ namespace ProyectoMinaELMochito
                     {
                         // Obtener los valores del usuario si la consulta retorna valores
                         usuario.Id = Convert.ToInt32(rdr["id"]);
-                        usuario.NombreCompleto = rdr["nombreCompleto"].ToString();
-                        usuario.Username = rdr["username"].ToString();
-                        usuario.Password = rdr["password"].ToString();
-                        usuario.Rol = rdr["rol"].ToString();
+                        usuario.NombreCompleto = rdr["primerNombre"].ToString();
+                        usuario.Username = rdr["nombreUsuario"].ToString();
+                        usuario.Password = rdr["contraseña"].ToString();
+                        usuario.Rol = rdr["idRol"].ToString();
                         usuario.Estado = Convert.ToBoolean(rdr["estado"]);
                     }
                 }

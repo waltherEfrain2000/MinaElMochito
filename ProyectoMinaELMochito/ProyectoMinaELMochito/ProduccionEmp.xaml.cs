@@ -79,6 +79,7 @@ namespace ProyectoMinaELMochito
             producciion.IdMineral = Convert.ToInt32(cmbMinerales.SelectedValue);
             producciion.Precio = Convert.ToDecimal(txtPrecio.Text);
             producciion.Peso = Convert.ToDecimal(txtCantidad.Text);
+            producciion.Fecha = DateTime.Now.ToString("yyyy/MM/dd");
 
         }
         private void MostarContenidoEnCasillas(object sender, SelectionChangedEventArgs e)
@@ -167,7 +168,7 @@ namespace ProyectoMinaELMochito
             {
                 //Realizar el query que mostrara la información
                 String queryProduccion = @"Select P.idProduccion as 'Id Producción', P.idViaje as 'N° Viaje', 
-                                    M.descripcion as 'Mineral',P.precio as 'Precio', P.peso as 'Peso(Kg)'
+                                    M.descripcion as 'Mineral',P.precio as 'Precio', P.peso as 'Peso(Kg)', P.Fecha as 'Fecha'
                                     From Producciones.Produccion as P
                                     Inner Join Minas.Mineral as M on P.idMineral = M.idMineral";
 

@@ -48,11 +48,11 @@ namespace ProyectoMinaELMochito
                 //Query para seleccionar los datos de la tabla
                 String queryEmpleado = @"Select IdEmpleado as 'Id Empleado', identidad as 'Identidad', 
                                primerNombre as 'Nombre Empleado'
-                               from Minas.Empleado where estado = 'Activo' And idCargo = 7";
+                               from Empleados.Empleado where estado = 'Activo' And idCargo = 7";
 
-                String queryVehiculo = @"Select idVehiculo as 'Id Vehiculo', marca as 'Marca', 
-                                        modelo as 'Modelo', placa as 'Placa', color as 'Color'
-                                         from Minas.Vehiculo where estado = 1";
+                String queryVehiculo = @"Select idVehiculo as 'Id Vehiculo', idMarca as 'Marca', 
+                                        idModelo as 'Modelo', placa as 'Placa', color as 'Color'
+                                         from Vehiculos.Vehiculo where estado = 1";
 
                 //Establecer la conexion
                 sqlConnection.Open();
@@ -70,8 +70,8 @@ namespace ProyectoMinaELMochito
                 SqlDataAdapter sqlDataAdapter2 = new SqlDataAdapter(sqlCommand2);
 
                 //Crear el dataTable que contendrá las tablas desde la base
-                DataTable dataTable1 = new DataTable("Minas.Empleado");
-                DataTable dataTable2 = new DataTable("Minas.Vehiculo");
+                DataTable dataTable1 = new DataTable("Empleados.Empleado");
+                DataTable dataTable2 = new DataTable("Vehiculos.Vehiculo");
 
                 //Llenar los datagrid con la información necesaria
                 sqlDataAdapter1.Fill(dataTable1);
