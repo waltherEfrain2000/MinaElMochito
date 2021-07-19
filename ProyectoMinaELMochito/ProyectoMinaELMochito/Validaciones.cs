@@ -43,11 +43,11 @@ namespace ProyectoMinaELMochito
 
         }
 
-        public bool VerificarCamposLlenos(string Cantidad, string Total, string FechaSalida, string Mineral, string Detalle)
+        public bool VerificarCamposLlenos(string Cantidad, string FechaSalida, string Mineral)
         {
             Double Valor = 0;
 
-            if (Cantidad == string.Empty || Total == string.Empty || FechaSalida == string.Empty || Detalle == string.Empty)
+            if (Cantidad == string.Empty || FechaSalida == string.Empty )
             {
                 MessageBox.Show("Favor no dejar vacío ningún campo...");
                 return false;
