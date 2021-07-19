@@ -7,17 +7,20 @@ using System.Threading.Tasks;
 using System.Windows;
 namespace ProyectoMinaELMochito
 {
-    class Conexion : Window
+    class Conexion 
     {
         // ojo, arreglar esta conexión si no sirve en su pc
         String Cadena = " Data Source=DESKTOP-PEIA00M\\SQLEXPRESS;Initial Catalog=MinaElMochitoVersion2;Integrated Security=True ";
         public SqlConnection Conectarbd = new SqlConnection();
 
+        //public Conexion()
+        //{
+        //    Conectarbd.ConnectionString = Cadena;
+        //}
         public Conexion()
         {
             Conectarbd.ConnectionString = Cadena;
         }
-
         public void abrir()
         {
             try

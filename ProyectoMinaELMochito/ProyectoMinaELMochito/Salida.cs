@@ -24,22 +24,12 @@ namespace ProyectoMinaELMochito
         public string FechaSalida { get; set; }
         public string DetalleSalida { get; set; }
 
-
-
-
-
         // Constructores
-        public Salida()
+        public Salida() {}
 
+        public Salida(int idSalida,int idMineral, int idDetallesalida, decimal cantidad, string fecha)
         {
-
-
-
-        }
-
-        public Salida(int idMineral, int idDetallesalida, decimal cantidad, string fecha)
-        {
-            
+            IDsalida = idSalida;
             IDMineral = idMineral;
             IdDetalle = idDetallesalida;
             Cantidad = cantidad;
@@ -49,11 +39,11 @@ namespace ProyectoMinaELMochito
 
         public void ingresarSalidas(Salida salidas )
         {
-           
+            Conexion cn = new Conexion();
             try
             {
-                sqlConnection.Open();
-                SqlCommand sqlCommand = new SqlCommand("insertarSalidas", sqlConnection);
+                
+                SqlCommand sqlCommand = new SqlCommand("insertarSalidas", cn.Conectarbd);
                 sqlCommand.CommandType = CommandType.StoredProcedure;
    
                 sqlCommand.Parameters.AddWithValue("@idmineral", salidas.IDMineral);
@@ -61,11 +51,7 @@ namespace ProyectoMinaELMochito
                 sqlCommand.Parameters.AddWithValue("@cantidad", salidas.Cantidad);
                 sqlCommand.Parameters.AddWithValue("@fechaSalida", salidas.FechaSalida);
 
-                
-                SqlDataAdapter adp = new SqlDataAdapter();
-                adp.SelectCommand = sqlCommand;
-                DataTable tabla = new DataTable();
-                adp.Fill(tabla);
+                cn.abrir();
                
                 sqlCommand.ExecuteNonQuery();
 
@@ -77,7 +63,7 @@ namespace ProyectoMinaELMochito
             }
             finally
             {
-                sqlConnection.Close();
+                cn.cerrar();
 
             }
 
@@ -89,17 +75,15 @@ namespace ProyectoMinaELMochito
             Conexion cn = new Conexion();
             try
             {
-               
-                sqlConnection.Open();
-
-
                 SqlCommand sqlCommand = new SqlCommand("ActualizarSalida",cn.Conectarbd);
                 sqlCommand.CommandType = CommandType.StoredProcedure;
+
                 sqlCommand.Parameters.AddWithValue("@idSalida", salidas.IDsalida);
                 sqlCommand.Parameters.AddWithValue("@idmineral", salidas.IDMineral);
                 sqlCommand.Parameters.AddWithValue("@idDetalle", salidas.IdDetalle);
                 sqlCommand.Parameters.AddWithValue("@cantidad", salidas.Cantidad);
                 sqlCommand.Parameters.AddWithValue("@fechaSalida", salidas.FechaSalida);
+
                 cn.abrir();
                 SqlDataAdapter adp = new SqlDataAdapter();
                 adp.SelectCommand = sqlCommand;
@@ -227,11 +211,7 @@ namespace ProyectoMinaELMochito
             }
 
         }
-        /// <summary>
-        /// Obtiene un vuelo por su id
-        /// </summary>
-        /// <param name="idvuelo">El id del vuelo</param>
-        /// <returns>Los datos del vuelon</returns>
+       
         //public Salida BuscarSalida(int idvuelo)
         //{
         //    Salida Salida = new Salida();

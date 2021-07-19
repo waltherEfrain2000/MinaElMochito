@@ -32,10 +32,9 @@ namespace ProyectoMinaELMochito
         private static string connectionString = ConfigurationManager.ConnectionStrings["ProyectoMinaELMochito.Properties.Settings.MinaConnectionString"].ConnectionString;
         private SqlConnection sqlConnection = new SqlConnection(connectionString);
 
-        private Salida salidas = new Salida();
         private Validaciones validaciones = new Validaciones();
         private Procedimientos procedimientos = new Procedimientos();
-
+        private Salida salidas = new Salida();
 
 
         public Salidas()
@@ -90,23 +89,6 @@ namespace ProyectoMinaELMochito
             }
         }
 
-        private void dgvSalida_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            DataGrid dg = (DataGrid)sender;
-            DataRowView filaSeleccionada = dg.SelectedItem as DataRowView;
-            if (filaSeleccionada != null)
-            {
-                txtIdSalida.Text = filaSeleccionada["IDSalida"].ToString();
-                cmbIdMineral.Text = filaSeleccionada["Mineral"].ToString();
-                txtCantidad.Text = filaSeleccionada["Cantidad"].ToString();
-                FSalida.Text = filaSeleccionada["FechaSalida"].ToString();
-                cmbSalidas.Text = filaSeleccionada["IdDetalle"].ToString();
-                
-            }
-
-            
-        }
-
 
         private void infoFormulario(int operacion)
         {
@@ -114,11 +96,9 @@ namespace ProyectoMinaELMochito
 
             if (operacion == 1)
             {
+                //salidas.IDsalida = Convert.ToInt32(txtIdSalida.Text);
                 salidas.IDsalida = Convert.ToInt32(txtIdSalida.Text);
             }
-            salidas.FechaSalida = FSalida.Text;
-            salidas.IdDetalle = Convert.ToInt32(cmbSalidas.SelectedIndex);
-            salidas.Cantidad = Convert.ToDecimal(txtCantidad.Text);
 
             switch (cmbIdMineral.SelectedIndex)
             {
@@ -134,38 +114,48 @@ namespace ProyectoMinaELMochito
                 case 3:
                     salidas.IDMineral = 4;
                     break;
+                case 4:
+                    salidas.IDMineral = 5;
+                    break;
                 default:
                     break;
             }
-            //switch (cmbSalidas.SelectedIndex)
-            //{
-            //    case 0:
-            //        salidas.IdDetalle = 1;
-            //        break;
-            //    case 1:
-            //        salidas.IdDetalle = 2;
-            //        break;
-            //    case 2:
-            //        salidas.IdDetalle = 3;
-            //        break;
-            //    case 3:
-            //        salidas.IdDetalle = 4;
-            //        break;
-            //    case 4:
-            //        salidas.IdDetalle = 5;
-            //        break;
-            //    case 5:
-            //        salidas.IdDetalle = 6;
-            //        break;
-            //    case 6:
-            //        salidas.IdDetalle = 7;
-            //        break;
+            switch (cmbSalidas.SelectedIndex)
+            {
+                case 0:
+                    salidas.IdDetalle = 1;
+                    break;
+                case 1:
+                    salidas.IdDetalle = 2;
+                    break;
+                case 2:
+                    salidas.IdDetalle = 3;
+                    break;
+                case 3:
+                    salidas.IdDetalle = 4;
+                    break;
+                case 4:
+                    salidas.IdDetalle = 5;
+                    break;
+                case 5:
+                    salidas.IdDetalle = 6;
+                    break;
+                case 6:
+                    salidas.IdDetalle = 7;
+                    break;
+                case 7:
+                    salidas.IdDetalle = 8;
+                    break;
+                default:
+                    break;
+            }
 
-            //    default:
-            //        break;
-            //}
-           
-     
+
+            salidas.FechaSalida = FSalida.Text;
+           // salidas.IdDetalle = Convert.ToInt32(cmbSalidas.SelectedIndex);
+            decimal cantidad = Convert.ToDecimal(txtCantidad.Text);
+            salidas.Cantidad = Convert.ToDecimal(txtCantidad.Text);
+
         }
 
         private void btnIngresar_Click(object sender, RoutedEventArgs e)
@@ -204,7 +194,7 @@ namespace ProyectoMinaELMochito
             {
                 try
                 {
-                   // infoFormulario(1);
+                   infoFormulario(1);
                     salidas.ActualizarSalidas(salidas);
                     MessageBox.Show("Salida Modificada");
 
@@ -232,7 +222,7 @@ namespace ProyectoMinaELMochito
             try
             {
 
-                //infoFormulario(1);
+                infoFormulario(1);
                 salidas.EliminarSalidas(salidas);
                 MessageBox.Show("Salida Eliminada");
 
@@ -251,7 +241,20 @@ namespace ProyectoMinaELMochito
                 MostrarInfoSalidas();
             }
         }
+        private void dgvSalida_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
+        {
+            DataGrid dg = (DataGrid)sender;
+            DataRowView filaSeleccionada = dg.SelectedItem as DataRowView;
+            if (filaSeleccionada != null)
+            {
+                txtIdSalida.Text = filaSeleccionada["Código"].ToString();
+                cmbIdMineral.Text = filaSeleccionada["Mineral"].ToString();
+                txtCantidad.Text = filaSeleccionada["Cantidad (kg)"].ToString();
+                FSalida.Text = filaSeleccionada["Fecha de Salida"].ToString();
+                //cmbSalidas.Text = filaSeleccionada["Código detalle"].ToString();
 
+            }
+        }
         private void btnLimpiar_Click(object sender, RoutedEventArgs e)
         {
             limpiarTexto();
@@ -374,5 +377,7 @@ namespace ProyectoMinaELMochito
             validaciones.ValidarLetras(e);
 
         }
+
+       
     }
 }
