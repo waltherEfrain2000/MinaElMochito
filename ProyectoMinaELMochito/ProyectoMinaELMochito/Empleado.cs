@@ -8,7 +8,7 @@ using System.Configuration;
 using System.Data;
 
 
-//hola
+//holaa
 
 namespace ProyectoMinaELMochito
 {
