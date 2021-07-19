@@ -42,12 +42,11 @@ namespace ProyectoMinaELMochito
                 e.Handled = true;
 
         }
-
-        public bool VerificarCamposLlenos(string Cantidad, string FechaSalida, string Mineral)
+        public bool VerificarCamposLlenos(string Cantidad, string Total, string FechaSalida, string Mineral, string Detalle)
         {
             Double Valor = 0;
 
-            if (Cantidad == string.Empty || FechaSalida == string.Empty )
+            if (Cantidad == string.Empty || Total == string.Empty || FechaSalida == string.Empty || Detalle == string.Empty)
             {
                 MessageBox.Show("Favor no dejar vacío ningún campo...");
                 return false;
@@ -95,7 +94,33 @@ namespace ProyectoMinaELMochito
             }
             return true;
         }
-
+        public bool VerificarCamposLlenos(string txtIdEmpleado, string txtIdVehiculo)
+        {
+            if (txtIdEmpleado == string.Empty || txtIdVehiculo == string.Empty)
+            {
+                MessageBoxResult result = MessageBox.Show("Por favor!, Verifique que las casillas contengan la infromación requerida!",
+                    "Confirmar", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return false;
+            }
+            //Si hay valores en las casillas entonces se retornará verdadero
+            return true;
+        }
+        public bool VerificacionDedatosRequeridos(string Cantidad, string Precio, string cmbMinerales)
+        {
+            int Valor = 0;
+            if (Cantidad == string.Empty || Precio == string.Empty || cmbMinerales == null)
+            {
+                MessageBoxResult result = MessageBox.Show("Por favor!, Verifique que las casillas" +
+                    " contengan la infromación requerida!",
+                   "Confirmar", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return false;
+            }
+            else if (Cantidad == string.Empty || Precio == string.Empty || cmbMinerales == null)
+            {
+                return false;
+            }
+            return true;
+        }
     }
 
 }

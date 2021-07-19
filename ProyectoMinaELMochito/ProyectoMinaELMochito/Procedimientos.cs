@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 // Agregar los namespaces requeridos
+using System.Data;
 using System.Data.SqlClient;
 using System.Configuration;
 
@@ -18,110 +19,230 @@ namespace ProyectoMinaELMochito
     {
 
         // conexion con clases
+        Conexion cn = new Conexion();
         Empleado empleado = new Empleado();
         Mineralinventario mineralinventario = new Mineralinventario();
 
+
+
+
+        public void CrearMarca(string Marca)
+        {
+            Conexion cn = new Conexion();
+
+            try
+            {
+                SqlCommand crearMarca = new SqlCommand("AdministrarMarca", cn.Conectarbd);
+                crearMarca.CommandType = CommandType.StoredProcedure;
+
+                crearMarca.Parameters.AddWithValue("@TipoConsulta", 1);
+                crearMarca.Parameters.AddWithValue("@idMarca", 1);
+                crearMarca.Parameters.AddWithValue("@nombreMarca", Marca);
+
+                cn.abrir();
+
+                crearMarca.ExecuteNonQuery();
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            finally
+            {
+                cn.cerrar();
+            }
+
+        }
+
+
+        public void ActualizarMarca(string Marca, int idMarca)
+        {
+            Conexion cn = new Conexion();
+
+            try
+            {
+                SqlCommand crearMarca = new SqlCommand("AdministrarMarca", cn.Conectarbd);
+                crearMarca.CommandType = CommandType.StoredProcedure;
+
+                crearMarca.Parameters.AddWithValue("@TipoConsulta", 3);
+                crearMarca.Parameters.AddWithValue("@idMarca", idMarca);
+                crearMarca.Parameters.AddWithValue("@nombreMarca", Marca);
+
+                cn.abrir();
+
+                crearMarca.ExecuteNonQuery();
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            finally
+            {
+                cn.cerrar();
+            }
+
+        }
+
+
+        public void CrearModelo(string Modelo, int Marca)
+        {
+            Conexion cn = new Conexion();
+
+            try
+            {
+                SqlCommand crearMarca = new SqlCommand("AdministrarModelo", cn.Conectarbd);
+                crearMarca.CommandType = CommandType.StoredProcedure;
+
+                crearMarca.Parameters.AddWithValue("@TipoConsulta", 1);
+                crearMarca.Parameters.AddWithValue("@idMarca", Marca);
+                crearMarca.Parameters.AddWithValue("@idModelo", 1);
+                crearMarca.Parameters.AddWithValue("@nombreModelo", Modelo);
+
+                cn.abrir();
+
+                crearMarca.ExecuteNonQuery();
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            finally
+            {
+                cn.cerrar();
+            }
+
+        }
+
+        public void ActualizarModelo(int idModelo, int idMarca, string modelo)
+        {
+            Conexion cn = new Conexion();
+
+            try
+            {
+                SqlCommand crearMarca = new SqlCommand("AdministrarModelo", cn.Conectarbd);
+                crearMarca.CommandType = CommandType.StoredProcedure;
+
+                crearMarca.Parameters.AddWithValue("@TipoConsulta", 3);
+                crearMarca.Parameters.AddWithValue("@idMarca", idMarca);
+                crearMarca.Parameters.AddWithValue("@idModelo", idModelo);
+                crearMarca.Parameters.AddWithValue("@nombreModelo", modelo);
+
+                cn.abrir();
+
+                crearMarca.ExecuteNonQuery();
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            finally
+            {
+                cn.cerrar();
+            }
+
+        }
+
+
+
+
         // ----------------------------------    PROCEDIMIENTOS PARA VEHICULOS  -------------------------------- //
 
-        private static string connectionString = ConfigurationManager.ConnectionStrings["ProyectoMinaELMochito.Properties.Settings.MinaConnectionString"].ConnectionString;
-        private SqlConnection sqlConnection = new SqlConnection(connectionString);
+        //private static string connectionString = ConfigurationManager.ConnectionStrings["ProyectoMinaELMochito.Properties.Settings.MinaConnectionString"].ConnectionString;
+        //private SqlConnection sqlConnection = new SqlConnection(connectionString);
         private Vehiculo elVehiculo = new Vehiculo();
 
-        public void CrearVehiculo(Procedimientos vehiculo)
+        public void CrearVehiculo(int idModelo, int idMarca, string placa, string color, int estado)
         {
+            Conexion cn = new Conexion();
+
             try
             {
-                string query = @"EXEC InsertarVehiculo @marca,@modelo,@placa,@color,@estado";
+                SqlCommand crearMarca = new SqlCommand("AdministrarVehiculo", cn.Conectarbd);
+                crearMarca.CommandType = CommandType.StoredProcedure;
 
-                sqlConnection.Open();
+                crearMarca.Parameters.AddWithValue("@TipoConsulta", 2);
+                crearMarca.Parameters.AddWithValue("@idVehiculo", 1);
+                crearMarca.Parameters.AddWithValue("@idModelo", idModelo);
+                crearMarca.Parameters.AddWithValue("@idMarca", idMarca);
+                crearMarca.Parameters.AddWithValue("@placa", placa);
+                crearMarca.Parameters.AddWithValue("@color", color);
+                crearMarca.Parameters.AddWithValue("@estado", estado);
 
+                cn.abrir();
 
-                SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
-
-                sqlCommand.Parameters.AddWithValue("@marca", elVehiculo.Marca);
-                sqlCommand.Parameters.AddWithValue("@modelo", elVehiculo.Modelo);
-                sqlCommand.Parameters.AddWithValue("@placa", elVehiculo.Placa);
-                sqlCommand.Parameters.AddWithValue("@color", elVehiculo.Color);
-                sqlCommand.Parameters.AddWithValue("@estado", elVehiculo.Estado);
-
-                sqlCommand.ExecuteNonQuery();
-
+                crearMarca.ExecuteNonQuery();
             }
             catch (Exception e)
             {
-
                 throw e;
             }
             finally
             {
-                sqlConnection.Close();
-
+                cn.cerrar();
             }
         }
-        public void ActualizarVehiculo(Procedimientos vehiculo)
+        public void ActualizarVehiculo(int idVehiculo, int idModelo, int idMarca, string placa, string color, int estado)
         {
+            Conexion cn = new Conexion();
+
             try
             {
-                string query = @"EXEC ModificarVehiculo @marca,@modelo,@placa,@color,@estado,@idVehiculo";
+                SqlCommand crearMarca = new SqlCommand("AdministrarVehiculo", cn.Conectarbd);
+                crearMarca.CommandType = CommandType.StoredProcedure;
 
-                sqlConnection.Open();
+                crearMarca.Parameters.AddWithValue("@TipoConsulta", 3);
+                crearMarca.Parameters.AddWithValue("@idVehiculo", idVehiculo);
+                crearMarca.Parameters.AddWithValue("@idModelo", idModelo);
+                crearMarca.Parameters.AddWithValue("@idMarca", idMarca);
+                crearMarca.Parameters.AddWithValue("@placa", placa);
+                crearMarca.Parameters.AddWithValue("@color", color);
+                crearMarca.Parameters.AddWithValue("@estado", estado);
 
+                cn.abrir();
 
-                SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
-
-                sqlCommand.Parameters.AddWithValue("@idVehiculo", elVehiculo.VehiculoID);
-                sqlCommand.Parameters.AddWithValue("@marca", elVehiculo.Marca);
-                sqlCommand.Parameters.AddWithValue("@modelo", elVehiculo.Modelo);
-                sqlCommand.Parameters.AddWithValue("@placa", elVehiculo.Marca);
-                sqlCommand.Parameters.AddWithValue("@color", elVehiculo.Color);
-                sqlCommand.Parameters.AddWithValue("@estado", elVehiculo.Estado);
-
-                sqlCommand.ExecuteNonQuery();
+                crearMarca.ExecuteNonQuery();
             }
             catch (Exception e)
             {
-
                 throw e;
             }
             finally
             {
-                sqlConnection.Close();
-
+                cn.cerrar();
             }
         }
 
 
-        public void EliminarVehiculo(Procedimientos vehiculo)
+        public void EliminarVehiculo(int idVehiculo)
         {
+            Conexion cn = new Conexion();
+
             try
             {
-                string query = @"EXEC EliminarVehiculo @estado, @idvehiculo ";
+                SqlCommand crearMarca = new SqlCommand("AdministrarVehiculo", cn.Conectarbd);
+                crearMarca.CommandType = CommandType.StoredProcedure;
 
-                sqlConnection.Open();
+                crearMarca.Parameters.AddWithValue("@TipoConsulta", 4);
+                crearMarca.Parameters.AddWithValue("@idVehiculo", idVehiculo);
+                crearMarca.Parameters.AddWithValue("@idModelo", 1);
+                crearMarca.Parameters.AddWithValue("@idMarca", 1);
+                crearMarca.Parameters.AddWithValue("@placa", 1);
+                crearMarca.Parameters.AddWithValue("@color", 1);
+                crearMarca.Parameters.AddWithValue("@estado", 2);
 
-                SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
+                cn.abrir();
 
-                sqlCommand.Parameters.AddWithValue("@idVehiculo", elVehiculo.VehiculoID);
-                sqlCommand.Parameters.AddWithValue("@estado", 3);
-
-                sqlCommand.ExecuteNonQuery();
-
+                crearMarca.ExecuteNonQuery();
             }
             catch (Exception e)
             {
-
                 throw e;
             }
             finally
             {
-                sqlConnection.Close();
+                cn.cerrar();
             }
         }
-
-
-
-
-
         // ----------------------------------    PROCEDIMIENTOS PARA EMPLEADOS   -------------------------------- //
         public bool VerificarCamposLlenos(string identidad, string nombre, string edad, string salario, string direccion, object genero, object cargo)
         {
@@ -148,68 +269,6 @@ namespace ProyectoMinaELMochito
             }
             return true;
         }
-        // si no sirve esta parte, cambiar a int genero y cargo
-        public void ExtraerInformacionFormulario(int operacion, string empleadoID, string identidad, string nombre, string edad, object genero, object cargo, string salario)
-        {
-            //entra si va extraer informacion para actualizar
-            if (operacion == 1)
-            {
-                // ojo
-                empleado.EmpledoID = Convert.ToInt32(empleadoID);
-            }
-
-            empleado.Identidad = identidad;
-            switch (genero)
-            {
-                case 0:
-                    empleado.Genero = 1;
-                    break;
-                case 1:
-                    empleado.Genero = 2;
-                    break;
-                default:
-                    break;
-            }
-            switch (cargo)
-            {
-                case 0:
-                    empleado.Cargo = 1;
-                    break;
-                case 1:
-                    empleado.Cargo = 2;
-                    break;
-                case 2:
-                    empleado.Cargo = 3;
-                    break;
-                case 3:
-                    empleado.Cargo = 4;
-                    break;
-                case 4:
-                    empleado.Cargo = 5;
-                    break;
-                 case 5:
-                    empleado.Cargo = 6;
-                    break;
-                case 6:
-                    empleado.Cargo = 7;
-                    break;
-                default:
-                    break;
-            }
-            decimal monto = Convert.ToDecimal(salario);
-
-
-            if (!decimal.TryParse(salario, out monto))
-            {
-                MessageBox.Show("Ingrese un monto válido...");
-                return; //Salimos del método o evento
-            }
-
-            empleado.Salario = Convert.ToDecimal(salario);
-            empleado.Estado = "activo";
-            empleado.Direccion = salario;
-            //txtSalario.Text = salario.ToString("0000.00", CultureInfo.InvariantCulture);
-        }
 
         Salida salidas = new Salida();
 
@@ -223,6 +282,8 @@ namespace ProyectoMinaELMochito
             }
 
             salidas.Cantidad = Convert.ToDecimal(Cantidad);
+            salidas.Total = Convert.ToDecimal(Total);
+            salidas.FechaSalida = Convert.ToDateTime(FSalida);
             salidas.DetalleSalida = Detalle;
 
             switch (cmbIdMineral)
@@ -292,8 +353,39 @@ namespace ProyectoMinaELMochito
             }
             return true;
         }
+        // ----------------------------------    PROCEDIMIENTOS PARA PRODUCCION  -------------------------------- //
+        public void VerificarP(string txtCantidad, string txtPrecio, string txtTotal)
+        {
+            double Valor = 0;
+            try
+            {
+                if (txtCantidad == string.Empty || (Convert.ToDouble(txtCantidad) == Valor))
+                {
+                    txtCantidad = " ";
+                    txtTotal = " ";
+                }
+                else if (txtPrecio == string.Empty)
+                {
+                    MessageBoxResult result = MessageBox.Show("Debe seleccionar un mineral",
+                      "Confirmar", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    txtCantidad = "";
+                }
+                else
+                {
+                    double Total;
+                    double Cantidad, precio;
+                    Cantidad = Convert.ToDouble(txtCantidad);
+                    precio = Convert.ToDouble(txtPrecio);
+                    Total = Cantidad * precio;
 
-
-
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBoxResult result = MessageBox.Show("No puede ingresar dos puntos deguidos",
+                      "Confirmar", MessageBoxButton.OK, MessageBoxImage.Warning);
+                txtCantidad = "";
+            }
+        }
     }
 }

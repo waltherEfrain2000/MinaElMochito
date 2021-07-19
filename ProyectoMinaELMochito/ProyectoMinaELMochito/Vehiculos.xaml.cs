@@ -24,40 +24,39 @@ namespace ProyectoMinaELMochito
     public partial class Vehiculos : Window
     {
         // Variables miembro
-        private static string connectionString = ConfigurationManager.ConnectionStrings["ProyectoMinaELMochito.Properties.Settings.MinaConnectionString"].ConnectionString;
-        private SqlConnection sqlConnection = new SqlConnection(connectionString);
+        Conexion cn = new Conexion();
+        int idVehiculo;
 
-        private Vehiculo vehiculo = new Vehiculo();
+        private Procedimientos vehiculo = new Procedimientos();
+        private Vehiculo vehiculos = new Vehiculo();
+        private Validaciones validacion = new Validaciones();
         public Vehiculos()
         {
             InitializeComponent();
             MostrarVehiculo();
-            MostrarEstados();
+            MostrarComboBoxes();
             botonfecha.Content = string.Format("{0}", DateTime.Now.ToString());
-
-            //Definir la longitud de los textbox
-            txtMarca.MaxLength = 15;
-            txtModelo.MaxLength = 30;
-            txtPlaca.MaxLength = 15;
             txtColor.MaxLength = 15;
-
+            txtPlaca.MaxLength = 15;
         }
 
         private void DgvVehiculos_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            cn.abrir();
             DataGrid dg = (DataGrid)sender;
             DataRowView filaSeleccionada = dg.SelectedItem as DataRowView;
             if (filaSeleccionada != null)
             {
-                txtVehiculoID.Text = filaSeleccionada["VehiculoID"].ToString();
-                txtMarca.Text = filaSeleccionada["Marca"].ToString();
-                txtModelo.Text = filaSeleccionada["Modelo"].ToString();
+                txtVehiculoID.Text = filaSeleccionada["Código Vehículo"].ToString();
+                idVehiculo = Convert.ToInt32(filaSeleccionada["Código Vehículo"]);
                 txtPlaca.Text = filaSeleccionada["Placa"].ToString();
-                txtColor.Text = filaSeleccionada["color"].ToString();
-                cmbEstado.Text = filaSeleccionada["estado"].ToString();
-
+                txtColor.Text = filaSeleccionada["Color"].ToString();
+                cmbEstado.Text = filaSeleccionada["Estado"].ToString();
+                cmbMarca.Text = filaSeleccionada["Marca"].ToString();
+                cmbModelo.Text = filaSeleccionada["Modelo"].ToString();
 
                 edicionDeCasillas(true, 0);
+                cn.cerrar();
             }
         }
         private void edicionDeCasillas(bool opcion, int operacion)
@@ -65,12 +64,9 @@ namespace ProyectoMinaELMochito
             //operacion sirve para distingir entre actualizar y activar o inabilitar todas las casillas
             if (operacion == 0)
             {
-                /*txtMarca.IsReadOnly = opcion;
-                txtModelo.IsReadOnly = opcion;
                 txtPlaca.IsReadOnly = opcion;
                 txtColor.IsReadOnly = opcion;
-                cmbEstado.IsReadOnly = opcion;*/
-                int a = 0;
+                cmbEstado.IsReadOnly = opcion;
 
             }
             else
@@ -79,19 +75,19 @@ namespace ProyectoMinaELMochito
                 cmbEstado.IsReadOnly = opcion;
             }
         }
-            private void LimpiarCasillas()
-            {
-                txtVehiculoID.Text = string.Empty;
-                txtMarca.Text = string.Empty;
-                txtModelo.Text = string.Empty;
-                txtPlaca.Text = string.Empty;
-                txtColor.Text = string.Empty;
-                cmbEstado.SelectedValue = null;
-                edicionDeCasillas(false, 0);
-            }
+        private void LimpiarCasillas()
+        {
+            txtVehiculoID.Text = string.Empty;
+            txtPlaca.Text = string.Empty;
+            txtColor.Text = string.Empty;
+            cmbEstado.SelectedValue = null;
+            cmbModelo.SelectedValue = null;
+            cmbMarca.SelectedValue = null;
+            edicionDeCasillas(false, 0);
+        }
         private bool VerificarCamposLlenos()
         {
-            if (txtMarca.Text == string.Empty || txtModelo.Text == string.Empty || txtPlaca.Text == string.Empty || txtColor.Text == string.Empty)
+            if (txtPlaca.Text == string.Empty || txtColor.Text == string.Empty)
             {
                 MessageBox.Show("Por favor ingresa todos los valores en las cajas de texto");
                 return false;
@@ -108,50 +104,55 @@ namespace ProyectoMinaELMochito
             //entra si va extraer informacion para actualizar
             if (operacion == 1)
             {
-                vehiculo.VehiculoID = Convert.ToInt32(txtVehiculoID.Text);
+                vehiculos.VehiculoID = Convert.ToInt32(txtVehiculoID.Text);
 
             }
 
-            vehiculo.Marca = txtMarca.Text;
-            vehiculo.Modelo = txtModelo.Text;
-            vehiculo.Placa = txtPlaca.Text;
-            vehiculo.Color = txtColor.Text;
+            vehiculos.Placa = txtPlaca.Text;
+            vehiculos.Color = txtColor.Text;
 
 
             switch (cmbEstado.SelectedIndex)
             {
                 case 0:
-                    vehiculo.Estado = 1;
+                    vehiculos.Estado = 1;
                     break;
                 case 1:
-                    vehiculo.Estado = 2;
+                    vehiculos.Estado = 2;
                     break;
                 case 2:
-                    vehiculo.Estado = 3;
+                    vehiculos.Estado = 3;
                     break;
                 default:
                     break;
             }
         }
-       
-        
 
-            private void MostrarVehiculo()
+
+
+        private void MostrarVehiculo()
         {
             try
             {
-                string query = @"SELECT V.idVehiculo  AS 'VehiculoID',V.marca AS 'Marca', V.modelo AS 'Modelo',
-                                V.placa AS 'Placa',V.color,EV.descripcion  AS 'Estado'FROM  Minas.Vehiculo V INNER JOIN Minas.EstadoVehiculo EV
-								ON EV.idEstado = V.estado";
 
-                sqlConnection.Open();
 
-                SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
+                string query = @"EXEC AdministrarVehiculo @tipoConsulta, @idVehiculo, @idModelo, @idMarca, @placa, @color, @estado";
+
+                cn.abrir();
+
+                SqlCommand sqlCommand = new SqlCommand(query, cn.Conectarbd);
+                sqlCommand.Parameters.AddWithValue("@tipoConsulta", 1);
+                sqlCommand.Parameters.AddWithValue("@idVehiculo", 1);
+                sqlCommand.Parameters.AddWithValue("@idModelo", 1);
+                sqlCommand.Parameters.AddWithValue("@idMarca", 1);
+                sqlCommand.Parameters.AddWithValue("@placa", 1);
+                sqlCommand.Parameters.AddWithValue("@color", 1);
+                sqlCommand.Parameters.AddWithValue("@estado", 1);
 
                 sqlCommand.ExecuteNonQuery();
                 SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand);
 
-                DataTable dataTable = new DataTable("Minas.Vehiculo");
+                DataTable dataTable = new DataTable("Vehiculos.Vehiculo");
                 sqlDataAdapter.Fill(dataTable);
                 DgvVehiculos.ItemsSource = dataTable.DefaultView;
                 sqlDataAdapter.Update(dataTable);
@@ -160,14 +161,14 @@ namespace ProyectoMinaELMochito
             catch (Exception ex)
             {
 
-                MessageBox.Show("Ha Ocurrido Un Error! Revisas tus datos.");
+                throw ex;
             }
             finally
             {
-                sqlConnection.Close();
+                cn.cerrar();
             }
         }
-            private void btnAgregar_Click(object sender, RoutedEventArgs e)
+        private void btnAgregar_Click(object sender, RoutedEventArgs e)
         {
             // Verificar que se ingresaron los valores requeridos
             if (VerificarCamposLlenos())
@@ -176,7 +177,7 @@ namespace ProyectoMinaELMochito
                 {
                     //parametro 0 por que no es actualizacion
                     ExtraerInformacionFormulario(0);
-                    //vehiculo.CrearVehiculo(vehiculo);
+                    vehiculo.CrearVehiculo(Convert.ToInt32(cmbModelo.SelectedValue), Convert.ToInt32(cmbMarca.SelectedValue), txtPlaca.Text, txtColor.Text, Convert.ToInt32(cmbEstado.SelectedValue));
 
                     // Mensaje de inserción exitosa
                     MessageBox.Show("¡Vehiculo insertado correctamente!");
@@ -184,7 +185,7 @@ namespace ProyectoMinaELMochito
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Ha Ocurrido Un Error! Revisas tus datos.");
+                    MessageBox.Show(ex.Message);
 
                 }
                 finally
@@ -218,7 +219,7 @@ namespace ProyectoMinaELMochito
                 }
             }
         }
-       
+
         private void btnAceptarModificacion_Click(object sender, RoutedEventArgs e)
         {
             // Verificar que se ingresaron los valores requeridos
@@ -230,7 +231,7 @@ namespace ProyectoMinaELMochito
                 {
                     //parametro 1 por que es actualizacion
                     ExtraerInformacionFormulario(1);
-                    //vehiculo.ActualizarVehiculo(vehiculo);
+                    vehiculo.ActualizarVehiculo(idVehiculo , Convert.ToInt32(cmbModelo.SelectedValue), Convert.ToInt32(cmbMarca.SelectedValue), txtPlaca.Text, txtColor.Text, Convert.ToInt32(cmbEstado.SelectedValue));
 
 
                     // Mensaje de inserción exitosa
@@ -285,7 +286,7 @@ namespace ProyectoMinaELMochito
                 {
                     //parametro 1 por que es actualizacion
                     ExtraerInformacionFormulario(1);
-                    //vehiculo.EliminarVehiculo(vehiculo);
+                    vehiculo.EliminarVehiculo(idVehiculo);
 
                     // Mensaje de inserción exitosa
                     MessageBox.Show("¡Vehiculo Eliminado correctamente!");
@@ -303,9 +304,9 @@ namespace ProyectoMinaELMochito
                     MostrarVehiculo();
                 }
             }
-           
+
         }
-        
+
         private void btnLimpiar_Click(object sender, RoutedEventArgs e)
         {
             LimpiarCasillas();
@@ -316,7 +317,7 @@ namespace ProyectoMinaELMochito
             BotonesCancelar();
         }
 
-     
+
 
         private void BotonesCancelar()
         {
@@ -336,12 +337,20 @@ namespace ProyectoMinaELMochito
         {
             BotonesCancelar();
         }
-        private void MostrarEstados()
+        private void MostrarComboBoxes()
         {
-            cmbEstado.ItemsSource = vehiculo.LlenarComboBoxEstados();
+            cmbEstado.ItemsSource = vehiculos.LlenarComboBoxEstados();
             cmbEstado.DisplayMemberPath = "NombreEstado";
             cmbEstado.SelectedValuePath = "Estado";
-
+            /*-------------------------------------------------------*/
+            cmbModelo.ItemsSource = vehiculos.LlenarComboBoxModelos(Convert.ToInt32(cmbMarca.SelectedValue));
+            cmbModelo.DisplayMemberPath = "Modelo";
+            cmbModelo.SelectedValuePath = "idModelo";
+            /*-------------------------------------------------------*/
+            Marcas marcas = new Marcas();
+            cmbMarca.ItemsSource = marcas.LlenarComboBoxMarcas();
+            cmbMarca.DisplayMemberPath = "NombreMarca";
+            cmbMarca.SelectedValuePath = "CodigoMarca";
         }
 
 
@@ -423,32 +432,19 @@ namespace ProyectoMinaELMochito
         {
 
         }
-        //Función evita que se inserten números
-        private void txtColor_KeyDown(object sender, KeyEventArgs e)
+
+        private void btnModelosMarcas_Click(object sender, RoutedEventArgs e)
         {
-            if (e.Key >= Key.D0 && e.Key <= Key.D9 || e.Key >= Key.NumPad0 && e.Key <= Key.NumPad9)
-                e.Handled = true;
-            else
-                e.Handled = false;
-        }
-        private void ListViewItem_Selected_9(object sender, RoutedEventArgs e)
-        {
-            ViajesInternos sld = new ViajesInternos();
+            MarcaVehiculo sld = new MarcaVehiculo();
             sld.Show();
             this.Close();
         }
-        private void ListViewItem_Selected_10(object sender, RoutedEventArgs e)
-        {
-            Cargos cargos = new Cargos();
-            cargos.Show();
-            this.Close();
-        }
 
-        private void ListViewItem_Selected_11(object sender, RoutedEventArgs e)
+        private void cmbMarca_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            Herramientas herramientas = new Herramientas();
-            herramientas.Show();
-            this.Close();
+            cmbModelo.ItemsSource = vehiculos.LlenarComboBoxModelos(Convert.ToInt32(cmbMarca.SelectedValue));
+            cmbModelo.DisplayMemberPath = "Modelo";
+            cmbModelo.SelectedValuePath = "idModelo";
         }
     }
 }
