@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
 using System.Configuration;
-
+using System.Data;
 
 namespace ProyectoMinaELMochito 
 {
@@ -18,14 +18,13 @@ namespace ProyectoMinaELMochito
         // Propiedades
         public int IDsalida { get; set; }
         public int IDMineral { get; set; }
+        public int IdDetalle { get; set; }
         public String NombreMineral { get; set; }
         public decimal Cantidad { get; set; }
-        public decimal Precio { get; set; }
-        public decimal Total { get; set; }
-        public DateTime FechaSalida { get; set; }
+        public string FechaSalida { get; set; }
         public string DetalleSalida { get; set; }
 
-      
+
 
 
 
@@ -34,37 +33,40 @@ namespace ProyectoMinaELMochito
 
         {
 
-          
+
 
         }
 
-        public Salida(int idSalida, int idMineral, decimal cantidad, decimal total, DateTime fecha, string detalle)
+        public Salida(int idMineral, int idDetallesalida, decimal cantidad, string fecha)
         {
-            IDsalida = idSalida;
+            
             IDMineral = idMineral;
+            IdDetalle = idDetallesalida;
             Cantidad = cantidad;
-            Total = total;
             FechaSalida = fecha;
-            DetalleSalida = detalle;
+
         }
 
-        public void ingresarSalidas(Salida salidas)
+        public void ingresarSalidas(Salida salidas )
         {
+           
             try
             {
-                string query = @"Insert into Minas.Salida values(@idmineral, @cantidad, @Total, @detalleVenta, @fechaSalida)";
-
                 sqlConnection.Open();
-
-
-                SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
-
+                SqlCommand sqlCommand = new SqlCommand("insertarSalidas", sqlConnection);
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+   
                 sqlCommand.Parameters.AddWithValue("@idmineral", salidas.IDMineral);
+                sqlCommand.Parameters.AddWithValue("@idDetalle", salidas.IdDetalle);
                 sqlCommand.Parameters.AddWithValue("@cantidad", salidas.Cantidad);
-                sqlCommand.Parameters.AddWithValue("@Total", salidas.Total);
-                sqlCommand.Parameters.AddWithValue("@detalleVenta", salidas.DetalleSalida);
-                sqlCommand.Parameters.AddWithValue("@fechaSalida", salidas.FechaSalida.ToString("yyyy-MM-dd "));
+                sqlCommand.Parameters.AddWithValue("@fechaSalida", salidas.FechaSalida);
 
+                
+                SqlDataAdapter adp = new SqlDataAdapter();
+                adp.SelectCommand = sqlCommand;
+                DataTable tabla = new DataTable();
+                adp.Fill(tabla);
+               
                 sqlCommand.ExecuteNonQuery();
 
             }
@@ -78,35 +80,33 @@ namespace ProyectoMinaELMochito
                 sqlConnection.Close();
 
             }
+
         }
 
+       
         public void ActualizarSalidas(Salida salidas)
         {
+            Conexion cn = new Conexion();
             try
             {
-                string query = @"UPDATE	Minas.Salida SET idmineral = @idmineral, 
-                                                         cantidad = @cantidad,
-                                                         Total = @Total,
-                                                         detalleVenta = @detalleVenta,
-                                                         fechaSalida = @fechaSalida
-                                                         Where idSalida = @idSalida";
-
+               
                 sqlConnection.Open();
 
 
-                SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
-
-                sqlCommand.Parameters.AddWithValue("@idmineral", salidas.IDMineral);
-                sqlCommand.Parameters.AddWithValue("@cantidad", salidas.Cantidad);
-                sqlCommand.Parameters.AddWithValue("@Total", salidas.Total);
-                sqlCommand.Parameters.AddWithValue("@detalleVenta", salidas.DetalleSalida);
-                sqlCommand.Parameters.AddWithValue("@fechaSalida", salidas.FechaSalida.ToString("yyyy-MM-dd "));
+                SqlCommand sqlCommand = new SqlCommand("ActualizarSalida",cn.Conectarbd);
+                sqlCommand.CommandType = CommandType.StoredProcedure;
                 sqlCommand.Parameters.AddWithValue("@idSalida", salidas.IDsalida);
-
-
-
+                sqlCommand.Parameters.AddWithValue("@idmineral", salidas.IDMineral);
+                sqlCommand.Parameters.AddWithValue("@idDetalle", salidas.IdDetalle);
+                sqlCommand.Parameters.AddWithValue("@cantidad", salidas.Cantidad);
+                sqlCommand.Parameters.AddWithValue("@fechaSalida", salidas.FechaSalida);
+                cn.abrir();
+                SqlDataAdapter adp = new SqlDataAdapter();
+                adp.SelectCommand = sqlCommand;
+                DataTable tabla = new DataTable();
+                adp.Fill(tabla);
+                cn.abrir();
                 sqlCommand.ExecuteNonQuery();
-
             }
             catch (Exception e)
             {
@@ -115,32 +115,31 @@ namespace ProyectoMinaELMochito
             }
             finally
             {
-                sqlConnection.Close();
+                cn.cerrar();
 
             }
         }
 
         public void EliminarSalidas(Salida salidas)
         {
+            Conexion cn = new Conexion();
             try
             {
-
-
-                string query = @"DELETE FROM Minas.Salida Where idSalida = @idSalida";
-
                 sqlConnection.Open();
 
 
-                SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
+                SqlCommand sqlCommand = new SqlCommand("EliminarSalida", cn.Conectarbd);
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+ 
+                sqlCommand.Parameters.AddWithValue("@idSalida",salidas.IDsalida);
 
-                //sqlCommand.Parameters.AddWithValue("@idmineral", salidas.IDMineral);
-                //sqlCommand.Parameters.AddWithValue("@cantidad", salidas.Cantidad);
-                //sqlCommand.Parameters.AddWithValue("@Total", salidas.Total);
-                //sqlCommand.Parameters.AddWithValue("@detalleVenta", salidas.DetalleSalida);
-                //sqlCommand.Parameters.AddWithValue("@fechaSalida", salidas.FechaSalida);
-                sqlCommand.Parameters.AddWithValue("@idSalida", salidas.IDsalida);
+                cn.abrir();
+                SqlDataAdapter adp = new SqlDataAdapter();
+                adp.SelectCommand = sqlCommand;
+                DataTable tabla = new DataTable();
+                adp.Fill(tabla);
+                cn.abrir();
                 sqlCommand.ExecuteNonQuery();
-
             }
             catch (Exception e)
             {
@@ -159,13 +158,11 @@ namespace ProyectoMinaELMochito
 
             try
             {
-                //Realizar el query que cargará la información correspondiente
-                String queryMinerales = @"Select * From Minas.Mineral";
 
                 //Establecer la conexión
                 sqlConnection.Open();
 
-                SqlCommand sqlCommand = new SqlCommand(queryMinerales, sqlConnection);
+                SqlCommand sqlCommand = new SqlCommand("LlenarCombobox",sqlConnection);
 
                 SqlDataReader reader = sqlCommand.ExecuteReader();
 
@@ -176,8 +173,6 @@ namespace ProyectoMinaELMochito
                     salidas.Add(new Salida
                     {
                         NombreMineral = reader["descripcion"].ToString(),
-
-                        Precio = Convert.ToDecimal(reader["Precio"].ToString()),
 
                         IDMineral = Convert.ToInt32(reader["idMineral"].ToString())
                     });
@@ -195,6 +190,92 @@ namespace ProyectoMinaELMochito
             }
 
         }
+     
+        public List<Salida> LlenarDetalleSalidas()
+        {
+
+            try
+            {
+
+                //Establecer la conexión
+                sqlConnection.Open();
+
+                SqlCommand sqlCommand = new SqlCommand("LlenarComboboxDetalle", sqlConnection);
+
+                SqlDataReader reader = sqlCommand.ExecuteReader();
+
+                List<Salida> salidas = new List<Salida>();
+
+                while (reader.Read())
+                {
+                    salidas.Add(new Salida
+                    {
+                        DetalleSalida = reader["DetalleSalida"].ToString(),
+                        IdDetalle = Convert.ToInt32(reader["idDetalle"].ToString())
+                    }); ;
+                }
+
+                return salidas;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                sqlConnection.Close();
+            }
+
+        }
+        /// <summary>
+        /// Obtiene un vuelo por su id
+        /// </summary>
+        /// <param name="idvuelo">El id del vuelo</param>
+        /// <returns>Los datos del vuelon</returns>
+        //public Salida BuscarSalida(int idvuelo)
+        //{
+        //    Salida Salida = new Salida();
+
+
+        //    try
+        //    {
+                
+        //        // Establecer la conexión
+        //        sqlConnection.Open();
+
+        //        // Crear el comando SQL
+        //        SqlCommand sqlCommand = new SqlCommand("BuscarSalidas", sqlConnection);
+
+        //        // Establecer el valor del parámetro
+        //        sqlCommand.Parameters.AddWithValue("@idSalida", IDsalida);
+
+        //        using (SqlDataReader rdr = sqlCommand.ExecuteReader())
+        //        {
+        //            while (rdr.Read())
+        //            {
+        //               Salida.IDsalida = Convert.ToInt32(rdr["idSalida"]);
+        //                Salida.IDMineral = Convert.ToInt32(rdr["idMineral"]);
+        //                Salida.IdDetalle = Convert.ToInt32(rdr["idDetalle"]);
+        //                Salida.FechaSalida = Convert.ToDateTime(rdr["fechaSalida"]);
+        //                Salida.Cantidad = Convert.ToDecimal(rdr["Cantidad"]);
+                        
+
+
+        //            }
+        //        }
+
+        //        return Salida;
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        throw e;
+        //    }
+        //    finally
+        //    {
+        //        // Cerrar la conexión
+        //        sqlConnection.Close();
+        //    }
+        //}
     }
 }
 

@@ -37,25 +37,15 @@ namespace ProyectoMinaELMochito
         private Procedimientos procedimientos = new Procedimientos();
 
 
-        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            DragMove();
-        }
-
-        private void ListViewItem_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-            menuPrincipal sld = new menuPrincipal();
-            sld.Show();
-            this.Close();
-        }
 
         public Salidas()
         {
+            //botonfecha.Content = string.Format("{0}", DateTime.Now.ToString());
             InitializeComponent();
             MostrarMinerales();
-            botonfecha.Content = string.Format("{0}", DateTime.Now.ToString());
-            MostrarInfoSalidas();
-
+            MostrarDetalleSalidas();
+             MostrarInfoSalidas();
+           
         }
 
         private void limpiarTexto()
@@ -63,9 +53,9 @@ namespace ProyectoMinaELMochito
             txtIdSalida.Text = string.Empty;
             cmbIdMineral.SelectedValue = null;
             txtCantidad.Text = string.Empty;
-            txtTotal.Text = string.Empty;
             FSalida.Text = string.Empty;
-            txtDetalle.Text = string.Empty;
+            cmbSalidas.SelectedValue = null;
+          
 
             //edicionDeCasillas(false, 0);
         }
@@ -75,18 +65,14 @@ namespace ProyectoMinaELMochito
         {
             try
             {
-                string query = @"Select S.[idSalida] as 'ID de Salida', M.[descripcion] as 'Mineral', S.[cantidad] AS 'Cantidad (Kg)', S.[Total] as 'Total',
-								S.[fechaSalida] as 'Fecha de Salida', S.[detalleVenta] as 'Detalle de venta'
-								from Minas.Salida S Inner Join Minas.Mineral M on S.idmineral = M.idMineral";
-
                 sqlConnection.Open();
 
-                SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
-
+                SqlCommand sqlCommand = new SqlCommand("MostrarInfoSalidas", sqlConnection);
+                sqlCommand.CommandType = CommandType.StoredProcedure;
                 sqlCommand.ExecuteNonQuery();
                 SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand);
 
-                DataTable dataTable = new DataTable("Minas.Salida");
+                DataTable dataTable = new DataTable("Salidas.Salida");
                 sqlDataAdapter.Fill(dataTable);
                 dgvSalida.ItemsSource = dataTable.DefaultView;
                 sqlDataAdapter.Update(dataTable);
@@ -110,27 +96,87 @@ namespace ProyectoMinaELMochito
             DataRowView filaSeleccionada = dg.SelectedItem as DataRowView;
             if (filaSeleccionada != null)
             {
-                txtIdSalida.Text = filaSeleccionada["ID de Salida"].ToString();
-                txtCantidad.Text = filaSeleccionada["Cantidad (Kg)"].ToString();
-                txtTotal.Text = filaSeleccionada["Total"].ToString();
-                FSalida.Text = filaSeleccionada["Fecha de Salida"].ToString();
-                txtDetalle.Text = filaSeleccionada["Detalle de venta"].ToString();
-                txtIdSalida.IsReadOnly = false;
+                txtIdSalida.Text = filaSeleccionada["IDSalida"].ToString();
+                cmbIdMineral.Text = filaSeleccionada["Mineral"].ToString();
+                txtCantidad.Text = filaSeleccionada["Cantidad"].ToString();
+                FSalida.Text = filaSeleccionada["FechaSalida"].ToString();
+                cmbSalidas.Text = filaSeleccionada["IdDetalle"].ToString();
+                
             }
+
+            
+        }
+
+
+        private void infoFormulario(int operacion)
+        {
+
+
+            if (operacion == 1)
+            {
+                salidas.IDsalida = Convert.ToInt32(txtIdSalida.Text);
+            }
+            salidas.FechaSalida = FSalida.Text;
+            salidas.IdDetalle = Convert.ToInt32(cmbSalidas.SelectedIndex);
+            salidas.Cantidad = Convert.ToDecimal(txtCantidad.Text);
+
+            switch (cmbIdMineral.SelectedIndex)
+            {
+                case 0:
+                    salidas.IDMineral = 1;
+                    break;
+                case 1:
+                    salidas.IDMineral = 2;
+                    break;
+                case 2:
+                    salidas.IDMineral = 3;
+                    break;
+                case 3:
+                    salidas.IDMineral = 4;
+                    break;
+                default:
+                    break;
+            }
+            //switch (cmbSalidas.SelectedIndex)
+            //{
+            //    case 0:
+            //        salidas.IdDetalle = 1;
+            //        break;
+            //    case 1:
+            //        salidas.IdDetalle = 2;
+            //        break;
+            //    case 2:
+            //        salidas.IdDetalle = 3;
+            //        break;
+            //    case 3:
+            //        salidas.IdDetalle = 4;
+            //        break;
+            //    case 4:
+            //        salidas.IdDetalle = 5;
+            //        break;
+            //    case 5:
+            //        salidas.IdDetalle = 6;
+            //        break;
+            //    case 6:
+            //        salidas.IdDetalle = 7;
+            //        break;
+
+            //    default:
+            //        break;
+            //}
+           
+     
         }
 
         private void btnIngresar_Click(object sender, RoutedEventArgs e)
         {
 
-            if (validaciones.VerificarCamposLlenos(txtCantidad.Text, txtDetalle.Text, cmbIdMineral.Text, txtTotal.Text, FSalida.Text)) ;
+            if (validaciones.VerificarCamposLlenos(txtCantidad.Text,  cmbIdMineral.Text, FSalida.Text)) ;
             {
                 try
                 {
-                    //Para definir el ancho de caracteres que debe aceptar el textbox
-                    txtDetalle.MaxLength = 50;
 
-
-                    procedimientos.infoFormulario(0, txtIdSalida.Text, txtCantidad.Text, txtTotal.Text, FSalida.Text, txtDetalle.Text, cmbIdMineral.SelectedIndex);
+                    infoFormulario(0);
                     salidas.ingresarSalidas(salidas);
 
                     MessageBox.Show("Salida Ingresada");
@@ -138,7 +184,7 @@ namespace ProyectoMinaELMochito
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Ha ocurrido un error al momento de insertar ...");
+                    MessageBox.Show("Ha ocurrido un error al momento de insertar  por " + ex);
                     Console.WriteLine(ex.Message);
 
                 }
@@ -148,25 +194,26 @@ namespace ProyectoMinaELMochito
                     MostrarInfoSalidas();
 
                 }
-
             }
         }
 
         private void btnModificar_Click(object sender, RoutedEventArgs e)
         {
-            if (validaciones.VerificarCamposLlenos(txtCantidad.Text, txtDetalle.Text, cmbIdMineral.Text, txtTotal.Text, FSalida.Text)) ;
+            if (validaciones.VerificarCamposLlenos(txtCantidad.Text, cmbIdMineral.Text, FSalida.Text)) ;
+            
             {
                 try
                 {
-
+                   // infoFormulario(1);
                     salidas.ActualizarSalidas(salidas);
-
                     MessageBox.Show("Salida Modificada");
 
 
                 }
                 catch (Exception ex)
                 {
+
+                    MessageBox.Show("Ha ocurrido un error al momento de modificar por " + ex);
                     MessageBox.Show(ex.Message);
 
                 }
@@ -174,6 +221,7 @@ namespace ProyectoMinaELMochito
                 {
                     limpiarTexto();
                     MostrarInfoSalidas();
+               
                 }
             }
         }
@@ -184,14 +232,16 @@ namespace ProyectoMinaELMochito
             try
             {
 
+                //infoFormulario(1);
                 salidas.EliminarSalidas(salidas);
-
                 MessageBox.Show("Salida Eliminada");
 
 
             }
             catch (Exception ex)
             {
+
+                MessageBox.Show("Ha ocurrido un error al momento de eliminar por " + ex);
                 MessageBox.Show(ex.Message);
 
             }
@@ -218,46 +268,33 @@ namespace ProyectoMinaELMochito
 
         }
 
+        private void MostrarDetalleSalidas()
+        {
+            cmbSalidas.ItemsSource = salidas.LlenarDetalleSalidas();
+            cmbSalidas.DisplayMemberPath = "DetalleSalida";
+            cmbSalidas.SelectedValuePath = "idDetalle";
 
-
-        /* private void txtTotal_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-         {
-             try
-             {
-                 if (txtCantidad.Text == string.Empty)
-                 {
-                     MessageBox.Show("Favor, ingresar una cantidad a calcular!");
-                 }
-                 else
-                 {
-
-                     decimal precio, cantidad, total;
-
-                     precio = Convert.ToDecimal(txtPrecio.Text, CultureInfo.InvariantCulture);
-                     cantidad = Convert.ToDecimal(txtCantidad.Text, CultureInfo.InvariantCulture);
-
-                     total = precio * cantidad;
-                     txtTotal.Text = total.ToString("0000.00", CultureInfo.InvariantCulture);
-
-                 }
-             }
-             catch (Exception ex)
-             {
-                 MessageBoxResult result = MessageBox.Show("Error no ingresar mas de 1 punto",
-                       "Confirmar", MessageBoxButton.OK, MessageBoxImage.Warning);
-                 txtCantidad.Text = "";
-             }
+        }
 
 
 
-         }
-        */
-        private void txtTotal_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        /*private void txtTotal_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
 
             procedimientos.txtTotal(txtCantidad.Text, txtPrecio.Text, txtTotal.Text);
+        }*/
+
+        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            DragMove();
         }
 
+        private void ListViewItem_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            menuPrincipal sld = new menuPrincipal();
+            sld.Show();
+            this.Close();
+        }
         private void ListViewItem_Selected(object sender, RoutedEventArgs e)
         {
             menuPrincipal sld = new menuPrincipal();

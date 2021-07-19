@@ -109,10 +109,9 @@ namespace ProyectoMinaELMochito
             //txtSalario.Text = salario.ToString("0000.00", CultureInfo.InvariantCulture);
         }
 
+        //
         Salida salidas = new Salida();
-
-
-        public void infoFormulario(int operacion, string IDsalida, string Cantidad, string Total, string FSalida, string Detalle, int cmbIdMineral)
+        public void infoFormulario(int operacion, string IDsalida, string Cantidad, string FSalida, int cmbIdMineral, int cmbSalidas)
         {
 
             if (operacion == 1)
@@ -121,9 +120,9 @@ namespace ProyectoMinaELMochito
             }
 
             salidas.Cantidad = Convert.ToDecimal(Cantidad);
-            salidas.Total = Convert.ToDecimal(Total);
-            salidas.FechaSalida = Convert.ToDateTime(FSalida);
-            salidas.DetalleSalida = Detalle;
+            //salidas.FechaSalida = Convert.ToDateTime(FSalida);
+            salidas.DetalleSalida = Convert.ToString(cmbSalidas);
+            
 
             switch (cmbIdMineral)
             {
@@ -149,37 +148,7 @@ namespace ProyectoMinaELMochito
 
         }
 
-        public void txtTotal(string Cantidad, string Precio, string Total)
-        {
-            try
-            {
-                if (Cantidad == string.Empty)
-                {
-                    MessageBox.Show("Favor, ingresar una cantidad a calcular!");
-                }
-                else
-                {
-
-                    decimal precio, cantidad, total;
-
-                    precio = Convert.ToDecimal(Precio, CultureInfo.InvariantCulture);
-                    cantidad = Convert.ToDecimal(Cantidad, CultureInfo.InvariantCulture);
-
-                    total = precio * cantidad;
-                    Total = total.ToString("0000.00", CultureInfo.InvariantCulture);
-
-                }
-            }
-            catch (Exception)
-            {
-                MessageBoxResult result = MessageBox.Show("Error no ingresar mas de 1 punto",
-                      "Confirmar", MessageBoxButton.OK, MessageBoxImage.Warning);
-                Cantidad = "";
-            }
-
-
-
-        }
+      
 
     }
 }

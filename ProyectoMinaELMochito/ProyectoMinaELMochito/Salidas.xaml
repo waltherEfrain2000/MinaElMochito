@@ -126,16 +126,16 @@
                 <Label Content="ID de Salida" Grid.Row="1" FontSize="15" Margin= "12"/>
                 <Label Content="ID de Mineral" Grid.Row="2" FontSize="15" Margin="12"/>
                 <Label Content="Cantidad (Kg)" Grid.Row="3" FontSize="15" Margin="12"/>
-                <Label Content="Total de Salida" Grid.Row="4" FontSize="15" Margin="12"/>
+               
                 <Label Content="Fecha de Salida" Grid.Row="5" FontSize="15" Margin="12"/>
                 <Label Content="Detalle de Salida" Grid.Row="6" FontSize="15" Margin="12"/>
 
                 <TextBox Name="txtIdSalida" Grid.Row="1" Grid.Column="1" FontSize="15" Margin="7" IsReadOnly="True"/>
                 <ComboBox Name="cmbIdMineral" Grid.Row="2" Grid.Column="1" FontSize="15" Margin="7"  />
+                <ComboBox Name="cmbSalidas" Grid.Row="6" Grid.Column="1" FontSize="15" Margin="7"  />
+
                 <TextBox Name="txtCantidad" Grid.Row="3" Grid.Column="1"  FontSize="15" Margin="7"    Text="{Binding Cantidad, Mode=TwoWay, ValidatesOnExceptions=True}" />
-                <TextBox Name="txtTotal" ToolTip="Dar doble click para obtener el valor " Grid.Row="4" Grid.Column="1" FontSize="15" Margin="7" IsReadOnly="True"  MouseDoubleClick="txtTotal_MouseDoubleClick" />
-
-
+            
 
                 <DatePicker  Name="FSalida" Grid.Row="5"  Grid.Column="1" ToolTip="Selet date" FontSize="15" Margin="7" Foreground="Black" Background="Transparent" 
                      DisplayDateStart="2021-01-01" DisplayDateEnd="2021-12-31" Height="30" SelectedDateFormat="Short"   >
@@ -147,11 +147,10 @@
                     </DatePicker.BlackoutDates>
 
                 </DatePicker>
-                <TextBox Name="txtPrecio" Text="{Binding ElementName=cmbIdMineral, Path=SelectedItem.Precio}" Grid.Row="5" Grid.Column="1" FontSize="15" Margin="7" Foreground="Black" Background="#dee2e6" Visibility="Hidden" BorderBrush="#6c757d"/>
-
-                <TextBox Name="txtDetalle" Grid.Row="6" Grid.Column="1" FontSize="15"  Margin="7,7,7,25" Grid.RowSpan="2" TextChanged="txtDetalle_TextChanged" MaxLength="50" />
-
-                <DataGrid Name="dgvSalida" Grid.Row="1" Grid.Column="2" Margin="7" Grid.ColumnSpan="5" Grid.RowSpan="5" SelectionChanged="dgvSalida_SelectionChanged" IsReadOnly="True" FontSize="15"  SelectionMode="Single">
+             
+                <DataGrid Name="dgvSalida" Grid.Row="1" Grid.Column="2" Margin="7" Grid.ColumnSpan="5" Grid.RowSpan="5"
+                          IsReadOnly="True" FontSize="15"  SelectionMode="Single"  GridLinesVisibility="All"
+                          HorizontalGridLinesBrush="Black" VerticalGridLinesBrush="Black" HeadersVisibility="Column" >
                     <DataGrid.Resources>
                         <Style TargetType="{x:Type DataGridColumnHeader}">
                         </Style>
