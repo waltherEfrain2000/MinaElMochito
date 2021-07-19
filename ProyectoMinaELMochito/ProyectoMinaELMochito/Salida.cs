@@ -39,7 +39,7 @@ namespace ProyectoMinaELMochito
 
         public void ingresarSalidas(Salida salidas )
         {
-            Conexion cn = new Conexion();
+            conexion cn = new conexion();
             try
             {
                 
@@ -72,7 +72,7 @@ namespace ProyectoMinaELMochito
        
         public void ActualizarSalidas(Salida salidas)
         {
-            Conexion cn = new Conexion();
+            conexion cn = new conexion();
             try
             {
                 SqlCommand sqlCommand = new SqlCommand("ActualizarSalida",cn.Conectarbd);
@@ -106,7 +106,7 @@ namespace ProyectoMinaELMochito
 
         public void EliminarSalidas(Salida salidas)
         {
-            Conexion cn = new Conexion();
+            conexion cn = new conexion();
             try
             {
                 sqlConnection.Open();

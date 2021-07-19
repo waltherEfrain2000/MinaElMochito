@@ -176,7 +176,7 @@ namespace ProyectoMinaELMochito
                 {
                     //parametro 0 por que no es actualizacion
                     ExtraerInformacionFormulario(0);
-                    vehiculo.CrearVehiculo(vehiculo);
+                    //vehiculo.CrearVehiculo(vehiculo);
 
                     // Mensaje de inserción exitosa
                     MessageBox.Show("¡Vehiculo insertado correctamente!");
@@ -230,7 +230,7 @@ namespace ProyectoMinaELMochito
                 {
                     //parametro 1 por que es actualizacion
                     ExtraerInformacionFormulario(1);
-                    vehiculo.ActualizarVehiculo(vehiculo);
+                    //vehiculo.ActualizarVehiculo(vehiculo);
 
 
                     // Mensaje de inserción exitosa
@@ -285,7 +285,7 @@ namespace ProyectoMinaELMochito
                 {
                     //parametro 1 por que es actualizacion
                     ExtraerInformacionFormulario(1);
-                    vehiculo.EliminarVehiculo(vehiculo);
+                    //vehiculo.EliminarVehiculo(vehiculo);
 
                     // Mensaje de inserción exitosa
                     MessageBox.Show("¡Vehiculo Eliminado correctamente!");

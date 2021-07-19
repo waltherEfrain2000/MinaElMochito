@@ -60,10 +60,10 @@ namespace ProyectoMinaELMochito
                 // Query de selección
 
 
-                SqlCommand cmd = new SqlCommand("BuscarUsusario", cn.Conectarbd);
+                SqlCommand cmd = new SqlCommand("BuscarUsuario", cn.Conectarbd);
                 cmd.CommandType = CommandType.StoredProcedure;
 
-                cmd.Parameters.AddWithValue("@username", username);
+                cmd.Parameters.AddWithValue("@usuario", username);
 
 
                 cn.abrir();

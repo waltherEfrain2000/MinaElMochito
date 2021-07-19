@@ -159,8 +159,6 @@ namespace ProyectoMinaELMochito
             }
 
             empleado.Identidad = identidad;
-            empleado.NombreCompleto = nombre;
-            empleado.Edad = Convert.ToInt32(edad);
             switch (genero)
             {
                 case 0:
@@ -225,8 +223,6 @@ namespace ProyectoMinaELMochito
             }
 
             salidas.Cantidad = Convert.ToDecimal(Cantidad);
-            salidas.Total = Convert.ToDecimal(Total);
-            salidas.FechaSalida = Convert.ToDateTime(FSalida);
             salidas.DetalleSalida = Detalle;
 
             switch (cmbIdMineral)
