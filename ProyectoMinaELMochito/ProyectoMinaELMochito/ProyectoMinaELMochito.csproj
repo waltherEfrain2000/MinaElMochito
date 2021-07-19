@@ -183,6 +183,7 @@
     <Compile Include="ComparacionHistoricos.xaml.cs">
       <DependentUpon>ComparacionHistoricos.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Conexion.cs" />
     <Compile Include="Empleado.cs" />
     <Compile Include="Empleados.xaml.cs">
       <DependentUpon>Empleados.xaml</DependentUpon>
