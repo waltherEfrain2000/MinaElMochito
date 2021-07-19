@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -20,40 +21,38 @@ namespace ProyectoMinaELMochito
 
 
     public partial class Usuarios_Crud : Window
+
     {
 
         private Validaciones validaciones = new Validaciones();
 
         private User user = new User();
-        private List<User> users;
+
+        private conexion cn = new conexion();
         public Usuarios_Crud()
         {
+
             InitializeComponent();
             CargarDatos();
+            ObtenerRol();
             botonfecha.Content = string.Format("{0}", DateTime.Now.ToString());
 
         }
 
-        private void ObtenerUsuarios()
+        private void ObtenerRol()
         {
-            users = user.MostrarUsuario();
 
-            dtgriduser.DisplayMemberPath = "id";
-            dtgriduser.DisplayMemberPath = "nombreCompleto";
-            dtgriduser.DisplayMemberPath = "UserName";
-            dtgriduser.DisplayMemberPath = "Password";
-            dtgriduser.DisplayMemberPath = "Rol";
-            dtgriduser.DisplayMemberPath = "Estado";
-            dtgriduser.SelectedValuePath = "id";
-
-            dtgriduser.ItemsSource = users;
-
+            cmbRol.ItemsSource = user.LlenarComboBoxEstados();
+            cmbRol.DisplayMemberPath = "NombreRol";
+            cmbRol.SelectedValuePath = "Rol";
         }
+
+
 
         private bool VerificarValores()
         {
 
-            if (txtnombre.Text == "" || txtusername.Text == "")
+            if (txtnombre.Text == string.Empty || txtusername.Text == string.Empty || txtApellido.Text == string.Empty || txtsegNombre.Text == string.Empty || txtSegApellido.Text == string.Empty)
             {
                 MessageBox.Show("Por favor ingresa todos los valores en las cajas de texto");
                 return false;
@@ -79,19 +78,22 @@ namespace ProyectoMinaELMochito
         {
 
 
-            user.NombreCompleto = txtnombre.Text;
+            user.PrimerNombre = txtnombre.Text;
+            user.SegundoNombre = txtsegNombre.Text;
+            user.PrimerApellido = txtApellido.Text;
+            user.SegundoApellido = txtSegApellido.Text;
             user.Username = txtusername.Text;
             user.Password = pssPassword.Password;
 
             if (cmbRol.SelectedIndex == 0)
             {
-                MessageBox.Show("sera un admin");
-                user.Rol = "ADMINISTRADOR";
+                MessageBox.Show("El usuario será " + cmbRol.Text);
+                user.Rol = 1;
             }
             else
             {
-                MessageBox.Show("sera un empleado normal");
-                user.Rol = "EMPLEADODETURNO";
+                MessageBox.Show("sera un empleado normal " + cmbRol.Text);
+                user.Rol = 2;
             }
             if (cmbEstado.SelectedIndex == 0)
             {
@@ -106,20 +108,24 @@ namespace ProyectoMinaELMochito
         {
 
             user.Id = Convert.ToInt32(txtid.Text);
-            user.NombreCompleto = txtnombre.Text;
+            user.PrimerNombre = txtnombre.Text;
+            user.SegundoNombre = txtsegNombre.Text;
+            user.PrimerApellido = txtApellido.Text;
+            user.SegundoApellido = txtSegApellido.Text;
             user.Username = txtusername.Text;
             user.Password = pssPassword.Password;
 
             if (cmbRol.SelectedIndex == 0)
             {
-                MessageBox.Show("sera un admin");
-                user.Rol = "ADMINISTRADOR";
+                MessageBox.Show("El usuario será " + cmbRol.Text);
+                user.Rol = 1;
             }
             else
             {
-                MessageBox.Show("sera un empleado normal");
-                user.Rol = "EMPLEADODETURNO";
+                MessageBox.Show("sera un empleado normal " + cmbRol.Text);
+                user.Rol = 2;
             }
+
             if (cmbEstado.SelectedIndex == 0)
             {
                 MessageBox.Show("sera un empleado inactivo");
@@ -148,6 +154,9 @@ namespace ProyectoMinaELMochito
         private void limpiar()
         {
             txtnombre.Text = "";
+            txtSegApellido.Text = "";
+            txtApellido.Text = "";
+            txtsegNombre.Text = "";
             txtusername.Text = "";
             pssPassword.Password = "";
             cmbEstado.Text = "";
@@ -177,7 +186,7 @@ namespace ProyectoMinaELMochito
                 finally
                 {
                     limpiar();
-                    ObtenerUsuarios();
+                    CargarDatos();
 
                 }
             }
@@ -214,42 +223,29 @@ namespace ProyectoMinaELMochito
         }
 
 
-        private void SetUsuario(User user)
-        {
-            try
-            {
-                this.txtnombre.Text = Convert.ToString(user.NombreCompleto);
-                this.txtusername.Text = Convert.ToString(user.Username);
-                this.pssPassword.Password = Convert.ToString(user.Password);
-                this.cmbRol.SelectedItem = Convert.ToString(user.Rol);
-                this.cmbEstado.SelectedValue = Convert.ToBoolean(user.Estado);
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-
-
-        }
         private void dtgriduser_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
-            DataGrid dataGrid = (DataGrid)sender;
-            DataRowView dataRowView = dataGrid.SelectedItem as DataRowView;
+            cn.abrir();
+
+            DataGrid dg = (DataGrid)sender;
+            DataRowView filaSeleccionada = dg.SelectedItem as DataRowView;
 
 
 
-            if (dataRowView != null)
+
+            if (filaSeleccionada != null)
             {
                 string estado;
 
-                txtid.Text = dataRowView["ID"].ToString();
-                txtnombre.Text = dataRowView["Nombre Completo"].ToString();
-                txtusername.Text = dataRowView["Nombre de Usuario"].ToString();
-                pssPassword.Password = dataRowView["Contraseña"].ToString();
-                cmbRol.Text = dataRowView["Rol"].ToString();
-                estado = dataRowView["Estado"].ToString();
+                txtid.Text = filaSeleccionada["ID"].ToString();
+                txtnombre.Text = filaSeleccionada["Primer Nombre"].ToString();
+                txtsegNombre.Text = filaSeleccionada["Segundo Nombre"].ToString();
+                txtApellido.Text = filaSeleccionada["Primer Apellido"].ToString();
+                txtSegApellido.Text = filaSeleccionada["Segundo Apellido"].ToString();
+                txtusername.Text = filaSeleccionada["Usuario"].ToString();
+                cmbRol.Text = filaSeleccionada["Rol"].ToString();
+                estado = filaSeleccionada["Estado"].ToString();
 
                 if (estado == "True")
                 {
@@ -282,17 +278,16 @@ namespace ProyectoMinaELMochito
                 cn.abrir();
                 cmd.ExecuteNonQuery();
 
-
+            
                 SqlDataAdapter sqlDataAdapter1 = new SqlDataAdapter(cmd);
 
                 DataTable dataTable1 = new DataTable("Usuarios.Usuario");
+              
 
 
                 sqlDataAdapter1.Fill(dataTable1);
                 dtgriduser.ItemsSource = dataTable1.DefaultView;
                 sqlDataAdapter1.Update(dataTable1);
-
-
 
             }
             catch (Exception)
@@ -335,7 +330,7 @@ namespace ProyectoMinaELMochito
 
         private void btnsalir_Click(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            limpiar();
         }
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
@@ -440,5 +435,20 @@ namespace ProyectoMinaELMochito
         }
 
 
+
+        private void txtApellido_KeyDown(object sender, KeyEventArgs e)
+        {
+            validaciones.validarTxtSinNumeros(e);
+        }
+
+        private void txtSegApellido_KeyDown(object sender, KeyEventArgs e)
+        {
+            validaciones.validarTxtSinNumeros(e);
+        }
+
+        private void txtnombre_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
     }
 }

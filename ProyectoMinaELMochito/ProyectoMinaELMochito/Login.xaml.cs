@@ -57,12 +57,12 @@ namespace ProyectoMinaELMochito
                 {
                     // Verificar que la contraseña ingresada es igual a la contraseña
                     // almacenada en la base de datos
-                    if (elUsuario.Password == pwbPassword.Password && elUsuario.Estado && elUsuario.Rol == "ADMINISTRADOR")
+                    if (elUsuario.Password == pwbPassword.Password && elUsuario.Estado && elUsuario.Rol == 1)
                     {
                         // Mostrar el formulario de menú principal
                         //MenuPrincipal menu = new MenuPrincipal(elUsuario.NombreCompleto);
                         //menu.Show();
-                        MessageBox.Show($"Bienvenido {elUsuario.NombreCompleto} eres un Usuario Administrador", "Usuario ADMINISTRADOR", MessageBoxButton.OK, MessageBoxImage.Information);
+                        MessageBox.Show($"Bienvenido {elUsuario.Username} eres un Usuario Administrador", "Usuario ADMINISTRADOR", MessageBoxButton.OK, MessageBoxImage.Information);
 
                         menuPrincipal sld = new menuPrincipal();
                         sld.Show();
@@ -73,7 +73,7 @@ namespace ProyectoMinaELMochito
                     }
                     else if (elUsuario.Password == pwbPassword.Password && elUsuario.Estado)
                     {
-                        MessageBox.Show($"Bienvenido {elUsuario.NombreCompleto} eres un Empleado de turno", "Usuario Emplado de Turno", MessageBoxButton.OK, MessageBoxImage.Information);
+                        MessageBox.Show($"Bienvenido {elUsuario.Username} eres un Empleado de turno", "Usuario Emplado de Turno", MessageBoxButton.OK, MessageBoxImage.Information);
                         menuEmpleado sld = new menuEmpleado();
                         sld.Show();
                         this.Close();
@@ -82,7 +82,7 @@ namespace ProyectoMinaELMochito
 
 
                     else if (!elUsuario.Estado)
-                        MessageBox.Show("Tu usuario se encuentra innactivo. Favor comunicarte con el personal de IT");
+                        MessageBox.Show("Tu usuario se encuentra inactivo. Favor comunicarte con el personal de IT");
                     else
                         MessageBox.Show("El usuario o la contraseña no es correcta. Favor verificar.");
                 }

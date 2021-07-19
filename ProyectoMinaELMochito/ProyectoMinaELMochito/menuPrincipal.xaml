@@ -7,15 +7,15 @@
         mc:Ignorable="d"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:fw="clr-namespace:SourceChord.FluentWPF;assembly=FluentWPF"
-        fw:AcrylicWindow.Enabled="True" FontSize="15"  MouseDown="Window_MouseDown" Height="550" Width="1080" WindowStyle="None" ResizeMode="CanResizeWithGrip" WindowStartupLocation="CenterScreen" Title="menu">
-    
+        fw:AcrylicWindow.Enabled="True" FontSize="15"  MouseDown="Window_MouseDown" Height="650" Width="1400" WindowStyle="None" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Title=" ">
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="220"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <Grid fw:PointerTracker.Enabled="True" Background="#9900afb9" Height="542" VerticalAlignment="Bottom">
+        <Grid fw:PointerTracker.Enabled="True" Background="#9900afb9" Height="650" VerticalAlignment="Bottom">
             <StackPanel>
                 <TextBlock Text="" Foreground="White" Margin="1" FontWeight="DemiBold"/>
 
@@ -95,15 +95,15 @@
                         </Button>
                         <TextBlock Text="" FontSize="12" Margin="10" VerticalAlignment="Center"/>
                     </StackPanel>
-                    
-                    
+
+
                 </ListView>
             </StackPanel>
         </Grid>
 
         <Grid Grid.Column="1" Background="White">
 
-            <Image HorizontalAlignment="Left" Height="401" Margin="173,49,0,0" VerticalAlignment="Top" Width="491" Source="logo.png" />
+            <Image HorizontalAlignment="Left" Height="532" Margin="250,50,0,0" VerticalAlignment="Top" Width="718" Source="logo.png" />
 
         </Grid>
     </Grid>

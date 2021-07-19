@@ -11,27 +11,34 @@ namespace ProyectoMinaELMochito
 {
     class User
     {
-        // Variables miembro
 
-
-        // Propiedades
+        conexion cn = new conexion();
+        Validaciones val = new Validaciones();
         public int Id { get; set; }
 
-        public string NombreCompleto { get; set; }
+        public string PrimerNombre { get; set; }
 
+        public string SegundoNombre { get; set; }
+
+        public string PrimerApellido { get; set; }
+
+        public string SegundoApellido { get; set; }
         public string Username { get; set; }
 
         public string Password { get; set; }
 
-        public string Rol { get; set; }
+        public string NombreRol { get; set; }
+        public int Rol { get; set; }
         public bool Estado { get; set; }
 
-        // Constructores
         public User() { }
 
-        public User(string nombreCompleto, string username, string password, string rol, bool estado)
+        public User(string primerNombre, string segundoNombre, string primerApellido, string segundoApellido, string username, string password, int rol, bool estado)
         {
-            NombreCompleto = nombreCompleto;
+            PrimerNombre = primerNombre;
+            SegundoNombre = segundoNombre;
+            PrimerApellido = primerApellido;
+            SegundoApellido = segundoApellido;
             Username = username;
             Password = password;
             Rol = rol;
@@ -39,13 +46,9 @@ namespace ProyectoMinaELMochito
         }
 
 
-        // Métodos
 
-        /// <summary>
-        /// Verifica si las credenciales de inicio de sesión son correctas.
-        /// </summary>
         /// <param name="username">El nombre del usuario</param>
-        /// <returns>Los datos del usuario</returns>
+
         public User BuscarUsuario(string username)
         {
             // Crear el objeto que almacena la información de los resultados
@@ -57,7 +60,7 @@ namespace ProyectoMinaELMochito
                 // Query de selección
 
 
-                SqlCommand cmd = new SqlCommand("buscarUsusario", cn.Conectarbd);
+                SqlCommand cmd = new SqlCommand("BuscarUsusario", cn.Conectarbd);
                 cmd.CommandType = CommandType.StoredProcedure;
 
                 cmd.Parameters.AddWithValue("@username", username);
@@ -70,7 +73,7 @@ namespace ProyectoMinaELMochito
                 DataTable tabla = new DataTable();
                 adp.Fill(tabla);
 
-                cn.abrir();
+
 
                 cmd.ExecuteNonQuery();
 
@@ -81,11 +84,9 @@ namespace ProyectoMinaELMochito
                     while (rdr.Read())
                     {
                         // Obtener los valores del usuario si la consulta retorna valores
-                        usuario.Id = Convert.ToInt32(rdr["id"]);
-                        usuario.NombreCompleto = rdr["nombreCompleto"].ToString();
-                        usuario.Username = rdr["username"].ToString();
-                        usuario.Password = rdr["password"].ToString();
-                        usuario.Rol = rdr["rol"].ToString();
+                        usuario.Username = rdr["nombreUsuario"].ToString();
+                        usuario.Password = rdr["contraseña"].ToString();
+                        usuario.Rol = Convert.ToInt32(rdr["idRol"].ToString());
                         usuario.Estado = Convert.ToBoolean(rdr["estado"]);
                     }
                 }
@@ -104,58 +105,55 @@ namespace ProyectoMinaELMochito
             }
         }
 
-        /// <summary>
-        /// aqui creamos una lista con los datos de los usuarios existentes
-        /// </summary>
-        /// <returns>los datos de los usuarios</returns>
-        public List<User> MostrarUsuario()
-        {
-            List<User> users = new List<User>();
 
-            conexion cn = new conexion();
-            Validaciones val = new Validaciones();
-            try
-            {
-                // Query de selección
+        //public List<User> MostrarUsuario()
+        //{
+        //    List<User> users = new List<User>();
+
+        //    conexion cn = new conexion();
+        //    Validaciones val = new Validaciones();
+        //    try
+        //    {
+        //        // Query de selección
 
 
-                SqlCommand cmd = new SqlCommand("MostrarUsuarios", cn.Conectarbd);
-                cmd.CommandType = CommandType.StoredProcedure;
+        //        SqlCommand cmd = new SqlCommand("MostrarUsuarios", cn.Conectarbd);
+        //        cmd.CommandType = CommandType.StoredProcedure;
 
-                cn.abrir();
+        //        cn.abrir();
 
-                SqlDataAdapter adp = new SqlDataAdapter();
-                adp.SelectCommand = cmd;
-                DataTable tabla = new DataTable();
-                adp.Fill(tabla);
+        //        SqlDataAdapter adp = new SqlDataAdapter();
+        //        adp.SelectCommand = cmd;
+        //        DataTable tabla = new DataTable();
+        //        adp.Fill(tabla);
 
-                cn.abrir();
+        //        cn.abrir();
 
-                cmd.ExecuteNonQuery();
+        //        cmd.ExecuteNonQuery();
 
 
 
 
-                // Obtener los datos de los usuarios
-                using (SqlDataReader rdr = cmd.ExecuteReader())
-                {
-                    while (rdr.Read())
-                        users.Add(new User { Id = Convert.ToInt32(rdr["id"]), NombreCompleto = rdr["nombreCompleto"].ToString(), Username = rdr["username"].ToString(), Password = rdr["password"].ToString(), Rol = rdr["rol"].ToString(), Estado = Convert.ToBoolean(rdr["estado"]) });
-                }
+        //        // Obtener los datos de los usuarios
+        //        using (SqlDataReader rdr = cmd.ExecuteReader())
+        //        {
+        //            while (rdr.Read())
+        //                users.Add(new User { Id = Convert.ToInt32(rdr["id"]), PrimerNombre = rdr["PrimerNombre"].ToString(), SegundoNombre = rdr["segundoNombre"].ToString(), PrimerApellido = rdr["PrmerApellido"].ToString(), SegundoApellido = rdr["SegundoApellido"].ToString(), Username = rdr["username"].ToString(), Password = rdr["password"].ToString(), Rol = Convert.ToInt32(rdr["rol"]), Estado = Convert.ToBoolean(rdr["estado"]) });
+        //        }
 
-                return users;
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
-            finally
-            {
-                // Cerrar la conexión
-                cn.cerrar();
-            }
+        //        return users;
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        throw e;
+        //    }
+        //    finally
+        //    {
+        //        // Cerrar la conexión
+        //        cn.cerrar();
+        //    }
 
-        }
+        //}
 
 
         public void CrearUsuario(User user)
@@ -166,21 +164,17 @@ namespace ProyectoMinaELMochito
             {
 
 
-                SqlCommand cmd = new SqlCommand("InsertarUsuario", cn.Conectarbd);
+                SqlCommand cmd = new SqlCommand("RegistrarUsuario", cn.Conectarbd);
                 cmd.CommandType = CommandType.StoredProcedure;
 
-                cmd.Parameters.AddWithValue("@nombreCompleto", user.NombreCompleto);
-                cmd.Parameters.AddWithValue("@username", user.Username);
-                cmd.Parameters.AddWithValue("@password", user.Password);
-                cmd.Parameters.AddWithValue("@rol", user.Rol);
+                cmd.Parameters.AddWithValue("@primerNombre", user.PrimerNombre);
+                cmd.Parameters.AddWithValue("@segundoNombre", user.SegundoNombre);
+                cmd.Parameters.AddWithValue("@primerApellido", user.PrimerApellido);
+                cmd.Parameters.AddWithValue("@segundoApellido", user.SegundoApellido);
+                cmd.Parameters.AddWithValue("@nombreUsuario", user.Username);
+                cmd.Parameters.AddWithValue("@contraseña", user.Password);
+                cmd.Parameters.AddWithValue("@idRol", user.Rol);
                 cmd.Parameters.AddWithValue("@estado", user.Estado);
-
-                cn.abrir();
-
-                SqlDataAdapter adp = new SqlDataAdapter();
-                adp.SelectCommand = cmd;
-                DataTable tabla = new DataTable();
-                adp.Fill(tabla);
 
                 cn.abrir();
 
@@ -199,9 +193,7 @@ namespace ProyectoMinaELMochito
                 cn.cerrar();
             }
         }
-        /// <summary>
-        /// aqui modificamos el usuario
-        /// </summary>
+
         /// <param name="user"></param>
         public void ModificarUsuario(User user)
         {
@@ -215,18 +207,15 @@ namespace ProyectoMinaELMochito
                 SqlCommand cmd = new SqlCommand("ModificarUsuario", cn.Conectarbd);
                 cmd.CommandType = CommandType.StoredProcedure;
 
-                cmd.Parameters.AddWithValue("@nombreCompleto", user.NombreCompleto);
-                cmd.Parameters.AddWithValue("@username", user.Username);
-                cmd.Parameters.AddWithValue("@password", user.Password);
-                cmd.Parameters.AddWithValue("@rol", user.Rol);
+                cmd.Parameters.AddWithValue("@primerNombre", user.PrimerNombre);
+                cmd.Parameters.AddWithValue("@segundoNombre", user.SegundoNombre);
+                cmd.Parameters.AddWithValue("@primerApellido", user.PrimerApellido);
+                cmd.Parameters.AddWithValue("@segundoApellido", user.SegundoApellido);
+                cmd.Parameters.AddWithValue("@nombreUsuario", user.Username);
+                cmd.Parameters.AddWithValue("@contraseña", user.Password);
+                cmd.Parameters.AddWithValue("@idRol", user.Rol);
                 cmd.Parameters.AddWithValue("@estado", user.Estado);
-
-                cn.abrir();
-
-                SqlDataAdapter adp = new SqlDataAdapter();
-                adp.SelectCommand = cmd;
-                DataTable tabla = new DataTable();
-                adp.Fill(tabla);
+                cmd.Parameters.AddWithValue("@id", user.Id);
 
                 cn.abrir();
 
@@ -249,8 +238,7 @@ namespace ProyectoMinaELMochito
 
         public void InvalidarUsuario(User user)
         {
-            conexion cn = new conexion();
-            Validaciones val = new Validaciones();
+
             try
             {
 
@@ -263,16 +251,8 @@ namespace ProyectoMinaELMochito
 
                 cn.abrir();
 
-                SqlDataAdapter adp = new SqlDataAdapter();
-                adp.SelectCommand = cmd;
-                DataTable tabla = new DataTable();
-                adp.Fill(tabla);
-
-                cn.abrir();
-
                 cmd.ExecuteNonQuery();
 
-                cn.cerrar();
             }
             catch (Exception e)
             {
@@ -282,6 +262,42 @@ namespace ProyectoMinaELMochito
             finally
             {
                 cn.cerrar();
+            }
+        }
+
+
+
+        public List<User> LlenarComboBoxEstados()
+        {
+            try
+            {
+                //Realizar el query que cargará la información correspondiente
+                String query = @"EXEC MostrarRol";
+
+                //Establecer la conexión
+                cn.abrir();
+
+                SqlCommand sqlCommand = new SqlCommand(query, cn.Conectarbd);
+
+                SqlDataReader reader = sqlCommand.ExecuteReader();
+                List<User> rol = new List<User>();
+
+                while (reader.Read())
+                {
+                    rol.Add(new User
+                    {
+                        NombreRol = reader["Rol"].ToString(),
+                        Rol = Convert.ToInt32(reader["idRol"].ToString())
+                    });
+                }
+
+                return rol;
+            }
+            catch (Exception)
+            {
+
+                throw;
+
             }
         }
 
