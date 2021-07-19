@@ -84,7 +84,63 @@ namespace ProyectoMinaELMochito
         }
 
 
+        public void CrearModelo(string Modelo, int Marca)
+        {
+            Conexion cn = new Conexion();
 
+            try
+            {
+                SqlCommand crearMarca = new SqlCommand("AdministrarModelo", cn.Conectarbd);
+                crearMarca.CommandType = CommandType.StoredProcedure;
+
+                crearMarca.Parameters.AddWithValue("@TipoConsulta", 1);
+                crearMarca.Parameters.AddWithValue("@idMarca", Marca);
+                crearMarca.Parameters.AddWithValue("@idModelo", 1);
+                crearMarca.Parameters.AddWithValue("@nombreModelo", Modelo);
+
+                cn.abrir();
+
+                crearMarca.ExecuteNonQuery();
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            finally
+            {
+                cn.cerrar();
+            }
+
+        }
+
+        public void ActualizarModelo(int idModelo, int idMarca, string modelo)
+        {
+            Conexion cn = new Conexion();
+
+            try
+            {
+                SqlCommand crearMarca = new SqlCommand("AdministrarModelo", cn.Conectarbd);
+                crearMarca.CommandType = CommandType.StoredProcedure;
+
+                crearMarca.Parameters.AddWithValue("@TipoConsulta", 3);
+                crearMarca.Parameters.AddWithValue("@idMarca", idMarca);
+                crearMarca.Parameters.AddWithValue("@idModelo", idModelo);
+                crearMarca.Parameters.AddWithValue("@nombreModelo", modelo);
+
+                cn.abrir();
+
+                crearMarca.ExecuteNonQuery();
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            finally
+            {
+                cn.cerrar();
+            }
+
+        }
 
 
 
@@ -95,29 +151,29 @@ namespace ProyectoMinaELMochito
         //private SqlConnection sqlConnection = new SqlConnection(connectionString);
         private Vehiculo elVehiculo = new Vehiculo();
 
-        public void CrearVehiculo(Procedimientos vehiculo)
+        public void CrearVehiculo(int idModelo, int idMarca, string placa, string color, int estado)
         {
+            Conexion cn = new Conexion();
+
             try
             {
-                string query = @"EXEC InsertarVehiculo @marca,@modelo,@placa,@color,@estado";
+                SqlCommand crearMarca = new SqlCommand("AdministrarVehiculo", cn.Conectarbd);
+                crearMarca.CommandType = CommandType.StoredProcedure;
+
+                crearMarca.Parameters.AddWithValue("@TipoConsulta", 2);
+                crearMarca.Parameters.AddWithValue("@idVehiculo", 1);
+                crearMarca.Parameters.AddWithValue("@idModelo", idModelo);
+                crearMarca.Parameters.AddWithValue("@idMarca", idMarca);
+                crearMarca.Parameters.AddWithValue("@placa", placa);
+                crearMarca.Parameters.AddWithValue("@color", color);
+                crearMarca.Parameters.AddWithValue("@estado", estado);
 
                 cn.abrir();
 
-
-                SqlCommand sqlCommand = new SqlCommand(query, cn.Conectarbd);
-
-                sqlCommand.Parameters.AddWithValue("@marca", elVehiculo.Marca);
-                sqlCommand.Parameters.AddWithValue("@modelo", elVehiculo.Modelo);
-                sqlCommand.Parameters.AddWithValue("@placa", elVehiculo.Placa);
-                sqlCommand.Parameters.AddWithValue("@color", elVehiculo.Color);
-                sqlCommand.Parameters.AddWithValue("@estado", elVehiculo.Estado);
-
-                sqlCommand.ExecuteNonQuery();
-
+                crearMarca.ExecuteNonQuery();
             }
             catch (Exception e)
             {
-
                 throw e;
             }
             finally
@@ -125,29 +181,29 @@ namespace ProyectoMinaELMochito
                 cn.cerrar();
             }
         }
-        public void ActualizarVehiculo(Procedimientos vehiculo)
+        public void ActualizarVehiculo(int idVehiculo, int idModelo, int idMarca, string placa, string color, int estado)
         {
+            Conexion cn = new Conexion();
+
             try
             {
-                string query = @"EXEC ModificarVehiculo @marca,@modelo,@placa,@color,@estado,@idVehiculo";
+                SqlCommand crearMarca = new SqlCommand("AdministrarVehiculo", cn.Conectarbd);
+                crearMarca.CommandType = CommandType.StoredProcedure;
+
+                crearMarca.Parameters.AddWithValue("@TipoConsulta", 3);
+                crearMarca.Parameters.AddWithValue("@idVehiculo", idVehiculo);
+                crearMarca.Parameters.AddWithValue("@idModelo", idModelo);
+                crearMarca.Parameters.AddWithValue("@idMarca", idMarca);
+                crearMarca.Parameters.AddWithValue("@placa", placa);
+                crearMarca.Parameters.AddWithValue("@color", color);
+                crearMarca.Parameters.AddWithValue("@estado", estado);
 
                 cn.abrir();
 
-
-                SqlCommand sqlCommand = new SqlCommand(query, cn.Conectarbd);
-
-                sqlCommand.Parameters.AddWithValue("@idVehiculo", elVehiculo.VehiculoID);
-                sqlCommand.Parameters.AddWithValue("@marca", elVehiculo.Marca);
-                sqlCommand.Parameters.AddWithValue("@modelo", elVehiculo.Modelo);
-                sqlCommand.Parameters.AddWithValue("@placa", elVehiculo.Marca);
-                sqlCommand.Parameters.AddWithValue("@color", elVehiculo.Color);
-                sqlCommand.Parameters.AddWithValue("@estado", elVehiculo.Estado);
-
-                sqlCommand.ExecuteNonQuery();
+                crearMarca.ExecuteNonQuery();
             }
             catch (Exception e)
             {
-
                 throw e;
             }
             finally
@@ -157,25 +213,29 @@ namespace ProyectoMinaELMochito
         }
 
 
-        public void EliminarVehiculo(Procedimientos vehiculo)
+        public void EliminarVehiculo(int idVehiculo)
         {
+            Conexion cn = new Conexion();
+
             try
             {
-                string query = @"EXEC EliminarVehiculo @estado, @idvehiculo ";
+                SqlCommand crearMarca = new SqlCommand("AdministrarVehiculo", cn.Conectarbd);
+                crearMarca.CommandType = CommandType.StoredProcedure;
+
+                crearMarca.Parameters.AddWithValue("@TipoConsulta", 4);
+                crearMarca.Parameters.AddWithValue("@idVehiculo", idVehiculo);
+                crearMarca.Parameters.AddWithValue("@idModelo", 1);
+                crearMarca.Parameters.AddWithValue("@idMarca", 1);
+                crearMarca.Parameters.AddWithValue("@placa", 1);
+                crearMarca.Parameters.AddWithValue("@color", 1);
+                crearMarca.Parameters.AddWithValue("@estado", 2);
 
                 cn.abrir();
 
-                SqlCommand sqlCommand = new SqlCommand(query, cn.Conectarbd);
-
-                sqlCommand.Parameters.AddWithValue("@idVehiculo", elVehiculo.VehiculoID);
-                sqlCommand.Parameters.AddWithValue("@estado", 3);
-
-                sqlCommand.ExecuteNonQuery();
-
+                crearMarca.ExecuteNonQuery();
             }
             catch (Exception e)
             {
-
                 throw e;
             }
             finally

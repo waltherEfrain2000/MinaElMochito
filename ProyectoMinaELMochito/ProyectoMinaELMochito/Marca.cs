@@ -15,29 +15,21 @@ namespace ProyectoMinaELMochito
         Conexion cn = new Conexion();
 
         //Propiedades
-        public int VehiculoID { get; set; }
-        public string Marca { get; set; }
-        public string Modelo { get; set; }
-        public string Placa { get; set; }
-        public string Color { get; set; }
-        public int elCodigoMarca { get; set; }
+        public int CodigoMarca { get; set; }
         public string NombreMarca { get; set; }
 
         // Constructores
         public Marcas() { }
 
 
-        public Marcas(int vehiculoID, int codigoMarca, string modelo, string placa, string color, int estado)
+        public Marcas(string marca, int codigoMarca)
         {
-            VehiculoID = vehiculoID;
-            codigoMarca = elCodigoMarca;
-            Modelo = modelo;
-            Placa = placa;
-            Color = color;
+            NombreMarca = marca;
+            CodigoMarca = codigoMarca;
         }
 
 
-        public List<Vehiculo> LlenarComboBoxModelos()
+        public List<Marcas> LlenarComboBoxMarcas()
         {
             try
             {
@@ -50,14 +42,14 @@ namespace ProyectoMinaELMochito
                 SqlCommand sqlCommand = new SqlCommand(query, cn.Conectarbd);
 
                 SqlDataReader reader = sqlCommand.ExecuteReader();
-                List<Vehiculo> estados = new List<Vehiculo>();
+                List<Marcas> estados = new List<Marcas>();
 
                 while (reader.Read())
                 {
-                    estados.Add(new Vehiculo
+                    estados.Add(new Marcas
                     {
                         NombreMarca = reader["nombreMarca"].ToString(),
-                        codigoMarca = Convert.ToInt32(reader["idMarca"].ToString())
+                        CodigoMarca = Convert.ToInt32(reader["idMarca"].ToString())
                     });
                 }
 

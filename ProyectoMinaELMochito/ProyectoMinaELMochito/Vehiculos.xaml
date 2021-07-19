@@ -122,12 +122,10 @@
             </Grid.RowDefinitions>
 
             <Label Content="Vehiculos" Grid.ColumnSpan="5" HorizontalAlignment="Center" FontSize="30" />
-            <TextBox Name="txtMarca" Grid.Row="2" Grid.Column="1" FontSize="15" Margin="25,20,25,20"/>
-            <TextBox Name="txtModelo" Grid.Row="3" Grid.Column="1" FontSize="15" Margin="25,20,25,20" />
-            <TextBox Name="txtPlaca" Grid.Column="3" FontSize="15" Margin="25,20,25,20" Grid.Row="1"/>
-            <TextBox Name="txtColor" Grid.Row="2" Grid.Column="3" FontSize="15" Margin="25,20,25,20"/>
+            <TextBox Name="txtPlaca" Grid.Column="3" FontSize="15" Margin="25,0,25,20" Grid.Row="1"/>
+            <TextBox Name="txtColor" Grid.Row="2" Grid.Column="3" FontSize="15" Margin="25,0,25,20"/>
 
-            <ComboBox Name="cmbEstado" Grid.Row="3" Grid.Column="3" FontSize="15" Margin="25,20,25,20" />
+            <ComboBox Name="cmbEstado" Grid.Row="3" Grid.Column="3" FontSize="15" Margin="25,0,25,20" Height="30" />
 
             <Button x:Name="btnAgregar" Content="Agregar" Foreground="White"  BorderBrush="#0082aa" Grid.Column="4" Grid.Row="1" Margin="60,5,30,10" Click="btnAgregar_Click"  />
             <Button x:Name="btnModificar" Content="Modificar" Foreground="White"  BorderBrush="#0082aa" Grid.Column="4" Grid.Row="2"  Margin="60,5,30,10" Click="btnModificar_Click"/>
@@ -145,13 +143,16 @@
                     </Style>
                 </DataGrid.Resources>
             </DataGrid>
-            <TextBox x:Name="txtVehiculoID" Grid.Column="1" FontSize="15" Margin="25,20,25,20" IsReadOnly="True" Grid.Row="1"/>
+            <TextBox x:Name="txtVehiculoID" Grid.Column="1" FontSize="15" Margin="25,0,25,20" IsReadOnly="True" Grid.Row="1"/>
             <Label Content="Código" Grid.Row="1" FontSize="15" Margin="30,10,10,0" Height="39" VerticalAlignment="Top" />
             <Label Content="Marca" Grid.Row="2" FontSize="15" Margin="30,10,10,0" Grid.RowSpan="2" />
             <Label Content="Modelo" Grid.Row="3" FontSize="15" Margin="30,10,10,0" Grid.RowSpan="2" />
             <Label Content="Placa" Grid.Row="1" FontSize="15" Margin="200,10,10,8" Grid.Column="2" />
             <Label Content="Color" Grid.Row="2" FontSize="15" Margin="200,10,10,8" Grid.Column="2" Grid.RowSpan="2" />
             <Label Content="Estado" Grid.Row="3"  FontSize="15" Margin="200,10,10,8" Grid.Column="2" />
+            <Button x:Name="btnModelosMarcas" Foreground="#0082aa"  BorderBrush="#0082aa" Background="White" FontStyle="Italic" FontSize="14" Content="Modelos/Marcas" Grid.Column="4" Grid.Row="5"  Click="btnModelosMarcas_Click" Margin="60,10,30,8" />
+            <ComboBox x:Name="cmbMarca" Grid.Row="2" Grid.Column="1" FontSize="15" Margin="25,0,26,20" SelectionChanged="cmbMarca_SelectionChanged" Height="30" />
+            <ComboBox x:Name="cmbModelo" Grid.Row="3" Grid.Column="1" FontSize="15" Margin="25,0,26,20" Height="30" />
 
         </Grid>
     </Grid>

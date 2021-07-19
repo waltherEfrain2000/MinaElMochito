@@ -32,6 +32,7 @@ namespace ProyectoMinaELMochito
             InitializeComponent();
             MostrarVehiculo();
             botonfecha.Content = string.Format("{0}", DateTime.Now.ToString());
+            LlenarModelos();
         }
 
         private void DgvModelos_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -44,6 +45,7 @@ namespace ProyectoMinaELMochito
                 txtCodigoModelo.Text = filaSeleccionada["Código Modelo"].ToString();
                 txtModelo.Text = filaSeleccionada["Modelo"].ToString();
                 cn.cerrar();
+                cmbMarca.Text = (filaSeleccionada["Marca"].ToString());
             }
         }
 
@@ -58,27 +60,64 @@ namespace ProyectoMinaELMochito
                 txtMarca.Text = filaSeleccionada["Marca"].ToString();
                 cn.cerrar();
                 MostrarModelos(Convert.ToInt32(filaSeleccionada["Código Marca"]));
+                cmbMarca.SelectedValue = Convert.ToInt32(filaSeleccionada["Código Marca"]);
             }
         }
 
-        private void LimpiarCasillas()
+        private void LimpiarCasillas(int tipoLimpiar)
         {
-            txtCodigoMarca.Text = string.Empty;
-            txtMarca.Text = string.Empty;
-        }
-
-        private bool VerificarCamposLlenos()
-        {
-            if (txtMarca.Text == string.Empty)
+            if (tipoLimpiar == 1)
             {
-                MessageBox.Show("Por favor ingresa todos los valores en las cajas de texto");
-                return false;
+                txtCodigoMarca.Text = string.Empty;
+                txtMarca.Text = string.Empty;
             }
-            return true;
+
+            else
+            {
+                txtModelo.Text = string.Empty;
+                txtCodigoModelo.Text = string.Empty;
+                cmbMarca.SelectedItem = null;
+            }
+
+
+
         }
 
+        private bool VerificarCamposLlenos(int tipoVerificado)
+        {
 
-        private Vehiculo elVehiculo = new Vehiculo();
+            if (tipoVerificado == 1)
+            {
+                if (txtMarca.Text == string.Empty)
+                {
+                    MessageBox.Show("Por favor ingresa todos los valores en las cajas de texto");
+                    return false;
+                }
+                return true;
+            }
+            else {
+                if (txtModelo.Text == string.Empty || cmbMarca.SelectedItem == null)
+                {
+                    MessageBox.Show("Por favor ingresa todos los valores en las cajas de texto");
+                    return false;
+                }
+                return true;
+            }
+
+
+
+        }
+
+        private void LlenarModelos()
+        {
+            Marcas marcas = new Marcas();
+            cmbMarca.ItemsSource = marcas.LlenarComboBoxMarcas();
+            cmbMarca.DisplayMemberPath = "NombreMarca";
+            cmbMarca.SelectedValuePath = "CodigoMarca";
+
+        }
+
+        //private Vehiculo elVehiculo = new Vehiculo();
 
 
         private void MostrarModelos(int codigoMarca)
@@ -117,7 +156,7 @@ namespace ProyectoMinaELMochito
         private void MostrarVehiculo()
         {
             try
-            {    
+            {
                 string query = @"EXEC AdministrarMarca @tipoConsulta, @idMarca, @nombreMarca";
 
                 cn.abrir();
@@ -145,10 +184,35 @@ namespace ProyectoMinaELMochito
             }
         }
 
+        private void btnAgregarModelo_Click(object sender, RoutedEventArgs e)
+        {
+            if (VerificarCamposLlenos(2))
+            {
+                try
+                {
+                    vehiculo.CrearModelo(txtModelo.Text, Convert.ToInt32(cmbMarca.SelectedValue));
+                    // Mensaje de inserción exitosa
+                    MessageBox.Show("¡Modelo registrado correctamente!");
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+
+                }
+                finally
+                {
+                    LimpiarCasillas(1);
+                    MostrarModelos(Convert.ToInt32(cmbMarca.SelectedValue));
+                    LlenarModelos();
+                }
+            }
+        }
+
         private void btnAgregar_Click(object sender, RoutedEventArgs e)
         {
             // Verificar que se ingresaron los valores requeridos
-            if (VerificarCamposLlenos())
+            if (VerificarCamposLlenos(1))
             {
                 try
                 {
@@ -165,17 +229,36 @@ namespace ProyectoMinaELMochito
                 }
                 finally
                 {
-                    LimpiarCasillas();
+                    LimpiarCasillas(1);
                     MostrarVehiculo();
+                    LlenarModelos();
                 }
             }
         }
 
+        private void btnModificarModelo_Click(object sender, RoutedEventArgs e)
+        {
+            if (VerificarCamposLlenos(2))
+            {
+                try
+                {
+                    btnAgregarModelo.Visibility = Visibility.Hidden;
+                    btnModificarModelo.Visibility = Visibility.Hidden;
+                    btnAceptarModelo.Visibility = Visibility.Visible;
+                    btnCancelarModelo.Visibility = Visibility.Visible;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+
+                }
+            }
+        }
 
         private void btnModificar_Click(object sender, RoutedEventArgs e)
         {
             // Verificar que se ingresaron los valores requeridos
-            if (VerificarCamposLlenos())
+            if (VerificarCamposLlenos(1))
             {
                 try
                 {
@@ -189,22 +272,26 @@ namespace ProyectoMinaELMochito
                     MessageBox.Show(ex.Message);
 
                 }
+                finally
+                {
+                    LlenarModelos();
+                }
             }
         }
 
-        private void btnAceptarModificacion_Click(object sender, RoutedEventArgs e)
+        private void btnAceptarModelo_Click(object sender, RoutedEventArgs e)
         {
             // Verificar que se ingresaron los valores requeridos
-            if (VerificarCamposLlenos())
+            if (VerificarCamposLlenos(2))
             {
-                BotonesCancelar();
+                BotonesCancelar(2);
 
                 try
                 {
-                    vehiculo.ActualizarMarca(txtMarca.Text, Convert.ToInt32(txtCodigoMarca.Text));
+                    vehiculo.ActualizarModelo(Convert.ToInt32(txtCodigoModelo.Text), Convert.ToInt32(cmbMarca.SelectedValue), txtModelo.Text);
 
                     // Mensaje de inserción exitosa
-                    MessageBox.Show("¡Vehiculo modificado correctamente!");
+                    MessageBox.Show("¡Modelo modificado correctamente!");
                 }
                 catch (Exception ex)
                 {
@@ -213,113 +300,159 @@ namespace ProyectoMinaELMochito
                 }
                 finally
                 {
-                    LimpiarCasillas();
                     MostrarVehiculo();
+                    MostrarModelos(Convert.ToInt32(cmbMarca.SelectedValue));
                 }
             }
         }
 
-        private void btnLimpiar_Click(object sender, RoutedEventArgs e)
-        {
-            LimpiarCasillas();
+            private void btnAceptarModificacion_Click(object sender, RoutedEventArgs e)
+            {
+                // Verificar que se ingresaron los valores requeridos
+                if (VerificarCamposLlenos(1))
+                {
+                    BotonesCancelar(1);
+
+                    try
+                    {
+                        vehiculo.ActualizarMarca(txtMarca.Text, Convert.ToInt32(txtCodigoMarca.Text));
+
+                        // Mensaje de inserción exitosa
+                        MessageBox.Show("¡Marca modificada correctamente!");
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+
+                    }
+                    finally
+                    {
+                        LimpiarCasillas(1);
+                        MostrarVehiculo();
+                        LlenarModelos();
+                }
+                }
+            }
+
+            private void btnLimpiar_Click(object sender, RoutedEventArgs e)
+            {
+                LimpiarCasillas(1);
+            }
+
+            private void BotonesCancelar(int tipoCancelar)
+            {
+                if (tipoCancelar == 1)
+                {
+                    btnModificar.Visibility = Visibility.Visible;
+                    btnAgregar.Visibility = Visibility.Visible;
+                    btnAceptarModificacion.Visibility = Visibility.Hidden;
+                    btnCancelarModificacion.Visibility = Visibility.Hidden;
+                    DgvVehiculos.SelectedItem = null;
+                }
+                else {
+                    btnModificarModelo.Visibility = Visibility.Visible;
+                    btnAgregarModelo.Visibility = Visibility.Visible;
+                    btnAceptarModelo.Visibility = Visibility.Hidden;
+                    btnCancelarModelo.Visibility = Visibility.Hidden;
+                    DgvModelos.SelectedItem = null;
+                }
+            }
+
+
+            private void btnCancelarModelo_Click(object sender, RoutedEventArgs e)
+            {
+                BotonesCancelar(2);
+            }
+
+            private void btnCancelarModificacion_Click(object sender, RoutedEventArgs e)
+            {
+                BotonesCancelar(1);
+            }
+
+
+            private void ListViewItem_Selected(object sender, RoutedEventArgs e)
+            {
+                Empleados sld = new Empleados();
+                sld.Show();
+                this.Close();
+            }
+
+            private void ListViewItem_Selected_1(object sender, RoutedEventArgs e)
+            {
+                Vehiculos sld = new Vehiculos();
+                sld.Show();
+                this.Close();
+            }
+
+            private void ListViewItem_Selected_2(object sender, RoutedEventArgs e)
+            {
+                Inventario_Mineral sld = new Inventario_Mineral();
+                sld.Show();
+                this.Close();
+            }
+
+            private void ListViewItem_Selected_3(object sender, RoutedEventArgs e)
+            {
+                EntradasHistoricas sld = new EntradasHistoricas();
+                sld.Show();
+                this.Close();
+            }
+
+            private void ListViewItem_Selected_4(object sender, RoutedEventArgs e)
+            {
+                Salidas sld = new Salidas();
+                sld.Show();
+                this.Close();
+            }
+
+            private void ListViewItem_Selected_5(object sender, RoutedEventArgs e)
+            {
+                ViajesInternos sld = new ViajesInternos();
+                sld.Show();
+                this.Close();
+            }
+
+            private void ListViewItem_Selected_6(object sender, RoutedEventArgs e)
+            {
+                Usuarios_Crud sld = new Usuarios_Crud();
+                sld.Show();
+                this.Close();
+            }
+
+            private void ListViewItem_Selected_7(object sender, RoutedEventArgs e)
+            {
+                menuPrincipal sld = new menuPrincipal();
+                sld.Show();
+                this.Close();
+            }
+            private void Window_MouseDown(object sender, MouseButtonEventArgs e)
+            {
+                DragMove();
+            }
+
+            private void ListViewItem_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+            {
+                menuPrincipal sld = new menuPrincipal();
+                sld.Show();
+                this.Close();
+            }
+
+            private void ListViewItem_Selected_8(object sender, RoutedEventArgs e)
+            {
+                Login sld = new Login();
+                sld.Show();
+                this.Close();
+            }
+
+            private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+            {
+
+            }
+
+            private void btnLimpiarModelo_Click(object sender, RoutedEventArgs e)
+            {
+                LimpiarCasillas(2);
+            }
+
         }
-
-        private void BotonesCancelar()
-        {
-            //mostar todos los botones necesarios
-            btnModificar.Visibility = Visibility.Visible;
-            btnAgregar.Visibility = Visibility.Visible;
-            btnAceptarModificacion.Visibility = Visibility.Hidden;
-            btnCancelarModificacion.Visibility = Visibility.Hidden;
-
-            DgvVehiculos.SelectedItem = null;
-        }
-
-        private void btnCancelarModificacion_Click(object sender, RoutedEventArgs e)
-        {
-            BotonesCancelar();
-        }
-
-
-        private void ListViewItem_Selected(object sender, RoutedEventArgs e)
-        {
-            Empleados sld = new Empleados();
-            sld.Show();
-            this.Close();
-        }
-
-        private void ListViewItem_Selected_1(object sender, RoutedEventArgs e)
-        {
-            Vehiculos sld = new Vehiculos();
-            sld.Show();
-            this.Close();
-        }
-
-        private void ListViewItem_Selected_2(object sender, RoutedEventArgs e)
-        {
-            Inventario_Mineral sld = new Inventario_Mineral();
-            sld.Show();
-            this.Close();
-        }
-
-        private void ListViewItem_Selected_3(object sender, RoutedEventArgs e)
-        {
-            EntradasHistoricas sld = new EntradasHistoricas();
-            sld.Show();
-            this.Close();
-        }
-
-        private void ListViewItem_Selected_4(object sender, RoutedEventArgs e)
-        {
-            Salidas sld = new Salidas();
-            sld.Show();
-            this.Close();
-        }
-
-        private void ListViewItem_Selected_5(object sender, RoutedEventArgs e)
-        {
-            ViajesInternos sld = new ViajesInternos();
-            sld.Show();
-            this.Close();
-        }
-
-        private void ListViewItem_Selected_6(object sender, RoutedEventArgs e)
-        {
-            Usuarios_Crud sld = new Usuarios_Crud();
-            sld.Show();
-            this.Close();
-        }
-
-        private void ListViewItem_Selected_7(object sender, RoutedEventArgs e)
-        {
-            menuPrincipal sld = new menuPrincipal();
-            sld.Show();
-            this.Close();
-        }
-        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            DragMove();
-        }
-
-        private void ListViewItem_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-            menuPrincipal sld = new menuPrincipal();
-            sld.Show();
-            this.Close();
-        }
-
-        private void ListViewItem_Selected_8(object sender, RoutedEventArgs e)
-        {
-            Login sld = new Login();
-            sld.Show();
-            this.Close();
-        }
-
-        private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
-
-
     }
-}
