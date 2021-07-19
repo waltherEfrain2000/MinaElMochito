@@ -34,6 +34,13 @@ namespace ProyectoMinaELMochito
             MostrarVehiculo();
             MostrarEstados();
             botonfecha.Content = string.Format("{0}", DateTime.Now.ToString());
+
+            //Definir la longitud de los textbox
+            txtMarca.MaxLength = 15;
+            txtModelo.MaxLength = 30;
+            txtPlaca.MaxLength = 15;
+            txtColor.MaxLength = 15;
+
         }
 
         private void DgvVehiculos_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -58,11 +65,12 @@ namespace ProyectoMinaELMochito
             //operacion sirve para distingir entre actualizar y activar o inabilitar todas las casillas
             if (operacion == 0)
             {
-                txtMarca.IsReadOnly = opcion;
+                /*txtMarca.IsReadOnly = opcion;
                 txtModelo.IsReadOnly = opcion;
                 txtPlaca.IsReadOnly = opcion;
                 txtColor.IsReadOnly = opcion;
-                cmbEstado.IsReadOnly = opcion;
+                cmbEstado.IsReadOnly = opcion;*/
+                int a = 0;
 
             }
             else
@@ -134,8 +142,7 @@ namespace ProyectoMinaELMochito
             {
                 string query = @"SELECT V.idVehiculo  AS 'VehiculoID',V.marca AS 'Marca', V.modelo AS 'Modelo',
                                 V.placa AS 'Placa',V.color,EV.descripcion  AS 'Estado'FROM  Minas.Vehiculo V INNER JOIN Minas.EstadoVehiculo EV
-								ON EV.idEstado = V.estado
-								where V.estado = 1 or V.estado = 2";
+								ON EV.idEstado = V.estado";
 
                 sqlConnection.Open();
 
@@ -153,7 +160,7 @@ namespace ProyectoMinaELMochito
             catch (Exception ex)
             {
 
-                throw ex;
+                MessageBox.Show("Ha Ocurrido Un Error! Revisas tus datos.");
             }
             finally
             {
@@ -177,7 +184,7 @@ namespace ProyectoMinaELMochito
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message);
+                    MessageBox.Show("Ha Ocurrido Un Error! Revisas tus datos.");
 
                 }
                 finally
@@ -415,6 +422,14 @@ namespace ProyectoMinaELMochito
         private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
+        }
+        //Función evita que se inserten números
+        private void txtColor_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key >= Key.D0 && e.Key <= Key.D9 || e.Key >= Key.NumPad0 && e.Key <= Key.NumPad9)
+                e.Handled = true;
+            else
+                e.Handled = false;
         }
     }
 }

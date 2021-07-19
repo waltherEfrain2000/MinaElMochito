@@ -52,6 +52,7 @@ namespace ProyectoMinaELMochito
             txtEdad.Text = string.Empty;
             txtSalario.Text = string.Empty;
             txtDireccion.Text = string.Empty;
+            dpFechaNacimiento.Text = string.Empty;
 
             cmbGenero.SelectedValue = null;
             cmbCargo.SelectedValue = null;
@@ -60,9 +61,14 @@ namespace ProyectoMinaELMochito
 
         private bool VerificarCamposLlenos()
         {
-                if (txtIdentidad.Text == string.Empty || txtNombreCompleto.Text == string.Empty || txtEdad.Text == string.Empty || txtSalario.Text == string.Empty || txtDireccion.Text == string.Empty)
+                if (txtIdentidad.Text == string.Empty || txtNombreCompleto.Text == string.Empty || txtSalario.Text == string.Empty || txtDireccion.Text == string.Empty)
                 {
                     MessageBox.Show("Por favor ingresa todos los valores en las cajas de texto");
+                    return false;
+                }
+                else if (dpFechaNacimiento.SelectedDate == null)
+                {
+                    MessageBox.Show("Por favor, ingresar su fecha de nacimiento");
                     return false;
                 }
                 else if (cmbGenero.SelectedValue == null)
@@ -76,11 +82,11 @@ namespace ProyectoMinaELMochito
                     return false;
                 }
 
-                else if (Convert.ToInt32(txtEdad.Text) < 18 || Convert.ToInt32(txtEdad.Text) > 100)
-                {
-                    MessageBox.Show("Por favor selecciona una edad valida!");
-                    return false;
-                }
+                //else if (Convert.ToInt32(txtEdad.Text) < 18 || Convert.ToInt32(txtEdad.Text) > 100)
+                //{
+                //    MessageBox.Show("Por favor selecciona una edad valida!");
+                //    return false;
+                //}
 
                 return true;
             
@@ -94,8 +100,17 @@ namespace ProyectoMinaELMochito
             }
 
             empleado.Identidad = txtIdentidad.Text;
-            empleado.NombreCompleto = txtNombreCompleto.Text;
-            empleado.Edad = Convert.ToInt32(txtEdad.Text);
+
+            char[] delimitador = {' '};
+            string[] trozos = txtNombreCompleto.Text.Split(delimitador);
+
+            empleado.PrimerNombre = trozos[0];
+            empleado.SegundoNombre = trozos[1];
+            empleado.PrimerApellido = trozos[2];
+            empleado.SegundoApellido = trozos[3];
+
+            empleado.FechaNacimiento = dpFechaNacimiento.Text;
+
             switch (cmbGenero.SelectedIndex)
             {
                 case 0:
@@ -107,6 +122,9 @@ namespace ProyectoMinaELMochito
                 default:
                     break;
             }
+
+            empleado.Direccion = txtDireccion.Text;
+
             switch (cmbCargo.SelectedIndex)
             {
                 case 0:
@@ -134,28 +152,6 @@ namespace ProyectoMinaELMochito
                     break;
             }
 
-            //try
-            //{
-            //    if (txtSalario.Text == string.Empty)
-            //    {
-            //        int a = 1;
-            //    }
-            //    else
-            //    {
-
-            //        //precio = Convert.ToDecimal(txtPrecio.Text, CultureInfo.InvariantCulture);
-            //        //cantidad = Convert.ToDecimal(txtCantidad.Text, CultureInfo.InvariantCulture);
-
-            //        //total = precio * cantidad;
-            //    }
-            //}
-            //catch (Exception ex)
-            //{
-            //    MessageBox.Show(ex.Message);
-            //}
-
-            //decimal precio, cantidad, total, salario;
-            //salario = Convert.ToDecimal(txtSalario.Text, CultureInfo.InvariantCulture);
 
             decimal monto = Convert.ToDecimal(txtSalario.Text);
             
@@ -167,8 +163,8 @@ namespace ProyectoMinaELMochito
             }
 
             empleado.Salario = Convert.ToDecimal(txtSalario.Text);
-            empleado.Estado = "activo";
-            empleado.Direccion = txtDireccion.Text;
+            //empleado.Estado = "activo";
+            
             //txtSalario.Text = salario.ToString("0000.00", CultureInfo.InvariantCulture);
 
         }
@@ -206,10 +202,8 @@ namespace ProyectoMinaELMochito
         {
             try
             {
-                string query = @"SELECT E.IdEmpleado AS 'Código',E.identidad, E.primerNombre AS 'Nombre', E.edad as 'Edad', 
-                                E.direccion as 'Dirección' ,C.descripcion AS 'Cargo', E.salario as 'Salario', E.estado as 'Estado'  FROM  Minas.Empleado E INNER JOIN Minas.cargo C 
-                                ON C.idCargo = E.idCargo 
-                                ";
+
+                string query = @"exec mostrarEmpleado";
 
                 sqlConnection.Open();
 
@@ -219,7 +213,7 @@ namespace ProyectoMinaELMochito
                 sqlCommand.ExecuteNonQuery();
                 SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand);
 
-                DataTable dataTable = new DataTable("Minas.Empleado");
+                DataTable dataTable = new DataTable("Empleados.Empleado");
                 sqlDataAdapter.Fill(dataTable);
                 DgvEmpleados.ItemsSource = dataTable.DefaultView;
                 sqlDataAdapter.Update(dataTable);
@@ -264,14 +258,14 @@ namespace ProyectoMinaELMochito
             DataRowView filaSeleccionada = dg.SelectedItem as DataRowView;
             if (filaSeleccionada != null)
             {
-                txtEmpleadoID.Text = filaSeleccionada["Empleado ID"].ToString();
-                txtIdentidad.Text = filaSeleccionada["identidad"].ToString();
-                txtNombreCompleto.Text = filaSeleccionada["Nombre Completo"].ToString();
-                txtEdad.Text = filaSeleccionada["edad"].ToString();
-                cmbGenero.Text = filaSeleccionada["Genero"].ToString();
-                txtDireccion.Text = filaSeleccionada["direccion"].ToString();
-                cmbCargo.Text = filaSeleccionada["cargo"].ToString();
-                txtSalario.Text = filaSeleccionada["salario"].ToString();
+                txtEmpleadoID.Text = filaSeleccionada["Código"].ToString();
+                txtIdentidad.Text = filaSeleccionada["Identidad"].ToString();
+                txtNombreCompleto.Text = filaSeleccionada["Nombre"].ToString();
+                dpFechaNacimiento.Text = filaSeleccionada["FechaNacimiento"].ToString();
+                cmbGenero.Text = filaSeleccionada["Género"].ToString();
+                txtDireccion.Text = filaSeleccionada["Dirección"].ToString();
+                cmbCargo.Text = filaSeleccionada["Cargo"].ToString();
+                txtSalario.Text = filaSeleccionada["Salario"].ToString();
 
                 edicionDeCasillas(true, 0);
             }
@@ -603,35 +597,6 @@ namespace ProyectoMinaELMochito
                       "Confirmar", MessageBoxButton.OK, MessageBoxImage.Warning);
                 txtSalario.Text = "";
             }
-        }
-
-        private void Setter_ColorChanged(object sender, RoutedPropertyChangedEventArgs<Color> e)
-        {
-
-        }
-
-        private void Window_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            
-        }
-
-        private void Window_Closed(object sender, EventArgs e)
-        {
-            
-        }
-
-        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            //if (MessageBox.Show("¿Está seguro que desea salir?", "Salir", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
-            //{
-            //    this.Hide();
-            //}
-            //else
-            //{
-            //    Empleados emp = new Empleados();
-            //    emp.Show();
-            //    //this.Hide();
-            //}
         }
     }
     }

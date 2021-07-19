@@ -73,7 +73,7 @@ namespace ProyectoMinaELMochito
         {
             try
             {
-                string query = @"UPDATE	Minas.Vehiculo SET color = @color,estado = @estado Where idVehiculo  = @idVehiculo";
+                string query = @"UPDATE	Minas.Vehiculo SET color = @color,estado = @estado, marca = @marca, modelo = @modelo, placa = @placa Where idVehiculo  = @idVehiculo";
 
                 sqlConnection.Open();
 
@@ -83,6 +83,10 @@ namespace ProyectoMinaELMochito
                 sqlCommand.Parameters.AddWithValue("@idVehiculo", vehiculo.VehiculoID);
                 sqlCommand.Parameters.AddWithValue("@color", vehiculo.Color);
                 sqlCommand.Parameters.AddWithValue("@estado", vehiculo.Estado);
+                sqlCommand.Parameters.AddWithValue("@marca", vehiculo.Marca);
+                sqlCommand.Parameters.AddWithValue("@modelo", vehiculo.Modelo);
+                sqlCommand.Parameters.AddWithValue("@placa", vehiculo.Placa);
+
 
                 sqlCommand.ExecuteNonQuery();
             }
