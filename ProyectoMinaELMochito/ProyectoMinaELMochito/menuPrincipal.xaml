@@ -13,6 +13,7 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="220"/>
             <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="200"/>
         </Grid.ColumnDefinitions>
 
         <Grid fw:PointerTracker.Enabled="True" Background="#9900afb9" Height="650" VerticalAlignment="Bottom">
@@ -116,9 +117,21 @@
         </Grid>
 
         <Grid Grid.Column="1" Background="White">
-
-            <Image HorizontalAlignment="Left" Height="532" Margin="250,50,0,0" VerticalAlignment="Top" Width="718" Source="logo.png" />
-
+            <Image HorizontalAlignment="Left" Height="532" Margin="212,52,0,0" VerticalAlignment="Top" Width="718" Source="logo.png" />
         </Grid>
+
+        <Grid Grid.Column="2" Background="White">
+            <StackPanel>
+                <StackPanel>
+                    <ListViewItem Padding="1" HorizontalAlignment="Center" Width="200" MouseDoubleClick="ListViewItem_MouseDoubleClick_1" Selected="ListViewItem_Selected_12">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Foreground="#9900afb9" Kind="Note"  Margin="15,15,15,15"/>
+                            <TextBlock Text="Generar reportes" Foreground="#9900afb9" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </ListViewItem>
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+
     </Grid>
 </Window>

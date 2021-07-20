@@ -127,6 +127,15 @@ namespace ProyectoMinaELMochito
             this.Close();
         }
 
-        
+        private void ListViewItem_MouseDoubleClick_1(object sender, MouseButtonEventArgs e)
+        {
+            Reportes reportes = new Reportes();
+            reportes.Show();
+        }
+
+        private void ListViewItem_Selected_12(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
