@@ -12,7 +12,7 @@ namespace ProyectoMinaELMochito
     class Vehiculo
     {
         // Variables miembro
-        Conexion cn = new Conexion();
+        conexion cn = new conexion();
 
         //Propiedades
         public int VehiculoID { get; set; }

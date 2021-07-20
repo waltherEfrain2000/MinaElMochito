@@ -19,7 +19,7 @@ namespace ProyectoMinaELMochito
     {
 
         // conexion con clases
-        Conexion cn = new Conexion();
+        conexion cn = new conexion();
         Empleado empleado = new Empleado();
         Mineralinventario mineralinventario = new Mineralinventario();
 
@@ -28,7 +28,7 @@ namespace ProyectoMinaELMochito
 
         public void CrearMarca(string Marca)
         {
-            Conexion cn = new Conexion();
+            conexion cn = new conexion();
 
             try
             {
@@ -57,7 +57,7 @@ namespace ProyectoMinaELMochito
 
         public void ActualizarMarca(string Marca, int idMarca)
         {
-            Conexion cn = new Conexion();
+            conexion cn = new conexion();
 
             try
             {
@@ -86,7 +86,7 @@ namespace ProyectoMinaELMochito
 
         public void CrearModelo(string Modelo, int Marca)
         {
-            Conexion cn = new Conexion();
+            conexion cn = new conexion();
 
             try
             {
@@ -115,7 +115,7 @@ namespace ProyectoMinaELMochito
 
         public void ActualizarModelo(int idModelo, int idMarca, string modelo)
         {
-            Conexion cn = new Conexion();
+            conexion cn = new conexion();
 
             try
             {
@@ -153,7 +153,7 @@ namespace ProyectoMinaELMochito
 
         public void CrearVehiculo(int idModelo, int idMarca, string placa, string color, int estado)
         {
-            Conexion cn = new Conexion();
+            conexion cn = new conexion();
 
             try
             {
@@ -183,7 +183,7 @@ namespace ProyectoMinaELMochito
         }
         public void ActualizarVehiculo(int idVehiculo, int idModelo, int idMarca, string placa, string color, int estado)
         {
-            Conexion cn = new Conexion();
+            conexion cn = new conexion();
 
             try
             {
@@ -215,7 +215,7 @@ namespace ProyectoMinaELMochito
 
         public void EliminarVehiculo(int idVehiculo)
         {
-            Conexion cn = new Conexion();
+            conexion cn = new conexion();
 
             try
             {
@@ -282,8 +282,6 @@ namespace ProyectoMinaELMochito
             }
 
             salidas.Cantidad = Convert.ToDecimal(Cantidad);
-            salidas.Total = Convert.ToDecimal(Total);
-            salidas.FechaSalida = Convert.ToDateTime(FSalida);
             salidas.DetalleSalida = Detalle;
 
             switch (cmbIdMineral)

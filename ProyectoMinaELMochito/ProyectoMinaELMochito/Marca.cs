@@ -12,7 +12,7 @@ namespace ProyectoMinaELMochito
     class Marcas
     {
         // Variables miembro
-        Conexion cn = new Conexion();
+        conexion cn = new conexion();
 
         //Propiedades
         public int CodigoMarca { get; set; }

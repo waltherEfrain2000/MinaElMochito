@@ -162,7 +162,7 @@ namespace ProyectoMinaELMochito
         private void btnIngresar_Click(object sender, RoutedEventArgs e)
         {
 
-            if (validaciones.VerificarCamposLlenos(txtCantidad.Text,  cmbIdMineral.Text, FSalida.Text)) ;
+            if (validaciones.VerificarCamposLlenosSalidas(txtCantidad.Text,  cmbIdMineral.Text, FSalida.Text)) ;
             {
                 try
                 {
@@ -190,7 +190,7 @@ namespace ProyectoMinaELMochito
 
         private void btnModificar_Click(object sender, RoutedEventArgs e)
         {
-            if (validaciones.VerificarCamposLlenos(txtCantidad.Text, cmbIdMineral.Text, FSalida.Text)) ;
+            if (validaciones.VerificarCamposLlenosSalidas(txtCantidad.Text, cmbIdMineral.Text, FSalida.Text)) ;
             
             {
                 try

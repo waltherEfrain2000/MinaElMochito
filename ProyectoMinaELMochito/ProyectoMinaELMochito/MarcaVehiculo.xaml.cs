@@ -24,7 +24,7 @@ namespace ProyectoMinaELMochito
     public partial class MarcaVehiculo : Window
     {
         // Variables miembro
-        Conexion cn = new Conexion();
+        conexion cn = new conexion();
 
         private Procedimientos vehiculo = new Procedimientos();
         public MarcaVehiculo()
@@ -454,5 +454,24 @@ namespace ProyectoMinaELMochito
                 LimpiarCasillas(2);
             }
 
+        private void ListViewItem_Selected_9(object sender, RoutedEventArgs e)
+        {
+            ViajesInternos sld = new ViajesInternos();
+            sld.Show();
+            this.Close();
         }
+        private void ListViewItem_Selected_10(object sender, RoutedEventArgs e)
+        {
+            Cargos cargos = new Cargos();
+            cargos.Show();
+            this.Close();
+        }
+
+        private void ListViewItem_Selected_11(object sender, RoutedEventArgs e)
+        {
+            Herramientas herramientas = new Herramientas();
+            herramientas.Show();
+            this.Close();
+        }
+    }
     }

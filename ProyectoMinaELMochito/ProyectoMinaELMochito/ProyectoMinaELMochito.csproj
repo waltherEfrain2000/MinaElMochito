@@ -152,6 +152,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="MarcaVehiculo.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="menuEmpleado.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -224,6 +228,8 @@
     <Compile Include="Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Marca.cs" />
+    <Compile Include="MarcaVehiculo.xaml.cs" />
     <Compile Include="menuEmpleado.xaml.cs">
       <DependentUpon>menuEmpleado.xaml</DependentUpon>
     </Compile>
