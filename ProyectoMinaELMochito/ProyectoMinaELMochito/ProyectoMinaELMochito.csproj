@@ -171,6 +171,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Ayuda.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Cargos.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -285,6 +289,9 @@
     </Compile>
     <Compile Include="AsignarHerramientas.xaml.cs">
       <DependentUpon>AsignarHerramientas.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Ayuda.xaml.cs">
+      <DependentUpon>Ayuda.xaml</DependentUpon>
     </Compile>
     <Compile Include="Cargocrud.cs" />
     <Compile Include="Cargos.xaml.cs">
@@ -405,6 +412,61 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <None Include="README.md" />
+    <Content Include="Ayuda\Ayuda_Equipamiento\AyudaEquipamiento.css" />
+    <Content Include="Ayuda\Ayuda_Equipamiento\AyudaEquipamiento.html" />
+    <Resource Include="Ayuda\Ayuda_Equipamiento\Imagenes\equipamiento.png" />
+    <Resource Include="Ayuda\Ayuda_Equipamiento\Imagenes\equipamiento1.png" />
+    <Resource Include="Ayuda\Ayuda_Equipamiento\Imagenes\equipamiento2.png" />
+    <Resource Include="Ayuda\Ayuda_Equipamiento\Imagenes\equipamiento3.png" />
+    <Resource Include="Ayuda\Ayuda_Equipamiento\Imagenes\equipamiento4.png" />
+    <Resource Include="Ayuda\Ayuda_Equipamiento\Imagenes\equipamiento5.png" />
+    <Content Include="Ayuda\Ayuda_Inventario\AyudaEmpleados.html" />
+    <Content Include="Ayuda\Ayuda_Inventario\AyudaEntrada.html" />
+    <Content Include="Ayuda\Ayuda_Inventario\AyudaInventario.css" />
+    <Content Include="Ayuda\Ayuda_Inventario\AyudaIventario.html" />
+    <Resource Include="Ayuda\Ayuda_Inventario\Imagenes\1.png" />
+    <Resource Include="Ayuda\Ayuda_Inventario\Imagenes\2.png" />
+    <Resource Include="Ayuda\Ayuda_Inventario\Imagenes\3.png" />
+    <Resource Include="Ayuda\Ayuda_Inventario\Imagenes\emp2.jpg" />
+    <Resource Include="Ayuda\Ayuda_Inventario\Imagenes\emp3.png" />
+    <Resource Include="Ayuda\Ayuda_Inventario\Imagenes\empleado1.png" />
+    <Resource Include="Ayuda\Ayuda_Inventario\Imagenes\empleado3.png" />
+    <Resource Include="Ayuda\Ayuda_Inventario\Imagenes\empleado4.png" />
+    <Resource Include="Ayuda\Ayuda_Inventario\Imagenes\empleado5.png" />
+    <Resource Include="Ayuda\Ayuda_Inventario\Imagenes\entradas1.png" />
+    <Resource Include="Ayuda\Ayuda_Inventario\Imagenes\entradas2.png" />
+    <Resource Include="Ayuda\Ayuda_Inventario\Imagenes\entradas3.png" />
+    <Resource Include="Ayuda\Ayuda_Inventario\Imagenes\entradas4.png" />
+    <Resource Include="Ayuda\Ayuda_ProduccionMain\ProduccionImagenes\1.PNG" />
+    <Resource Include="Ayuda\Ayuda_ProduccionMain\ProduccionImagenes\2.PNG" />
+    <Resource Include="Ayuda\Ayuda_ProduccionMain\ProduccionImagenes\3.PNG" />
+    <Resource Include="Ayuda\Ayuda_ProduccionMain\ProduccionImagenes\4.PNG" />
+    <Resource Include="Ayuda\Ayuda_ProduccionMain\ProduccionImagenes\produccion.PNG" />
+    <Resource Include="Ayuda\Ayuda_ProduccionMain\ProduccionImagenes\viaje Interno.PNG" />
+    <Content Include="Ayuda\Ayuda_ProduccionMain\VIProduccion\VIPoduccion.css" />
+    <Content Include="Ayuda\Ayuda_ProduccionMain\VIProduccion\VProduccion.html" />
+    <Resource Include="Ayuda\Ayuda_Salidas\ImagenesSalidas\._1.PNG" />
+    <Resource Include="Ayuda\Ayuda_Salidas\ImagenesSalidas\._2.PNG" />
+    <Resource Include="Ayuda\Ayuda_Salidas\ImagenesSalidas\._3.PNG" />
+    <Resource Include="Ayuda\Ayuda_Salidas\ImagenesSalidas\._4.PNG" />
+    <Resource Include="Ayuda\Ayuda_Salidas\ImagenesSalidas\._5.PNG" />
+    <Resource Include="Ayuda\Ayuda_Salidas\ImagenesSalidas\._6.PNG" />
+    <Resource Include="Ayuda\Ayuda_Salidas\ImagenesSalidas\1.PNG" />
+    <Resource Include="Ayuda\Ayuda_Salidas\ImagenesSalidas\2.PNG" />
+    <Resource Include="Ayuda\Ayuda_Salidas\ImagenesSalidas\3.PNG" />
+    <Resource Include="Ayuda\Ayuda_Salidas\ImagenesSalidas\4.PNG" />
+    <Resource Include="Ayuda\Ayuda_Salidas\ImagenesSalidas\5.PNG" />
+    <Resource Include="Ayuda\Ayuda_Salidas\ImagenesSalidas\6.PNG" />
+    <Content Include="Ayuda\Ayuda_Salidas\Salidas\AyudaSalidas.css" />
+    <Content Include="Ayuda\Ayuda_Salidas\Salidas\AyudaSalidas.html" />
+    <Content Include="Ayuda\Ayuda_Usuarios\Ayuda Usuarios\Estilo.css" />
+    <Content Include="Ayuda\Ayuda_Usuarios\Ayuda Usuarios\VProduccion.html" />
+    <Resource Include="Ayuda\Ayuda_Usuarios\Imagenes\1.PNG" />
+    <Resource Include="Ayuda\Ayuda_Usuarios\Imagenes\2.PNG" />
+    <Resource Include="Ayuda\Ayuda_Usuarios\Imagenes\3.png" />
+    <Resource Include="Ayuda\Ayuda_Usuarios\Imagenes\4.PNG" />
+    <Resource Include="Ayuda\Ayuda_Usuarios\Imagenes\5.PNG" />
+    <Resource Include="Ayuda\Ayuda_Usuarios\Imagenes\6.PNG" />
     <Content Include="Reportes\Reporte Empleados.rdl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

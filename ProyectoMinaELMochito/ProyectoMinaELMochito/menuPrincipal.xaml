@@ -129,6 +129,14 @@
                             <TextBlock Text="Generar reportes" Foreground="#9900afb9" VerticalAlignment="Center"/>
                         </StackPanel>
                     </ListViewItem>
+
+                    <ListViewItem Padding="1" HorizontalAlignment="Center" Width="200" MouseDoubleClick="ListViewItem_MouseDoubleClick_2" >
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Foreground="#9900afb9" Kind="Information"   Margin="15,15,15,15"/>
+                            <TextBlock Text="Ayuda" Foreground="#9900afb9" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </ListViewItem>
+
                 </StackPanel>
             </StackPanel>
         </Grid>

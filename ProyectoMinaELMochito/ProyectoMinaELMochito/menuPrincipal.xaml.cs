@@ -137,5 +137,11 @@ namespace ProyectoMinaELMochito
         {
 
         }
+
+        private void ListViewItem_MouseDoubleClick_2(object sender, RoutedEventArgs e)
+        {
+            Ayuda ayuda = new Ayuda();
+            ayuda.Show();
+        }
     }
 }

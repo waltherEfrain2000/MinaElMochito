@@ -39,6 +39,13 @@
                         </StackPanel>
                     </ListViewItem>
 
+                    <ListViewItem Padding="1" Selected="ListViewItem_Selected_4">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Foreground="White" Kind="Information" Margin="15" />
+                            <TextBlock Text="Ayuda" Foreground="White" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </ListViewItem>
+
                     <ListViewItem Padding="1" Selected="ListViewItem_Selected_2" >
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Foreground="White" Kind="Logout" Margin="15"/>

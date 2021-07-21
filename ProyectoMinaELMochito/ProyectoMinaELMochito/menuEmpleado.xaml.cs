@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Diagnostics;
 
 namespace ProyectoMinaELMochito
 {
@@ -63,6 +64,20 @@ namespace ProyectoMinaELMochito
             menuEmpleado sld = new menuEmpleado();
             sld.Show();
             this.Close();
+        }
+
+        private void ListViewItem_Selected_4(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                Process.Start("file:///C:/Users/G7/Desktop/CLASES/2-IMPLEMENTACION%20DE%20SISTEMAS%20DE%20SOFTWARE/III%20PARCIAL/html/AyudaProduccionMain/VProduccion.html");
+
+            }
+            catch (Exception)
+            {
+
+                MessageBox.Show("Error, no se ha encontrado la página...", "Error", MessageBoxButton.OK);
+            }
         }
     }
 }
