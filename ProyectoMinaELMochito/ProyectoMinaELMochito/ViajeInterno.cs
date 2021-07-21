@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -48,34 +49,32 @@ namespace ProyectoMinaELMochito
         /// <param name="empleado">El id del empleado</param>
         public void AgregarDatosAViajeInterno(ViajeInterno viajeinterno)
         {
+            conexion cn = new conexion();
+            Validaciones validaciones = new Validaciones();
             try
             {
-                //Query Insersición
-                string query = @"INSERT INTO Minas.viajeInterno (idVehiculo, idEmpleado)
-                                 VALUES (@idVehiculo, @idEmpleado)";
 
-                //Establecer y abrir la conexión
-                sqlConnection.Open();
 
-                //Crear el comando SQL
-                SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
+                SqlCommand cmd = new SqlCommand("AgregarDatosAViajeInterno", cn.Conectarbd);
+                cmd.CommandType = CommandType.StoredProcedure;
 
-                //Establecer los valores de los parámetros
-                sqlCommand.Parameters.AddWithValue("@idVehiculo", viajeinterno.IdVehiculo);
-                sqlCommand.Parameters.AddWithValue("@idEmpleado", viajeinterno.IdEmpleado);
 
-                //Ejecutar el comando del query de la inserción
-                sqlCommand.ExecuteNonQuery();
+                cn.abrir();
+                cmd.Parameters.AddWithValue("@idVehiculo", viajeinterno.IdVehiculo);
+                cmd.Parameters.AddWithValue("@idEmpleado", viajeinterno.IdEmpleado);
+
+                cmd.ExecuteNonQuery();
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                throw;
+
+                throw e;
             }
             finally
             {
-                // Cerrar la conexión
-                sqlConnection.Close();
+                cn.cerrar();
             }
+
         }
     }
 }

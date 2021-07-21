@@ -26,6 +26,7 @@ namespace ProyectoMinaELMochito
     {
         //Variables Miembro
         private ViajeInterno viajeinterno = new ViajeInterno();
+        Validaciones validaciones = new Validaciones();
 
         private static string connectionString = ConfigurationManager.ConnectionStrings["ProyectoMinaELMochito.Properties.Settings.MinaConnectionString"].ConnectionString;
         private SqlConnection sqlConnection = new SqlConnection(connectionString);
@@ -38,66 +39,9 @@ namespace ProyectoMinaELMochito
             botonfecha.Content = string.Format("{0}", DateTime.Now.ToString());
 
         }
-        /// <summary>
-        /// Muestra la tabla en donde se encuentran los empleados
-        /// de la mina, de aquí el usuario seleccionará uno para el viaje
-        /// </summary>
-        private void CargarDatos()
-        {
-            try
-            {
-                //Query para seleccionar los datos de la tabla
-                String queryEmpleado = @"Select IdEmpleado as 'Id Empleado', identidad as 'Identidad', 
-                               primerNombre as 'Nombre Empleado', C.descripcion AS 'Cargo'
-                               from Minas.Empleado  E INNER JOIN Minas.cargo C 
-                                ON C.idCargo = E.idCargo 
-                                WHERE E.estado = 'activo' and C.idcargo= 7";
-
-                String queryVehiculo = @"Select idVehiculo as 'Id Vehiculo', marca as 'Marca', 
-                                        modelo as 'Modelo', placa as 'Placa', color as 'Color'
-                                        from Minas.Vehiculo V INNER JOIN Minas.EstadoVehiculo EV
-								        ON EV.idEstado = V.estado
-								        where V.estado = 1";
-
-                //Establecer la conexion
-                sqlConnection.Open();
-
-                // Crear el comando SQL tanto como para el query de emplados y de vehículos
-                SqlCommand sqlCommand1 = new SqlCommand(queryEmpleado, sqlConnection);
-                SqlCommand sqlCommand2 = new SqlCommand(queryVehiculo, sqlConnection);
-
-                //Se crea el sqlCommand para poder ejecuatar cada quuery
-                sqlCommand1.ExecuteNonQuery();
-                sqlCommand2.ExecuteNonQuery();
-
-                //Crear el comando SQL
-                SqlDataAdapter sqlDataAdapter1 = new SqlDataAdapter(sqlCommand1);
-                SqlDataAdapter sqlDataAdapter2 = new SqlDataAdapter(sqlCommand2);
-
-                //Crear el dataTable que contendrá las tablas desde la base
-                DataTable dataTable1 = new DataTable("Minas.Empleado");
-                DataTable dataTable2 = new DataTable("Minas.Vehiculo");
-
-                //Llenar los datagrid con la información necesaria
-                sqlDataAdapter1.Fill(dataTable1);
-                dgvEmpleados.ItemsSource = dataTable1.DefaultView;
-                sqlDataAdapter1.Update(dataTable1);
-
-                sqlDataAdapter2.Fill(dataTable2);
-                dgvVehiculos.ItemsSource = dataTable2.DefaultView;
-                sqlDataAdapter2.Update(dataTable2);
-              
-            }
-            catch (Exception ex)
-            {
-
-                throw ex;
-            }
-            finally
-            {
-                sqlConnection.Close();
-            }
-        }
+        /*-----------------------------------------------------------------------------------------------------------------------------------------
+        ------------------------------------------------------------------------------------------------------------------------------------
+       ----------------------------------------------------------------------------------------------------------------------------------------- */
 
         //Limpiar las cajas de texto
         private void LimpiarCasillas()
@@ -124,20 +68,119 @@ namespace ProyectoMinaELMochito
             txtVehiculo.Text = viajeinterno.Vehiculo;
         }
 
-        //Vamos a verificar que todas las casillas estén llenas
-        private bool VerificacionCasillas()
-        {
-            if (txtIdEmpleado.Text == string.Empty || txtIdVehiculo.Text == string.Empty)
-            {
-                MessageBoxResult result = MessageBox.Show("Por favor!, Verifique que las casillas contengan la infromación requerida!",
-                    "Confirmar", MessageBoxButton.OK, MessageBoxImage.Warning);
-                return false;
-            }
 
-            //Si hay valores en las casillas entonces se retornará verdadero
-            return true;
+
+
+
+        /*------------------------------------------------------------------------------------------------------------------------
+        ---------------------------------------------- CARGAR---------------------------------------------------------------------
+        -------------------------------------------------------------------------------------------------------------------------*/
+        /// <summary>
+        /// Muestra la tabla en donde se encuentran los empleados
+        /// de la mina, de aquí el usuario seleccionará uno para el viaje
+        /// </summary>
+        private void CargarDatos()
+        {
+            try
+            {
+                //Query para seleccionar los datos de la tabla
+                String queryEmpleado = @"execute CargarDatosEmpleado";
+
+                String queryVehiculo = @"execute CargarDatosVehiculo";
+
+                //Establecer la conexion
+                sqlConnection.Open();
+
+                // Crear el comando SQL tanto como para el query de emplados y de vehículos
+                SqlCommand sqlCommand1 = new SqlCommand(queryEmpleado, sqlConnection);
+                SqlCommand sqlCommand2 = new SqlCommand(queryVehiculo, sqlConnection);
+
+                //Se crea el sqlCommand para poder ejecuatar cada quuery
+                sqlCommand1.ExecuteNonQuery();
+                sqlCommand2.ExecuteNonQuery();
+
+                //Crear el comando SQL
+                SqlDataAdapter sqlDataAdapter1 = new SqlDataAdapter(sqlCommand1);
+                SqlDataAdapter sqlDataAdapter2 = new SqlDataAdapter(sqlCommand2);
+
+                //Crear el dataTable que contendrá las tablas desde la base
+                DataTable dataTable1 = new DataTable("Empleados.Empleado");
+                DataTable dataTable2 = new DataTable("Vehiculos.Vehiculo");
+
+                //Llenar los datagrid con la información necesaria
+                sqlDataAdapter1.Fill(dataTable1);
+                dgvEmpleados.ItemsSource = dataTable1.DefaultView;
+                sqlDataAdapter1.Update(dataTable1);
+
+                sqlDataAdapter2.Fill(dataTable2);
+                dgvVehiculos.ItemsSource = dataTable2.DefaultView;
+                sqlDataAdapter2.Update(dataTable2);
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                sqlConnection.Close();
+            }
         }
 
+        /*------------------------------------------------------------------------------------------------------------------------
+         ---------------------------------------------- MOSTRAR-----------------------------------------------------------
+         -------------------------------------------------------------------------------------------------------------------------*/
+        /// <summary>
+        /// Este método va a obtener las propiedades del datagrid
+        /// y las va a pasar a los textBox
+        /// </summary>
+        private void ObtienePropiedades(ViajeInterno viajeInterno)
+        {
+            this.txtIdEmpleado.Text = Convert.ToString(viajeinterno.IdEmpleado);
+            this.txtnombreEmpleado.Text = Convert.ToString(viajeinterno.NombreEmpleado);
+            this.txtIdVehiculo.Text = Convert.ToString(viajeInterno.IdVehiculo);
+            this.txtVehiculo.Text = Convert.ToString(viajeInterno.Vehiculo);
+        }
+
+        private void MostarEnTexBoxContenido(object sender, SelectionChangedEventArgs e)
+        {
+            DataGrid dataGrid = (DataGrid)sender;
+            DataRowView row_selected = dataGrid.SelectedItem as DataRowView;
+
+            //Validar que realmente se esta seleccionando un elemento del datagrid
+            if (row_selected != null)
+            {
+                txtIdEmpleado.Text = row_selected["Código"].ToString();
+                txtnombreEmpleado.Text = row_selected["Nombre"].ToString();
+            }
+            else
+            {
+                MessageBox.Show("Por favor seleccione una fila del datagrid");
+            }
+        }
+
+        private void MostrarVehiculosTextBox(object sender, SelectionChangedEventArgs e)
+        {
+            DataGrid dataGrid = (DataGrid)sender;
+            DataRowView row_selected = dataGrid.SelectedItem as DataRowView;
+
+            //Validar que realmente se esta seleccionando un elemento del datagrid
+            if (row_selected != null)
+            {
+                txtIdVehiculo.Text = row_selected["Código"].ToString();
+                txtVehiculo.Text = row_selected["Marca"].ToString();
+            }
+            else
+            {
+                MessageBox.Show("Por favor seleccione una fila del datagrid");
+            }
+        }
+
+
+        /*------------------------------------------------------------------------------------------------------------------------
+         ---------------------------------------------- BOTONES-----------------------------------------------------------
+         -------------------------------------------------------------------------------------------------------------------------*/
         /// <summary>
         /// En el momento en que el usuario decida presionar el botón siguiente 
         /// automáticamente se agregarán los datos en la tabla de viajeInterno para
@@ -146,7 +189,7 @@ namespace ProyectoMinaELMochito
         private void btnSiguiente_Click(object sender, RoutedEventArgs e)
         {
             //Primero verificamos que las casillas no estén vacías
-            if (VerificacionCasillas())
+            if (validaciones.VerificarCamposLlenos(txtIdEmpleado.Text, txtIdVehiculo.Text))
             {
                 try
                 {
@@ -173,76 +216,6 @@ namespace ProyectoMinaELMochito
                     LimpiarCasillas();
                 }
             }
-        }
-
-        /// <summary>
-        /// Este método va a obtener las propiedades del datagrid
-        /// y las va a pasar a los textBox
-        /// </summary>
-        private void ObtienePropiedades(ViajeInterno viajeInterno)
-        {
-            this.txtIdEmpleado.Text = Convert.ToString(viajeinterno.IdEmpleado);
-            this.txtnombreEmpleado.Text = Convert.ToString(viajeinterno.NombreEmpleado);
-            this.txtIdVehiculo.Text = Convert.ToString(viajeInterno.IdVehiculo);
-            this.txtVehiculo.Text = Convert.ToString(viajeInterno.Vehiculo);
-        }
-
-        private void MostarEnTexBoxContenido(object sender, SelectionChangedEventArgs e)
-        {
-            DataGrid dataGrid = (DataGrid)sender;
-            DataRowView row_selected = dataGrid.SelectedItem as DataRowView;
-
-            //Validar que realmente se esta seleccionando un elemento del datagrid
-            if (row_selected != null)
-            {
-                txtIdEmpleado.Text = row_selected["Id Empleado"].ToString();
-                txtnombreEmpleado.Text = row_selected["Nombre Empleado"].ToString();
-            }
-            else
-            {
-                MessageBox.Show("Por favor seleccione una fila del datagrid");
-            }
-        }
-
-        private void MostrarVehiculosTextBox(object sender, SelectionChangedEventArgs e)
-        {
-            DataGrid dataGrid = (DataGrid)sender;
-            DataRowView row_selected = dataGrid.SelectedItem as DataRowView;
-
-            //Validar que realmente se esta seleccionando un elemento del datagrid
-            if (row_selected != null)
-            {
-                txtIdVehiculo.Text = row_selected["Id Vehiculo"].ToString();
-                txtVehiculo.Text = row_selected["Marca"].ToString();
-            }
-            else
-            {
-                MessageBox.Show("Por favor seleccione una fila del datagrid");
-            }
-        }
-
-        /// <summary>
-        /// Este evento permitirá que solo se pueda insertar datos de tipo 
-        /// númerico en el el textBox de Empleados
-        /// </summary>
-        private void SoloNumeros(object sender, KeyEventArgs e)
-        {
-            if (e.Key >= Key.D0 && e.Key <= Key.D9 || e.Key >= Key.NumPad0 && e.Key <= Key.NumPad9)
-                e.Handled = false;
-            else
-                e.Handled = true;
-        }
-
-        /// <summary>
-        /// Este evento permitirá que solo se pueda insertar datos de tipo 
-        /// númerico en el el textBox de Vehiculos
-        /// </summary>
-        private void PermiteSoloNumeros(object sender, KeyEventArgs e)
-        {
-            if (e.Key >= Key.D0 && e.Key <= Key.D9 || e.Key >= Key.NumPad0 && e.Key <= Key.NumPad9)
-                e.Handled = false;
-            else
-                e.Handled = true;
         }
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
