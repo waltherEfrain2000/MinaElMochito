@@ -104,8 +104,8 @@ namespace ProyectoMinaELMochito
                 SqlDataAdapter sqlDataAdapter2 = new SqlDataAdapter(sqlCommand2);
 
                 //Crear el dataTable que contendrá las tablas desde la base
-                DataTable dataTable1 = new DataTable("Minas.Empleado");
-                DataTable dataTable2 = new DataTable("Minas.Vehiculo");
+                DataTable dataTable1 = new DataTable("Empleados.Empleado");
+                DataTable dataTable2 = new DataTable("Vehiculos.Vehiculo");
 
                 //Llenar los datagrid con la información necesaria
                 sqlDataAdapter1.Fill(dataTable1);
@@ -151,8 +151,8 @@ namespace ProyectoMinaELMochito
             //Validar que realmente se esta seleccionando un elemento del datagrid
             if (row_selected != null)
             {
-                txtIdEmpleado.Text = row_selected["Id Empleado"].ToString();
-                txtnombreEmpleado.Text = row_selected["Nombre Empleado"].ToString();
+                txtIdEmpleado.Text = row_selected["Código"].ToString();
+                txtnombreEmpleado.Text = row_selected["Nombre"].ToString();
             }
             else
             {
@@ -168,7 +168,7 @@ namespace ProyectoMinaELMochito
             //Validar que realmente se esta seleccionando un elemento del datagrid
             if (row_selected != null)
             {
-                txtIdVehiculo.Text = row_selected["Id Vehiculo"].ToString();
+                txtIdVehiculo.Text = row_selected["Código"].ToString();
                 txtVehiculo.Text = row_selected["Marca"].ToString();
             }
             else
@@ -176,6 +176,7 @@ namespace ProyectoMinaELMochito
                 MessageBox.Show("Por favor seleccione una fila del datagrid");
             }
         }
+
 
         /*------------------------------------------------------------------------------------------------------------------------
          ---------------------------------------------- BOTONES-----------------------------------------------------------

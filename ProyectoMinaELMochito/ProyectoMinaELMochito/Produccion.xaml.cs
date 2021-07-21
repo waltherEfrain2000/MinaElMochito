@@ -64,7 +64,7 @@ namespace ProyectoMinaELMochito
             txtPrecio.Text = string.Empty;
             txtCantidad.Text = string.Empty;
             txtTotal.Text = string.Empty;
-
+            txtfecha.Text = string.Empty;
             //ComboBox
             cmbMinerales.SelectedValue = null;
         }
@@ -80,6 +80,8 @@ namespace ProyectoMinaELMochito
             producciion.IdMineral = Convert.ToInt32(cmbMinerales.SelectedValue);
             producciion.Precio = Convert.ToDecimal(txtPrecio.Text);
             producciion.Peso = Convert.ToDecimal(txtCantidad.Text);
+            // producciion.Fecha = Convert.(txtfecha.SelectedDateFormat);
+            producciion.Fecha = txtfecha.Text;
         }
 
         //Valores del formulario objeto
@@ -107,6 +109,7 @@ namespace ProyectoMinaELMochito
             this.txtNumeroViaje.Text = Convert.ToString(producciion.IdViaje);
             this.txtPrecio.Text = Convert.ToString(producciion.Precio);
             this.cmbMinerales.SelectedItem = Convert.ToString(producciion.NombreMineral);
+            this.txtfecha.Text = Convert.ToString (producciion.Fecha);
         }
         /// <summary>
         /// Este método tiene la funcionaliad de pasar los datos que se seleccionan
@@ -123,7 +126,9 @@ namespace ProyectoMinaELMochito
                 cmbMinerales.Text = filaSeleccionada["Mineral"].ToString();
                 txtCantidad.Text = filaSeleccionada["Peso(Kg)"].ToString();
                 txtPrecio.Text = filaSeleccionada["Precio"].ToString();
-                txtIdProduccion.Text = filaSeleccionada["Id Producción"].ToString();
+                //txtTotal.Text = filaSeleccionada["Total"].ToString();
+                txtfecha.Text = filaSeleccionada["Fecha del viaje"].ToString();
+                txtIdProduccion.Text = filaSeleccionada["Código"].ToString();
 
 
             }
@@ -160,10 +165,11 @@ namespace ProyectoMinaELMochito
             //Validar que realmente se esta seleccionando un elemento del datagrid
             if (row_selected != null)
             {
-                txtNumeroViaje.Text = row_selected["IdViaje"].ToString();
+                txtNumeroViaje.Text = row_selected["Código"].ToString();
                 txtCantidad.Text = row_selected["Peso"].ToString();
                 txtPrecio.Text = row_selected["Precio"].ToString();
-                cmbMinerales.SelectedItem = row_selected["NombreMineral"].ToString();
+                cmbMinerales.SelectedItem = row_selected["Mineral"].ToString();
+                txtfecha.Text = row_selected["Fecha del viaje"].ToString();
             }
             else
             {
@@ -219,7 +225,7 @@ namespace ProyectoMinaELMochito
                 SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand);
 
                 //Crear el dataTable que contendrá las tablas desde la base
-                DataTable dataTable1 = new DataTable("Minas.Produccion");
+                DataTable dataTable1 = new DataTable("Produccion.Produccion");
 
                 //Llenar los datagrid con la información necesaria
                 sqlDataAdapter.Fill(dataTable1);
@@ -245,6 +251,44 @@ namespace ProyectoMinaELMochito
             btnLimpiar.Visibility = Visibility.Visible;
             LimpiarCasillasDeDatos();
             Casillas(false, 0);
+        }
+
+        /*------------------------------------------------------------------------------------------------------------------------
+       ---------------------------------------------- CALCULO-----------------------------------------------------------
+       -------------------------------------------------------------------------------------------------------------------------*/
+
+        public void VerificarP()
+        {
+            double Valor = 0;
+            try
+            {
+                if (txtCantidad.Text == string.Empty || (Convert.ToDouble(txtCantidad.Text) == Valor))
+                {
+                    txtCantidad.Text = " ";
+                    txtTotal.Text = " ";
+                }
+                else if (txtPrecio.Text == string.Empty)
+                {
+                    MessageBoxResult result = MessageBox.Show("Debe seleccionar un mineral",
+                      "Confirmar", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    txtCantidad.Text = "";
+                }
+                else
+                {
+                    double Total;
+                    double Cantidad, precio;
+                    Cantidad = Convert.ToDouble(txtCantidad);
+                    precio = Convert.ToDouble(txtPrecio);
+                    Total = Cantidad * precio;
+
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBoxResult result = MessageBox.Show("No puede ingresar dos puntos deguidos",
+                      "Confirmar", MessageBoxButton.OK, MessageBoxImage.Warning);
+                txtCantidad.Text = "";
+            }
         }
 
         /*-----------------------------------------------------------------------------------------------------------------------------------------
@@ -312,6 +356,7 @@ namespace ProyectoMinaELMochito
                 }
                 finally
                 {
+                    LimpiarCasillasDeDatos();
                     MostrarDatosTabla();
                 }
 
@@ -357,6 +402,7 @@ namespace ProyectoMinaELMochito
                 }
                 finally
                 {
+                    LimpiarCasillasDeDatos();
                     MostrarDatosTabla();
                 }
 
@@ -450,38 +496,41 @@ namespace ProyectoMinaELMochito
 
         private void txtCantidad_TextChanged(object sender, TextChangedEventArgs e)
         {
-            txtCantidad.MaxLength = 7;
-            double Valor = 0;
-            try
-            {
-                if (txtCantidad.Text == string.Empty || (Convert.ToDouble(txtCantidad.Text) == Valor))
-                {
-                    txtCantidad.Text = "";
-                    txtTotal.Text = "";
-                }
-                else if (txtPrecio.Text == string.Empty)
-                {
-                    MessageBoxResult result = MessageBox.Show("Debe seleccionar un mineral",
-                      "Confirmar", MessageBoxButton.OK, MessageBoxImage.Warning);
-                    txtCantidad.Text = "";
-                }
-                else
-                {
-                    double Total;
-                    double Cantidad, precio;
-                    Cantidad = Convert.ToDouble(txtCantidad.Text);
-                    precio = Convert.ToDouble(txtPrecio.Text);
-                    Total = Cantidad * precio;
-                    txtTotal.Text = Total.ToString();
-                }
-            }
-            catch(Exception ex)
-            {
-                MessageBoxResult result = MessageBox.Show("No puede ingresar dos puntos deguidos",
-                      "Confirmar", MessageBoxButton.OK, MessageBoxImage.Warning);
-                txtCantidad.Text = "";
-            }
+            VerificarP();
+            //txtCantidad.MaxLength = 7;
+            //double Valor = 0;
+            //try
+            //{
+            //    if (txtCantidad.Text == string.Empty || (Convert.ToDouble(txtCantidad.Text) == Valor))
+            //    {
+            //        txtCantidad.Text = "";
+            //        txtTotal.Text = "";
+            //    }
+            //    else if (txtPrecio.Text == string.Empty)
+            //    {
+            //        MessageBoxResult result = MessageBox.Show("Debe seleccionar un mineral",
+            //          "Confirmar", MessageBoxButton.OK, MessageBoxImage.Warning);
+            //        txtCantidad.Text = "";
+            //    }
+            //    else
+            //    {
+            //        double Total;
+            //        double Cantidad, precio;
+            //        Cantidad = Convert.ToDouble(txtCantidad.Text);
+            //        precio = Convert.ToDouble(txtPrecio.Text);
+            //        Total = Cantidad * precio;
+            //        txtTotal.Text = Total.ToString();
+            //    }
+            //}
+            //catch(Exception ex)
+            //{
+            //    MessageBoxResult result = MessageBox.Show("No puede ingresar dos puntos deguidos",
+            //          "Confirmar", MessageBoxButton.OK, MessageBoxImage.Warning);
+            //    txtCantidad.Text = "";
+            //}
         }
+
+       
 
         //Fin del programa
     }

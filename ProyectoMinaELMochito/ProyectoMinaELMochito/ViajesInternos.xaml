@@ -10,7 +10,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
         xmlns:fw="clr-namespace:SourceChord.FluentWPF;assembly=FluentWPF"
-        fw:AcrylicWindow.Enabled="True" FontSize="15"  MouseDown="Window_MouseDown" Height="550" Width="1080" WindowStyle="None" ResizeMode="CanResizeWithGrip" WindowStartupLocation="CenterScreen" Title="menu">
+        fw:AcrylicWindow.Enabled="True" FontSize="15"  MouseDown="Window_MouseDown" Height="650" Width="1400" WindowStyle="None" ResizeMode="CanResizeWithGrip" WindowStartupLocation="CenterScreen" Title="menu">
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -18,7 +18,7 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <Grid fw:PointerTracker.Enabled="True" Background="#9900afb9" Height="542" VerticalAlignment="Bottom">
+        <Grid fw:PointerTracker.Enabled="True" Background="#9900afb9" Height="650" VerticalAlignment="Bottom">
             <StackPanel>
                 <TextBlock Text="" Foreground="White" Margin="1" FontWeight="DemiBold"/>
 
@@ -114,25 +114,24 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="50"/>
                 <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
+                <RowDefinition Height="80"/>
                 <RowDefinition Height="70"/>
             </Grid.RowDefinitions>
             <!-- Contenido del grid -->
             <!-- Label -->
             <Label Content="SISTEMA DE VIAJES INTERNOS" Grid.Row="0" HorizontalAlignment="Center"
-                FontSize="20" Margin="257,17,251,3" Width="284" FontFamily="Aldine" Grid.ColumnSpan="3"/>
-            <Label Content="Vehículo:" Grid.Column="1" Grid.Row="2" Margin="0,129,0,0" 
-               HorizontalAlignment="Right" FontSize="16" Width="82" FontFamily="Aldine"/>
-            <Label Content="Empleados" Grid.Row="1" Margin="136,20,34,111" FontSize="16" FontFamily="Aldine"/>
-            <Label Content="Vehículos" Grid.Row="1" Margin="252,20,193,111" Grid.ColumnSpan="2" Grid.Column="1"
+                FontSize="30" Margin="337,2,0,0" Width="450" FontFamily="Aldine" Grid.ColumnSpan="2"/>
+            <Label Content="Vehículos:" Grid.Column="1" Grid.Row="2" Margin="0,33,79,27" 
+               HorizontalAlignment="Right" FontSize="16" Width="82" FontFamily="Aldine" Grid.RowSpan="2"/>
+            <Label Content="Empleados" Grid.Row="1" Margin="51,11,119,401" FontSize="16" FontFamily="Aldine"/>
+            <Label Content="Vehículos" Grid.Row="1" Margin="234,11,211,396" Grid.ColumnSpan="2" Grid.Column="1"
                FontSize="16" FontFamily="Aldine"/>
-            <Label Content="Empleado:" Grid.Row="2" Margin="0,133,159,2" HorizontalAlignment="Right" 
-            FontSize="16" Width="86" FontFamily="Aldine"/>
+            <Label Content="Empleado:" Grid.Row="2" Margin="0,32,256,32" HorizontalAlignment="Right" 
+            FontSize="16" Width="86" FontFamily="Aldine" Grid.RowSpan="2"/>
 
             <!-- Data Grid - Tablas -->
-            <DataGrid Name ="dgvEmpleados" HorizontalAlignment="Left" Height="239" Margin="12,57,0,0" 
-                  Grid.Row="1" VerticalAlignment="Top" Width="349" Grid.ColumnSpan="2" 
-                  Grid.RowSpan="2" SelectionChanged="MostarEnTexBoxContenido" IsReadOnly="True" >
+            <DataGrid Name ="dgvEmpleados" HorizontalAlignment="Left" Height="366" Margin="51,46,0,0" 
+                  Grid.Row="1" VerticalAlignment="Top" Width="509" Grid.ColumnSpan="2" SelectionChanged="MostarEnTexBoxContenido" IsReadOnly="True" >
 
                 <DataGrid.Resources>
                     <Style TargetType="{x:Type DataGridColumnHeader}">
@@ -144,9 +143,7 @@
 
                 </DataGrid.Columns>
             </DataGrid>
-            <DataGrid Name ="dgvVehiculos" HorizontalAlignment="Left" Height="239" Margin="121,57,0,0"
-                  Grid.Row="1" VerticalAlignment="Top" Width="397" Grid.ColumnSpan="2" Grid.RowSpan="2" 
-                  Grid.Column="1" IsReadOnly="True" SelectionChanged="MostrarVehiculosTextBox">
+            <DataGrid Name ="dgvVehiculos" HorizontalAlignment="Left" Height="366" Margin="234,46,0,0" VerticalAlignment="Top" Width="509" Grid.ColumnSpan="2" IsReadOnly="True" SelectionChanged="MostrarVehiculosTextBox" Grid.Column="1" Grid.Row="1">
 
                 <DataGrid.Resources>
                     <Style TargetType="{x:Type DataGridColumnHeader}">
@@ -157,15 +154,14 @@
                 <DataGrid.Columns>
                 </DataGrid.Columns>
             </DataGrid>
-            <Button Name="btnSiguiente"  Height="40" Content="Siguiente"  Margin="73,10,42,20"  Foreground="White"  BorderBrush="#0082aa"
+            <Button Name="btnSiguiente"  Height="Auto" Content="Siguiente"  Margin="188,24,44,10"  Foreground="White"  BorderBrush="#0082aa"
                Click="btnSiguiente_Click" FontFamily="Aldine"    
-            Grid.Column="2" Grid.Row="3" AllowDrop="True">
-            </Button>
+            Grid.Column="2" Grid.Row="2" AllowDrop="True"/>
 
-            <TextBox x:Name="txtnombreEmpleado" Grid.Row="2" Margin="115,109,24,26" FontSize="14" 
+            <TextBox x:Name="txtnombreEmpleado" Grid.Row="2" Margin="140,25,66,27" FontSize="14" 
             materialDesign:HintAssist.Hint="Nombre Empleado" HorizontalAlignment="Center"
             Style="{StaticResource MaterialDesignTextBox}" IsReadOnly="True"
-            VerticalAlignment="Center" ToolTip="Ingrese el Id del Empleado" Width="125"/>
+            VerticalAlignment="Center" ToolTip="Ingrese el Id del Empleado" Width="185" RenderTransformOrigin="0.54,-0.948"/>
             <TextBox x:Name="txtIdVehiculo" Grid.Row="2" Margin="145,104,43,31" Grid.Column="2" FontSize="14"
             materialDesign:HintAssist.Hint="Id Vehiculo" HorizontalAlignment="Center" Visibility="Hidden"
             Style="{StaticResource MaterialDesignTextBox}"
@@ -174,10 +170,10 @@
                  materialDesign:HintAssist.Hint="Id Empleado" HorizontalAlignment="Center" Visibility="Hidden"
                  Style="{StaticResource MaterialDesignTextBox}"
                  VerticalAlignment="Center" ToolTip="Ingrese el nombre del Empleado" Width="80" Grid.Column="1"/>
-            <TextBox Name="txtVehiculo" Grid.Row="2" Margin="260,105,151,30" Grid.Column="1" FontSize="14"
-                 materialDesign:HintAssist.Hint="Nombre Vehiculo" HorizontalAlignment="Center"
+            <TextBox Name="txtVehiculo" Grid.Row="2" Margin="317,25,274.667,27" FontSize="14"
+                 materialDesign:HintAssist.Hint="Nombre Vehículo" HorizontalAlignment="Center"
                  Style="{StaticResource MaterialDesignTextBox}" IsReadOnly="True"
-                 VerticalAlignment="Center" ToolTip="Ingrese el nombre del vehiculo" Width="117" Grid.ColumnSpan="2"/>
+                 VerticalAlignment="Center" ToolTip="Ingrese el nombre del vehiculo" Width="190" Grid.Column="1" Grid.ColumnSpan="2"/>
         </Grid>
     </Grid>
 </Window>

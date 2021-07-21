@@ -298,7 +298,11 @@ namespace ProyectoMinaELMochito
         }
 
         //-----------------------------------------Produccion-----------------
-        public void VerificarP(string txtCantidad, string txtPrecio, string txtTotal)
+        /*------------------------------------------------------------------------------------------------------------------------
+       ---------------------------------------------- CALCULO-----------------------------------------------------------
+       -------------------------------------------------------------------------------------------------------------------------*/
+
+        public void VerificarP(string txtCantidad, string txtTotal, string txtPrecio)
         {
             double Valor = 0;
             try

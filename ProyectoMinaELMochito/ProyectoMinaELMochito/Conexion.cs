@@ -11,7 +11,7 @@ namespace ProyectoMinaELMochito
 {
     class conexion
     {
-        String Cadena = " Data Source=DESKTOP-4AAROTR;Initial Catalog=MinaElMochito;Integrated Security=True ";
+        String Cadena = " Data Source=DESKTOP-JRBU49C;Initial Catalog=MinaElMochitoVersion2;Integrated Security=True";
         public SqlConnection Conectarbd = new SqlConnection();
 
         public conexion()
