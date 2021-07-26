@@ -123,7 +123,7 @@ namespace ProyectoMinaELMochito
         {
             if (txtIdEmpleado == string.Empty || txtIdVehiculo == string.Empty)
             {
-                MessageBoxResult result = MessageBox.Show("Por favor!, Verifique que las casillas contengan la infromación requerida!",
+                MessageBoxResult result = MessageBox.Show("Por favor!, Verifique que las casillas contengan la información requerida!",
                     "Confirmar", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return false;
             }

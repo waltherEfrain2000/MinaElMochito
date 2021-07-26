@@ -45,8 +45,8 @@ namespace ProyectoMinaELMochito
 
             try
             {
-                Process.Start("file:///C:/Users/G7/Desktop/CLASES/2-IMPLEMENTACION%20DE%20SISTEMAS%20DE%20SOFTWARE/II%20PARCIAL/mina/ProyectoMinaELMochito/ProyectoMinaELMochito/Ayuda/Ayuda_Equipamiento/AyudaEquipamiento.html");
-
+                //Process.Start("file:///C:/Users/G7/Desktop/CLASES/2-IMPLEMENTACION%20DE%20SISTEMAS%20DE%20SOFTWARE/II%20PARCIAL/mina/ProyectoMinaELMochito/ProyectoMinaELMochito/Ayuda/Ayuda_Equipamiento/AyudaEquipamiento.html");
+                Process.Start("file:///C:/Users/G7/Desktop/CLASES/2-IMPLEMENTACION%20DE%20SISTEMAS%20DE%20SOFTWARE/III%20PARCIAL/html2/html/Ayuda_Equipamiento/AyudaEquipamiento.html");
             }
             catch (Exception)
             {
@@ -59,8 +59,8 @@ namespace ProyectoMinaELMochito
         {
             try
             {
-                Process.Start("file:///C:/Users/G7/Desktop/CLASES/2-IMPLEMENTACION%20DE%20SISTEMAS%20DE%20SOFTWARE/III%20PARCIAL/html/Ayuda_Inventario/AyudaIventario.html");
-
+                //Process.Start("file:///C:/Users/G7/Desktop/CLASES/2-IMPLEMENTACION%20DE%20SISTEMAS%20DE%20SOFTWARE/III%20PARCIAL/html/Ayuda_Inventario/AyudaIventario.html");
+                Process.Start("file:///C:/Users/G7/Desktop/CLASES/2-IMPLEMENTACION%20DE%20SISTEMAS%20DE%20SOFTWARE/III%20PARCIAL/html2/html/Ayuda_Inventario/AyudaIventario.html");
             }
             catch (Exception)
             {
@@ -73,8 +73,8 @@ namespace ProyectoMinaELMochito
         {
             try
             {
-                Process.Start("file:///C:/Users/G7/Desktop/CLASES/2-IMPLEMENTACION%20DE%20SISTEMAS%20DE%20SOFTWARE/III%20PARCIAL/html/Ayuda_Inventario/AyudaEntrada.html");
-
+                //Process.Start("file:///C:/Users/G7/Desktop/CLASES/2-IMPLEMENTACION%20DE%20SISTEMAS%20DE%20SOFTWARE/III%20PARCIAL/html/Ayuda_Inventario/AyudaEntrada.html");
+                Process.Start("file:///C:/Users/G7/Desktop/CLASES/2-IMPLEMENTACION%20DE%20SISTEMAS%20DE%20SOFTWARE/III%20PARCIAL/html2/html/Ayuda_Inventario/AyudaEntrada.html");
             }
             catch (Exception)
             {
@@ -87,8 +87,8 @@ namespace ProyectoMinaELMochito
         {
             try
             {
-                Process.Start("file:///C:/Users/G7/Desktop/CLASES/2-IMPLEMENTACION%20DE%20SISTEMAS%20DE%20SOFTWARE/III%20PARCIAL/html/Ayuda_Inventario/AyudaEmpleados.html");
-
+                //Process.Start("file:///C:/Users/G7/Desktop/CLASES/2-IMPLEMENTACION%20DE%20SISTEMAS%20DE%20SOFTWARE/III%20PARCIAL/html/Ayuda_Inventario/AyudaEmpleados.html");
+                Process.Start("file:///C:/Users/G7/Desktop/CLASES/2-IMPLEMENTACION%20DE%20SISTEMAS%20DE%20SOFTWARE/III%20PARCIAL/html2/html/Ayuda_Inventario/AyudaEmpleados.html");
             }
             catch (Exception)
             {
@@ -101,8 +101,8 @@ namespace ProyectoMinaELMochito
         {
             try
             {
-                Process.Start("file:///C:/Users/G7/Desktop/CLASES/2-IMPLEMENTACION%20DE%20SISTEMAS%20DE%20SOFTWARE/III%20PARCIAL/html/Ayuda_Salidas/Salidas/Salidas/AyudaSalidas.html");
-
+                //Process.Start("file:///C:/Users/G7/Desktop/CLASES/2-IMPLEMENTACION%20DE%20SISTEMAS%20DE%20SOFTWARE/III%20PARCIAL/html/Ayuda_Salidas/Salidas/Salidas/AyudaSalidas.html");
+                Process.Start("file:///C:/Users/G7/Desktop/CLASES/2-IMPLEMENTACION%20DE%20SISTEMAS%20DE%20SOFTWARE/III%20PARCIAL/html2/html/Ayuda_Salidas/Salidas/Salidas/AyudaSalidas.html");
             }
             catch (Exception)
             {
@@ -115,8 +115,8 @@ namespace ProyectoMinaELMochito
         {
             try
             {
-                Process.Start("file:///C:/Users/G7/Desktop/CLASES/2-IMPLEMENTACION%20DE%20SISTEMAS%20DE%20SOFTWARE/III%20PARCIAL/html/AyudaProduccionMain/VProduccion.html");
-
+                //Process.Start("file:///C:/Users/G7/Desktop/CLASES/2-IMPLEMENTACION%20DE%20SISTEMAS%20DE%20SOFTWARE/III%20PARCIAL/html/AyudaProduccionMain/VProduccion.html");
+                Process.Start("file:///C:/Users/G7/Desktop/CLASES/2-IMPLEMENTACION%20DE%20SISTEMAS%20DE%20SOFTWARE/III%20PARCIAL/html2/html/AyudaProduccionMain/VProduccion.html");
             }
             catch (Exception)
             {
@@ -129,8 +129,8 @@ namespace ProyectoMinaELMochito
         {
             try
             {
-                Process.Start("file:///C:/Users/G7/Desktop/CLASES/2-IMPLEMENTACION%20DE%20SISTEMAS%20DE%20SOFTWARE/III%20PARCIAL/html/AyudaUsuarios/Ayuda%20Usuarios/VProduccion.html");
-
+                //Process.Start("file:///C:/Users/G7/Desktop/CLASES/2-IMPLEMENTACION%20DE%20SISTEMAS%20DE%20SOFTWARE/III%20PARCIAL/html/AyudaUsuarios/Ayuda%20Usuarios/VProduccion.html");
+                Process.Start("file:///C:/Users/G7/Desktop/CLASES/2-IMPLEMENTACION%20DE%20SISTEMAS%20DE%20SOFTWARE/III%20PARCIAL/html2/html/AyudaUsuarios/Ayuda%20Usuarios/VProduccion.html");
             }
             catch (Exception)
             {
@@ -143,8 +143,8 @@ namespace ProyectoMinaELMochito
         {
             try
             {
-                Process.Start("file:///C:/Users/G7/Desktop/CLASES/2-IMPLEMENTACION%20DE%20SISTEMAS%20DE%20SOFTWARE/III%20PARCIAL/html/AyudaCargo/ACargoE.html");
-
+                //Process.Start("file:///C:/Users/G7/Desktop/CLASES/2-IMPLEMENTACION%20DE%20SISTEMAS%20DE%20SOFTWARE/III%20PARCIAL/html/AyudaCargo/ACargoE.html");
+                Process.Start("file:///C:/Users/G7/Desktop/CLASES/2-IMPLEMENTACION%20DE%20SISTEMAS%20DE%20SOFTWARE/III%20PARCIAL/html2/html/AyudaCargo/ACargoE.html");
             }
             catch (Exception)
             {
@@ -157,7 +157,8 @@ namespace ProyectoMinaELMochito
         {
             try
             {
-                Process.Start("file:///C:/Users/G7/Desktop/CLASES/2-IMPLEMENTACION%20DE%20SISTEMAS%20DE%20SOFTWARE/III%20PARCIAL/html/Salidas/AyudaVehiculos.html");
+                //Process.Start("file:///C:/Users/G7/Desktop/CLASES/2-IMPLEMENTACION%20DE%20SISTEMAS%20DE%20SOFTWARE/III%20PARCIAL/html/Salidas/AyudaVehiculos.html");
+                Process.Start("file:///C:/Users/G7/Desktop/CLASES/2-IMPLEMENTACION%20DE%20SISTEMAS%20DE%20SOFTWARE/III%20PARCIAL/html2/html/AyudaVehiculos/AyudaVehiculos.html");
             }
             catch (Exception)
             {

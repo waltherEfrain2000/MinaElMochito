@@ -249,9 +249,10 @@ namespace ProyectoMinaELMochito
             if (filaSeleccionada != null)
             {
                 txtIdSalida.Text = filaSeleccionada["Código"].ToString();
-                cmbIdMineral.Text = filaSeleccionada["Mineral"].ToString();
+                cmbIdMineral.Text = filaSeleccionada["Minera"].ToString();
                 txtCantidad.Text = filaSeleccionada["Cantidad (kg)"].ToString();
                 FSalida.Text = filaSeleccionada["Fecha de Salida"].ToString();
+                cmbSalidas.Text = filaSeleccionada["Detalle de venta"].ToString();
                 //cmbSalidas.Text = filaSeleccionada["Código detalle"].ToString();
 
             }
