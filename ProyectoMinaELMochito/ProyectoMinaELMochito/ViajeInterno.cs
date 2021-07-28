@@ -54,7 +54,6 @@ namespace ProyectoMinaELMochito
             try
             {
 
-
                 SqlCommand cmd = new SqlCommand("AgregarDatosAViajeInterno", cn.Conectarbd);
                 cmd.CommandType = CommandType.StoredProcedure;
 

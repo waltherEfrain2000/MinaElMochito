@@ -104,7 +104,7 @@ namespace ProyectoMinaELMochito
                 SqlDataAdapter sqlDataAdapter2 = new SqlDataAdapter(sqlCommand2);
 
                 //Crear el dataTable que contendrá las tablas desde la base
-                DataTable dataTable1 = new DataTable("Empleados.Empleado");
+                DataTable dataTable1 = new DataTable("Empleado.Empleado");
                 DataTable dataTable2 = new DataTable("Vehiculos.Vehiculo");
 
                 //Llenar los datagrid con la información necesaria
