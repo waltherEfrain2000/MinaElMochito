@@ -143,8 +143,10 @@
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="0*"/>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
+                        <ColumnDefinition Width="43*"/>
+                        <ColumnDefinition Width="316*"/>
+                        <ColumnDefinition Width="13*"/>
+                        <ColumnDefinition Width="346*"/>
 
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
@@ -154,21 +156,21 @@
                         <RowDefinition Height="30"/>
                         <RowDefinition Height="30"/>
                     </Grid.RowDefinitions>
-                    <Label Content=" Peso en kilos " HorizontalAlignment="Center" Grid.Column="0" Grid.Row="0" FontFamily="helvetica" FontWeight="Heavy" Grid.ColumnSpan="2" Margin="44,0,43,0"/>
-                    <TextBox x:Name="txtpeso" Grid.Row="0" Grid.Column="2"  BorderThickness="0" FontFamily="helvetica" FontStretch="ExtraCondensed" FontStyle="Italic"
+                    <Label Content=" Peso en kilos " HorizontalAlignment="Center" Grid.Column="2" Grid.Row="0" FontFamily="helvetica" FontWeight="Heavy" Margin="81,0,123,0"/>
+                    <TextBox x:Name="txtpeso" Grid.Row="0" Grid.Column="4"  BorderThickness="0" FontFamily="helvetica" FontStretch="ExtraCondensed" FontStyle="Italic"
                            Foreground="Black"
                            Background="Transparent"
-                          HorizontalContentAlignment="Left" Margin="35,0,-34,0" />
-                    <Label Content=" Fecha de Modificacion " HorizontalAlignment="Center" Grid.Column="0" Grid.Row="1" FontFamily="helvetica" FontWeight="Heavy" Margin="0,0,18,0" Grid.ColumnSpan="2"/>
+                          HorizontalContentAlignment="Left" Margin="22,0,-34,0" />
+                    <!--<Label Content=" Fecha de Modificacion " HorizontalAlignment="Center" Grid.Column="0" Grid.Row="1" FontFamily="helvetica" FontWeight="Heavy" Margin="0,0,18,0" Grid.ColumnSpan="2"/>
                     <TextBox x:Name="txtfecha" Grid.Row="1" Grid.Column="2" BorderThickness="0" FontFamily="helvetica" FontStretch="ExtraCondensed" FontStyle="Italic"
                            Foreground="Black"
                            Background="Transparent"
-                          HorizontalContentAlignment="Left"/>
-                    <Label Content=" Total En $" HorizontalAlignment="Center" Grid.Column="0" Grid.Row="2" FontFamily="helvetica" FontWeight="Heavy" Grid.ColumnSpan="2" Margin="57,0"/>
-                    <TextBox x:Name="txttotal" Grid.Row="2" Grid.Column="2" BorderThickness="0" FontFamily="helvetica" FontStretch="ExtraCondensed" FontStyle="Italic"
+                          HorizontalContentAlignment="Left"/>-->
+                    <Label Content=" Total En $" HorizontalAlignment="Center" Grid.Column="2" Grid.Row="2" FontFamily="helvetica" FontWeight="Heavy" Margin="94,0,137,0"/>
+                    <TextBox x:Name="txttotal" Grid.Row="2" Grid.Column="3" BorderThickness="0" FontFamily="helvetica" FontStretch="ExtraCondensed" FontStyle="Italic"
                            Foreground="Black"
                            Background="Transparent"
-                          HorizontalContentAlignment="Left" Focusable="True"  />
+                          HorizontalContentAlignment="Left" Focusable="True" Grid.ColumnSpan="2"  />
 
                 </Grid>
                 <Image Height="120" x:Name="imgmineral" Margin="10,0,0,0" RenderTransformOrigin="0.495,-0.011" />

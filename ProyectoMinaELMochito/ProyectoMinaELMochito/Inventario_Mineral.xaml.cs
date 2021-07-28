@@ -66,7 +66,7 @@ namespace ProyectoMinaELMochito
             {
                 Mineralinventario elmineral = mineralinventario.CargarPlata();
                 txtpeso.Text = elmineral.Peso.ToString();
-                txtfecha.Text = String.Format("{0}, a las :{1}", elmineral.FechaActualizacion.ToLongDateString(), elmineral.FechaActualizacion.ToLongTimeString());
+              //  txtfecha.Text = String.Format("{0}, a las :{1}", elmineral.FechaActualizacion.ToLongDateString(), elmineral.FechaActualizacion.ToLongTimeString());
                 txttotal.Text = elmineral.Total.ToString("N");
 
                 Uri uri = new Uri("plata.png", UriKind.Relative);
@@ -78,7 +78,7 @@ namespace ProyectoMinaELMochito
             {
                 Mineralinventario elmineral = mineralinventario.CargarOro();
                 txtpeso.Text = elmineral.Peso.ToString();
-                txtfecha.Text = String.Format("{0}, a las :{1}", elmineral.FechaActualizacion.ToLongDateString(), elmineral.FechaActualizacion.ToLongTimeString());
+                //txtfecha.Text = String.Format("{0}, a las :{1}", elmineral.FechaActualizacion.ToLongDateString(), elmineral.FechaActualizacion.ToLongTimeString());
                 txttotal.Text = elmineral.Total.ToString("N");
 
                 Uri uri = new Uri("oro.png", UriKind.Relative);
@@ -89,7 +89,7 @@ namespace ProyectoMinaELMochito
             {
                 Mineralinventario elmineral = mineralinventario.CargarCobre();
                 txtpeso.Text = elmineral.Peso.ToString();
-                txtfecha.Text = String.Format("{0}, a las :{1}", elmineral.FechaActualizacion.ToLongDateString(), elmineral.FechaActualizacion.ToLongTimeString());
+                //txtfecha.Text = String.Format("{0}, a las :{1}", elmineral.FechaActualizacion.ToLongDateString(), elmineral.FechaActualizacion.ToLongTimeString());
                 txttotal.Text = elmineral.Total.ToString("N");
 
                 Uri uri = new Uri("cobre.png", UriKind.Relative);
@@ -101,7 +101,7 @@ namespace ProyectoMinaELMochito
             {
                 Mineralinventario elmineral = mineralinventario.CargarPlomo();
                 txtpeso.Text = elmineral.Peso.ToString();
-                txtfecha.Text = String.Format("{0}, a las :{1}", elmineral.FechaActualizacion.ToLongDateString(), elmineral.FechaActualizacion.ToLongTimeString());
+                //txtfecha.Text = String.Format("{0}, a las :{1}", elmineral.FechaActualizacion.ToLongDateString(), elmineral.FechaActualizacion.ToLongTimeString());
                 txttotal.Text = elmineral.Total.ToString("N");
 
                 Uri uri = new Uri("plomo.png", UriKind.Relative);
@@ -113,7 +113,7 @@ namespace ProyectoMinaELMochito
             {
                 Mineralinventario elmineral = mineralinventario.CargarZinc();
                 txtpeso.Text = elmineral.Peso.ToString();
-                txtfecha.Text = String.Format("{0}, a las :{1}", elmineral.FechaActualizacion.ToLongDateString(), elmineral.FechaActualizacion.ToLongTimeString());
+               // txtfecha.Text = String.Format("{0}, a las :{1}", elmineral.FechaActualizacion.ToLongDateString(), elmineral.FechaActualizacion.ToLongTimeString());
                 txttotal.Text = elmineral.Total.ToString("N");
 
                 Uri uri = new Uri("zinc.png", UriKind.Relative);

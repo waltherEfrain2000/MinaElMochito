@@ -88,7 +88,10 @@ namespace ProyectoMinaELMochito
         }
         public SeriesCollection SeriesCollection { get; set; }
 
-
-
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Resporte_y_ComparacionHistoricos resporte_Y_ComparacionHistoricos = new Resporte_y_ComparacionHistoricos();
+            resporte_Y_ComparacionHistoricos.Show();
+        }
     }  
 }
