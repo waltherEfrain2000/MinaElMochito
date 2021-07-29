@@ -111,7 +111,7 @@ namespace ProyectoMinaELMochito
 
         //
         Salida salidas = new Salida();
-        public void infoFormulario(int operacion, string IDsalida, string Cantidad, string FSalida, int cmbIdMineral, int cmbSalidas)
+       /* public void infoFormulario(int operacion, string IDsalida, string Cantidad, string FSalida, int cmbIdMineral, int cmbSalidas)
         {
 
             if (operacion == 1)
@@ -147,7 +147,7 @@ namespace ProyectoMinaELMochito
             }
 
         }
-
+       */
       
 
     }

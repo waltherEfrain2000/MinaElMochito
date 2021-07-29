@@ -10,7 +10,7 @@ namespace ProyectoMinaELMochito
     class Conexion 
     {
         // ojo, arreglar esta conexión si no sirve en su pc
-        String Cadena = " Data Source=DESKTOP-PEIA00M\\SQLEXPRESS;Initial Catalog=MinaElMochitoVersion2;Integrated Security=True ";
+        String Cadena = " Data Source=KARLAGISSELBBA3;Initial Catalog=MinaElMochitoVersion2;Integrated Security=True ";
         public SqlConnection Conectarbd = new SqlConnection();
 
         //public Conexion()

@@ -89,6 +89,9 @@
                         </StackPanel>
                     </ListViewItem>
 
+
+
+
                     <StackPanel Orientation="Horizontal">
                         <Button x:Name="botonfecha" Foreground="white" Background="{x:Null}" BorderBrush="{x:Null}">
                             <materialDesign:PackIcon Kind="Calendar"/>
@@ -123,21 +126,24 @@
 
                 <Label Content="Salidas" Grid.ColumnSpan="6" HorizontalAlignment="Center" FontSize="35" />
 
-                <Label Content="Código Salida" Grid.Row="1" FontSize="15" Margin= "30,19,12,5"/>
-                <Label Content="Código Mineral" Grid.Row="2" FontSize="15" Margin="30,18,12,7"/>
-                <Label Content="Cantidad (Kg)" Grid.Row="3" FontSize="15" Margin="30,23,12,0"/>
+                <Label Content="Código detalle" Grid.Row="2" FontSize="15" Margin= "32,20,10,42" Grid.RowSpan="2"/>
+                <Label Content="Código Mineral" Grid.Row="3" FontSize="15" Margin="30,20,12,4"/>
+                <Label Content="Cantidad (Kg)" Grid.Row="2" FontSize="15" Margin="10,16,75,2" Grid.Column="3"/>
 
-                <Label Content="Fecha de Salida" Grid.Row="1" FontSize="15" Margin="52,19,10,5" Grid.Column="2"/>
-                <Label Content="Detalle de Salida" Grid.Row="2" FontSize="15" Margin="52,19,0,5" Grid.Column="2"/>
+                <!--<Label Content="Fecha de Salida" Grid.Row="1" FontSize="15" Margin="52,19,10,5" Grid.Column="2"/>
+                <Label Content="Detalle de Salida" Grid.Row="2" FontSize="15" Margin="52,19,0,5" Grid.Column="2"/>-->
 
-                <TextBox Name="txtIdSalida" Grid.Row="1" Grid.Column="1" FontSize="15" Margin="15,7,43,12" IsReadOnly="True"/>
-                <ComboBox Name="cmbIdMineral" Grid.Row="2" Grid.Column="1" FontSize="15" Margin="15,10,43,12" Height="28"  />
-                <ComboBox Name="cmbSalidas" Grid.Row="2" Grid.Column="3" FontSize="15" Margin="56,0,15,12" Grid.ColumnSpan="2" Height="38"  />
+                <TextBox Name="txtIdSalida" Grid.Row="1" Grid.Column="0" FontSize="15" Margin="15,7,43,12" IsReadOnly="True" Visibility="Hidden"/>
+                <TextBox Name="txtIdDetalleSalida" Grid.Row="2" Grid.Column="1" FontSize="15" Margin="15,10,43,10" IsReadOnly="True" />
 
-                <TextBox Name="txtCantidad" Grid.Row="3" Grid.Column="1"  FontSize="15" Margin="15,10,43,0"    Text="{Binding Cantidad, Mode=TwoWay, ValidatesOnExceptions=True}" Height="33" VerticalAlignment="Top" />
+                <ComboBox Name="cmbIdMineral" Grid.Row="3" Grid.Column="1" FontSize="15" Margin="15,12,43,4" Height="34"  />
+                <!--<ComboBox Name="cmbSalidas" Grid.Row="2" Grid.Column="3" FontSize="15" Margin="56,0,15,12" Grid.ColumnSpan="2" Height="38"  />-->
+
+                <TextBox Name="txtCantidad" Grid.Row="2" Grid.Column="3"  FontSize="15" Margin="147,10,15,0"    Text="{Binding Cantidad, Mode=TwoWay, ValidatesOnExceptions=True}" 
+                         Height="32" VerticalAlignment="Top" KeyDown="txtCantidad_KeyDown" Grid.ColumnSpan="2" TextChanged="txtCantidad_TextChanged" />
 
 
-                <DatePicker  Name="FSalida" Grid.Row="1"  Grid.Column="3" ToolTip="Selet date" FontSize="15" Margin="56,7,15,12" Foreground="Black" Background="Transparent" 
+                <!--<DatePicker  Name="FSalida" Grid.Row="1"  Grid.Column="3" ToolTip="Selet date" FontSize="15" Margin="56,7,15,12" Foreground="Black" Background="Transparent" 
                      DisplayDateStart="2021-01-01" DisplayDateEnd="2021-12-31" Height="31" SelectedDateFormat="Short" Grid.ColumnSpan="2"   >
 
                     <DatePicker.BlackoutDates>
@@ -146,9 +152,9 @@
 
                     </DatePicker.BlackoutDates>
 
-                </DatePicker>
+                </DatePicker>-->
 
-                <DataGrid Name="dgvSalida" Grid.Row="5" Margin="15,10,15,50" Grid.ColumnSpan="4"
+                <DataGrid Name="dgvSalida"  Grid.Row="5" Margin="15,10,15,50" Grid.ColumnSpan="4"
                           IsReadOnly="True" FontSize="15"  SelectionMode="Single"  GridLinesVisibility="All"
                           HorizontalGridLinesBrush="Black" VerticalGridLinesBrush="Black" 
                           HeadersVisibility="Column" Grid.RowSpan="3" Width="auto"
@@ -161,13 +167,14 @@
 
                         </Style>
                     </DataGrid.Resources>
-                 
+
                 </DataGrid>
 
-                <Button x:Name="btnIngresar" Content="Ingresar" Grid.Column="5" Grid.Row="1"    Margin="60,7,30,10"   Click="btnIngresar_Click"  Foreground="White"  BorderBrush="#0082aa"/>
-                <Button x:Name="btnModificar" Content="Modificar" Grid.Column="5" Grid.Row="2"   Margin="60,7,30,10"    Click="btnModificar_Click" Foreground="White"  BorderBrush="#0082aa" />
-                <Button x:Name="btnEliminar" Content="Eliminar" Grid.Column="5" Grid.Row="3"     Margin="60,7,30,10"   Click="btnEliminar_Click" Foreground="White"  BorderBrush="#0082aa"/>
-                <Button x:Name="btnLimpiar" Content="Limpiar" Grid.Column="5" Grid.Row="4"  Margin="60,7,30,10"  Click="btnLimpiar_Click" Foreground="White"  BorderBrush="#0082aa"/>
+                <Button x:Name="btnIngresar" Content="Ingresar" Grid.Column="5" Grid.Row="2"    Margin="60,10,30,8"   Click="btnIngresar_Click"  Foreground="White"  BorderBrush="#0082aa"/>
+                <Button x:Name="btnModificar" Content="Modificar" Grid.Column="5" Grid.Row="3"   Margin="60,10,30,8"    Click="btnModificar_Click" Foreground="White"  BorderBrush="#0082aa" />
+                <Button x:Name="btnEliminar" Content="Eliminar" Grid.Column="5" Grid.Row="4"     Margin="60,10,30,8"   Click="btnEliminar_Click" Foreground="White"  BorderBrush="#0082aa"/>
+                <Button x:Name="btnLimpiar" Content="Limpiar" Grid.Column="5" Grid.Row="5"  Margin="60,10,30,8"  Click="btnLimpiar_Click" Foreground="White"  BorderBrush="#0082aa"/>
+                <Button x:Name="btnAsignar" Content="Asignar" Grid.Column="2" Grid.Row="2"  Margin="60,10,30,8"    Foreground="White"  BorderBrush="#0082aa" Click="btnAsignar_Click"/>
 
 
             </Grid>
