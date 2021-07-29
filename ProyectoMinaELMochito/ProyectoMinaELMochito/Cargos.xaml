@@ -125,22 +125,30 @@
                 <RowDefinition Height="20"/>
 
             </Grid.RowDefinitions>
-            <Label x:Name="lbtitulo" Content="Cargos" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Center" FontFamily="Helvetica" FontSize="30" Margin="183,34,181,10" Width="166" Grid.ColumnSpan="2"/>
+            <Label x:Name="lbtitulo" Content="Cargos" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Center" FontFamily="Helvetica" FontSize="30" Margin="186,10,178,34" Width="166" Grid.ColumnSpan="2"/>
             <iconPacks:PackIconMaterial Kind="RobotConfused" Foreground="Cyan"
                     VerticalAlignment="Center" 
                     HorizontalAlignment="Left" x:Name="icon"
                       Width="24" Visibility="Visible" Grid.Column="2" Grid.Row="0" Margin="58,10,0,15" RenderTransformOrigin="-1.417,0.406"   />
-            <Label x:Name="lbcodigo" Content="Código" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center" Height="28" Margin="10,42,111,0" VerticalAlignment="Top" Width="144"/>
+            <Label x:Name="lbcodigo" Content="Código" Grid.Row="2" Grid.Column="2" HorizontalAlignment="Center" Height="28" Margin="10,42,111,0" VerticalAlignment="Top" Width="144"/>
             <TextBox x:Name="txtid" Grid.Row="1" Grid.Column="1" Visibility="Hidden"/>
-            <TextBox x:Name="txtcodigo" IsReadOnly="True"  Grid.Row="2"  Margin="224,20,28,10" RenderTransformOrigin="0.446,-0.098" Grid.Column="1" Grid.ColumnSpan="2"/>
-            <Label x:Name="lbRol" Content="Nombre del cargo" Grid.Row="3" HorizontalAlignment="Center" Margin="10,39,79,10" Width="176" Grid.Column="1" />
+            <TextBox x:Name="txtcodigo" IsReadOnly="True"  Grid.Row="2"  Margin="224,0,28,30" RenderTransformOrigin="0.446,-0.098" Grid.Column="2" Grid.ColumnSpan="2"  
+                     ToolTip="Se muestra el numero del viaje en que será trasnportado el material" />
+            <Label x:Name="lbRol" Content="Nombre del cargo" Grid.Row="3" HorizontalAlignment="Center" Margin="10,19,79,30" Width="176" Grid.Column="2" />
 
-            <DataGrid Name="dtgridcargo" Grid.Row="2" Grid.RowSpan="5" Grid.ColumnSpan="2" Margin="0,20,0,0" HorizontalAlignment="Right" Width="523" SelectionChanged="dtgriduser_SelectionChanged" Grid.Column="3" >
-                <!--<DataGridTextColumn x:Name="dgId" Header="Id" Binding="{Binding Path=Id}" Width="*"/>
-            <DataGridTextColumn x:Name="dgnombreCompleto" Header="Nombre Completo" Binding="{Binding Path=NombreCompleto}" Width="*"/>
-            <DataGridTextColumn x:Name="dgusername" Header="Username" Binding="{Binding Path=Username}" Width="*"/>-->
 
+
+            <DataGrid Name="dtgridcargo" Margin="160,10,170,78" Grid.Row="4" 
+                  Grid.RowSpan="4" FontFamily="Aldine" IsReadOnly="True"
+                  Grid.Column="1" Grid.ColumnSpan="4">
+
+                <DataGrid.Resources>
+                    <Style TargetType="{x:Type DataGridColumnHeader}">
+
+                    </Style>
+                </DataGrid.Resources>
             </DataGrid>
+
 
             <Button x:Name="btnIngresar" Click="btnIngresar_Click" Content="Insertar" Grid.Column="1" Grid.Row="7" Height="40"  Foreground="White"  BorderBrush="#0082aa" RenderTransformOrigin="0.51,0.525" Margin="27,40,40,0"/>
             <iconPacks:PackIconMaterial 
@@ -167,13 +175,13 @@
                  Width="24" Visibility="Visible" Grid.Column="2" Grid.Row="8" Margin="130,10,0,15" RenderTransformOrigin="2.949,0.131"   />
 
 
-             <iconPacks:PackIconMaterial 
+            <iconPacks:PackIconMaterial 
                  VerticalAlignment="Center" 
                  HorizontalAlignment="Left" 
                  Foreground="White"
                 x:Name="icon4"
                  Width="24" Visibility="Visible" Grid.Column="3" Grid.Row="8" Margin="130,10,0,15" RenderTransformOrigin="2.949,0.131"   />
-            <TextBox x:Name="txtnombre" Grid.Row="3"  Margin="224,20,28,10" RenderTransformOrigin="0.446,-0.098" Grid.Column="1" Grid.ColumnSpan="2" TextChanged="txtnombre_TextChanged"/>
+            <TextBox x:Name="txtnombre" Grid.Row="3"  Margin="224,0,28,30" RenderTransformOrigin="0.446,-0.098" Grid.Column="2" Grid.ColumnSpan="2" TextChanged="txtnombre_TextChanged"/>
 
         </Grid>
     </Grid>
