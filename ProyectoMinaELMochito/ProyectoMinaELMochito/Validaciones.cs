@@ -6,6 +6,12 @@ using System.Threading.Tasks;
 
 using System.Windows;
 using System.Windows.Input;
+
+using System.Data;
+using System.Data.SqlClient;
+using System.Configuration;
+using System.Windows;
+
 namespace ProyectoMinaELMochito
 {
     class Validaciones : Window
@@ -17,6 +23,38 @@ namespace ProyectoMinaELMochito
             else
                 e.Handled = true;
         }
+
+
+        public int validacionesVehiculos(int tipoValidacion, string laValidacion, int idMarca)
+        {
+            Conexion cn = new Conexion();
+            
+            try
+            {
+                cn.abrir();
+                SqlCommand crearMarca = new SqlCommand("validacionesVehiculos", cn.Conectarbd);
+                crearMarca.CommandType = CommandType.StoredProcedure;
+
+                crearMarca.Parameters.AddWithValue("@tipoValidacion", tipoValidacion);
+                crearMarca.Parameters.AddWithValue("@validacion", laValidacion);
+                crearMarca.Parameters.AddWithValue("@idMarca", idMarca);
+
+                int cantidadItemSolicitado = Convert.ToInt32(crearMarca.ExecuteScalar());
+
+                return cantidadItemSolicitado;
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return 5;
+            }
+            finally { cn.cerrar(); }
+
+
+        }
+
+
 
         public void validarTxtSinLetrasConCommas(KeyEventArgs e)
         {

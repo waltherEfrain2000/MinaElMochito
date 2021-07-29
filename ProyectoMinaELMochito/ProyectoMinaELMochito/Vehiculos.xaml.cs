@@ -26,6 +26,7 @@ namespace ProyectoMinaELMochito
         // Variables miembro
         Conexion cn = new Conexion();
         int idVehiculo;
+        string placaSeleccionada;
 
         private Procedimientos vehiculo = new Procedimientos();
         private Vehiculo vehiculos = new Vehiculo();
@@ -49,6 +50,7 @@ namespace ProyectoMinaELMochito
                 txtVehiculoID.Text = filaSeleccionada["Código Vehículo"].ToString();
                 idVehiculo = Convert.ToInt32(filaSeleccionada["Código Vehículo"]);
                 txtPlaca.Text = filaSeleccionada["Placa"].ToString();
+                placaSeleccionada = filaSeleccionada["Placa"].ToString();
                 txtColor.Text = filaSeleccionada["Color"].ToString();
                 cmbEstado.Text = filaSeleccionada["Estado"].ToString();
                 cmbMarca.Text = filaSeleccionada["Marca"].ToString();
@@ -110,8 +112,6 @@ namespace ProyectoMinaELMochito
             }
         }
 
-
-
         private void MostrarVehiculo()
         {
             try
@@ -155,26 +155,34 @@ namespace ProyectoMinaELMochito
             // Verificar que se ingresaron los valores requeridos
             if (VerificarCamposLlenos())
             {
-                try
-                {
-                    //parametro 0 por que no es actualizacion
-                    ExtraerInformacionFormulario(0);
-                    vehiculo.CrearVehiculo(Convert.ToInt32(cmbModelo.SelectedValue), Convert.ToInt32(cmbMarca.SelectedValue), txtPlaca.Text, txtColor.Text, Convert.ToInt32(cmbEstado.SelectedValue));
 
-                    // Mensaje de inserción exitosa
-                    MessageBox.Show("¡Vehiculo insertado correctamente!");
+                int verificarPlaca = validacion.validacionesVehiculos(2, txtPlaca.Text, 1);
 
-                }
-                catch (Exception ex)
+                if (verificarPlaca == 0)
                 {
-                    MessageBox.Show(ex.Message);
 
+                    try
+                    {
+                        //parametro 0 por que no es actualizacion
+                        ExtraerInformacionFormulario(0);
+                        vehiculo.CrearVehiculo(Convert.ToInt32(cmbModelo.SelectedValue), Convert.ToInt32(cmbMarca.SelectedValue), txtPlaca.Text, txtColor.Text, Convert.ToInt32(cmbEstado.SelectedValue));
+
+                        // Mensaje de inserción exitosa
+                        MessageBox.Show("¡Vehiculo insertado correctamente!");
+
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+
+                    }
+                    finally
+                    {
+                        LimpiarCasillas();
+                        MostrarVehiculo();
+                    }
                 }
-                finally
-                {
-                    LimpiarCasillas();
-                    MostrarVehiculo();
-                }
+                else { MessageBox.Show("No se puede ingresar una placa repetida."); }
             }
         }
 
@@ -186,7 +194,6 @@ namespace ProyectoMinaELMochito
                 try
                 {
                     //parametro 1 por que es actualizacion
-                    //edicionDeCasillas(false, 1);
                     btnModificar.Visibility = Visibility.Hidden;
                     btnAgregar.Visibility = Visibility.Hidden;
                     btnEliminar.Visibility = Visibility.Hidden;
@@ -204,6 +211,22 @@ namespace ProyectoMinaELMochito
 
         private void btnAceptarModificacion_Click(object sender, RoutedEventArgs e)
         {
+            int verificarPlaca = validacion.validacionesVehiculos(2, txtPlaca.Text, 1);
+
+            if (txtPlaca.Text != placaSeleccionada)
+            {
+                if (verificarPlaca == 0)
+                {
+                    ProcesoModificar();
+                }
+                else { MessageBox.Show("No se puede ingresar una placa repetida."); }
+            }
+            else { ProcesoModificar(); }            
+        }
+        
+
+        private void ProcesoModificar()
+        {
             // Verificar que se ingresaron los valores requeridos
             if (VerificarCamposLlenos())
             {
@@ -213,18 +236,15 @@ namespace ProyectoMinaELMochito
                 {
                     //parametro 1 por que es actualizacion
                     ExtraerInformacionFormulario(1);
-                    vehiculo.ActualizarVehiculo(idVehiculo , Convert.ToInt32(cmbModelo.SelectedValue), Convert.ToInt32(cmbMarca.SelectedValue), txtPlaca.Text, txtColor.Text, Convert.ToInt32(cmbEstado.SelectedValue));
+                    vehiculo.ActualizarVehiculo(idVehiculo, Convert.ToInt32(cmbModelo.SelectedValue), Convert.ToInt32(cmbMarca.SelectedValue), txtPlaca.Text, txtColor.Text, Convert.ToInt32(cmbEstado.SelectedValue));
 
 
                     // Mensaje de inserción exitosa
                     MessageBox.Show("¡Vehiculo modificado correctamente!");
-
-
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message);
-
                 }
                 finally
                 {
@@ -234,6 +254,7 @@ namespace ProyectoMinaELMochito
             }
         }
 
+
         private void btnEliminar_Click(object sender, RoutedEventArgs e)
         {
             // Verificar que se ingresaron los valores requeridos
@@ -242,8 +263,7 @@ namespace ProyectoMinaELMochito
                 try
                 {
                     //parametro 1 por que es actualizacion
-                    //edicionDeCasillas(true, 0);
-                    //ocultar todos los otones inecesarios
+                    //ocultar todos los botones inecesarios
                     btnModificar.Visibility = Visibility.Hidden;
                     btnAgregar.Visibility = Visibility.Hidden;
                     btnEliminar.Visibility = Visibility.Hidden;
