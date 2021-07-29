@@ -145,11 +145,12 @@
 
             <DataGrid Name="dgvProduccion" Margin="10,22,55,66" Grid.Row="4" 
                   Grid.RowSpan="4" FontFamily="Aldine" IsReadOnly="True"
-                  SelectionChanged="DatosEnCasillas" Grid.Column="1" Grid.ColumnSpan="3">
+                  SelectionChanged="DatosEnCasillas" Grid.Column="1" Grid.ColumnSpan="3" >
 
                 <DataGrid.Resources>
                     <Style TargetType="{x:Type DataGridColumnHeader}">
-
+                        <Setter Property="Background" Value="#9900afb9"></Setter>
+                        <Setter Property="HorizontalContentAlignment" Value="Center"/>
                     </Style>
                 </DataGrid.Resources>
             </DataGrid>
@@ -159,10 +160,10 @@
                 Margin="105,24,0,0" FontSize="15" FontFamily="Aldine"/>
             <Label Content="Peso (kg):" HorizontalAlignment="Left" Grid.Column="0" Grid.Row="3"
                 Margin="105,24,0,0" FontSize="15" FontFamily="Aldine"/>
-            <Label Content="Precio $:" HorizontalAlignment="Left" Grid.Row="2"
-                Margin="114,14,0,10" FontSize="15" FontFamily="Aldine" RenderTransformOrigin="0.844,0.526" Grid.Column="2"/>
+            <Label Content="Precio $:" HorizontalAlignment="Left" Grid.Row="1"
+                Margin="126,24,0,0" FontSize="15" FontFamily="Aldine" RenderTransformOrigin="0.844,0.526" Grid.Column="2"/>
             <TextBox x:Name="txtNumeroViaje" Width="192" Height="28"
-                Margin="10,20,56,12" materialDesign:HintAssist.Hint="Numero - Viaje"
+                Margin="10,20,56,12" materialDesign:HintAssist.Hint="  Numero - Viaje"
                 HorizontalAlignment="Center" TextAlignment="Center"
                 VerticalAlignment="Center" FontSize="14" FontFamily="Aldine"
                 ToolTip="Se muestra el numero del viaje en que será trasnportado el material"
@@ -170,37 +171,22 @@
             <TextBox x:Name="txtCantidad" Grid.Row="3" Width="194" Height="28"
                 Margin="10,22,0,10" materialDesign:HintAssist.Hint="Peso producto" IsReadOnly="False"
                 VerticalAlignment="Center" HorizontalAlignment="Left" FontFamily="Aldine"
-                FontSize="14" ToolTip="Cantidad del mineral pesado" TextAlignment="Center"  Grid.Column="1" />
+                FontSize="14" ToolTip="  Cantidad del mineral pesado" TextAlignment="Center"  Grid.Column="1" KeyDown="txtCantidad_KeyDown_1" />
             <TextBox Text="{Binding SelectedItem.Precio, ElementName=cmbMinerales}" 
-                x:Name="txtPrecio" Grid.Row="2" Width="194" Height="28"
-                Margin="10,20,54,12" HorizontalAlignment="Center" VerticalAlignment="Center"
-                materialDesign:HintAssist.Hint="Precio producto" FontFamily="Aldine"
+                x:Name="txtPrecio" Grid.Row="1" Width="194" Height="28"
+                Margin="9,25,55,7" HorizontalAlignment="Center" VerticalAlignment="Center"
+                materialDesign:HintAssist.Hint="  Precio producto" FontFamily="Aldine"
                 FontSize="14" ToolTip="Precio que tendrá el producto" TextAlignment="Center" 
                 IsReadOnly="true" Grid.Column="3"/>
-            <Button x:Name="btnInsertar" Content="Agregar" Height="28" Foreground="White"  BorderBrush="#0082aa" Margin="60,21,73,10" Click="btnInsertar_Click" Grid.Row="2" Grid.Column="4"/>
+            <Button x:Name="btnInsertar" Content="Agregar" Height="28" Foreground="White"  BorderBrush="#0082aa" Margin="60,21,73,10" Click="btnInsertar_Click" Grid.Row="1" Grid.Column="4"/>
             <Button x:Name="btnModificar" Content="Modificar" Height="Auto" Foreground="White"  BorderBrush="#0082aa"
-                Grid.Row="1" Margin="60,21,73,10" Click="btnModificar_Click" Grid.Column="4"/>
+                Grid.Row="2" Margin="60,21,73,10" Click="btnModificar_Click" Grid.Column="4"/>
             <Button x:Name="btnEliminar" Content="Eliminar" Height="28" Foreground="White"  BorderBrush="#0082aa"
                 Grid.Row="3" Margin="60,21,73,10" Click="btnEliminar_Click" Grid.Column="4"/>
             <Button x:Name="btnLimpiar" Content="Limpiar" Height="28" Foreground="White"  BorderBrush="#0082aa"
-                Grid.Row="4" Margin="60,21,73,10" Click="btnLimpiar_Click" Grid.Column="4"/>
+                Grid.Row="4" Margin="60,22,73,0" Click="btnLimpiar_Click" Grid.Column="4" VerticalAlignment="Top"/>
             <ComboBox x:Name="cmbMinerales" HorizontalAlignment="Left" Margin="10,20,56,12" Grid.Row="2" 
                 VerticalAlignment="Top" Width="194" Height="28" RenderTransformOrigin="0.53,1.771" Grid.Column="1" />
-            <Label Content="Total $:" HorizontalAlignment="Left" Grid.Row="3"
-                Margin="114,30,0,54" FontSize="15" FontFamily="Aldine" Grid.Column="2" Grid.RowSpan="2"/>
-            <TextBox Text="" 
-                x:Name="txtTotal" Grid.Row="3" Width="194" Height="28"
-                Margin="10,20,54,12" HorizontalAlignment="Center" VerticalAlignment="Center"
-                materialDesign:HintAssist.Hint="Precio Total" FontFamily="Aldine"
-                FontSize="14" ToolTip="Precio Total del producto" TextAlignment="Center" 
-                IsReadOnly="true" Grid.Column="3"/>
-            <Label Content="Fecha:" HorizontalAlignment="Left" Grid.Column="2" Grid.Row="1"
-                Margin="114,27,0,57" FontSize="15" FontFamily="Aldine" RenderTransformOrigin="0.918,-2.778" Grid.RowSpan="2"/>
-            <DatePicker x:Name="txtfecha" HorizontalAlignment="Left" Margin="10,20,0,0" Grid.Row="1" VerticalAlignment="Top" Height="38" 
-                         FontSize="14" ToolTip="Fecha del viaje" materialDesign:HintAssist.Hint="Fecha del viaje" Width="202" Grid.Column="3"
-                        Background="Transparent"
-                        DisplayDateStart="2021-01-01"
-                        DisplayDateEnd="2021-12-31"/>
 
         </Grid>
     </Grid>

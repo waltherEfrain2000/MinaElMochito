@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -49,17 +50,18 @@ namespace ProyectoMinaELMochito
         public void AgregarDatosAViajeInterno(ViajeInterno viajeinterno)
         {
             conexion cn = new conexion();
-            //Validaciones validaciones = new Validaciones();
+            Validaciones validaciones = new Validaciones();
             try
             {
+
                 SqlCommand cmd = new SqlCommand("AgregarDatosAViajeInterno", cn.Conectarbd);
                 cmd.CommandType = CommandType.StoredProcedure;
 
-                
+
+                cn.abrir();
                 cmd.Parameters.AddWithValue("@idVehiculo", viajeinterno.IdVehiculo);
                 cmd.Parameters.AddWithValue("@idEmpleado", viajeinterno.IdEmpleado);
 
-                cn.abrir();
                 cmd.ExecuteNonQuery();
             }
             catch (Exception e)

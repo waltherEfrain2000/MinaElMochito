@@ -60,11 +60,8 @@ namespace ProyectoMinaELMochito
         private void LimpiarCasillasDeDatos()
         {
             //Cajas de texto
-            //txtNumeroViaje.Text = string.Empty;
             txtPrecio.Text = string.Empty;
             txtCantidad.Text = string.Empty;
-            txtTotal.Text = string.Empty;
-            txtfecha.Text = string.Empty;
             //ComboBox
             cmbMinerales.SelectedValue = null;
         }
@@ -80,8 +77,6 @@ namespace ProyectoMinaELMochito
             producciion.IdMineral = Convert.ToInt32(cmbMinerales.SelectedValue);
             producciion.Precio = Convert.ToDecimal(txtPrecio.Text);
             producciion.Peso = Convert.ToDecimal(txtCantidad.Text);
-            // producciion.Fecha = Convert.(txtfecha.SelectedDateFormat);
-            producciion.Fecha = txtfecha.Text;
         }
 
         //Valores del formulario objeto
@@ -109,7 +104,7 @@ namespace ProyectoMinaELMochito
             this.txtNumeroViaje.Text = Convert.ToString(producciion.IdViaje);
             this.txtPrecio.Text = Convert.ToString(producciion.Precio);
             this.cmbMinerales.SelectedItem = Convert.ToString(producciion.NombreMineral);
-            this.txtfecha.Text = Convert.ToString (producciion.Fecha);
+            //this.txtfecha.Text = Convert.ToString (producciion.Fecha);
         }
         /// <summary>
         /// Este método tiene la funcionaliad de pasar los datos que se seleccionan
@@ -119,19 +114,25 @@ namespace ProyectoMinaELMochito
         {
             DataGrid dg = (DataGrid)sender;
             DataRowView filaSeleccionada = dg.SelectedItem as DataRowView;
-
-            if (filaSeleccionada != null)
+            try
             {
-                txtNumeroViaje.Text = filaSeleccionada["N° Viaje"].ToString();
-                cmbMinerales.Text = filaSeleccionada["Mineral"].ToString();
-                txtCantidad.Text = filaSeleccionada["Peso(Kg)"].ToString();
-                txtPrecio.Text = filaSeleccionada["Precio"].ToString();
-                //txtTotal.Text = filaSeleccionada["Total"].ToString();
-                txtfecha.Text = filaSeleccionada["Fecha del viaje"].ToString();
-                txtIdProduccion.Text = filaSeleccionada["Código"].ToString();
+                if (filaSeleccionada != null)
+                {
+                    txtNumeroViaje.Text = filaSeleccionada["N° Viaje"].ToString();
+                    cmbMinerales.Text = filaSeleccionada["Mineral"].ToString();
+                    txtCantidad.Text = filaSeleccionada["Peso(Kg)"].ToString();
+                    txtPrecio.Text = filaSeleccionada["Precio"].ToString();
+                    //txtTotal.Text = filaSeleccionada["Total"].ToString();
+                    //txtfecha.Text = filaSeleccionada["Fecha del viaje"].ToString();
+                    txtIdProduccion.Text = filaSeleccionada["Código"].ToString();
 
 
+                }
+            }catch(Exception ex)
+            {
+                MessageBox.Show(Convert.ToString(ex));
             }
+            
         }
 
         private void Casillas(bool opcion, int operacion)
@@ -169,7 +170,6 @@ namespace ProyectoMinaELMochito
                 txtCantidad.Text = row_selected["Peso"].ToString();
                 txtPrecio.Text = row_selected["Precio"].ToString();
                 cmbMinerales.SelectedItem = row_selected["Mineral"].ToString();
-                txtfecha.Text = row_selected["Fecha del viaje"].ToString();
             }
             else
             {
@@ -210,7 +210,7 @@ namespace ProyectoMinaELMochito
             try
             {
                 //Realizar el query que mostrara la información
-                String queryProduccion = @"execute MostrarDatosTabla";
+                String queryProduccion = @"execute MostrarDatosTablaProduccion";
 
                 //Establecer la conexión
                 sqlConnection.Open();
@@ -235,7 +235,8 @@ namespace ProyectoMinaELMochito
             catch (Exception)
             {
 
-                throw;
+                MessageBox.Show("Al mostrar datos en la tabla",
+                      "Confirmar", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             finally
             {
@@ -253,43 +254,6 @@ namespace ProyectoMinaELMochito
             Casillas(false, 0);
         }
 
-        /*------------------------------------------------------------------------------------------------------------------------
-       ---------------------------------------------- CALCULO-----------------------------------------------------------
-       -------------------------------------------------------------------------------------------------------------------------*/
-
-        public void VerificarP()
-        {
-            double Valor = 0;
-            try
-            {
-                if (txtCantidad.Text == string.Empty || (Convert.ToDouble(txtCantidad.Text) == Valor))
-                {
-                    txtCantidad.Text = " ";
-                    txtTotal.Text = " ";
-                }
-                else if (txtPrecio.Text == string.Empty)
-                {
-                    MessageBoxResult result = MessageBox.Show("Debe seleccionar un mineral",
-                      "Confirmar", MessageBoxButton.OK, MessageBoxImage.Warning);
-                    txtCantidad.Text = "";
-                }
-                else
-                {
-                    double Total;
-                    double Cantidad, precio;
-                    Cantidad = Convert.ToDouble(txtCantidad);
-                    precio = Convert.ToDouble(txtPrecio);
-                    Total = Cantidad * precio;
-
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBoxResult result = MessageBox.Show("No puede ingresar dos puntos deguidos",
-                      "Confirmar", MessageBoxButton.OK, MessageBoxImage.Warning);
-                txtCantidad.Text = "";
-            }
-        }
 
         /*-----------------------------------------------------------------------------------------------------------------------------------------
   -------------------------------------------------------BOTONES---------------------------------------------------------
@@ -318,7 +282,7 @@ namespace ProyectoMinaELMochito
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Ha ocurrido un error al momento de insertar los datos...");
+                    MessageBox.Show("Ha ocurrido un error al momento de insertar los datos..." + ex);
                     Console.WriteLine(ex.Message);
                 }
                 finally
@@ -363,6 +327,34 @@ namespace ProyectoMinaELMochito
             }
         }
 
+        /*------------------------------------------------------------------------------------------------------------------------
+       ---------------------------------------------- vALIDACION-----------------------------------------------------------
+       -------------------------------------------------------------------------------------------------------------------------*/
+
+        public void VerificarP()
+        {
+            double Valor = 0;
+            try
+            {
+                if (txtCantidad.Text == string.Empty || (Convert.ToDouble(txtCantidad.Text) == Valor))
+                {
+                    txtCantidad.Text = string.Empty;
+                }
+                else if (txtPrecio.Text == String.Empty)
+                {
+                    MessageBoxResult result = MessageBox.Show("Debe seleccionar un mineral",
+                      "Confirmar", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    txtCantidad.Text = string.Empty;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                    MessageBoxResult result = MessageBox.Show("No puede ingresar dos puntos deguidos",
+                    "Confirmar", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    txtCantidad.Text = string.Empty;
+            }
+        }
 
         //---------------------------------------------------------------------------------------------------------------------------
         //Checked
@@ -485,52 +477,15 @@ namespace ProyectoMinaELMochito
             this.Close();
         }
 
-        private void txtCantidad_KeyDown(object sender, KeyEventArgs e)
+
+
+        private void txtCantidad_KeyDown_1(object sender, KeyEventArgs e)
         {
-            if (e.Key >= Key.D0 && e.Key <= Key.D9 || e.Key >= Key.NumPad0 && e.Key <= Key.NumPad9 || e.Key == Key.OemPeriod || e.Key == Key.Decimal)
-                e.Handled = false;
-            else
-                e.Handled = true;
+            Validacion.ValidarLetras(e);
+
         }
 
-
-        private void txtCantidad_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            VerificarP();
-            //txtCantidad.MaxLength = 7;
-            //double Valor = 0;
-            //try
-            //{
-            //    if (txtCantidad.Text == string.Empty || (Convert.ToDouble(txtCantidad.Text) == Valor))
-            //    {
-            //        txtCantidad.Text = "";
-            //        txtTotal.Text = "";
-            //    }
-            //    else if (txtPrecio.Text == string.Empty)
-            //    {
-            //        MessageBoxResult result = MessageBox.Show("Debe seleccionar un mineral",
-            //          "Confirmar", MessageBoxButton.OK, MessageBoxImage.Warning);
-            //        txtCantidad.Text = "";
-            //    }
-            //    else
-            //    {
-            //        double Total;
-            //        double Cantidad, precio;
-            //        Cantidad = Convert.ToDouble(txtCantidad.Text);
-            //        precio = Convert.ToDouble(txtPrecio.Text);
-            //        Total = Cantidad * precio;
-            //        txtTotal.Text = Total.ToString();
-            //    }
-            //}
-            //catch(Exception ex)
-            //{
-            //    MessageBoxResult result = MessageBox.Show("No puede ingresar dos puntos deguidos",
-            //          "Confirmar", MessageBoxButton.OK, MessageBoxImage.Warning);
-            //    txtCantidad.Text = "";
-            //}
-        }
-
-       
+    
 
         private void ListViewItem_Selected_9(object sender, RoutedEventArgs e)
         {
