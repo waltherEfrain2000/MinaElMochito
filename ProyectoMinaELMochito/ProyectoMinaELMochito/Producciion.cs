@@ -29,7 +29,6 @@ namespace ProyectoMinaELMochito
 
         public int IdProduccion { get; set; }
 
-        public string Fecha { get; set; }
 
         //Constructores
         public Producciion() { }
@@ -63,7 +62,6 @@ namespace ProyectoMinaELMochito
                 cmd.Parameters.AddWithValue("@idMineral", producciion.IdMineral);
                 cmd.Parameters.AddWithValue("@precio", producciion.Precio);
                 cmd.Parameters.AddWithValue("@peso", producciion.Peso);
-                cmd.Parameters.AddWithValue("@Fecha", producciion.Fecha);
 
                 cmd.ExecuteNonQuery();
 
@@ -129,7 +127,6 @@ namespace ProyectoMinaELMochito
                 cmd.Parameters.AddWithValue("@idProduccion", producciion.IdProduccion);
                 cmd.Parameters.AddWithValue("@idMineral", producciion.IdMineral);
                 cmd.Parameters.AddWithValue("@peso", producciion.Peso);
-                cmd.Parameters.AddWithValue("@Fecha", producciion.Fecha);
 
                 cn.abrir();
 

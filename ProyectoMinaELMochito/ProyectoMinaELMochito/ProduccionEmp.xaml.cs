@@ -79,7 +79,6 @@ namespace ProyectoMinaELMochito
             producciion.IdMineral = Convert.ToInt32(cmbMinerales.SelectedValue);
             producciion.Precio = Convert.ToDecimal(txtPrecio.Text);
             producciion.Peso = Convert.ToDecimal(txtCantidad.Text);
-            producciion.Fecha = DateTime.Now.ToString("yyyy/MM/dd");
 
         }
         private void MostarContenidoEnCasillas(object sender, SelectionChangedEventArgs e)
@@ -135,7 +134,7 @@ namespace ProyectoMinaELMochito
         private void btnInsertar_Click(object sender, RoutedEventArgs e)
         {
             //Primero verificamos que las casillas no estén vacías
-            if (procedimiento.VerificacionDeDatos(txtCantidad.Text, txtPrecio.Text, cmbMinerales.SelectedValue) && validacion.VerificarNegativos(txtCantidad.Text))
+            if (procedimiento.VerificacionDeDatos(txtCantidad.Text, txtPrecio.Text, cmbMinerales.SelectedValue))
             {
                 try
                 {
@@ -258,7 +257,7 @@ namespace ProyectoMinaELMochito
         private void btnModificar_Click(object sender, RoutedEventArgs e)
         {
             //Primero verificamos que las casillas no estén vacías
-            if (procedimiento.VerificacionDeDatos(txtCantidad.Text, txtPrecio.Text, cmbMinerales.SelectedValue) && validacion.VerificarNegativos(txtCantidad.Text))
+            if (procedimiento.VerificacionDeDatos(txtCantidad.Text, txtPrecio.Text, cmbMinerales.SelectedValue))
             {
                 try
                 {
@@ -367,6 +366,19 @@ namespace ProyectoMinaELMochito
             menuEmpleado sld = new menuEmpleado();
             sld.Show();
             this.Close();
+        }
+
+        private void txtCantidad_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            char ch = e.Text[0];
+
+            if ((Char.IsDigit(ch) || ch == '.'))
+            {
+                if (ch == '.' && txtCantidad.Text.Contains('.'))
+                    e.Handled = true;
+            }
+            else
+                e.Handled = true;
         }
         //Fin del programa
     }

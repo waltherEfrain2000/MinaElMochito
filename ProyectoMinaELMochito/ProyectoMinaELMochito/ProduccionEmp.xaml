@@ -95,7 +95,7 @@
             <TextBox Name="txtCantidad" Grid.Row="1" Grid.Column="1" Width="160" Height="25"
                  Margin="152,19,174,16" materialDesign:HintAssist.Hint="Peso producto" IsReadOnly="False"
                  VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Aldine"
-                 FontSize="14" ToolTip="Cantidad del mineral pesado" TextAlignment="Center"/>
+                 FontSize="14" ToolTip="Cantidad del mineral pesado" TextAlignment="Center" PreviewTextInput="txtCantidad_PreviewTextInput"/>
             <TextBox Text="{Binding ElementName=cmbMinerales, Path=SelectedItem.Precio}" 
                  Name="txtPrecio" Grid.Row="2" Grid.Column="1" Width="160" Height="28"
                  Margin="152,22,174,10" HorizontalAlignment="Center" VerticalAlignment="Center"
