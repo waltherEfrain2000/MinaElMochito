@@ -36,7 +36,6 @@ namespace ProyectoMinaELMochito
             MostrarVehiculo();
             MostrarComboBoxes();
             botonfecha.Content = string.Format("{0}", DateTime.Now.ToString());
-            txtColor.MaxLength = 15;
             txtPlaca.MaxLength = 15;
         }
 
@@ -55,24 +54,7 @@ namespace ProyectoMinaELMochito
                 cmbMarca.Text = filaSeleccionada["Marca"].ToString();
                 cmbModelo.Text = filaSeleccionada["Modelo"].ToString();
 
-                edicionDeCasillas(true, 0);
                 cn.cerrar();
-            }
-        }
-        private void edicionDeCasillas(bool opcion, int operacion)
-        {
-            //operacion sirve para distingir entre actualizar y activar o inabilitar todas las casillas
-            if (operacion == 0)
-            {
-                txtPlaca.IsReadOnly = opcion;
-                txtColor.IsReadOnly = opcion;
-                cmbEstado.IsReadOnly = opcion;
-
-            }
-            else
-            {
-                txtColor.IsReadOnly = opcion;
-                cmbEstado.IsReadOnly = opcion;
             }
         }
         private void LimpiarCasillas()
@@ -83,7 +65,7 @@ namespace ProyectoMinaELMochito
             cmbEstado.SelectedValue = null;
             cmbModelo.SelectedValue = null;
             cmbMarca.SelectedValue = null;
-            edicionDeCasillas(false, 0);
+            colorPicker.SelectedColor = null;
         }
         private bool VerificarCamposLlenos()
         {
@@ -204,7 +186,7 @@ namespace ProyectoMinaELMochito
                 try
                 {
                     //parametro 1 por que es actualizacion
-                    edicionDeCasillas(false, 1);
+                    //edicionDeCasillas(false, 1);
                     btnModificar.Visibility = Visibility.Hidden;
                     btnAgregar.Visibility = Visibility.Hidden;
                     btnEliminar.Visibility = Visibility.Hidden;
@@ -260,7 +242,7 @@ namespace ProyectoMinaELMochito
                 try
                 {
                     //parametro 1 por que es actualizacion
-                    edicionDeCasillas(true, 0);
+                    //edicionDeCasillas(true, 0);
                     //ocultar todos los otones inecesarios
                     btnModificar.Visibility = Visibility.Hidden;
                     btnAgregar.Visibility = Visibility.Hidden;
@@ -321,7 +303,7 @@ namespace ProyectoMinaELMochito
 
         private void BotonesCancelar()
         {
-            //mostar todos los otones necesarios
+            //mostar todos los Botones necesarios
             btnModificar.Visibility = Visibility.Visible;
             btnAgregar.Visibility = Visibility.Visible;
             btnEliminar.Visibility = Visibility.Visible;
@@ -329,7 +311,7 @@ namespace ProyectoMinaELMochito
             btnCancelarModificacion.Visibility = Visibility.Hidden;
             btnAceptarEliminacion.Visibility = Visibility.Hidden;
             btnCancelarEliminacion.Visibility = Visibility.Hidden;
-            edicionDeCasillas(false, 0);
+            //edicionDeCasillas(false, 0);
             DgvVehiculos.SelectedItem = null;
         }
 
@@ -445,6 +427,31 @@ namespace ProyectoMinaELMochito
             cmbModelo.ItemsSource = vehiculos.LlenarComboBoxModelos(Convert.ToInt32(cmbMarca.SelectedValue));
             cmbModelo.DisplayMemberPath = "Modelo";
             cmbModelo.SelectedValuePath = "idModelo";
+        }
+
+        private void ColorPicker_SelectedColorChanged(object sender, RoutedPropertyChangedEventArgs<Color?> e)
+        {
+            try
+            {
+                txtColor.Text = colorPicker.SelectedColorText;
+                squareText.Fill = new BrushConverter().ConvertFromString(txtColor.Text) as SolidColorBrush;
+            }
+            catch (Exception)
+            {
+
+            }
+        }
+
+        private void txtColor_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            try
+            {
+                colorPicker.SelectedColor = (Color)ColorConverter.ConvertFromString(txtColor.Text);
+            }
+            catch (Exception)
+            {
+
+            }
         }
     }
 }
