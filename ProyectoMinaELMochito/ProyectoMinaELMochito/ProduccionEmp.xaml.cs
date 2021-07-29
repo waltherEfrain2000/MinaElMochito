@@ -134,7 +134,7 @@ namespace ProyectoMinaELMochito
         private void btnInsertar_Click(object sender, RoutedEventArgs e)
         {
             //Primero verificamos que las casillas no estén vacías
-            if (procedimiento.VerificacionDeDatos(txtCantidad.Text, txtPrecio.Text, cmbMinerales.SelectedValue) && validacion.VerificarNegativos(txtCantidad.Text))
+            if (procedimiento.VerificacionDeDatos(txtCantidad.Text, txtPrecio.Text, cmbMinerales.SelectedValue))
             {
                 try
                 {
@@ -167,7 +167,7 @@ namespace ProyectoMinaELMochito
             {
                 //Realizar el query que mostrara la información
                 String queryProduccion = @"Select P.idProduccion as 'Id Producción', P.idViaje as 'N° Viaje', 
-                                    M.descripcion as 'Mineral',P.precio as 'Precio', P.peso as 'Peso(Kg)'
+                                    M.descripcion as 'Mineral',P.precio as 'Precio', P.peso as 'Peso(Kg)', P.Fecha as 'Fecha'
                                     From Producciones.Produccion as P
                                     Inner Join Minas.Mineral as M on P.idMineral = M.idMineral";
 
@@ -257,7 +257,7 @@ namespace ProyectoMinaELMochito
         private void btnModificar_Click(object sender, RoutedEventArgs e)
         {
             //Primero verificamos que las casillas no estén vacías
-            if (procedimiento.VerificacionDeDatos(txtCantidad.Text, txtPrecio.Text, cmbMinerales.SelectedValue) && validacion.VerificarNegativos(txtCantidad.Text))
+            if (procedimiento.VerificacionDeDatos(txtCantidad.Text, txtPrecio.Text, cmbMinerales.SelectedValue))
             {
                 try
                 {
@@ -366,6 +366,19 @@ namespace ProyectoMinaELMochito
             menuEmpleado sld = new menuEmpleado();
             sld.Show();
             this.Close();
+        }
+
+        private void txtCantidad_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            char ch = e.Text[0];
+
+            if ((Char.IsDigit(ch) || ch == '.'))
+            {
+                if (ch == '.' && txtCantidad.Text.Contains('.'))
+                    e.Handled = true;
+            }
+            else
+                e.Handled = true;
         }
         //Fin del programa
     }
