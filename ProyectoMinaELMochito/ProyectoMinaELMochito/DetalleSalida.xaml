@@ -1,0 +1,73 @@
+﻿<Window x:Class="ProyectoMinaELMochito.DetalleSalida"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ProyectoMinaELMochito"
+        mc:Ignorable="d"
+          xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+           xmlns:fw="clr-namespace:SourceChord.FluentWPF;assembly=FluentWPF"
+            Title="DetalleSalida" Height="450" Width="800" WindowStartupLocation="CenterScreen">
+   
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid  Background="#9900afb9" Height="419" VerticalAlignment="Bottom">
+            <StackPanel>
+
+                <ListViewItem Padding="1" Selected="ListViewItem_Selected" MouseDoubleClick="ListViewItem_MouseDoubleClick">
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Foreground="White" Kind="Close" Margin="15"/>
+                        <TextBlock Text="salir" Foreground="White" VerticalAlignment="Center"/>
+                    </StackPanel>
+                </ListViewItem>
+
+            </StackPanel>
+        </Grid>
+
+        <Grid Grid.Column="1" Background="White" Grid.ColumnSpan="4">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto" MinWidth="147" />
+                <ColumnDefinition Width="120*" />
+                <ColumnDefinition Width="142*" />
+                <ColumnDefinition Width="142*" />
+                <ColumnDefinition Width="141*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="67" />
+                <RowDefinition Height="67*" />
+                <RowDefinition Height="66*" />
+                <RowDefinition Height="67*" />
+                <RowDefinition Height="67*" />
+                <RowDefinition Height="66*" />
+            </Grid.RowDefinitions>
+            <Label Content="Detalle de Salidas" Grid.ColumnSpan="3" HorizontalAlignment="Center" FontSize="35" Grid.Column="1" Margin="70,0,54,0" Width="280" />
+            <Label Content="Descripción" Grid.Row="1" FontSize="15" Margin="55,38,105,0" Grid.ColumnSpan="2"  />
+
+            <TextBox Name="txtDetalle" Grid.Row="1" Grid.Column="1" FontSize="15" Margin="20,25,55,10" Grid.ColumnSpan="2"/>
+            <TextBox Name="txtIdDetalle" Grid.Row="1" Grid.Column="1" FontSize="15" Margin="15,10,10,10" IsReadOnly="True" Visibility="Hidden"/>
+
+            <Button x:Name="btnAgregar" Foreground="White"  BorderBrush="#0082aa" Content="Agregar" Grid.Column="3" Grid.Row="1" Margin="73,25,99,10" Height="Auto" Click="btnAgregar_Click" Grid.ColumnSpan="2"  />
+
+            <DataGrid Name="DgDetalleSalida" Grid.Row="2" Margin="55,10,99,25" Grid.ColumnSpan="5" Grid.RowSpan="4" IsReadOnly="True" FontSize="15" SelectionChanged="DgDetalleSalida_SelectionChanged" >
+
+                <DataGrid.Resources>
+                    <Style TargetType="{x:Type DataGridColumnHeader}" >
+                        <Setter Property="Background" Value="#9900afb9"></Setter>
+                        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                    </Style>
+                </DataGrid.Resources>
+
+            </DataGrid>
+            <!--<Button x:Name="btnSiguiente" Foreground="White"  BorderBrush="#0082aa" Content="Siguiente" Grid.Column="4" Grid.Row="1" Margin="10,25,20,0" Height="36"  RenderTransformOrigin="1.458,0.603" VerticalAlignment="Top" Click="btnSiguiente_Click"  />-->
+
+        </Grid>
+    </Grid>
+</Window>
