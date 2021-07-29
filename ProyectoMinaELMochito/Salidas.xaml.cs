@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,7 +18,8 @@ using System.Configuration;
 using System.Data;
 //libreria para error de decimales
 using System.Globalization;
-
+//libreria para validar caracteres especiales
+using System.Text.RegularExpressions;
 
 namespace ProyectoMinaELMochito
 {
@@ -30,26 +32,19 @@ namespace ProyectoMinaELMochito
         private static string connectionString = ConfigurationManager.ConnectionStrings["ProyectoMinaELMochito.Properties.Settings.MinaConnectionString"].ConnectionString;
         private SqlConnection sqlConnection = new SqlConnection(connectionString);
 
+        private Validaciones validaciones = new Validaciones();
+        private Procedimientos procedimientos = new Procedimientos();
         private Salida salidas = new Salida();
 
-        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            DragMove();
-        }
-
-        private void ListViewItem_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-            menuPrincipal sld = new menuPrincipal();
-            sld.Show();
-            this.Close();
-        }
 
         public Salidas()
         {
+            //botonfecha.Content = string.Format("{0}", DateTime.Now.ToString());
             InitializeComponent();
             MostrarMinerales();
+            MostrarDetalleSalidas();
+             MostrarInfoSalidas();
             botonfecha.Content = string.Format("{0}", DateTime.Now.ToString());
-            MostrarInfoSalidas();
 
         }
 
@@ -58,43 +53,26 @@ namespace ProyectoMinaELMochito
             txtIdSalida.Text = string.Empty;
             cmbIdMineral.SelectedValue = null;
             txtCantidad.Text = string.Empty;
-            txtTotal.Text = string.Empty;
-            txtFecha.Text = string.Empty;
-            txtDetalle.Text = string.Empty;
+            FSalida.Text = string.Empty;
+            cmbSalidas.SelectedValue = null;
+          
 
             //edicionDeCasillas(false, 0);
         }
 
-        private bool CamposVacios()
-        {
-            if (txtCantidad.Text == string.Empty || txtTotal.Text == string.Empty || txtFecha.Text == string.Empty)
-            {
-                MessageBox.Show("Favor no dejar vacío ningún campo...");
-                return false;
-            }
-            else if (cmbIdMineral.SelectedValue == null)
-            {
-                MessageBox.Show("Favor, seleccionar un valor mineral!");
-                return false;
-            }
-            return true;
-        }
+
         private void MostrarInfoSalidas()
         {
             try
             {
-                string query = @"Select S.[idSalida] as 'ID de Salida', M.[descripcion] as 'Mineral', S.[cantidad] AS 'Cantidad (Kg)', S.[Total] as 'Total',
-								S.[fechaSalida] as 'Fecha de Salida', S.[detalleVenta] as 'Detalle de venta'
-								from Minas.Salida S Inner Join Minas.Mineral M on S.idmineral = M.idMineral";
-
                 sqlConnection.Open();
 
-                SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
-
+                SqlCommand sqlCommand = new SqlCommand("MostrarInfoSalidas", sqlConnection);
+                sqlCommand.CommandType = CommandType.StoredProcedure;
                 sqlCommand.ExecuteNonQuery();
                 SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand);
 
-                DataTable dataTable = new DataTable("Minas.Salida");
+                DataTable dataTable = new DataTable("Salidas.Salida");
                 sqlDataAdapter.Fill(dataTable);
                 dgvSalida.ItemsSource = dataTable.DefaultView;
                 sqlDataAdapter.Update(dataTable);
@@ -107,22 +85,21 @@ namespace ProyectoMinaELMochito
             }
             finally
             {
+
                 sqlConnection.Close();
             }
         }
+
+
         private void infoFormulario(int operacion)
         {
 
 
             if (operacion == 1)
             {
+                //salidas.IDsalida = Convert.ToInt32(txtIdSalida.Text);
                 salidas.IDsalida = Convert.ToInt32(txtIdSalida.Text);
             }
-
-            salidas.Cantidad = Convert.ToDecimal(txtCantidad.Text);
-            salidas.Total = Convert.ToDecimal(txtTotal.Text);
-            salidas.FechaSalida = Convert.ToDateTime(txtFecha.Text);
-            salidas.DetalleSalida = txtDetalle.Text;
 
             switch (cmbIdMineral.SelectedIndex)
             {
@@ -138,35 +115,58 @@ namespace ProyectoMinaELMochito
                 case 3:
                     salidas.IDMineral = 4;
                     break;
+                case 4:
+                    salidas.IDMineral = 5;
+                    break;
                 default:
                     break;
             }
-        }
-
-
-
-        private void dgvSalida_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            DataGrid dg = (DataGrid)sender;
-            DataRowView filaSeleccionada = dg.SelectedItem as DataRowView;
-            if (filaSeleccionada != null)
+            switch (cmbSalidas.SelectedIndex)
             {
-                txtIdSalida.Text = filaSeleccionada["ID de Salida"].ToString();
-                txtCantidad.Text = filaSeleccionada["Cantidad (Kg)"].ToString();
-                txtTotal.Text = filaSeleccionada["Total"].ToString();
-                txtFecha.Text = filaSeleccionada["Fecha de Salida"].ToString();
-                txtDetalle.Text = filaSeleccionada["Detalle de venta"].ToString();
-
-                txtIdSalida.IsReadOnly = false;
+                case 0:
+                    salidas.IdDetalle = 1;
+                    break;
+                case 1:
+                    salidas.IdDetalle = 2;
+                    break;
+                case 2:
+                    salidas.IdDetalle = 3;
+                    break;
+                case 3:
+                    salidas.IdDetalle = 4;
+                    break;
+                case 4:
+                    salidas.IdDetalle = 5;
+                    break;
+                case 5:
+                    salidas.IdDetalle = 6;
+                    break;
+                case 6:
+                    salidas.IdDetalle = 7;
+                    break;
+                case 7:
+                    salidas.IdDetalle = 8;
+                    break;
+                default:
+                    break;
             }
+
+
+            salidas.FechaSalida = FSalida.Text;
+           // salidas.IdDetalle = Convert.ToInt32(cmbSalidas.SelectedIndex);
+            decimal cantidad = Convert.ToDecimal(txtCantidad.Text);
+            salidas.Cantidad = Convert.ToDecimal(txtCantidad.Text);
+
         }
 
         private void btnIngresar_Click(object sender, RoutedEventArgs e)
         {
-            if (CamposVacios())
+
+            if (validaciones.VerificarCamposLlenosSalidas(txtCantidad.Text,  cmbIdMineral.Text, FSalida.Text)) ;
             {
                 try
                 {
+
                     infoFormulario(0);
                     salidas.ingresarSalidas(salidas);
 
@@ -175,32 +175,36 @@ namespace ProyectoMinaELMochito
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message);
+                    MessageBox.Show("Ha ocurrido un error al momento de insertar  por " + ex);
+                    Console.WriteLine(ex.Message);
 
                 }
                 finally
                 {
                     limpiarTexto();
                     MostrarInfoSalidas();
+
                 }
             }
         }
 
         private void btnModificar_Click(object sender, RoutedEventArgs e)
         {
-            if (CamposVacios())
+            if (validaciones.VerificarCamposLlenosSalidas(txtCantidad.Text, cmbIdMineral.Text, FSalida.Text)) ;
+            
             {
                 try
                 {
-                    infoFormulario(1);
+                   infoFormulario(1);
                     salidas.ActualizarSalidas(salidas);
-
                     MessageBox.Show("Salida Modificada");
 
 
                 }
                 catch (Exception ex)
                 {
+
+                    MessageBox.Show("Ha ocurrido un error al momento de modificar por " + ex);
                     MessageBox.Show(ex.Message);
 
                 }
@@ -208,6 +212,7 @@ namespace ProyectoMinaELMochito
                 {
                     limpiarTexto();
                     MostrarInfoSalidas();
+               
                 }
             }
         }
@@ -217,15 +222,17 @@ namespace ProyectoMinaELMochito
         {
             try
             {
+
                 infoFormulario(1);
                 salidas.EliminarSalidas(salidas);
-
                 MessageBox.Show("Salida Eliminada");
 
 
             }
             catch (Exception ex)
             {
+
+                MessageBox.Show("Ha ocurrido un error al momento de eliminar por " + ex);
                 MessageBox.Show(ex.Message);
 
             }
@@ -235,22 +242,28 @@ namespace ProyectoMinaELMochito
                 MostrarInfoSalidas();
             }
         }
+        private void dgvSalida_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
+        {
+            DataGrid dg = (DataGrid)sender;
+            DataRowView filaSeleccionada = dg.SelectedItem as DataRowView;
+            if (filaSeleccionada != null)
+            {
+                txtIdSalida.Text = filaSeleccionada["Código"].ToString();
+                cmbIdMineral.Text = filaSeleccionada["Minera"].ToString();
+                txtCantidad.Text = filaSeleccionada["Cantidad (kg)"].ToString();
+                FSalida.Text = filaSeleccionada["Fecha de Salida"].ToString();
+                cmbSalidas.Text = filaSeleccionada["Detalle de venta"].ToString();
+                //cmbSalidas.Text = filaSeleccionada["Código detalle"].ToString();
 
+            }
+        }
         private void btnLimpiar_Click(object sender, RoutedEventArgs e)
         {
             limpiarTexto();
             txtIdSalida.IsReadOnly = true;
         }
 
-        private void cmbIdMineral_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
 
-        }
-
-        private void txtCantidad_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
 
         private void MostrarMinerales()
         {
@@ -260,71 +273,40 @@ namespace ProyectoMinaELMochito
 
         }
 
-        private void txtTotal_TextChanged(object sender, TextChangedEventArgs e)
+        private void MostrarDetalleSalidas()
         {
+            cmbSalidas.ItemsSource = salidas.LlenarDetalleSalidas();
+            cmbSalidas.DisplayMemberPath = "DetalleSalida";
+            cmbSalidas.SelectedValuePath = "idDetalle";
 
         }
 
-        private void txtTotal_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+
+
+        /*private void txtTotal_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            try
-            {
-                if (txtCantidad.Text == string.Empty)
-                {
-                    MessageBox.Show("Favor, ingresar una cantidad a calcular!");
-                }
-                else
-                {
-                    decimal precio, cantidad, total;
 
-                    precio = Convert.ToDecimal(txtPrecio.Text, CultureInfo.InvariantCulture);
-                    cantidad = Convert.ToDecimal(txtCantidad.Text, CultureInfo.InvariantCulture);
+            procedimientos.txtTotal(txtCantidad.Text, txtPrecio.Text, txtTotal.Text);
+        }*/
 
-                    total = precio * cantidad;
-                    txtTotal.Text = total.ToString("0000.00", CultureInfo.InvariantCulture);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-           
-
-
+        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            DragMove();
         }
 
+        private void ListViewItem_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            menuPrincipal sld = new menuPrincipal();
+            sld.Show();
+            this.Close();
+        }
         private void ListViewItem_Selected(object sender, RoutedEventArgs e)
         {
-            menuPrincipal sld = new menuPrincipal ();
+            menuPrincipal sld = new menuPrincipal();
             sld.Show();
             this.Close();
         }
 
-        private void txtCantidad_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.Key >= Key.D0 && e.Key <= Key.D9 || e.Key >= Key.NumPad0 && e.Key <= Key.NumPad9)
-                e.Handled = false;
-            else
-                e.Handled = true;
-
-        }
-
-        private void txtIdSalida_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.Key >= Key.D0 && e.Key <= Key.D9 || e.Key >= Key.NumPad0 && e.Key <= Key.NumPad9)
-                e.Handled = false;
-            else
-                e.Handled = true;
-        }
-
-        private void txtTotal_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.Key >= Key.D0 && e.Key <= Key.D9 || e.Key >= Key.NumPad0 && e.Key <= Key.NumPad9)
-                e.Handled = false;
-            else
-                e.Handled = true;
-
-        }
 
         private void ListViewItem_Selected_1(object sender, RoutedEventArgs e)
         {
@@ -391,5 +373,33 @@ namespace ProyectoMinaELMochito
         {
 
         }
+
+        private void txtCantidad_KeyDown(object sender, KeyEventArgs e)
+        {
+            validaciones.ValidarLetras(e);
+
+        }
+
+        private void ListViewItem_Selected_9(object sender, RoutedEventArgs e)
+        {
+            ViajesInternos sld = new ViajesInternos();
+            sld.Show();
+            this.Close();
+        }
+        private void ListViewItem_Selected_10(object sender, RoutedEventArgs e)
+        {
+            Cargos cargos = new Cargos();
+            cargos.Show();
+            this.Close();
+        }
+
+        private void ListViewItem_Selected_11(object sender, RoutedEventArgs e)
+        {
+            Herramientas herramientas = new Herramientas();
+            herramientas.Show();
+            this.Close();
+        }
+
+
     }
 }

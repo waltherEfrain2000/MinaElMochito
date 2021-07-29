@@ -20,7 +20,7 @@ namespace ProyectoMinaELMochito
 
         public double Peso { get; set; }
 
-        public DateTime FechaActualizacion { get; set; }
+        //public DateTime FechaActualizacion { get; set; }
 
         public Decimal Total { get; set; }
 
@@ -29,11 +29,11 @@ namespace ProyectoMinaELMochito
         // Constructores
         public Mineralinventario() { }
 
-        public Mineralinventario(int idMineral, double peso, DateTime fechaActualizacion, decimal total)
+        public Mineralinventario(int idMineral, double peso,/* DateTime fechaActualizacion,*/ decimal total)
         {
             IdMineral = idMineral;
             Peso = peso;
-            FechaActualizacion = fechaActualizacion;
+          //  FechaActualizacion = fechaActualizacion;
             Total = total;
         }
 
@@ -47,8 +47,7 @@ namespace ProyectoMinaELMochito
             try
             {
                 // Query de selección
-                string query = @"SELECT * FROM Minas.InventarioMineral
-                                 WHERE idMineral = 1";
+                string query = @"exec MostrarOro";
 
 
                 // Establecer la conexión
@@ -67,7 +66,7 @@ namespace ProyectoMinaELMochito
                         // Obtener los valores del mineral si la consulta retorna valores
                         mineral.IdMineral = Convert.ToInt32(rdr["idMineral"]);
                         mineral.Peso = Convert.ToDouble(rdr["peso"]);
-                        mineral.FechaActualizacion = Convert.ToDateTime(rdr["fechaActualizacion"]);
+                        //mineral.FechaActualizacion = Convert.ToDateTime(rdr["fechaActualizacion"]);
                         mineral.Total = Convert.ToDecimal(rdr["Total"]);
                     }
                 }
@@ -99,8 +98,7 @@ namespace ProyectoMinaELMochito
             try
             {
                 // Query de selección
-                string query = @"SELECT * FROM Minas.InventarioMineral
-                                 WHERE idMineral = 2";
+                string query = @"exec Mostrar2";
 
 
                 // Establecer la conexión
@@ -119,7 +117,7 @@ namespace ProyectoMinaELMochito
                         // Obtener los valores del mineral si la consulta retorna valores
                         mineral.IdMineral = Convert.ToInt32(rdr["idMineral"]);
                         mineral.Peso = Convert.ToDouble(rdr["peso"]);
-                        mineral.FechaActualizacion = Convert.ToDateTime(rdr["fechaActualizacion"]);
+                        //mineral.FechaActualizacion = Convert.ToDateTime(rdr["fechaActualizacion"]);
                         mineral.Total = Convert.ToDecimal(rdr["Total"]);
                     }
                 }
@@ -151,8 +149,7 @@ namespace ProyectoMinaELMochito
             try
             {
                 // Query de selección
-                string query = @"SELECT * FROM Minas.InventarioMineral
-                                 WHERE idMineral = 3";
+                string query = @"exec Mostrar3";
 
 
                 // Establecer la conexión
@@ -171,7 +168,7 @@ namespace ProyectoMinaELMochito
                         // Obtener los valores del mineral si la consulta retorna valores
                         mineral.IdMineral = Convert.ToInt32(rdr["idMineral"]);
                         mineral.Peso = Convert.ToDouble(rdr["peso"]);
-                        mineral.FechaActualizacion = Convert.ToDateTime(rdr["fechaActualizacion"]);
+                        //mineral.FechaActualizacion = Convert.ToDateTime(rdr["fechaActualizacion"]);
                         mineral.Total = Convert.ToDecimal(rdr["Total"]);
                     }
                 }
@@ -202,8 +199,7 @@ namespace ProyectoMinaELMochito
             try
             {
                 // Query de selección
-                string query = @"SELECT * FROM Minas.InventarioMineral
-                                 WHERE idMineral = 4";
+                string query = @"exec Mostrar4";
 
 
                 // Establecer la conexión
@@ -222,7 +218,7 @@ namespace ProyectoMinaELMochito
                         // Obtener los valores del mineral si la consulta retorna valores
                         mineral.IdMineral = Convert.ToInt32(rdr["idMineral"]);
                         mineral.Peso = Convert.ToDouble(rdr["peso"]);
-                        mineral.FechaActualizacion = Convert.ToDateTime(rdr["fechaActualizacion"]);
+                        //mineral.FechaActualizacion = Convert.ToDateTime(rdr["fechaActualizacion"]);
                         mineral.Total = Convert.ToDecimal(rdr["Total"]);
                     }
                 }
@@ -252,8 +248,7 @@ namespace ProyectoMinaELMochito
             try
             {
                 // Query de selección
-                string query = @"SELECT * FROM Minas.InventarioMineral
-                                 WHERE idMineral = 5";
+                string query = @"exec Mostrar5";
 
 
                 // Establecer la conexión
@@ -272,7 +267,7 @@ namespace ProyectoMinaELMochito
                         // Obtener los valores del mineral si la consulta retorna valores
                         mineral.IdMineral = Convert.ToInt32(rdr["idMineral"]);
                         mineral.Peso = Convert.ToDouble(rdr["peso"]);
-                        mineral.FechaActualizacion = Convert.ToDateTime(rdr["fechaActualizacion"]);
+                        //mineral.FechaActualizacion = Convert.ToDateTime(rdr["fechaActualizacion"]);
                         mineral.Total = Convert.ToDecimal(rdr["Total"]);
                     }
                 }

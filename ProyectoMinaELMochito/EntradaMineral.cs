@@ -51,8 +51,7 @@ namespace ProyectoMinaELMochito
             try
             {
                 // Query de selección
-                string query = @"select  [idProducto],sum([cantidad]) as 'Total K Ingresados', sum([Total]) as 'Total'  from [Minas].[Entrada] 
-                                 where  [idProducto] =1 group by [idProducto] ";
+                string query = @"exec MostrarEntradas1 ";
 
 
                 // Establecer la conexión
@@ -62,14 +61,14 @@ namespace ProyectoMinaELMochito
                 SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
 
                 // Establecer los valores de los parámetros
-                sqlCommand.Parameters.AddWithValue("idProductol", 1);
+                sqlCommand.Parameters.AddWithValue("idMineral", 1);
 
                 using (SqlDataReader rdr = sqlCommand.ExecuteReader())
                 {
                     while (rdr.Read())
                     {
                         // Obtener los valores del mineral si la consulta retorna valores
-                        mineral.IdMineral = Convert.ToInt32(rdr["idProducto"]);
+                        mineral.IdMineral = Convert.ToInt32(rdr["idMineral"]);
                         mineral.Cantidad = Convert.ToDouble(rdr["Total K Ingresados"]);
                         mineral.Total = Convert.ToDecimal(rdr["Total"]);
                     }
@@ -101,8 +100,7 @@ namespace ProyectoMinaELMochito
             try
             {
                 // Query de selección
-                string query = @"select  [idProducto],sum([cantidad]) as 'Total K Ingresados', sum([Total]) as 'Total'  from [Minas].[Entrada] 
-                                 where  [idProducto] =2 group by [idProducto] ";
+                string query = @"exec MostrarEntradas2 ";
 
 
                 // Establecer la conexión
@@ -112,14 +110,14 @@ namespace ProyectoMinaELMochito
                 SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
 
                 // Establecer los valores de los parámetros
-                sqlCommand.Parameters.AddWithValue("idProducto", 2);
+                sqlCommand.Parameters.AddWithValue("idMineral", 2);
 
                 using (SqlDataReader rdr = sqlCommand.ExecuteReader())
                 {
                     while (rdr.Read())
                     {
                         // Obtener los valores del mineral si la consulta retorna valores
-                        mineral1.IdMineral = Convert.ToInt32(rdr["idProducto"]);
+                        mineral1.IdMineral = Convert.ToInt32(rdr["idMineral"]);
                         mineral1.Cantidad = Convert.ToDouble(rdr["Total K Ingresados"]);
                         mineral1.Total = Convert.ToDecimal(rdr["Total"]);
                     }
@@ -151,8 +149,7 @@ namespace ProyectoMinaELMochito
             try
             {
                 // Query de selección
-                string query = @"select  [idProducto],sum([cantidad]) as 'Total K Ingresados', sum([Total]) as 'Total'  from [Minas].[Entrada] 
-                                 where  [idProducto] =3 group by [idProducto] ";
+                string query = @"Exec MostrarEntradas3 ";
 
 
                 // Establecer la conexión
@@ -162,14 +159,14 @@ namespace ProyectoMinaELMochito
                 SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
 
                 // Establecer los valores de los parámetros
-                sqlCommand.Parameters.AddWithValue("idProductol", 3);
+                sqlCommand.Parameters.AddWithValue("idMineral", 3);
 
                 using (SqlDataReader rdr = sqlCommand.ExecuteReader())
                 {
                     while (rdr.Read())
                     {
                         // Obtener los valores del mineral si la consulta retorna valores
-                        mineral1.IdMineral = Convert.ToInt32(rdr["idProducto"]);
+                        mineral1.IdMineral = Convert.ToInt32(rdr["idMineral"]);
                         mineral1.Cantidad = Convert.ToDouble(rdr["Total K Ingresados"]);
                         mineral1.Total = Convert.ToDecimal(rdr["Total"]);
                     }
@@ -200,8 +197,7 @@ namespace ProyectoMinaELMochito
             try
             {
                 // Query de selección
-                string query = @"select  [idProducto],sum([cantidad]) as 'Total K Ingresados', sum([Total]) as 'Total'  from [Minas].[Entrada] 
-                                 where  [idProducto] =4 group by [idProducto] ";
+                string query = @"exec MostrarEntradas4 ";
 
 
                 // Establecer la conexión
@@ -211,14 +207,14 @@ namespace ProyectoMinaELMochito
                 SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
 
                 // Establecer los valores de los parámetros
-                sqlCommand.Parameters.AddWithValue("idProducto", 4);
+                sqlCommand.Parameters.AddWithValue("idMineral", 4);
 
                 using (SqlDataReader rdr = sqlCommand.ExecuteReader())
                 {
                     while (rdr.Read())
                     {
                         // Obtener los valores del mineral si la consulta retorna valores
-                        mineral1.IdMineral = Convert.ToInt32(rdr["idProducto"]);
+                        mineral1.IdMineral = Convert.ToInt32(rdr["idMineral"]);
                         mineral1.Cantidad = Convert.ToDouble(rdr["Total K Ingresados"]);
                         mineral1.Total = Convert.ToDecimal(rdr["Total"]);
                     }
@@ -248,8 +244,7 @@ namespace ProyectoMinaELMochito
             try
             {
                 // Query de selección
-                string query = @"select  [idProducto],sum([cantidad]) as 'Total K Ingresados', sum([Total]) as 'Total'  from [Minas].[Entrada] 
-                                 where  [idProducto] =5 group by [idProducto] ";
+                string query = @"exec MostrarEntradas5 ";
 
 
                 // Establecer la conexión
@@ -259,14 +254,14 @@ namespace ProyectoMinaELMochito
                 SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
 
                 // Establecer los valores de los parámetros
-                sqlCommand.Parameters.AddWithValue("idProductol", 5);
+                sqlCommand.Parameters.AddWithValue("idMineral", 5);
 
                 using (SqlDataReader rdr = sqlCommand.ExecuteReader())
                 {
                     while (rdr.Read())
                     {
                         // Obtener los valores del mineral si la consulta retorna valores
-                        mineral1.IdMineral = Convert.ToInt32(rdr["idProducto"]);
+                        mineral1.IdMineral = Convert.ToInt32(rdr["idMineral"]);
                         mineral1.Cantidad = Convert.ToDouble(rdr["Total K Ingresados"]);
                         mineral1.Total = Convert.ToDecimal(rdr["Total"]);
                     }

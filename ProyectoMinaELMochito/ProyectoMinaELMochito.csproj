@@ -56,6 +56,12 @@
     </StartupObject>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Bold.Licensing, Version=3.1460.43.0, Culture=neutral, PublicKeyToken=632609b4d040f6b4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Bold.Licensing.3.1.43\lib\net46\Bold.Licensing.dll</HintPath>
+    </Reference>
+    <Reference Include="BoldReports.WPF, Version=3.1460.43.0, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>..\packages\BoldReports.WPF.3.1.43\lib\net46\BoldReports.WPF.dll</HintPath>
+    </Reference>
     <Reference Include="FluentWPF, Version=0.9.0.1, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\FluentWPF.0.9.0\lib\net45\FluentWPF.dll</HintPath>
     </Reference>
@@ -76,6 +82,51 @@
     </Reference>
     <Reference Include="MaterialDesignThemes.Wpf, Version=4.0.0.2422, Culture=neutral, PublicKeyToken=df2a72020bd7962a, processorArchitecture=MSIL">
       <HintPath>..\packages\MaterialDesignThemes.4.0.0\lib\net452\MaterialDesignThemes.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.Chart.WPF, Version=18.3460.0.35, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syncfusion.Chart.WPF.Classic.18.3.0.35\lib\net46\Syncfusion.Chart.WPF.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.Compression.Base, Version=18.3460.0.35, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syncfusion.Compression.Base.18.3.0.35\lib\net46\Syncfusion.Compression.Base.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.DocIO.Base, Version=18.3460.0.35, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syncfusion.DocIO.Wpf.18.3.0.35\lib\net46\Syncfusion.DocIO.Base.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.Gauge.WPF, Version=18.3460.0.35, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syncfusion.Gauge.WPF.18.3.0.35\lib\net46\Syncfusion.Gauge.WPF.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.Grid.WPF, Version=18.3460.0.35, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syncfusion.Grid.WPF.18.3.0.35\lib\net46\Syncfusion.Grid.WPF.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.GridCommon.WPF, Version=18.3460.0.35, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syncfusion.GridCommon.Wpf.18.3.0.35\lib\net46\Syncfusion.GridCommon.WPF.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.Licensing, Version=18.3460.0.35, Culture=neutral, PublicKeyToken=632609b4d040f6b4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syncfusion.Licensing.18.3.0.35\lib\net46\Syncfusion.Licensing.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.Linq.Base, Version=18.3460.0.35, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syncfusion.Linq.Base.18.3.0.35\lib\net46\Syncfusion.Linq.Base.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.OfficeChart.Base, Version=18.3460.0.35, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syncfusion.OfficeChart.Base.18.3.0.35\lib\net46\Syncfusion.OfficeChart.Base.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.Pdf.Base, Version=18.3460.0.35, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syncfusion.Pdf.Wpf.18.3.0.35\lib\net46\Syncfusion.Pdf.Base.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.Presentation.Base, Version=18.3460.0.35, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syncfusion.Presentation.Wpf.18.3.0.35\lib\net46\Syncfusion.Presentation.Base.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.SfMaps.WPF, Version=18.3460.0.35, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syncfusion.SfMaps.WPF.18.3.0.35\lib\net46\Syncfusion.SfMaps.WPF.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.Shared.WPF, Version=18.3460.0.35, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syncfusion.Shared.WPF.18.3.0.35\lib\net46\Syncfusion.Shared.WPF.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.XlsIO.Base, Version=18.3460.0.35, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syncfusion.XlsIO.Wpf.18.3.0.35\lib\net46\Syncfusion.XlsIO.Base.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
@@ -116,6 +167,18 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="AsignarHerramientas.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Ayuda.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Cargos.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ComparacionHistoricos.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -128,6 +191,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Herramientas.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Historial_Entradas.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -137,6 +204,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Login.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MarcaVehiculo.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -153,6 +224,42 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ProduccionEmp.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ReporteEmpleado.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ReporteEntradas.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ReporteInventarioMineral.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ReporteProduccion.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ReporteProduccionEmpleado.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Reportes.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ReporteSalidas.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ReporteUsuarios.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ReporteVehiculos.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -180,9 +287,20 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="AsignarHerramientas.xaml.cs">
+      <DependentUpon>AsignarHerramientas.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Ayuda.xaml.cs">
+      <DependentUpon>Ayuda.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Cargocrud.cs" />
+    <Compile Include="Cargos.xaml.cs">
+      <DependentUpon>Cargos.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ComparacionHistoricos.xaml.cs">
       <DependentUpon>ComparacionHistoricos.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Conexion.cs" />
     <Compile Include="Empleado.cs" />
     <Compile Include="Empleados.xaml.cs">
       <DependentUpon>Empleados.xaml</DependentUpon>
@@ -190,6 +308,10 @@
     <Compile Include="EntradaMineral.cs" />
     <Compile Include="EntradasHistoricas.xaml.cs">
       <DependentUpon>EntradasHistoricas.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Herramienta.cs" />
+    <Compile Include="Herramientas.xaml.cs">
+      <DependentUpon>Herramientas.xaml</DependentUpon>
     </Compile>
     <Compile Include="Historial_Entradas.xaml.cs">
       <DependentUpon>Historial_Entradas.xaml</DependentUpon>
@@ -200,6 +322,8 @@
     <Compile Include="Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Marca.cs" />
+    <Compile Include="MarcaVehiculo.xaml.cs" />
     <Compile Include="menuEmpleado.xaml.cs">
       <DependentUpon>menuEmpleado.xaml</DependentUpon>
     </Compile>
@@ -214,6 +338,33 @@
     </Compile>
     <Compile Include="ProduccionEmp.xaml.cs">
       <DependentUpon>ProduccionEmp.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ReporteEmpleado.xaml.cs">
+      <DependentUpon>ReporteEmpleado.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ReporteEntradas.xaml.cs">
+      <DependentUpon>ReporteEntradas.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ReporteInventarioMineral.xaml.cs">
+      <DependentUpon>ReporteInventarioMineral.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ReporteProduccion.xaml.cs">
+      <DependentUpon>ReporteProduccion.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ReporteProduccionEmpleado.xaml.cs">
+      <DependentUpon>ReporteProduccionEmpleado.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes.xaml.cs">
+      <DependentUpon>Reportes.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ReporteSalidas.xaml.cs">
+      <DependentUpon>ReporteSalidas.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ReporteUsuarios.xaml.cs">
+      <DependentUpon>ReporteUsuarios.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ReporteVehiculos.xaml.cs">
+      <DependentUpon>ReporteVehiculos.xaml</DependentUpon>
     </Compile>
     <Compile Include="Salida.cs" />
     <Compile Include="Salidas.xaml.cs">
@@ -261,6 +412,85 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <None Include="README.md" />
+    <Content Include="Ayuda\Ayuda_Equipamiento\AyudaEquipamiento.css" />
+    <Content Include="Ayuda\Ayuda_Equipamiento\AyudaEquipamiento.html" />
+    <Resource Include="Ayuda\Ayuda_Equipamiento\Imagenes\equipamiento.png" />
+    <Resource Include="Ayuda\Ayuda_Equipamiento\Imagenes\equipamiento1.png" />
+    <Resource Include="Ayuda\Ayuda_Equipamiento\Imagenes\equipamiento2.png" />
+    <Resource Include="Ayuda\Ayuda_Equipamiento\Imagenes\equipamiento3.png" />
+    <Resource Include="Ayuda\Ayuda_Equipamiento\Imagenes\equipamiento4.png" />
+    <Resource Include="Ayuda\Ayuda_Equipamiento\Imagenes\equipamiento5.png" />
+    <Content Include="Ayuda\Ayuda_Inventario\AyudaEmpleados.html" />
+    <Content Include="Ayuda\Ayuda_Inventario\AyudaEntrada.html" />
+    <Content Include="Ayuda\Ayuda_Inventario\AyudaInventario.css" />
+    <Content Include="Ayuda\Ayuda_Inventario\AyudaIventario.html" />
+    <Resource Include="Ayuda\Ayuda_Inventario\Imagenes\1.png" />
+    <Resource Include="Ayuda\Ayuda_Inventario\Imagenes\2.png" />
+    <Resource Include="Ayuda\Ayuda_Inventario\Imagenes\3.png" />
+    <Resource Include="Ayuda\Ayuda_Inventario\Imagenes\emp2.jpg" />
+    <Resource Include="Ayuda\Ayuda_Inventario\Imagenes\emp3.png" />
+    <Resource Include="Ayuda\Ayuda_Inventario\Imagenes\empleado1.png" />
+    <Resource Include="Ayuda\Ayuda_Inventario\Imagenes\empleado3.png" />
+    <Resource Include="Ayuda\Ayuda_Inventario\Imagenes\empleado4.png" />
+    <Resource Include="Ayuda\Ayuda_Inventario\Imagenes\empleado5.png" />
+    <Resource Include="Ayuda\Ayuda_Inventario\Imagenes\entradas1.png" />
+    <Resource Include="Ayuda\Ayuda_Inventario\Imagenes\entradas2.png" />
+    <Resource Include="Ayuda\Ayuda_Inventario\Imagenes\entradas3.png" />
+    <Resource Include="Ayuda\Ayuda_Inventario\Imagenes\entradas4.png" />
+    <Resource Include="Ayuda\Ayuda_ProduccionMain\ProduccionImagenes\1.PNG" />
+    <Resource Include="Ayuda\Ayuda_ProduccionMain\ProduccionImagenes\2.PNG" />
+    <Resource Include="Ayuda\Ayuda_ProduccionMain\ProduccionImagenes\3.PNG" />
+    <Resource Include="Ayuda\Ayuda_ProduccionMain\ProduccionImagenes\4.PNG" />
+    <Resource Include="Ayuda\Ayuda_ProduccionMain\ProduccionImagenes\produccion.PNG" />
+    <Resource Include="Ayuda\Ayuda_ProduccionMain\ProduccionImagenes\viaje Interno.PNG" />
+    <Content Include="Ayuda\Ayuda_ProduccionMain\VIProduccion\VIPoduccion.css" />
+    <Content Include="Ayuda\Ayuda_ProduccionMain\VIProduccion\VProduccion.html" />
+    <Resource Include="Ayuda\Ayuda_Salidas\ImagenesSalidas\._1.PNG" />
+    <Resource Include="Ayuda\Ayuda_Salidas\ImagenesSalidas\._2.PNG" />
+    <Resource Include="Ayuda\Ayuda_Salidas\ImagenesSalidas\._3.PNG" />
+    <Resource Include="Ayuda\Ayuda_Salidas\ImagenesSalidas\._4.PNG" />
+    <Resource Include="Ayuda\Ayuda_Salidas\ImagenesSalidas\._5.PNG" />
+    <Resource Include="Ayuda\Ayuda_Salidas\ImagenesSalidas\._6.PNG" />
+    <Resource Include="Ayuda\Ayuda_Salidas\ImagenesSalidas\1.PNG" />
+    <Resource Include="Ayuda\Ayuda_Salidas\ImagenesSalidas\2.PNG" />
+    <Resource Include="Ayuda\Ayuda_Salidas\ImagenesSalidas\3.PNG" />
+    <Resource Include="Ayuda\Ayuda_Salidas\ImagenesSalidas\4.PNG" />
+    <Resource Include="Ayuda\Ayuda_Salidas\ImagenesSalidas\5.PNG" />
+    <Resource Include="Ayuda\Ayuda_Salidas\ImagenesSalidas\6.PNG" />
+    <Content Include="Ayuda\Ayuda_Salidas\Salidas\AyudaSalidas.css" />
+    <Content Include="Ayuda\Ayuda_Salidas\Salidas\AyudaSalidas.html" />
+    <Content Include="Ayuda\Ayuda_Usuarios\Ayuda Usuarios\Estilo.css" />
+    <Content Include="Ayuda\Ayuda_Usuarios\Ayuda Usuarios\VProduccion.html" />
+    <Resource Include="Ayuda\Ayuda_Usuarios\Imagenes\1.PNG" />
+    <Resource Include="Ayuda\Ayuda_Usuarios\Imagenes\2.PNG" />
+    <Resource Include="Ayuda\Ayuda_Usuarios\Imagenes\3.png" />
+    <Resource Include="Ayuda\Ayuda_Usuarios\Imagenes\4.PNG" />
+    <Resource Include="Ayuda\Ayuda_Usuarios\Imagenes\5.PNG" />
+    <Resource Include="Ayuda\Ayuda_Usuarios\Imagenes\6.PNG" />
+    <Content Include="Reportes\Reporte Empleados.rdl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Reportes\Reporte Entradas.rdl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Reportes\Reporte InventarioMineral.rdl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Reportes\Reporte Produccion.rdl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Reportes\Reporte Produccion-Empleado.rdl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Reportes\Reporte Usuarios.rdl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Reportes\Reporte Vehiculos.rdl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Reportes\ReporteSalidas.rdl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -286,6 +516,7 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\MaterialDesignThemes.4.0.0\build\MaterialDesignThemes.targets" Condition="Exists('..\packages\MaterialDesignThemes.4.0.0\build\MaterialDesignThemes.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

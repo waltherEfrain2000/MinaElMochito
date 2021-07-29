@@ -7,14 +7,14 @@
         mc:Ignorable="d"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:fw="clr-namespace:SourceChord.FluentWPF;assembly=FluentWPF"
-        fw:AcrylicWindow.Enabled="True" FontSize="15"  MouseDown="Window_MouseDown" Height="550" Width="1080" WindowStyle="None" ResizeMode="CanResizeWithGrip" WindowStartupLocation="CenterScreen" Title="menu">
+        fw:AcrylicWindow.Enabled="True" FontSize="15"  MouseDown="Window_MouseDown" Height="650" Width="1400" WindowStyle="None" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Title=" ">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="220"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <Grid fw:PointerTracker.Enabled="True" Background="#9900afb9" Height="542" VerticalAlignment="Bottom">
+        <Grid fw:PointerTracker.Enabled="True" Background="#9900afb9" Height="650" VerticalAlignment="Bottom">
             <StackPanel>
                 <TextBlock Text="" Foreground="White" Margin="1" FontWeight="DemiBold"/>
 
@@ -39,6 +39,13 @@
                         </StackPanel>
                     </ListViewItem>
 
+                    <ListViewItem Padding="1" Selected="ListViewItem_Selected_4">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Foreground="White" Kind="Information" Margin="15" />
+                            <TextBlock Text="Ayuda" Foreground="White" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </ListViewItem>
+
                     <ListViewItem Padding="1" Selected="ListViewItem_Selected_2" >
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Foreground="White" Kind="Logout" Margin="15"/>
@@ -60,7 +67,7 @@
 
         <Grid Grid.Column="1" Background="White">
 
-            <Image HorizontalAlignment="Left" Height="420" Margin="167,34,0,0" VerticalAlignment="Top" Width="508" Source="logo.png" />
+            <Image HorizontalAlignment="Left" Height="532" Margin="250,50,0,0" VerticalAlignment="Top" Width="718" Source="logo.png" />
 
         </Grid>
     </Grid>

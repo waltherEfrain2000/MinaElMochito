@@ -25,6 +25,6 @@
                 <lvc:DefaultTooltip BulletSize="20"></lvc:DefaultTooltip>
             </lvc:PieChart.DataTooltip>
         </lvc:PieChart>
-        <Button Content="Mas Detalles" FontWeight="ExtraBlack" Foreground="Black"  HorizontalAlignment="Left" Margin="498,359,-32,-24" Grid.Row="1" VerticalAlignment="Top" Width="168" Height="34"/>
+        <Button Content="Más Detalles" FontWeight="ExtraBlack" Foreground="White" Margin="498,359,-32,0" Grid.Row="1" VerticalAlignment="Top" Height="34" Click="Button_Click"/>
     </Grid>
 </Window>

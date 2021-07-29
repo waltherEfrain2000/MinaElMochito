@@ -100,16 +100,48 @@ namespace ProyectoMinaELMochito
             this.Close();
         }
 
+        
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
         private void ListViewItem_Selected_9(object sender, RoutedEventArgs e)
         {
             ViajesInternos sld = new ViajesInternos();
             sld.Show();
             this.Close();
         }
+        private void ListViewItem_Selected_10(object sender, RoutedEventArgs e)
+        {
+            Cargos cargos = new Cargos();
+            cargos.Show();
+            this.Close();
+        }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void ListViewItem_Selected_11(object sender, RoutedEventArgs e)
+        {
+            Herramientas herramientas = new Herramientas();
+            herramientas.Show();
+            this.Close();
+        }
+
+        private void ListViewItem_MouseDoubleClick_1(object sender, MouseButtonEventArgs e)
+        {
+            Reportes reportes = new Reportes();
+            reportes.Show();
+        }
+
+        private void ListViewItem_Selected_12(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void ListViewItem_MouseDoubleClick_2(object sender, RoutedEventArgs e)
+        {
+            Ayuda ayuda = new Ayuda();
+            ayuda.Show();
         }
     }
 }

@@ -52,7 +52,7 @@
                     <TextBox FontFamily="HELVETICA"
                            FontWeight="Light"
                          FontSize="25"
-                           Text="Username"
+                           Text="Usuario"
                            ToolTip="Ingrese el nombre de usuario"
                            HorizontalAlignment="Left"
                          BorderThickness="0"
@@ -134,10 +134,10 @@
 
 
                 <Border Width="250" Height="2" Background="White" Opacity="0.1"/>
-                <StackPanel Orientation="Horizontal" Margin="0,50,0,0">
+                <StackPanel Orientation="Horizontal" Margin="0,40,0,30">
 
-                    <Button fw:PointerTracker.Enabled="True" Name="btnLogin" MouseDown="btnLogin_MouseDown" BorderThickness="2" BorderBrush="White" FontSize="16" Foreground="White" FontWeight="Light" Background="Transparent" FontFamily="helvetica" Height="40" Content="Iniciar Sesión" Width="117"  Margin="65,0,60,0" Click="btnLogin_Click" MouseEnter="btnLogin_MouseEnter"/>
-                    <Button fw:PointerTracker.Enabled="True" MouseDown="btnLogin_MouseDown" BorderThickness="2" BorderBrush="White" FontSize="16" Foreground="White" FontWeight="Light" Background="Transparent" FontFamily="helvetica" Width="100" Height="40" Content="Salir" Click="Button_Click"     />
+                    <Button fw:PointerTracker.Enabled="True" Name="btnLogin" MouseDown="btnLogin_MouseDown" BorderThickness="2" BorderBrush="White" FontSize="16" Foreground="White" FontWeight="Light" Background="Transparent" FontFamily="helvetica" Height="40" Content="Iniciar Sesión" Width="117"  Margin="75,0,60,0" Click="btnLogin_Click" MouseEnter="btnLogin_MouseEnter"/>
+                    <Button fw:PointerTracker.Enabled="True" MouseDown="btnLogin_MouseDown" BorderThickness="2" BorderBrush="White" FontSize="16" Foreground="White" FontWeight="Light" Background="Transparent" FontFamily="helvetica" Width="117" Height="40" Content="Salir" Click="Button_Click"   Margin="-45,0,0,0"  />
                 </StackPanel>
 
 

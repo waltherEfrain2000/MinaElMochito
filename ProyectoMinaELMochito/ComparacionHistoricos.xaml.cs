@@ -41,9 +41,7 @@ namespace ProyectoMinaELMochito
             try
             {
                 // El query de consulta a la base de datos
-                string query = @"SELECT mi.idMineral,mi.[descripcion]+' =        K'+ CAST(m.peso as varchar)+',      $'+CONVERT(varchar, CONVERT(varchar, CAST( m.Total as money),1))as 'Descripcion'  FROM Minas.InventarioMineral m
-                                  inner join	
-                                  [Minas].[Mineral] mi on m.idMineral = mi.idMineral";
+                string query = @"exec ProcedimientoReporteInventarioMineral";
 
                 // Crear un comando SQL
                 SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
@@ -80,9 +78,7 @@ namespace ProyectoMinaELMochito
             try
             {
                 // El query de consulta a la base de datos
-                string query = @"Select m.idProducto,mi.[descripcion] +'=        k'+Cast(sum( [cantidad]) as varchar)+',      $'+CONVERT(varchar, CONVERT(varchar, CAST(SUM( m.Total) as money),1))as 'Descripcion' from [Minas].[Entrada]m
-                             inner join	
-                             [Minas].[Mineral] mi on mi.idMineral = m.idProducto group by [idProducto],mi.descripcion";
+                string query = @"exec procedimientoReporteEntrada";
 
 
                 // Crear un comando SQL
@@ -119,9 +115,7 @@ namespace ProyectoMinaELMochito
             try
             {
                 // El query de consulta a la base de datos
-                string query = @"Select m.idmineral,mi.[descripcion] +',        k'+Cast(sum( [cantidad]) as varchar)+',      $'+CONVERT(varchar, CONVERT(varchar, CAST(SUM( m.Total) as money),1))as 'Descripcion' from Minas.Salida m
-                             inner join	
-                             [Minas].[Mineral] mi on mi.idMineral = m.idmineral group by m.idmineral,mi.descripcion";
+                string query = @"exec ProcedimientoReporteSalidas";
 
 
                 // Crear un comando SQL
@@ -245,6 +239,11 @@ namespace ProyectoMinaELMochito
         {
             menuPrincipal sld = new menuPrincipal();
             sld.Show();
+            this.Close();
+        }
+
+        private void ListViewItem_MouseDoubleClick_1(object sender, MouseButtonEventArgs e)
+        {
             this.Close();
         }
     }

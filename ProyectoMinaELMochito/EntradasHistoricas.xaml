@@ -7,8 +7,8 @@
         xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
         xmlns:fw="clr-namespace:SourceChord.FluentWPF;assembly=FluentWPF"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        fw:AcrylicWindow.Enabled="True" FontSize="15"  MouseDown="Window_MouseDown" Height="550" Width="1080" WindowStyle="None" ResizeMode="CanResizeWithGrip" WindowStartupLocation="CenterScreen" 
-        mc:Ignorable="d" d:DataContext="{d:DesignInstance local:EntradasHistoricas}" >
+        fw:AcrylicWindow.Enabled="True" FontSize="15"  MouseDown="Window_MouseDown" Height="650" Width="1400" WindowStyle="None" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" 
+        mc:Ignorable="d" d:DataContext="{d:DesignInstance local:EntradasHistoricas}" Title=" ">
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -16,7 +16,7 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <Grid fw:PointerTracker.Enabled="True" Background="#9900afb9" Height="542" VerticalAlignment="Bottom">
+        <Grid fw:PointerTracker.Enabled="True" Background="#9900afb9" Height="650" VerticalAlignment="Bottom">
             <StackPanel>
                 <TextBlock Text="" Foreground="White" Margin="1" FontWeight="DemiBold"/>
 
@@ -38,6 +38,13 @@
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Foreground="White" Kind="Worker" Margin="15"/>
                             <TextBlock Text="Empleado" Foreground="White" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </ListViewItem>
+
+                    <ListViewItem Padding="1" Selected="ListViewItem_Selected_10" >
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Foreground="White" Kind="Work" Margin="15"/>
+                            <TextBlock Text="Cargo" Foreground="White" VerticalAlignment="Center"/>
                         </StackPanel>
                     </ListViewItem>
 
@@ -69,7 +76,7 @@
                         </StackPanel>
                     </ListViewItem>
 
-                    <ListViewItem Padding="1" Selected="ListViewItem_Selected_5">
+                    <ListViewItem Padding="1" Selected="ListViewItem_Selected_9">
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Foreground="White" Kind="Abacus" Margin="15"/>
                             <TextBlock Text="Producción" Foreground="White" VerticalAlignment="Center"/>
@@ -80,6 +87,13 @@
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Foreground="White" Kind="User" Margin="15"/>
                             <TextBlock Text="Usuarios" Foreground="White" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </ListViewItem>
+
+                    <ListViewItem Padding="1" Selected="ListViewItem_Selected_11"  >
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Foreground="White" Kind="Pickaxe" Margin="15"/>
+                            <TextBlock Text="Equipo" Foreground="White" VerticalAlignment="Center"/>
                         </StackPanel>
                     </ListViewItem>
 
@@ -113,11 +127,12 @@
                 <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
             <StackPanel Grid.Row="0" Margin="0,-10,0,333" Grid.RowSpan="2" Grid.ColumnSpan="2" >
-                <Label Content="Historial de Entradas " HorizontalAlignment="Center"  Width="300" Margin="433,0,119,0" Height="37" FontSize="20"/>
-                <TextBlock TextWrapping="Wrap" Text="Dona Central: Valor en Kilogramos    Done Exterior : Valor en $" Height="27" FontSize="15" Margin="187,0,0,0"/>
+                <Label Content="Historial de Entradas " HorizontalAlignment="Center"  Width="335" Margin="381,0,456,0" Height="56" FontSize="35"/>
+                <TextBlock TextWrapping="Wrap" Text="Dona Exterior : Valor en $" Height="27" FontSize="18" Margin="30,0,0,0"/>
+                <TextBlock TextWrapping="Wrap" Text="Dona Central: Valor en Kilogramos" Height="27" FontSize="18" Margin="30,0,0,0"/>
             </StackPanel>
             <lvc:PieChart Name="Chart" Grid.Row="1" Series="{Binding SeriesCollection}" 
-                      LegendLocation="Right" InnerRadius="100" Margin="0,59,44,10" Grid.ColumnSpan="2">
+                      LegendLocation="Right" FontSize="18"  InnerRadius="100" Margin="28,95,28,15" Grid.ColumnSpan="2">
                 <lvc:PieChart.ChartLegend>
                     <lvc:DefaultLegend BulletSize="20" Content="oro"></lvc:DefaultLegend>
                 </lvc:PieChart.ChartLegend>
@@ -125,7 +140,7 @@
                     <lvc:DefaultTooltip BulletSize="20"></lvc:DefaultTooltip>
                 </lvc:PieChart.DataTooltip>
             </lvc:PieChart>
-            <Button Content="Mas Detalles" FontWeight="ExtraBlack" Foreground="White"  BorderBrush="#0082aa" HorizontalAlignment="Left" Margin="351,485,0,0" Grid.Row="1" VerticalAlignment="Top" Width="168" Height="34" Grid.Column="1" Click="Button_Click"/>
+            <Button Content="Mas Detalles" FontWeight="ExtraBlack" Foreground="White"  BorderBrush="#0082aa" HorizontalAlignment="Left" Margin="577,486,20,10" Grid.Row="1" VerticalAlignment="Top" Width="168" Height="34" Grid.Column="1" FontSize="18" Click="Button_Click" RenderTransformOrigin="0.497,-0.206"/>
         </Grid>
     </Grid>
 </Window>

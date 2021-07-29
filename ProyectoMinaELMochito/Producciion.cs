@@ -29,16 +29,20 @@ namespace ProyectoMinaELMochito
 
         public int IdProduccion { get; set; }
 
+        public string Fecha { get; set; }
+
         //Constructores
         public Producciion() { }
 
-        public Producciion(int idProduccion, int numeroViaje, int numeroMineral, string tipoMineral, decimal precioMineral, decimal pesoMineral)
+        public Producciion(int idProduccion, int numeroViaje, int numeroMineral, string tipoMineral, decimal precioMineral, decimal pesoMineral, string fecha)
         {
             IdProduccion = idProduccion;
             IdViaje = numeroViaje;
             IdMineral = numeroMineral;
             Peso = pesoMineral;
             Precio = precioMineral;
+            Fecha = fecha;
+
         }
 
         //Métodos
@@ -47,53 +51,50 @@ namespace ProyectoMinaELMochito
         /// </summary>
         public void AgregarProduccion(Producciion producciion)
         {
+            conexion cn = new conexion();
+            Validaciones validaciones = new Validaciones();
             try
             {
-                //Este query permitirá insertar una nueva producción
-                string queryProduccion = @"Insert Into Minas.Produccion(idViaje, idMineral, precio, peso)
-                                        Values(@idViaje, @idMineral, @precio, @peso)";
+                SqlCommand cmd = new SqlCommand("AgregarProduccion", cn.Conectarbd);
+                cmd.CommandType = CommandType.StoredProcedure;
 
-                //Establecer la conexión con la base de datos
-                sqlConnection.Open();
 
-                //Crear el sqlCommand necesario
-                SqlCommand sqlCommand = new SqlCommand(queryProduccion, sqlConnection);
+                cn.abrir();
 
-                //Establecer los prámetros de las variables
-                sqlCommand.Parameters.AddWithValue("@idViaje", producciion.IdViaje);
-                sqlCommand.Parameters.AddWithValue("@idMineral", producciion.IdMineral);
-                sqlCommand.Parameters.AddWithValue("@precio", producciion.Precio);
-                sqlCommand.Parameters.AddWithValue("@peso", producciion.Peso);
+                cmd.Parameters.AddWithValue("@idViaje", producciion.IdViaje);
+                cmd.Parameters.AddWithValue("@idMineral", producciion.IdMineral);
+                cmd.Parameters.AddWithValue("@precio", producciion.Precio);
+                cmd.Parameters.AddWithValue("@peso", producciion.Peso);
 
-                //Ejecutar la insersición
-                sqlCommand.ExecuteNonQuery();
+                cmd.ExecuteNonQuery();
+
+
+
             }
-            catch (Exception ex)
+            catch (Exception e)
             {
 
-                throw ex;
+                throw e;
             }
             finally
             {
-                //Cerrar la conexión
-                sqlConnection.Close();
+                cn.cerrar();
             }
         }
 
-        public Producciion UltimoId() 
+        public Producciion UltimoId()
         {
             Producciion ultimoId = new Producciion();
-
+            conexion cn = new conexion();
             try
             {
-                String query = @"Select top 1 [idViaje] from [Minas].[viajeInterno] 
-                                order by [idViaje] desc";
+                SqlCommand cmd = new SqlCommand("UltimoId", cn.Conectarbd);
+                cmd.CommandType = CommandType.StoredProcedure;
 
-                sqlConnection.Open();
 
-                SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
+                cn.abrir();
 
-                using (SqlDataReader rdr = sqlCommand.ExecuteReader())
+                using (SqlDataReader rdr = cmd.ExecuteReader())
                 {
                     while (rdr.Read())
                     {
@@ -102,53 +103,49 @@ namespace ProyectoMinaELMochito
                 }
 
                 return ultimoId;
+
             }
-            catch (Exception ex)
+            catch (Exception e)
             {
 
-                throw ex;
+                throw e;
             }
             finally
             {
-                sqlConnection.Close();
+                cn.cerrar();
             }
         }
-
-        /// <summary>
-        /// Modifica solo los datos permitidos en la producción
-        /// </summary>
         public void ModificarProduccion(Producciion producciion)
         {
+            conexion cn = new conexion();
+            Validaciones validaciones = new Validaciones();
             try
             {
-                //Query que permitirá la actualización de datos en la tabla
-                string queryModificacion = @"Update Minas.Produccion 
-                                         Set idMineral = @idMineral, peso = @peso
-                                         Where idProduccion = @idProduccion";
+                SqlCommand cmd = new SqlCommand("ModificarProduccion", cn.Conectarbd);
+                cmd.CommandType = CommandType.StoredProcedure;
 
-                //Establecer la conexión
-                sqlConnection.Open();
 
-                //Crear el sqlCommant
-                SqlCommand sqlCommand = new SqlCommand(queryModificacion, sqlConnection);
+                cn.abrir();
 
-                //Crear los parámetros que serán actualizados en la tabla
-                sqlCommand.Parameters.AddWithValue("@idProduccion", producciion.IdProduccion);
-                sqlCommand.Parameters.AddWithValue("@idMineral", producciion.IdMineral);
-                sqlCommand.Parameters.AddWithValue("@peso", producciion.Peso);
+                cmd.Parameters.AddWithValue("@idProduccion", producciion.IdProduccion);
+                cmd.Parameters.AddWithValue("@idMineral", producciion.IdMineral);
+                cmd.Parameters.AddWithValue("@peso", producciion.Peso);
 
-                //Ejecutar el comando para la actualización de datos
-                sqlCommand.ExecuteNonQuery();
+                cn.abrir();
+
+                cmd.ExecuteNonQuery();
+
+
+
             }
-            catch (Exception ex)
+            catch (Exception e)
             {
 
-                throw ex;
+                throw e;
             }
             finally
             {
-                //Cerrar la conexión
-                sqlConnection.Close();
+                cn.cerrar();
             }
         }
 
@@ -161,18 +158,17 @@ namespace ProyectoMinaELMochito
         /// <returns>Descripcion o tipo de Mineral</returns>
         public List<Producciion> LlenarComboBox()
         {
-
+            conexion cn = new conexion();
+            Validaciones validaciones = new Validaciones();
             try
             {
-                //Realizar el query que cargará la información correspondiente
-                String queryMinerales = @"Select * From Minas.Mineral";
+                SqlCommand cmd = new SqlCommand("LlenarCombobox", cn.Conectarbd);
+                cmd.CommandType = CommandType.StoredProcedure;
 
-                //Establecer la conexión
-                sqlConnection.Open();
 
-                SqlCommand sqlCommand = new SqlCommand(queryMinerales, sqlConnection);
+                cn.abrir();
 
-                SqlDataReader reader = sqlCommand.ExecuteReader();
+                SqlDataReader reader = cmd.ExecuteReader();
 
                 List<Producciion> minerales = new List<Producciion>();
 
@@ -195,40 +191,34 @@ namespace ProyectoMinaELMochito
             }
             finally
             {
-                sqlConnection.Close();
+                cn.cerrar();
             }
         }
 
         public void BorrarProduccion(Producciion producciion)
         {
+            conexion cn = new conexion();
+            Validaciones validaciones = new Validaciones();
             try
             {
-                //Query que permitirá la opción de eliminar una producción
-                string queryEliminacion = @"Delete From Minas.Produccion 
-                                      Where idProduccion = @idProduccion";
+                SqlCommand cmd = new SqlCommand("BorrarProduccion", cn.Conectarbd);
+                cmd.CommandType = CommandType.StoredProcedure;
 
-                // Establecer la conexión
-                sqlConnection.Open();
 
-                //Crear el sqlCommant
-                SqlCommand sqlCommand = new SqlCommand(queryEliminacion, sqlConnection);
+                cn.abrir();
 
-                //Crear los parámetros que serán actualizados en la tabla
-                sqlCommand.Parameters.AddWithValue("@idViaje", producciion.IdViaje);
-                sqlCommand.Parameters.AddWithValue("@idProduccion", producciion.IdProduccion);
+                cmd.Parameters.AddWithValue("@idProduccion", producciion.IdProduccion);
 
-                //Ejecutar el comando para la actualización de datos
-                sqlCommand.ExecuteNonQuery();
+                cmd.ExecuteNonQuery();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
-                throw;
+                throw ex;
             }
             finally
             {
-                //Cerrar la conexión
-                sqlConnection.Close();
+                cn.cerrar();
             }
         }
 

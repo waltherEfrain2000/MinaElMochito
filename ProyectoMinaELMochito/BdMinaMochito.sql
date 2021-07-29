@@ -78,7 +78,7 @@ create table Minas.Empleado
 	idGenero int ,
 	direccion  varchar(50),
 	idCargo int,
-	salario decimal,
+	salario decimal(18,2),
 	estado  varchar(15)
 
 	Constraint PK_Empleado_id
@@ -220,6 +220,12 @@ ALTER TABLE Usuarios.Usuario WITH CHECK
 	ADD CONSTRAINT CHK_Usuarios_Usuario$VerificarLongitudContraseña
 	CHECK (LEN(password) >= 6)
 	
+GO
+
+ALTER TABLE Minas.Vehiculo
+	ADD CONSTRAINT AK_Minas_Vehiculo_placa
+	UNIQUE NONCLUSTERED (placa)
+
 GO
 
 ----Triggers -------------------------

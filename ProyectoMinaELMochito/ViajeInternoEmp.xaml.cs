@@ -48,11 +48,11 @@ namespace ProyectoMinaELMochito
                 //Query para seleccionar los datos de la tabla
                 String queryEmpleado = @"Select IdEmpleado as 'Id Empleado', identidad as 'Identidad', 
                                primerNombre as 'Nombre Empleado'
-                               from Minas.Empleado";
+                               from Minas.Empleado where estado = 'Activo' And idCargo = 7";
 
                 String queryVehiculo = @"Select idVehiculo as 'Id Vehiculo', marca as 'Marca', 
                                         modelo as 'Modelo', placa as 'Placa', color as 'Color'
-                                         from Minas.Vehiculo";
+                                         from Minas.Vehiculo where estado = 1";
 
                 //Establecer la conexion
                 sqlConnection.Open();
@@ -261,7 +261,7 @@ namespace ProyectoMinaELMochito
 
         private void ListViewItem_Selected_2(object sender, RoutedEventArgs e)
         {
-            Inventario_Mineral sld = new Inventario_Mineral();
+            Login sld = new Login();
             sld.Show();
             this.Close();
         }

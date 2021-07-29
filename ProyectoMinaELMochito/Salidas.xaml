@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:fw="clr-namespace:SourceChord.FluentWPF;assembly=FluentWPF"
-        fw:AcrylicWindow.Enabled="True" FontSize="15"  MouseDown="Window_MouseDown" Height="550" Width="1080" WindowStyle="None" ResizeMode="CanResizeWithGrip" WindowStartupLocation="CenterScreen">
+        fw:AcrylicWindow.Enabled="True" FontSize="15"  MouseDown="Window_MouseDown" Height="650" Width="1400" WindowStyle="None" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -15,7 +15,7 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <Grid fw:PointerTracker.Enabled="True" Background="#9900afb9" Height="542" VerticalAlignment="Bottom">
+        <Grid fw:PointerTracker.Enabled="True" Background="#9900afb9" Height="650" VerticalAlignment="Bottom">
             <StackPanel>
                 <TextBlock Text="" Foreground="White" Margin="1" FontWeight="DemiBold"/>
 
@@ -31,12 +31,19 @@
 
                 <TextBlock Text="Sistema" Foreground="White" Margin="15" FontWeight="DemiBold"/>
 
-                <ListView FontSize="15" SelectionChanged="ListView_SelectionChanged">
+                <ListView FontSize="15">
 
                     <ListViewItem Padding="1" Selected="ListViewItem_Selected">
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Foreground="White" Kind="Worker" Margin="15"/>
                             <TextBlock Text="Empleado" Foreground="White" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </ListViewItem>
+
+                    <ListViewItem Padding="1" Selected="ListViewItem_Selected_10" >
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Foreground="White" Kind="Work" Margin="15"/>
+                            <TextBlock Text="Cargo" Foreground="White" VerticalAlignment="Center"/>
                         </StackPanel>
                     </ListViewItem>
 
@@ -68,7 +75,7 @@
                         </StackPanel>
                     </ListViewItem>
 
-                    <ListViewItem Padding="1" Selected="ListViewItem_Selected_5">
+                    <ListViewItem Padding="1" Selected="ListViewItem_Selected_9">
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Foreground="White" Kind="Abacus" Margin="15"/>
                             <TextBlock Text="Producción" Foreground="White" VerticalAlignment="Center"/>
@@ -79,6 +86,13 @@
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Foreground="White" Kind="User" Margin="15"/>
                             <TextBlock Text="Usuarios" Foreground="White" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </ListViewItem>
+
+                    <ListViewItem Padding="1" Selected="ListViewItem_Selected_11"  >
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Foreground="White" Kind="Pickaxe" Margin="15"/>
+                            <TextBlock Text="Equipo" Foreground="White" VerticalAlignment="Center"/>
                         </StackPanel>
                     </ListViewItem>
 
@@ -121,36 +135,54 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
 
-                <Label Content="Salidas" Grid.ColumnSpan="6" HorizontalAlignment="Center" FontSize="18" />
+                <Label Content="Salidas" Grid.ColumnSpan="6" HorizontalAlignment="Center" FontSize="35" />
 
-                <Label Content="ID de Salida" Grid.Row="1" FontSize="15" Margin= "12"/>
-                <Label Content="ID de Mineral" Grid.Row="2" FontSize="15" Margin="12"/>
-                <Label Content="Cantidad (Kg)" Grid.Row="3" FontSize="15" Margin="12"/>
-                <Label Content="Total de Salida" Grid.Row="4" FontSize="15" Margin="12"/>
-                <Label Content="Fecha de Salida" Grid.Row="5" FontSize="15" Margin="12"/>
-                <Label Content="Detalle de Salida" Grid.Row="6" FontSize="15" Margin="12"/>
+                <Label Content="Código Salida" Grid.Row="1" FontSize="15" Margin= "30,19,12,5"/>
+                <Label Content="Código Mineral" Grid.Row="2" FontSize="15" Margin="30,18,12,7"/>
+                <Label Content="Cantidad (Kg)" Grid.Row="3" FontSize="15" Margin="30,23,12,0"/>
 
-                <TextBox Name="txtIdSalida" Grid.Row="1" Grid.Column="1" FontSize="15" Margin="7" IsReadOnly="True"/>
-                <ComboBox Name="cmbIdMineral" Grid.Row="2" Grid.Column="1" FontSize="15" Margin="7"  SelectionChanged="cmbIdMineral_SelectionChanged"/>
-                <TextBox Name="txtCantidad" Grid.Row="3" Grid.Column="1" FontSize="15" Margin="7"   TextChanged="txtCantidad_TextChanged" KeyDown="txtCantidad_KeyDown" />
-                <TextBox Name="txtTotal" Grid.Row="4" Grid.Column="1" FontSize="15" Margin="7" IsReadOnly="False" TextChanged="txtTotal_TextChanged" MouseDoubleClick="txtTotal_MouseDoubleClick"/>
-                <TextBox Name="txtFecha" Grid.Row="5" Grid.Column="1" FontSize="15" Margin="7" />
+                <Label Content="Fecha de Salida" Grid.Row="1" FontSize="15" Margin="52,19,10,5" Grid.Column="2"/>
+                <Label Content="Detalle de Salida" Grid.Row="2" FontSize="15" Margin="52,19,0,5" Grid.Column="2"/>
 
-                <TextBox Name="txtPrecio" Text="{Binding ElementName=cmbIdMineral, Path=SelectedItem.Precio}" Grid.Row="5" Grid.Column="1" FontSize="15" Margin="7" Foreground="Black" Background="#dee2e6" Visibility="Hidden" BorderBrush="#6c757d"/>
+                <TextBox Name="txtIdSalida" Grid.Row="1" Grid.Column="1" FontSize="15" Margin="15,7,43,12" IsReadOnly="True"/>
+                <ComboBox Name="cmbIdMineral" Grid.Row="2" Grid.Column="1" FontSize="15" Margin="15,10,43,12" Height="28"  />
+                <ComboBox Name="cmbSalidas" Grid.Row="2" Grid.Column="3" FontSize="15" Margin="56,0,15,12" Grid.ColumnSpan="2" Height="38"  />
 
-                <TextBox Name="txtDetalle" Grid.Row="6" Grid.Column="1" FontSize="15" Margin="7" Grid.RowSpan="7" TextChanged="txtDetalle_TextChanged" />
+                <TextBox Name="txtCantidad" Grid.Row="3" Grid.Column="1"  FontSize="15" Margin="15,10,43,0"    Text="{Binding Cantidad, Mode=TwoWay, ValidatesOnExceptions=True}" Height="33" VerticalAlignment="Top" />
 
-                <DataGrid Name="dgvSalida" Grid.Row="1" Grid.Column="2" Margin="7" Grid.ColumnSpan="5" Grid.RowSpan="5" SelectionChanged="dgvSalida_SelectionChanged" IsReadOnly="True" FontSize="15">
+
+                <DatePicker  Name="FSalida" Grid.Row="1"  Grid.Column="3" ToolTip="Selet date" FontSize="15" Margin="56,7,15,12" Foreground="Black" Background="Transparent" 
+                     DisplayDateStart="2021-01-01" DisplayDateEnd="2021-12-31" Height="31" SelectedDateFormat="Short" Grid.ColumnSpan="2"   >
+
+                    <DatePicker.BlackoutDates>
+                        <CalendarDateRange Start="2021-01-01" End="2021-06-09" />
+
+
+                    </DatePicker.BlackoutDates>
+
+                </DatePicker>
+
+                <DataGrid Name="dgvSalida" Grid.Row="5" Margin="15,10,15,50" Grid.ColumnSpan="4"
+                          IsReadOnly="True" FontSize="15"  SelectionMode="Single"  GridLinesVisibility="All"
+                          HorizontalGridLinesBrush="Black" VerticalGridLinesBrush="Black" 
+                          HeadersVisibility="Column" Grid.RowSpan="3" Width="auto"
+                          SelectionChanged="dgvSalida_SelectionChanged_1"
+                          Grid.Column="1"  BorderBrush="BlueViolet" Background="White">
                     <DataGrid.Resources>
                         <Style TargetType="{x:Type DataGridColumnHeader}">
+                            <Setter Property="Background" Value="#9900afb9"></Setter>
+                            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+
                         </Style>
                     </DataGrid.Resources>
+                 
                 </DataGrid>
 
-                <Button x:Name="btnIngresar" Content="Ingresar" Grid.Column="2" Grid.Row="6" Margin="7" Click="btnIngresar_Click"  Foreground="White"  BorderBrush="#0082aa"/>
-                <Button x:Name="btnModificar" Content="Modificar" Grid.Column="3" Grid.Row="6" Margin="7" Click="btnModificar_Click" Foreground="White"  BorderBrush="#0082aa"/>
-                <Button x:Name="btnEliminar" Content="Eliminar" Grid.Column="4" Grid.Row="6" Margin="7" Click="btnEliminar_Click" Foreground="White"  BorderBrush="#0082aa"/>
-                <Button x:Name="btnLimpiar" Content="Limpiar" Grid.Column="5" Grid.Row="6" Margin="7" Click="btnLimpiar_Click" Foreground="White"  BorderBrush="#0082aa"/>
+                <Button x:Name="btnIngresar" Content="Ingresar" Grid.Column="5" Grid.Row="1"    Margin="60,7,30,10"   Click="btnIngresar_Click"  Foreground="White"  BorderBrush="#0082aa"/>
+                <Button x:Name="btnModificar" Content="Modificar" Grid.Column="5" Grid.Row="2"   Margin="60,7,30,10"    Click="btnModificar_Click" Foreground="White"  BorderBrush="#0082aa" />
+                <Button x:Name="btnEliminar" Content="Eliminar" Grid.Column="5" Grid.Row="3"     Margin="60,7,30,10"   Click="btnEliminar_Click" Foreground="White"  BorderBrush="#0082aa"/>
+                <Button x:Name="btnLimpiar" Content="Limpiar" Grid.Column="5" Grid.Row="4"  Margin="60,7,30,10"  Click="btnLimpiar_Click" Foreground="White"  BorderBrush="#0082aa"/>
+
 
             </Grid>
         </Grid>

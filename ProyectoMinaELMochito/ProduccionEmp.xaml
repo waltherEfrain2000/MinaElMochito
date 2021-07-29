@@ -7,14 +7,14 @@
         mc:Ignorable="d"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:fw="clr-namespace:SourceChord.FluentWPF;assembly=FluentWPF"
-        fw:AcrylicWindow.Enabled="True" FontSize="15"  MouseDown="Window_MouseDown" Height="550" Width="1080" WindowStyle="None" ResizeMode="CanResizeWithGrip" WindowStartupLocation="CenterScreen" Title="menu">
+        fw:AcrylicWindow.Enabled="True" FontSize="15"  MouseDown="Window_MouseDown" Height="650" Width="1400" WindowStyle="None" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Title=" ">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="220"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <Grid fw:PointerTracker.Enabled="True" Background="#9900afb9" Height="542" VerticalAlignment="Bottom">
+        <Grid fw:PointerTracker.Enabled="True" Background="#9900afb9" Height="650" VerticalAlignment="Bottom">
             <StackPanel>
                 <TextBlock Text="" Foreground="White" Margin="1" FontWeight="DemiBold"/>
 
@@ -63,49 +63,50 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="200"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="60"/>
+                <RowDefinition Height="60"/>
+                <RowDefinition Height="60"/>
+                <RowDefinition Height="60"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
             <!--Contendio del Grid-->
             <Label Content="SISTEMA DE PRODUCCIÓN" HorizontalAlignment="Center" Grid.Column="0" 
-               Grid.ColumnSpan="2" Grid.Row="0" FontSize="20" VerticalAlignment="Center"/>
+               Grid.ColumnSpan="2" Grid.Row="0" FontSize="30" VerticalAlignment="Center"/>
             <Label Content="N° de Viaje:" HorizontalAlignment="Left" Grid.Column="0" Grid.Row="1"
-               Margin="15" FontSize="15" FontFamily="Aldine"/>
+               Margin="68,19,0,15" FontSize="15" FontFamily="Aldine"/>
             <Label Content="Mineral:" HorizontalAlignment="Left" Grid.Column="0" Grid.Row="2"
-               Margin="15" FontSize="15" FontFamily="Aldine"/>
-            <Label Content="Peso (kg):" HorizontalAlignment="Left" Grid.Column="0" Grid.Row="3"
-               Margin="15" FontSize="15" FontFamily="Aldine"/>
-            <Label Content="Precio $:" HorizontalAlignment="Left" Grid.Column="0" Grid.Row="4"
-               Margin="15" FontSize="15" FontFamily="Aldine"/>
+               Margin="68,26,0,46" FontSize="15" FontFamily="Aldine" Grid.RowSpan="2"/>
+            <Label Content="Peso (kg):" HorizontalAlignment="Left" Grid.Column="1" Grid.Row="1"
+               Margin="49,18,0,16" FontSize="15" FontFamily="Aldine"/>
+            <Label Content="Precio $:" HorizontalAlignment="Left" Grid.Column="1" Grid.Row="2"
+               Margin="49,18,0,16" FontSize="15" FontFamily="Aldine"/>
 
-            <TextBox Name="txtNumeroViaje" Grid.Column="0" Width="100" Height="28"
-                 Margin="105,10,191,36" materialDesign:HintAssist.Hint="Numero - Viaje"
+            <TextBox Name="txtNumeroViaje" Grid.Column="0" Width="160" Height="24"
+                 Margin="158,16,168,20" materialDesign:HintAssist.Hint="Numero - Viaje"
                  HorizontalAlignment="Center" TextAlignment="Center"
                  VerticalAlignment="Center" FontSize="14" FontFamily="Aldine"
                  ToolTip="Se muestra el numero del viaje en que será trasnportado el material"
                  KeyDown="BloquearEdicion" IsReadOnly="True" Grid.Row="1"/>
-            <TextBox Name="txtCantidad" Grid.Row="3" Grid.Column="0" Width="100" Height="28"
-                 Margin="84,15,212,31" materialDesign:HintAssist.Hint="Peso producto" IsReadOnly="False"
+            <TextBox Name="txtCantidad" Grid.Row="1" Grid.Column="1" Width="160" Height="25"
+                 Margin="152,19,174,16" materialDesign:HintAssist.Hint="Peso producto" IsReadOnly="False"
                  VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Aldine"
                  FontSize="14" ToolTip="Cantidad del mineral pesado" TextAlignment="Center"/>
             <TextBox Text="{Binding ElementName=cmbMinerales, Path=SelectedItem.Precio}" 
-                 Name="txtPrecio" Grid.Row="4" Grid.Column="0" Width="100" Height="28"
-                 Margin="78,15,218,30" HorizontalAlignment="Center" VerticalAlignment="Center"
+                 Name="txtPrecio" Grid.Row="2" Grid.Column="1" Width="160" Height="28"
+                 Margin="152,22,174,10" HorizontalAlignment="Center" VerticalAlignment="Center"
                  materialDesign:HintAssist.Hint="Precio producto" FontFamily="Aldine"
                  FontSize="14" ToolTip="Precio que tendrá el producto" TextAlignment="Center" 
                  IsReadOnly="true"/>
             <TextBox Name="txtIdProduccion" Grid.Column="0" Grid.Row="0" Visibility="Hidden" />
 
-            <DataGrid Name="dgvProduccion" Grid.ColumnSpan="2" Margin="280,10,21,15" Grid.Row="1" 
-                  Grid.RowSpan="4" FontFamily="Aldine" IsReadOnly="True"
-                  SelectionChanged="DatosEnCasillas">
+            <DataGrid Name="dgvProduccion" Margin="30,59,102,30" Grid.Row="3" 
+                  Grid.RowSpan="3" FontFamily="Aldine" IsReadOnly="True"
+                  SelectionChanged="DatosEnCasillas" Grid.ColumnSpan="2">
 
                 <DataGrid.Resources>
                     <Style TargetType="{x:Type DataGridColumnHeader}">
@@ -114,18 +115,17 @@
                 </DataGrid.Resources>
             </DataGrid>
 
-            <Button Name="btnInsertar" Content="Agregar" Width="100" Height="28" Grid.Column="0" Foreground="White"  BorderBrush="#0082aa"
-                Grid.Row="5" Margin="65,23,231,22" Click="btnInsertar_Click"/>
-            <Button Name="btnModificar" Content="Modificar" Width="100" Height="28" Grid.Column="0" Foreground="White"  BorderBrush="#0082aa"
-                Grid.Row="5" Margin="246,23,50,22" Click="btnModificar_Click"/>
-            <Button Name="btnEliminar" Content="Eliminar" Width="100" Height="28" Grid.Column="1" Foreground="White"  BorderBrush="#0082aa"
-                Grid.Row="5" Margin="50,23,246,22" Click="btnEliminar_Click"/>
-            <Button Name="btnLimpiar" Content="Limpiar" Width="100" Height="28" Grid.Column="1" Foreground="White"  BorderBrush="#0082aa"
-                Grid.Row="5" Margin="231,23,65,22" Click="btnLimpiar_Click"/>
 
-
-            <ComboBox Name="cmbMinerales" HorizontalAlignment="Left" Margin="84,15,0,0" Grid.Row="2" 
-                  VerticalAlignment="Top" Width="120" />
+            <ComboBox Name="cmbMinerales" HorizontalAlignment="Left" Margin="158,21,0,0" Grid.Row="2" 
+                  VerticalAlignment="Top" Width="160" />
+            <Button x:Name="btnInsertar" Content="Agregar" Width="100" Height="28" Grid.Column="2" Foreground="White"  BorderBrush="#0082aa"
+                Grid.Row="1" Margin="0,16,100,16" Click="btnInsertar_Click"/>
+            <Button x:Name="btnModificar" Content="Modificar" Width="100" Height="28" Grid.Column="2" Foreground="White"  BorderBrush="#0082aa"
+                Grid.Row="2" Margin="0,16,100,16" Click="btnModificar_Click"/>
+            <Button x:Name="btnEliminar" Content="Eliminar" Width="100" Height="28" Grid.Column="2" Foreground="White"  BorderBrush="#0082aa"
+                Grid.Row="3" Margin="0,16,100,16" Click="btnEliminar_Click"/>
+            <Button x:Name="btnLimpiar" Content="Limpiar" Width="100" Height="28" Grid.Column="2" Foreground="White"  BorderBrush="#0082aa"
+                Grid.Row="4" Margin="0,16,100,16" Click="btnLimpiar_Click"/>
 
         </Grid>
     </Grid>
