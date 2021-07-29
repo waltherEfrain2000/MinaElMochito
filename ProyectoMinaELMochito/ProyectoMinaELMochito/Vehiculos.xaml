@@ -125,7 +125,7 @@
 
             <Label Content="Vehiculos" Grid.ColumnSpan="5" HorizontalAlignment="Center" FontSize="30" />
             <TextBox x:Name="txtPlaca" Grid.Column="3" FontSize="15" Margin="25,0,25,20" Grid.Row="1"/>
-            <TextBox x:Name="txtColor" Grid.Row="2" Grid.Column="3" FontSize="15" Margin="25,12,25,8" IsEnabled="False" TextChanged="txtColor_TextChanged"/>
+            <TextBox x:Name="txtColor" Grid.Row="2" Grid.Column="3" FontSize="15" Margin="25,11,24,10" IsEnabled="False" TextChanged="txtColor_TextChanged"/>
 
             <ComboBox x:Name="cmbEstado" Grid.Row="3" Grid.Column="3" FontSize="15" Margin="25,0,25,20" Height="30" />
 
@@ -156,7 +156,7 @@
             <ComboBox x:Name="cmbModelo" Grid.Row="3" Grid.Column="1" FontSize="15" Margin="25,0,26,20" Height="30" />
 
             <xctk:ColorPicker x:Name="colorPicker" Grid.Column="3" HorizontalAlignment="Left" Margin="25,10,0,0" Grid.Row="2" VerticalAlignment="Top" Width="220" xctk:ColorPicker.SelectedColorChanged="ColorPicker_SelectedColorChanged" Height="32" ColorMode="ColorCanvas" ShowTabHeaders="False" DropDownBackground="White"/>
-            <Rectangle x:Name="squareText" Grid.Column="2" Fill="#FF2121AC" HorizontalAlignment="Left" Height="30" Margin="162,5,0,0" Grid.Row="4" Stroke="Black" VerticalAlignment="Top" Width="29"/>
+            <Rectangle x:Name="squareText" Grid.Column="2" Fill="#FF2121AC" HorizontalAlignment="Left" Height="30" Margin="162,5,0,0" Grid.Row="4" Stroke="Black" VerticalAlignment="Top" Width="29" Visibility="Hidden"/>
 
         </Grid>
     </Grid>
