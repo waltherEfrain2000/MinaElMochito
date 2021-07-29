@@ -35,6 +35,7 @@ namespace ProyectoMinaELMochito
         private Validaciones validaciones = new Validaciones();
         private Procedimientos procedimientos = new Procedimientos();
         private Salida salidas = new Salida();
+        public int IdDetalle { get; internal set; }
 
 
         public Salidas()
@@ -42,10 +43,10 @@ namespace ProyectoMinaELMochito
             //botonfecha.Content = string.Format("{0}", DateTime.Now.ToString());
             InitializeComponent();
             MostrarMinerales();
-            MostrarDetalleSalidas();
-             MostrarInfoSalidas();
-            botonfecha.Content = string.Format("{0}", DateTime.Now.ToString());
-
+            //MostrarDetalleSalidas();
+            MostrarInfoSalidas();
+            AsignarUltimoId();
+           
         }
 
         private void limpiarTexto()
@@ -53,8 +54,8 @@ namespace ProyectoMinaELMochito
             txtIdSalida.Text = string.Empty;
             cmbIdMineral.SelectedValue = null;
             txtCantidad.Text = string.Empty;
-            FSalida.Text = string.Empty;
-            cmbSalidas.SelectedValue = null;
+            //FSalida.Text = string.Empty;
+            //cmbSalidas.SelectedValue = null;
           
 
             //edicionDeCasillas(false, 0);
@@ -100,7 +101,7 @@ namespace ProyectoMinaELMochito
                 //salidas.IDsalida = Convert.ToInt32(txtIdSalida.Text);
                 salidas.IDsalida = Convert.ToInt32(txtIdSalida.Text);
             }
-
+            salidas.IdDetalle = Convert.ToInt32(txtIdDetalleSalida.Text);
             switch (cmbIdMineral.SelectedIndex)
             {
                 case 0:
@@ -121,38 +122,9 @@ namespace ProyectoMinaELMochito
                 default:
                     break;
             }
-            switch (cmbSalidas.SelectedIndex)
-            {
-                case 0:
-                    salidas.IdDetalle = 1;
-                    break;
-                case 1:
-                    salidas.IdDetalle = 2;
-                    break;
-                case 2:
-                    salidas.IdDetalle = 3;
-                    break;
-                case 3:
-                    salidas.IdDetalle = 4;
-                    break;
-                case 4:
-                    salidas.IdDetalle = 5;
-                    break;
-                case 5:
-                    salidas.IdDetalle = 6;
-                    break;
-                case 6:
-                    salidas.IdDetalle = 7;
-                    break;
-                case 7:
-                    salidas.IdDetalle = 8;
-                    break;
-                default:
-                    break;
-            }
+    
 
-
-            salidas.FechaSalida = FSalida.Text;
+           // salidas.FechaSalida = FSalida.Text;
            // salidas.IdDetalle = Convert.ToInt32(cmbSalidas.SelectedIndex);
             decimal cantidad = Convert.ToDecimal(txtCantidad.Text);
             salidas.Cantidad = Convert.ToDecimal(txtCantidad.Text);
@@ -162,7 +134,7 @@ namespace ProyectoMinaELMochito
         private void btnIngresar_Click(object sender, RoutedEventArgs e)
         {
 
-            if (validaciones.VerificarCamposLlenosSalidas(txtCantidad.Text,  cmbIdMineral.Text, FSalida.Text)) ;
+            if (validaciones.VerificarCamposLlenos(txtCantidad.Text,  cmbIdMineral.Text)) ;
             {
                 try
                 {
@@ -190,15 +162,16 @@ namespace ProyectoMinaELMochito
 
         private void btnModificar_Click(object sender, RoutedEventArgs e)
         {
-            if (validaciones.VerificarCamposLlenosSalidas(txtCantidad.Text, cmbIdMineral.Text, FSalida.Text)) ;
+            if (validaciones.VerificarCamposLlenos(txtCantidad.Text, cmbIdMineral.Text)) ;
             
             {
                 try
                 {
                    infoFormulario(1);
                     salidas.ActualizarSalidas(salidas);
-                    MessageBox.Show("Salida Modificada");
+                    MessageBox.Show("Seguro que quiere modificar?", "Modificar", MessageBoxButton.YesNo);
 
+                    MessageBox.Show("Salida Modificada");
 
                 }
                 catch (Exception ex)
@@ -225,6 +198,8 @@ namespace ProyectoMinaELMochito
 
                 infoFormulario(1);
                 salidas.EliminarSalidas(salidas);
+                MessageBox.Show("Seguro que quiere eliminar el Registro?", "Eliminar Registro", MessageBoxButton.YesNo);
+                
                 MessageBox.Show("Salida Eliminada");
 
 
@@ -242,6 +217,7 @@ namespace ProyectoMinaELMochito
                 MostrarInfoSalidas();
             }
         }
+
         private void dgvSalida_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
         {
             DataGrid dg = (DataGrid)sender;
@@ -249,12 +225,12 @@ namespace ProyectoMinaELMochito
             if (filaSeleccionada != null)
             {
                 txtIdSalida.Text = filaSeleccionada["Código"].ToString();
-                cmbIdMineral.Text = filaSeleccionada["Minera"].ToString();
+                cmbIdMineral.Text = filaSeleccionada["Mineral"].ToString();
+                txtIdDetalleSalida.Text = filaSeleccionada["idDetalle"].ToString();
                 txtCantidad.Text = filaSeleccionada["Cantidad (kg)"].ToString();
-                FSalida.Text = filaSeleccionada["Fecha de Salida"].ToString();
-                cmbSalidas.Text = filaSeleccionada["Detalle de venta"].ToString();
-                //cmbSalidas.Text = filaSeleccionada["Código detalle"].ToString();
-
+                // FSalida.Text = filaSeleccionada["Fecha de Salida"].ToString();
+                // cmbSalidas.Text = filaSeleccionada["Detalle de venta"].ToString();
+               
             }
         }
         private void btnLimpiar_Click(object sender, RoutedEventArgs e)
@@ -273,21 +249,13 @@ namespace ProyectoMinaELMochito
 
         }
 
-        private void MostrarDetalleSalidas()
-        {
-            cmbSalidas.ItemsSource = salidas.LlenarDetalleSalidas();
-            cmbSalidas.DisplayMemberPath = "DetalleSalida";
-            cmbSalidas.SelectedValuePath = "idDetalle";
+        //private void MostrarDetalleSalidas()
+        //{
+        //    cmbSalidas.ItemsSource = salidas.LlenarDetalleSalidas();
+        //    cmbSalidas.DisplayMemberPath = "DetalleSalida";
+        //    cmbSalidas.SelectedValuePath = "idDetalle";
 
-        }
-
-
-
-        /*private void txtTotal_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-
-            procedimientos.txtTotal(txtCantidad.Text, txtPrecio.Text, txtTotal.Text);
-        }*/
+        //}
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
@@ -366,7 +334,7 @@ namespace ProyectoMinaELMochito
 
         private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            
         }
 
         private void txtDetalle_TextChanged(object sender, TextChangedEventArgs e)
@@ -377,15 +345,40 @@ namespace ProyectoMinaELMochito
         private void txtCantidad_KeyDown(object sender, KeyEventArgs e)
         {
             validaciones.ValidarLetras(e);
+            
 
         }
 
-        private void ListViewItem_Selected_9(object sender, RoutedEventArgs e)
+        public void AsignarUltimoId()
         {
-            ViajesInternos sld = new ViajesInternos();
-            sld.Show();
-            this.Close();
+            Salida ultimoId = salidas.UltimoId();
+            txtIdDetalleSalida.Text = ultimoId.IdDetalle.ToString();
         }
+
+        private void btnAsignar_Click(object sender, RoutedEventArgs e)
+        {
+            DetalleSalida sld = new DetalleSalida();
+            sld.Show();
+            //txtIdDetalleSalida.Visibility = Visibility.Visible;
+        }
+        //public bool VerificarValor0()
+        //{
+        //    Double Valor = 0;
+
+        //  if (Convert.ToDouble(txtCantidad.Text) == Valor)
+        //    {
+        //        MessageBoxResult result = MessageBox.Show("La cantidad no puede ser 0",
+        //          "Confirmar", MessageBoxButton.OK, MessageBoxImage.Warning);
+        //        return false;
+        //    }
+
+        //    return true;
+        //}
+        private void txtCantidad_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            //VerificarValor0();
+        }
+
         private void ListViewItem_Selected_10(object sender, RoutedEventArgs e)
         {
             Cargos cargos = new Cargos();
@@ -400,6 +393,11 @@ namespace ProyectoMinaELMochito
             this.Close();
         }
 
-
+        private void ListViewItem_Selected_9(object sender, RoutedEventArgs e)
+        {
+            ViajesInternos sld = new ViajesInternos();
+            sld.Show();
+            this.Close();
+        }
     }
 }

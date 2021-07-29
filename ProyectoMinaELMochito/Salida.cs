@@ -16,28 +16,29 @@ namespace ProyectoMinaELMochito
         private SqlConnection sqlConnection = new SqlConnection(connectionString);
 
         // Propiedades
+        public int IdDetalle { get; set; }
         public int IDsalida { get; set; }
         public int IDMineral { get; set; }
-        public int IdDetalle { get; set; }
+        
         public String NombreMineral { get; set; }
         public decimal Cantidad { get; set; }
-        public string FechaSalida { get; set; }
-        public string DetalleSalida { get; set; }
+       //// public string FechaSalida { get; set; }
+       // public string DetalleSalida { get; set; }
 
         // Constructores
         public Salida() {}
 
-        public Salida(int idSalida,int idMineral, int idDetallesalida, decimal cantidad, string fecha)
+        public Salida(int idSalida,int idMineral, int idDetalle, decimal cantidad)
         {
             IDsalida = idSalida;
             IDMineral = idMineral;
-            IdDetalle = idDetallesalida;
+            IdDetalle = idDetalle;
             Cantidad = cantidad;
-            FechaSalida = fecha;
+            //FechaSalida = fecha;
 
         }
 
-        public void ingresarSalidas(Salida salidas )
+        public void ingresarSalidas(Salida salidas)
         {
             conexion cn = new conexion();
             try
@@ -49,7 +50,7 @@ namespace ProyectoMinaELMochito
                 sqlCommand.Parameters.AddWithValue("@idmineral", salidas.IDMineral);
                 sqlCommand.Parameters.AddWithValue("@idDetalle", salidas.IdDetalle);
                 sqlCommand.Parameters.AddWithValue("@cantidad", salidas.Cantidad);
-                sqlCommand.Parameters.AddWithValue("@fechaSalida", salidas.FechaSalida);
+               // sqlCommand.Parameters.AddWithValue("@fechaSalida", salidas.FechaSalida);
 
                 cn.abrir();
                
@@ -69,7 +70,40 @@ namespace ProyectoMinaELMochito
 
         }
 
-       
+        public Salida UltimoId()
+        {
+            Salida ultimoId = new Salida();
+            conexion cn = new conexion();
+            try
+            {
+                SqlCommand cmd = new SqlCommand("UltimoIdSalida", cn.Conectarbd);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+
+                cn.abrir();
+
+                using (SqlDataReader rdr = cmd.ExecuteReader())
+                {
+                    while (rdr.Read())
+                    {
+                        ultimoId.IdDetalle = Convert.ToInt32(rdr["idDetalle"]);
+                    }
+                }
+
+                return ultimoId;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                cn.cerrar();
+            }
+        }
+
+
         public void ActualizarSalidas(Salida salidas)
         {
             conexion cn = new conexion();
@@ -82,7 +116,7 @@ namespace ProyectoMinaELMochito
                 sqlCommand.Parameters.AddWithValue("@idmineral", salidas.IDMineral);
                 sqlCommand.Parameters.AddWithValue("@idDetalle", salidas.IdDetalle);
                 sqlCommand.Parameters.AddWithValue("@cantidad", salidas.Cantidad);
-                sqlCommand.Parameters.AddWithValue("@fechaSalida", salidas.FechaSalida);
+                //sqlCommand.Parameters.AddWithValue("@fechaSalida", salidas.FechaSalida);
 
                 cn.abrir();
                 SqlDataAdapter adp = new SqlDataAdapter();
@@ -174,44 +208,44 @@ namespace ProyectoMinaELMochito
             }
 
         }
-     
-        public List<Salida> LlenarDetalleSalidas()
-        {
+      
+        /* public List<Salida> LlenarDetalleSalidas()
+         {
 
-            try
-            {
+             try
+             {
 
-                //Establecer la conexión
-                sqlConnection.Open();
+                 //Establecer la conexión
+                 sqlConnection.Open();
 
-                SqlCommand sqlCommand = new SqlCommand("LlenarComboboxDetalle", sqlConnection);
+                 SqlCommand sqlCommand = new SqlCommand("LlenarComboboxDetalle", sqlConnection);
 
-                SqlDataReader reader = sqlCommand.ExecuteReader();
+                 SqlDataReader reader = sqlCommand.ExecuteReader();
 
-                List<Salida> salidas = new List<Salida>();
+                 List<Salida> salidas = new List<Salida>();
 
-                while (reader.Read())
-                {
-                    salidas.Add(new Salida
-                    {
-                        DetalleSalida = reader["DetalleSalida"].ToString(),
-                        IdDetalle = Convert.ToInt32(reader["idDetalle"].ToString())
-                    }); ;
-                }
+                 while (reader.Read())
+                 {
+                     salidas.Add(new Salida
+                     {
+                         DetalleSalida = reader["DetalleSalida"].ToString(),
+                         IdDetalle = Convert.ToInt32(reader["idDetalle"].ToString())
+                     }); ;
+                 }
 
-                return salidas;
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-            finally
-            {
-                sqlConnection.Close();
-            }
+                 return salidas;
+             }
+             catch (Exception)
+             {
+                 throw;
+             }
+             finally
+             {
+                 sqlConnection.Close();
+             }
 
-        }
-       
+         }
+        */
         //public Salida BuscarSalida(int idvuelo)
         //{
         //    Salida Salida = new Salida();
@@ -219,7 +253,7 @@ namespace ProyectoMinaELMochito
 
         //    try
         //    {
-                
+
         //        // Establecer la conexión
         //        sqlConnection.Open();
 
@@ -238,7 +272,7 @@ namespace ProyectoMinaELMochito
         //                Salida.IdDetalle = Convert.ToInt32(rdr["idDetalle"]);
         //                Salida.FechaSalida = Convert.ToDateTime(rdr["fechaSalida"]);
         //                Salida.Cantidad = Convert.ToDecimal(rdr["Cantidad"]);
-                        
+
 
 
         //            }

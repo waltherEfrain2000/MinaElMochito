@@ -183,6 +183,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="DetalleSalida.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Empleados.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -301,6 +305,10 @@
       <DependentUpon>ComparacionHistoricos.xaml</DependentUpon>
     </Compile>
     <Compile Include="Conexion.cs" />
+    <Compile Include="DetalleSalida.xaml.cs">
+      <DependentUpon>DetalleSalida.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DetalleSalidaSalidas.cs" />
     <Compile Include="Empleado.cs" />
     <Compile Include="Empleados.xaml.cs">
       <DependentUpon>Empleados.xaml</DependentUpon>
