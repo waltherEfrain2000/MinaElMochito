@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 using System.Data;
 using System.Data.SqlClient;
 using System.Configuration;
-
 using System.Windows;
 
 
@@ -83,7 +82,6 @@ namespace ProyectoMinaELMochito
 
         }
 
-
         public void CrearModelo(string Modelo, int Marca)
         {
             conexion cn = new conexion();
@@ -143,14 +141,11 @@ namespace ProyectoMinaELMochito
         }
 
 
-
-
         // ----------------------------------    PROCEDIMIENTOS PARA VEHICULOS  -------------------------------- //
 
         //private static string connectionString = ConfigurationManager.ConnectionStrings["ProyectoMinaELMochito.Properties.Settings.MinaConnectionString"].ConnectionString;
         //private SqlConnection sqlConnection = new SqlConnection(connectionString);
         private Vehiculo elVehiculo = new Vehiculo();
-
         public void CrearVehiculo(int idModelo, int idMarca, string placa, string color, int estado)
         {
             conexion cn = new conexion();

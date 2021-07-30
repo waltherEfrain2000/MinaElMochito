@@ -27,6 +27,9 @@ namespace ProyectoMinaELMochito
         conexion cn = new conexion();
 
         private Procedimientos vehiculo = new Procedimientos();
+        private Validaciones validacion = new Validaciones();
+        string nombreMarca, nombreModelo;
+
         public MarcaVehiculo()
         {
             InitializeComponent();
@@ -44,9 +47,9 @@ namespace ProyectoMinaELMochito
             {
                 txtCodigoModelo.Text = filaSeleccionada["Código Modelo"].ToString();
                 txtModelo.Text = filaSeleccionada["Modelo"].ToString();
-                cn.cerrar();
                 cmbMarca.Text = (filaSeleccionada["Marca"].ToString());
             }
+            cn.cerrar();
         }
 
         private void DgvVehiculos_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -58,10 +61,11 @@ namespace ProyectoMinaELMochito
             {
                 txtCodigoMarca.Text = filaSeleccionada["Código Marca"].ToString();
                 txtMarca.Text = filaSeleccionada["Marca"].ToString();
-                cn.cerrar();
+                nombreMarca = filaSeleccionada["Marca"].ToString();
                 MostrarModelos(Convert.ToInt32(filaSeleccionada["Código Marca"]));
                 cmbMarca.SelectedValue = Convert.ToInt32(filaSeleccionada["Código Marca"]);
             }
+            cn.cerrar();
         }
 
         private void LimpiarCasillas(int tipoLimpiar)
@@ -78,9 +82,6 @@ namespace ProyectoMinaELMochito
                 txtCodigoModelo.Text = string.Empty;
                 cmbMarca.SelectedItem = null;
             }
-
-
-
         }
 
         private bool VerificarCamposLlenos(int tipoVerificado)
@@ -103,9 +104,6 @@ namespace ProyectoMinaELMochito
                 }
                 return true;
             }
-
-
-
         }
 
         private void LlenarModelos()
@@ -114,10 +112,7 @@ namespace ProyectoMinaELMochito
             cmbMarca.ItemsSource = marcas.LlenarComboBoxMarcas();
             cmbMarca.DisplayMemberPath = "NombreMarca";
             cmbMarca.SelectedValuePath = "CodigoMarca";
-
         }
-
-        //private Vehiculo elVehiculo = new Vehiculo();
 
 
         private void MostrarModelos(int codigoMarca)
@@ -143,7 +138,6 @@ namespace ProyectoMinaELMochito
             }
             catch (Exception ex)
             {
-
                 throw ex;
             }
             finally
@@ -188,24 +182,29 @@ namespace ProyectoMinaELMochito
         {
             if (VerificarCamposLlenos(2))
             {
-                try
+                int verificarModelo = validacion.validacionesVehiculos(3, txtModelo.Text, Convert.ToInt32(cmbMarca.SelectedValue));
+                if (verificarModelo == 0)
                 {
-                    vehiculo.CrearModelo(txtModelo.Text, Convert.ToInt32(cmbMarca.SelectedValue));
-                    // Mensaje de inserción exitosa
-                    MessageBox.Show("¡Modelo registrado correctamente!");
+                    try
+                    {
+                        vehiculo.CrearModelo(txtModelo.Text, Convert.ToInt32(cmbMarca.SelectedValue));
+                        // Mensaje de inserción exitosa
+                        MessageBox.Show("¡Modelo registrado correctamente!");
 
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
 
+                    }
+                    finally
+                    {
+                        MostrarModelos(Convert.ToInt32(cmbMarca.SelectedValue));
+                        LlenarModelos();
+                        LimpiarCasillas(2);
+                    }
                 }
-                finally
-                {
-                    LimpiarCasillas(1);
-                    MostrarModelos(Convert.ToInt32(cmbMarca.SelectedValue));
-                    LlenarModelos();
-                }
+                else { MessageBox.Show("Ya existe un modelo con el mismo nombre en esta marca."); }
             }
         }
 
@@ -214,25 +213,30 @@ namespace ProyectoMinaELMochito
             // Verificar que se ingresaron los valores requeridos
             if (VerificarCamposLlenos(1))
             {
-                try
+                int verificarMarca = validacion.validacionesVehiculos(1, txtMarca.Text, 1);
+                if (verificarMarca == 0)
                 {
-                    vehiculo.CrearMarca(txtMarca.Text);
+                    try
+                    {
+                        vehiculo.CrearMarca(txtMarca.Text);
 
-                    // Mensaje de inserción exitosa
-                    MessageBox.Show("¡Marca registrada correctamente!");
+                        // Mensaje de inserción exitosa
+                        MessageBox.Show("¡Marca registrada correctamente!");
 
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
 
+                    }
+                    finally
+                    {
+                        LimpiarCasillas(1);
+                        MostrarVehiculo();
+                        LlenarModelos();
+                    }
                 }
-                finally
-                {
-                    LimpiarCasillas(1);
-                    MostrarVehiculo();
-                    LlenarModelos();
-                }
+                else { MessageBox.Show("Ya existe una marca con ese nombre."); }
             }
         }
 
@@ -284,55 +288,85 @@ namespace ProyectoMinaELMochito
             // Verificar que se ingresaron los valores requeridos
             if (VerificarCamposLlenos(2))
             {
+                int verificarModelo = validacion.validacionesVehiculos(3, txtModelo.Text, Convert.ToInt32(cmbMarca.SelectedValue));
                 BotonesCancelar(2);
 
-                try
+                if (txtModelo.Text != nombreModelo)
                 {
-                    vehiculo.ActualizarModelo(Convert.ToInt32(txtCodigoModelo.Text), Convert.ToInt32(cmbMarca.SelectedValue), txtModelo.Text);
-
-                    // Mensaje de inserción exitosa
-                    MessageBox.Show("¡Modelo modificado correctamente!");
+                    if (verificarModelo == 0)
+                    {
+                        ProcesoModificarModelo();
+                    }
+                    else { MessageBox.Show("Ya existe un modelo con el mismo nombre en esta marca."); }
                 }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-
-                }
-                finally
-                {
-                    MostrarVehiculo();
-                    MostrarModelos(Convert.ToInt32(cmbMarca.SelectedValue));
-                }
+                else { ProcesoModificarModelo(); }
             }
         }
+
+        private void ProcesoModificarModelo()
+        {
+            try
+            {
+                vehiculo.ActualizarModelo(Convert.ToInt32(txtCodigoModelo.Text), Convert.ToInt32(cmbMarca.SelectedValue), txtModelo.Text);
+
+                // Mensaje de inserción exitosa
+                MessageBox.Show("¡Modelo modificado correctamente!");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+
+            }
+            finally
+            {
+                MostrarVehiculo();
+                MostrarModelos(Convert.ToInt32(cmbMarca.SelectedValue));
+                LimpiarCasillas(2);
+            }
+        }
+
 
             private void btnAceptarModificacion_Click(object sender, RoutedEventArgs e)
             {
                 // Verificar que se ingresaron los valores requeridos
                 if (VerificarCamposLlenos(1))
                 {
-                    BotonesCancelar(1);
+                int verificarMarca = validacion.validacionesVehiculos(1, txtMarca.Text, 1);
+                BotonesCancelar(1);
 
-                    try
+                if (txtMarca.Text != nombreMarca)
+                {
+                    if (verificarMarca == 0)
                     {
-                        vehiculo.ActualizarMarca(txtMarca.Text, Convert.ToInt32(txtCodigoMarca.Text));
-
-                        // Mensaje de inserción exitosa
-                        MessageBox.Show("¡Marca modificada correctamente!");
+                        ProcesoModificarMarca();
                     }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show(ex.Message);
-
-                    }
-                    finally
-                    {
-                        LimpiarCasillas(1);
-                        MostrarVehiculo();
-                        LlenarModelos();
+                    else { MessageBox.Show("Ya existe una marca con ese nombre."); }
                 }
-                }
+                else { ProcesoModificarMarca(); }
             }
+            }
+
+        private void ProcesoModificarMarca()
+        {
+            try
+            {
+                vehiculo.ActualizarMarca(txtMarca.Text, Convert.ToInt32(txtCodigoMarca.Text));
+
+                // Mensaje de inserción exitosa
+                MessageBox.Show("¡Marca modificada correctamente!");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                MostrarVehiculo();
+                LlenarModelos();
+                MostrarModelos(Convert.ToInt32(txtCodigoMarca.Text));
+                LimpiarCasillas(1);
+            }
+        }
 
             private void btnLimpiar_Click(object sender, RoutedEventArgs e)
             {
