@@ -149,7 +149,7 @@ namespace ProyectoMinaELMochito
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Ha ocurrido un error al momento de insertar los datos...");
+                    MessageBox.Show("Ha ocurrido un error al momento de insertar los datos..." + ex);
                     Console.WriteLine(ex.Message);
                 }
                 finally

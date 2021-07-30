@@ -46,13 +46,9 @@ namespace ProyectoMinaELMochito
             try
             {
                 //Query para seleccionar los datos de la tabla
-                String queryEmpleado = @"Select IdEmpleado as 'Id Empleado', identidad as 'Identidad', 
-                               primerNombre as 'Nombre Empleado'
-                               from Empleados.Empleado where estado = 'Activo' And idCargo = 7";
+                String queryEmpleado = @"execute CargarDatosEmpleado";
 
-                String queryVehiculo = @"Select idVehiculo as 'Id Vehiculo', idMarca as 'Marca', 
-                                        idModelo as 'Modelo', placa as 'Placa', color as 'Color'
-                                         from Vehiculos.Vehiculo where estado = 1";
+                String queryVehiculo = @"execute CargarDatosVehiculo";
 
                 //Establecer la conexion
                 sqlConnection.Open();
@@ -70,7 +66,7 @@ namespace ProyectoMinaELMochito
                 SqlDataAdapter sqlDataAdapter2 = new SqlDataAdapter(sqlCommand2);
 
                 //Crear el dataTable que contendrá las tablas desde la base
-                DataTable dataTable1 = new DataTable("Empleados.Empleado");
+                DataTable dataTable1 = new DataTable("Empleado.Empleado");
                 DataTable dataTable2 = new DataTable("Vehiculos.Vehiculo");
 
                 //Llenar los datagrid con la información necesaria
@@ -93,6 +89,7 @@ namespace ProyectoMinaELMochito
                 sqlConnection.Close();
             }
         }
+
 
         //Limpiar las cajas de texto
         private void LimpiarCasillas()
@@ -190,8 +187,8 @@ namespace ProyectoMinaELMochito
             //Validar que realmente se esta seleccionando un elemento del datagrid
             if (row_selected != null)
             {
-                txtIdEmpleado.Text = row_selected["Id Empleado"].ToString();
-                txtnombreEmpleado.Text = row_selected["Nombre Empleado"].ToString();
+                txtIdEmpleado.Text = row_selected["Código"].ToString();
+                txtnombreEmpleado.Text = row_selected["Nombre"].ToString();
             }
             else
             {
@@ -207,7 +204,7 @@ namespace ProyectoMinaELMochito
             //Validar que realmente se esta seleccionando un elemento del datagrid
             if (row_selected != null)
             {
-                txtIdVehiculo.Text = row_selected["Id Vehiculo"].ToString();
+                txtIdVehiculo.Text = row_selected["Código"].ToString();
                 txtVehiculo.Text = row_selected["Marca"].ToString();
             }
             else
