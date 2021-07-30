@@ -140,7 +140,7 @@
                     <lvc:DefaultTooltip BulletSize="20"></lvc:DefaultTooltip>
                 </lvc:PieChart.DataTooltip>
             </lvc:PieChart>
-            <Button Content="Mas Detalles" FontWeight="ExtraBlack" Foreground="White"  BorderBrush="#0082aa" HorizontalAlignment="Left" Margin="577,486,20,10" Grid.Row="1" VerticalAlignment="Top" Width="168" Height="34" Grid.Column="1" FontSize="18" Click="Button_Click" RenderTransformOrigin="0.497,-0.206"/>
+            <Button Content="Más Detalles" FontWeight="ExtraBlack" Foreground="White"  BorderBrush="#0082aa" HorizontalAlignment="Left" Margin="577,486,20,10" Grid.Row="1" VerticalAlignment="Top" Width="168" Height="34" Grid.Column="1" FontSize="18" Click="Button_Click" RenderTransformOrigin="0.497,-0.206"/>
         </Grid>
     </Grid>
 </Window>
