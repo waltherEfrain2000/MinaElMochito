@@ -29,20 +29,17 @@ namespace ProyectoMinaELMochito
 
         public int IdProduccion { get; set; }
 
-        public string Fecha { get; set; }
 
         //Constructores
         public Producciion() { }
 
-        public Producciion(int idProduccion, int numeroViaje, int numeroMineral, string tipoMineral, decimal precioMineral, decimal pesoMineral, string fecha)
+        public Producciion(int idProduccion, int numeroViaje, int numeroMineral, string tipoMineral, decimal precioMineral, decimal pesoMineral)
         {
             IdProduccion = idProduccion;
             IdViaje = numeroViaje;
             IdMineral = numeroMineral;
             Peso = pesoMineral;
             Precio = precioMineral;
-            Fecha = fecha;
-
         }
 
         //Métodos
