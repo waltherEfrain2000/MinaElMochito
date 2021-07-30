@@ -67,34 +67,6 @@ namespace ProyectoMinaELMochito
 
             return true;
         }
-        public bool VerificarNegativos(string cantidad)
-        {
-
-            try
-            {
-                double peso = Convert.ToDouble(cantidad);
-
-            }
-            catch (Exception ex)
-            {
-
-                MessageBox.Show(ex.Message);
-                cantidad = string.Empty;
-                return false;
-            }
-            finally
-            {
-            }
-            double Cantidad = Convert.ToDouble(cantidad);
-            if (Cantidad < 0)
-            {
-                MessageBoxResult result = MessageBox.Show("Error!" +
-                    " Los números no pueden ser negativos!",
-                   "Confirmar", MessageBoxButton.OK, MessageBoxImage.Warning);
-                return false;
-            }
-            return true;
-        }
 
         //--------------------------------------------------Viajes Intenos-----------------------------------------------------------------
         public bool VerificarCamposLlenos(string txtIdEmpleado, string txtIdVehiculo)

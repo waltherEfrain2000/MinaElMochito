@@ -203,25 +203,6 @@ namespace ProyectoMinaELMochito
         }
 
 
-        private void Casillas(bool opcion, int operacion)
-        {
-            //Operacion se utiliza para distingir entre actualizar y activar o
-            ////inabilitar todas las casillas
-            if (operacion == 0)
-            {
-                txtCantidad.IsReadOnly = opcion;
-                txtNumeroViaje.IsReadOnly = opcion;
-                cmbMinerales.IsReadOnly = opcion;
-            }
-            else
-            {
-                txtCantidad.IsReadOnly = opcion;
-                txtNumeroViaje.IsReadOnly = opcion;
-                cmbMinerales.IsReadOnly = opcion;
-            }
-
-        }
-
         /// <summary>
         /// Este método tiene la funcionaliad de pasar los datos que se seleccionan
         /// en el datagridview a las acjas de texto
