@@ -26,7 +26,7 @@ namespace ProyectoMinaELMochito
         private static string connectionString = ConfigurationManager.ConnectionStrings["ProyectoMinaELMochito.Properties.Settings.MinaConnectionString"].ConnectionString;
         private SqlConnection sqlConnection = new SqlConnection(connectionString);
 
-        Conexion conexion = new Conexion();
+        conexion cn = new conexion();
         DetalleSalidaSalidas detallesalidas = new DetalleSalidaSalidas();
         public DetalleSalida()
         {

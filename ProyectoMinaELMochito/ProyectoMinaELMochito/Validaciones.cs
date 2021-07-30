@@ -27,7 +27,7 @@ namespace ProyectoMinaELMochito
 
         public int validacionesVehiculos(int tipoValidacion, string laValidacion, int idMarca)
         {
-            Conexion cn = new Conexion();
+            conexion cn = new conexion();
             
             try
             {

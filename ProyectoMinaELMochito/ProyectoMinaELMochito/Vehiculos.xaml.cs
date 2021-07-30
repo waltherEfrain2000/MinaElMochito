@@ -24,7 +24,7 @@ namespace ProyectoMinaELMochito
     public partial class Vehiculos : Window
     {
         // Variables miembro
-        Conexion cn = new Conexion();
+        conexion cn = new conexion();
         int idVehiculo;
         string placaSeleccionada;
 

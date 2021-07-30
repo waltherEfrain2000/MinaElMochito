@@ -36,7 +36,7 @@ namespace ProyectoMinaELMochito
      
         public void AgregarDetalleSalida(DetalleSalidaSalidas detalleSalida)
         {
-            Conexion cn = new Conexion();
+            conexion cn = new conexion();
            
             try
             {

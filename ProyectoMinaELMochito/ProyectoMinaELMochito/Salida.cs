@@ -73,7 +73,7 @@ namespace ProyectoMinaELMochito
         public Salida UltimoId()
         {
             Salida ultimoId = new Salida();
-            Conexion cn = new Conexion();
+            conexion cn = new conexion();
             try
             {
                 SqlCommand cmd = new SqlCommand("UltimoIdSalida", cn.Conectarbd);

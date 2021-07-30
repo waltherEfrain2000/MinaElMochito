@@ -277,7 +277,7 @@ namespace ProyectoMinaELMochito
             }
 
             salidas.Cantidad = Convert.ToDecimal(Cantidad);
-            salidas.DetalleSalida = Detalle;
+            //salidas.DetalleSalida = Detalle;
 
             switch (cmbIdMineral)
             {
