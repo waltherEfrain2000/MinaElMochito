@@ -70,7 +70,7 @@ namespace ProyectoMinaELMochito
         {
             try
             {
-                Process.Start("file:///C:/Users/G7/Desktop/CLASES/2-IMPLEMENTACION%20DE%20SISTEMAS%20DE%20SOFTWARE/III%20PARCIAL/html/AyudaProduccionMain/VProduccion.html");
+                Process.Start("https://waltherefrain2000.github.io/WebMinaMochito/AyudaProduccionMain/VProduccion.html");
 
             }
             catch (Exception)
