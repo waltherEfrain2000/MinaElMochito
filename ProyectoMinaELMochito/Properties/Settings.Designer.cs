@@ -26,8 +26,8 @@ namespace ProyectoMinaELMochito.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=(local)\\SQLEXPRESS;Initial Catalog=MinaElMochitoVersion2;Integrated S" +
-            "ecurity=True")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source= 192.168.0.16 ,1433 ;Initial Catalog = MinaElMochitoVersion2 ; user i" +
+            "d = usuarioMina; password = 123456")]
         public string MinaConnectionString {
             get {
                 return ((string)(this["MinaConnectionString"]));
