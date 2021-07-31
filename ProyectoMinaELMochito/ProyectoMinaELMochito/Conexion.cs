@@ -12,7 +12,8 @@ namespace ProyectoMinaELMochito
     class conexion
     {
         // ojo, arreglar esta conexión si no sirve en su pc
-        String Cadena = " Data Source=(local)\\SQLEXPRESS;Initial Catalog=MinaElMochitoVersion2;Integrated Security=True ";
+        // String Cadena = " Data Source=(local)\\SQLEXPRESS;Initial Catalog=MinaElMochitoVersion2;Integrated Security=True ";
+        String Cadena = " Data Source= 192.168.0.16  ,1433 ;Initial Catalog = MinaElMochitoVersion2 ; user id = usuarioMina; password = 123456 ";
         public SqlConnection Conectarbd = new SqlConnection();
 
         public conexion()
