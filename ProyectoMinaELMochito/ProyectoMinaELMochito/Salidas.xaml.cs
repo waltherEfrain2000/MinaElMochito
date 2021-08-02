@@ -143,12 +143,12 @@ namespace ProyectoMinaELMochito
                     //Manda a llamar lo que esta en la clase de salidas.c
                     salidas.ingresarSalidas(salidas);
 
-                    MessageBox.Show("Salida Ingresada");
+                    MessageBox.Show("La salida ha sido Ingresada","Datos Correctos");
 
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Ha ocurrido un error al momento de insertar ");
+                    MessageBox.Show("Ha ocurrido un error al momento de insertar","Datos Incorrectos",MessageBoxButton.OK,MessageBoxImage.Error);
                     Console.WriteLine(ex.Message);
                 }
                 finally
@@ -170,13 +170,13 @@ namespace ProyectoMinaELMochito
                    infoFormulario(1);
                     salidas.ActualizarSalidas(salidas);
                   
-                    MessageBox.Show("Salida Modificada");
+                    MessageBox.Show("La salida ha sido modificada","Datos Correctos");
 
                 }
                 catch (Exception ex)
                 {
 
-                    MessageBox.Show("Ha ocurrido un error al momento de modificar  " );
+                    MessageBox.Show("Ha ocurrido un error al momento de modificar " ,"Datos Incorrectos", MessageBoxButton.OK, MessageBoxImage.Error);
                     MessageBox.Show(ex.Message);
 
                 }
@@ -198,14 +198,14 @@ namespace ProyectoMinaELMochito
                 infoFormulario(1);
                 salidas.EliminarSalidas(salidas);
               
-                MessageBox.Show("Salida Eliminada");
+                MessageBox.Show("Salida Eliminada","Eliminación Exitosa");
 
 
             }
             catch (Exception ex)
             {
 
-                MessageBox.Show("Ha ocurrido un error al momento de eliminar  " );
+                MessageBox.Show("Ha ocurrido un error al momento de eliminar ", "Datos Incorrectos", MessageBoxButton.OK, MessageBoxImage.Error);
                 MessageBox.Show(ex.Message);
 
             }

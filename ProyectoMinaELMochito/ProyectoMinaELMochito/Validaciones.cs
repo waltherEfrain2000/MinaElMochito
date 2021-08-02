@@ -48,9 +48,7 @@ namespace ProyectoMinaELMochito
            
             if (Cantidad == string.Empty || Mineral == null)
             {
-                MessageBoxResult result = MessageBox.Show("Por favor!, Verifique que las casillas" +
-                   " contengan la infromación requerida!",
-                  "Confirmar", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBoxResult result = MessageBox.Show("Por favor, Verifique que las casillas\nContengan la infromación requerida","Confirmar", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return false;
             }
             else if (Cantidad == string.Empty || Mineral == null)
