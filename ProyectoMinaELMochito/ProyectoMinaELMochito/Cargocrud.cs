@@ -21,45 +21,77 @@ namespace ProyectoMinaELMochito
         //Propiedades
         public int CargoID { get; set; }
         public string NombreCargo { get; set; }
-       
-        public Cargocrud(int ID, string nombrecargo)
+        public string Estado { get; set; }
+
+        public Cargocrud(int ID, string nombrecargo, string estado)
         {
             CargoID = ID;
             NombreCargo = nombrecargo;
-           
+            Estado = estado;
+
+
         }
 
         // Constructores
         public Cargocrud() { }
 
+        public int Cargorepetido(string laValidacion)
+        {
+            Conexion cn = new Conexion();
+
+            try
+            {
+                cn.abrir();
+                SqlCommand CrearCargor = new SqlCommand("Cargorepetido", cn.Conectarbd);
+                CrearCargor.CommandType = CommandType.StoredProcedure;
+
+                
+                CrearCargor.Parameters.AddWithValue("@validacion", laValidacion);
+               
+
+                int cantidadItemSolicitado = Convert.ToInt32(CrearCargor.ExecuteScalar());
+
+                return cantidadItemSolicitado;
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return 5;
+            }
+            finally { cn.cerrar(); }
+
+
+        }
+
+
+
+
         public void CrearCargo(Cargocrud Cargo)
         {
             Conexion cn = new Conexion();
             try
-            {  
-                SqlCommand cmd = new SqlCommand("insertarCargos", cn.Conectarbd);
+            {
+                SqlCommand cmd = new SqlCommand("InsertarCargos", cn.Conectarbd);
                 cmd.CommandType = CommandType.StoredProcedure;
 
                 cmd.Parameters.AddWithValue("@descripcion", Cargo.NombreCargo);
-               
 
                 cn.abrir();
-
-
-
                 cmd.ExecuteNonQuery();
 
             }
-            catch (Exception e)
+            catch (Exception )
             {
+                MessageBox.Show("Por favor ingresa los datos requeridos");
 
-                throw e;
             }
             finally
             {
                 cn.cerrar();
             }
         }
+
         public void ActualizarCargo(Cargocrud Cargo)
         {
             Conexion cn = new Conexion();
@@ -70,6 +102,7 @@ namespace ProyectoMinaELMochito
 
                 cmd.Parameters.AddWithValue("@idCargo", Cargo.CargoID);
                 cmd.Parameters.AddWithValue("@descripcion", Cargo.NombreCargo);
+                cmd.Parameters.AddWithValue("@estado", Cargo.Estado);
 
                 cn.abrir();
 
@@ -93,6 +126,40 @@ namespace ProyectoMinaELMochito
                 cn.cerrar();
             }
         }
+
+        //public void Actualizarestado(Cargocrud Cargo)
+        //{
+        //    Conexion cn = new Conexion();
+        //    try
+        //    {
+        //        SqlCommand cmd = new SqlCommand("Actualizarestado", cn.Conectarbd);
+        //        cmd.CommandType = CommandType.StoredProcedure;
+
+        //        cmd.Parameters.AddWithValue("@idCargo", Cargo.CargoID);
+        //        cmd.Parameters.AddWithValue("@estado", Cargo.Estado);
+
+        //        cn.abrir();
+
+        //        SqlDataAdapter adp = new SqlDataAdapter();
+        //        adp.SelectCommand = cmd;
+        //        DataTable tabla = new DataTable();
+        //        adp.Fill(tabla);
+
+        //        cn.abrir();
+        //        cmd.ExecuteNonQuery();
+
+        //    }
+        //    catch (Exception e)
+        //    {
+
+        //        throw e;
+        //    }
+        //    finally
+        //    {
+        //        //sqlConnection.Close();
+        //        cn.cerrar();
+        //    }
+        //}
 
         public void EliminarCargo(Cargocrud Cargo)
         {

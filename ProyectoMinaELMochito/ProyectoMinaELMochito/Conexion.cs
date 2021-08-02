@@ -11,7 +11,7 @@ namespace ProyectoMinaELMochito
     class Conexion
     {
         // ojo, arreglar esta conexión si no sirve en su pc
-        String Cadena = " Data Source=DESKTOP-JRBU49C;Initial Catalog=MinaElMochito2;Integrated Security=True ";
+        String Cadena = " Data Source=DESKTOP-JRBU49C;Initial Catalog=MinaElMochitoVersion2;Integrated Security=True ";
         public SqlConnection Conectarbd = new SqlConnection();
         
         //constructor

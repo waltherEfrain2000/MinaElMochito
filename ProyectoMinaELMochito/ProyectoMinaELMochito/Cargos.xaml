@@ -102,7 +102,7 @@
             </StackPanel>
         </Grid>
 
-        <Grid Grid.Column="1" Background="White" Margin="0,10,0,-10">
+        <Grid Grid.Column="1" Background="White" Margin="0,10,0,-10" >
 
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="60"/>
@@ -125,26 +125,30 @@
                 <RowDefinition Height="20"/>
 
             </Grid.RowDefinitions>
-            <Label x:Name="lbtitulo" Content="Cargos" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Center" FontFamily="Helvetica" FontSize="30" Margin="186,10,178,34" Width="166" Grid.ColumnSpan="2"/>
+            <Label x:Name="lbtitulo" Content="Cargos" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Center" FontFamily="Helvetica" FontSize="30" Margin="206,10,158,34" Width="166" Grid.ColumnSpan="2"/>
             <iconPacks:PackIconMaterial Kind="RobotConfused" Foreground="Cyan"
                     VerticalAlignment="Center" 
                     HorizontalAlignment="Left" x:Name="icon"
                       Width="24" Visibility="Visible" Grid.Column="2" Grid.Row="0" Margin="58,10,0,15" RenderTransformOrigin="-1.417,0.406"   />
-            <Label x:Name="lbcodigo" Content="Código" Grid.Row="2" Grid.Column="2" HorizontalAlignment="Center" Height="28" Margin="10,42,111,0" VerticalAlignment="Top" Width="144"/>
+            <Label x:Name="lbcodigo" Content="Código" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" Height="28" Margin="160,83,226,0" VerticalAlignment="Top" Width="144" Grid.RowSpan="2" Grid.ColumnSpan="2"/>
             <TextBox x:Name="txtid" Grid.Row="1" Grid.Column="1" Visibility="Hidden"/>
-            <TextBox x:Name="txtcodigo" IsReadOnly="True"  Grid.Row="2"  Margin="224,0,28,30" RenderTransformOrigin="0.446,-0.098" Grid.Column="2" Grid.ColumnSpan="2"  
-                     ToolTip="Se muestra el numero del viaje en que será trasnportado el material" />
-            <Label x:Name="lbRol" Content="Nombre del cargo" Grid.Row="3" HorizontalAlignment="Center" Margin="10,19,79,30" Width="176" Grid.Column="2" />
+            <TextBox x:Name="txtcodigo" IsReadOnly="True"  Grid.Row="1"  Margin="101,61,246,59" RenderTransformOrigin="0.446,-0.098" Grid.Column="2"  
+                     ToolTip="Se muestra el numero del viaje en que será trasnportado el material" Grid.RowSpan="2" Grid.ColumnSpan="2" />
+            <Label x:Name="lbRol" Content="Nombre del cargo" Grid.Row="2" HorizontalAlignment="Center" Margin="160,60,194,69" Width="176" Grid.Column="1" Grid.RowSpan="2" Grid.ColumnSpan="2" />
+            <ComboBox Name="cmbestado" Grid.Column="3" Margin="202,82,164,59" Grid.Row="1" Grid.ColumnSpan="2" Grid.RowSpan="2">
+                <ComboBoxItem Content="Activo"/>
+                <ComboBoxItem Content="Inactivo"/>
+            </ComboBox>
 
 
-
-            <DataGrid Name="dtgridcargo" Margin="160,10,170,78" Grid.Row="4" 
-                  Grid.RowSpan="4" FontFamily="Aldine" IsReadOnly="True"
-                  Grid.Column="1" Grid.ColumnSpan="4">
+            <DataGrid Name="dtgridcargo" Margin="165,56,164,78" Grid.Row="3" Foreground="Black"
+                  Grid.RowSpan="5" FontFamily="Aldine" IsReadOnly="True"
+                  Grid.Column="1" Grid.ColumnSpan="4" SelectionChanged="dtgridcargo_SelectionChanged">
 
                 <DataGrid.Resources>
                     <Style TargetType="{x:Type DataGridColumnHeader}">
-
+                        <Setter Property="Background" Value="#9900afb9"></Setter>
+                        <Setter Property="HorizontalContentAlignment" Value="Center"/>
                     </Style>
                 </DataGrid.Resources>
             </DataGrid>
@@ -158,7 +162,7 @@
                x:Name="icon1"
                Width="24" Visibility="Visible" Grid.Column="0" Grid.Row="8" Margin="130,10,0,15" RenderTransformOrigin="2.949,0.131"   />
 
-            <Button x:Name="btnModificar" Content="Modificar" Grid.Row="7" Height="40" Click="btnModificar_Click"  Foreground="White"  BorderBrush="#0082aa" Margin="39,40,28,0" Grid.Column="2" VerticalAlignment="Top"/>
+            <Button x:Name="btnModificar" Content="Modificar" Grid.Row="7" Height="40" Click="btnModificar_Click"  Foreground="White"  BorderBrush="#0082aa" Margin="31,40,36,0" Grid.Column="2" VerticalAlignment="Top"/>
             <iconPacks:PackIconMaterial
                  VerticalAlignment="Center" 
                  HorizontalAlignment="Left" 
@@ -181,8 +185,13 @@
                  Foreground="White"
                 x:Name="icon4"
                  Width="24" Visibility="Visible" Grid.Column="3" Grid.Row="8" Margin="130,10,0,15" RenderTransformOrigin="2.949,0.131"   />
-            <TextBox x:Name="txtnombre" Grid.Row="3"  Margin="224,0,28,30" RenderTransformOrigin="0.446,-0.098" Grid.Column="2" Grid.ColumnSpan="2" TextChanged="txtnombre_TextChanged"/>
+            <TextBox x:Name="txtnombre" Grid.Row="2"  Margin="101,60,246,69" RenderTransformOrigin="0.446,-0.098" Grid.Column="2" TextChanged="txtnombre_TextChanged" Grid.RowSpan="2" Grid.ColumnSpan="2"/>
+            <Button x:Name="btnAceptar"  Content="Aceptar" Grid.Column="2" Grid.Row="7" Foreground="#0082aa"  BorderBrush="#0082aa"  Margin="31,40,36,0"  Visibility="Hidden" Click="btnAceptar_Click" Height="Auto"/>
+            <Button x:Name="btnCancelar" Content="Cancelar" Grid.Column="3" Grid.Row="7"  Foreground="#0082aa"  BorderBrush="#0082aa" Margin="34,40,32,0"  Visibility="Hidden" Click="btnCancelar_Click" Height="Auto" />
+            <Button x:Name="btnlimpiar" Content="Limpiar" Grid.Column="4" Grid.Row="7" Height="40"  Foreground="White"  BorderBrush="#0082aa" Margin="32,40,34,0" Click="btnlimpiar_Click"/>
+            <!--<ComboBox Name="txtestado" Grid.Column="3" HorizontalAlignment="Left" Margin="183,76,0,0" Grid.Row="1" VerticalAlignment="Top" Width="221" Height="42" RenderTransformOrigin="0.493,0.381" Grid.ColumnSpan="2" Grid.RowSpan="2" />-->
 
         </Grid>
+        <Label x:Name="lbestado" Content="Estado" Grid.Column="1" HorizontalAlignment="Center" Height="28" Margin="684,113,352,0" VerticalAlignment="Top" Width="144"/>
     </Grid>
 </Window>
