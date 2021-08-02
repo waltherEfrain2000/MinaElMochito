@@ -131,6 +131,7 @@
 
             <!-- Data Grid - Tablas -->
             <DataGrid Name ="dgvEmpleados" HorizontalAlignment="Left" Height="366" Margin="51,46,0,0" 
+                      HorizontalGridLinesBrush="Black" VerticalGridLinesBrush="Black"
                   Grid.Row="1" VerticalAlignment="Top" Width="509" Grid.ColumnSpan="2" SelectionChanged="MostarEnTexBoxContenido" IsReadOnly="True" >
 
                 <DataGrid.Resources>
@@ -144,7 +145,11 @@
 
                 </DataGrid.Columns>
             </DataGrid>
-            <DataGrid Name ="dgvVehiculos" HorizontalAlignment="Left" Height="366" Margin="234,46,0,0" VerticalAlignment="Top" Width="509" Grid.ColumnSpan="2" IsReadOnly="True" SelectionChanged="MostrarVehiculosTextBox" Grid.Column="1" Grid.Row="1">
+            <DataGrid Name ="dgvVehiculos" HorizontalAlignment="Left" Height="366" Margin="234,46,0,0" 
+                      HorizontalGridLinesBrush="Black" 
+                      VerticalGridLinesBrush="Black" 
+                      VerticalAlignment="Top" Width="509" Grid.ColumnSpan="2" IsReadOnly="True" SelectionChanged="MostrarVehiculosTextBox" 
+                      Grid.Column="1" Grid.Row="1">
 
                 <DataGrid.Resources>
                     <Style TargetType="{x:Type DataGridColumnHeader}">

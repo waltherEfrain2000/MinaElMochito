@@ -101,7 +101,7 @@ namespace ProyectoMinaELMochito
         {
             if (txtIdEmpleado == string.Empty || txtIdVehiculo == string.Empty)
             {
-                MessageBoxResult result = MessageBox.Show("Por favor!, Verifique que las casillas contengan la infromación requerida!",
+                MessageBoxResult result = MessageBox.Show("Por favor, Verifique que las casillas contengan la infromación requerida!",
                     "Confirmar", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return false;
             }
@@ -118,8 +118,7 @@ namespace ProyectoMinaELMochito
             int Valor = 0;
             if (Cantidad == string.Empty || Precio == string.Empty || cmbMinerales == null)
             {
-                MessageBoxResult result = MessageBox.Show("Por favor!, Verifique que las casillas" +
-                    " contengan la infromación requerida!",
+                MessageBoxResult result = MessageBox.Show("Por favor, Verifique que las casillas contengan la infromación requerida",
                    "Confirmar", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return false;
             }
