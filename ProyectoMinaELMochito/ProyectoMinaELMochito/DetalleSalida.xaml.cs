@@ -58,8 +58,8 @@ namespace ProyectoMinaELMochito
                 detallesalidas.idDetalle = Convert.ToInt32(txtIdDetalle);
 
             }
-                //detallesalidas.idDetalle = Convert.ToInt32(txtIdDetalle);
-                detallesalidas.DetalleSalida = txtDetalle.Text;
+            //detallesalidas.idDetalle = Convert.ToInt32(txtIdDetalle);
+            detallesalidas.DetalleSalida = txtDetalle.Text;
 
             //herramienta.HerramientasEnUso = Convert.ToInt32(txtCantidad.Text);
 

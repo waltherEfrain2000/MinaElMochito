@@ -161,13 +161,15 @@
                           SelectionChanged="dgvSalida_SelectionChanged_1"
                           Grid.Column="1"  BorderBrush="BlueViolet" Background="White">
                     <DataGrid.Resources>
+                        
                         <Style TargetType="{x:Type DataGridColumnHeader}">
                             <Setter Property="Background" Value="#9900afb9"></Setter>
                             <Setter Property="HorizontalContentAlignment" Value="Center"/>
-
+                            
                         </Style>
+                     
                     </DataGrid.Resources>
-
+ 
                 </DataGrid>
 
                 <Button x:Name="btnIngresar" Content="Ingresar" Grid.Column="5" Grid.Row="2"    Margin="60,10,30,8"   Click="btnIngresar_Click"  Foreground="White"  BorderBrush="#0082aa"/>

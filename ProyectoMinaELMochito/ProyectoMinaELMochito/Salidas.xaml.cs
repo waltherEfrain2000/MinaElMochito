@@ -134,12 +134,13 @@ namespace ProyectoMinaELMochito
         private void btnIngresar_Click(object sender, RoutedEventArgs e)
         {
 
-            if (validaciones.VerificarCamposLlenos(txtCantidad.Text,  cmbIdMineral.Text)) ;
+            if (validaciones.VerificarCamposLlenos(txtCantidad.Text, cmbIdMineral.Text)) ;
             {
                 try
                 {
 
                     infoFormulario(0);
+                    //Manda a llamar lo que esta en la clase de salidas.c
                     salidas.ingresarSalidas(salidas);
 
                     MessageBox.Show("Salida Ingresada");
@@ -147,9 +148,8 @@ namespace ProyectoMinaELMochito
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Ha ocurrido un error al momento de insertar  por " + ex);
+                    MessageBox.Show("Ha ocurrido un error al momento de insertar ");
                     Console.WriteLine(ex.Message);
-
                 }
                 finally
                 {
@@ -162,22 +162,21 @@ namespace ProyectoMinaELMochito
 
         private void btnModificar_Click(object sender, RoutedEventArgs e)
         {
-            if (validaciones.VerificarCamposLlenos(txtCantidad.Text, cmbIdMineral.Text)) ;
+            if (validaciones.VerificarCamposLlenos(txtCantidad.Text,cmbIdMineral.Text)) ;
             
             {
                 try
                 {
                    infoFormulario(1);
                     salidas.ActualizarSalidas(salidas);
-                    MessageBox.Show("Seguro que quiere modificar?", "Modificar", MessageBoxButton.YesNo);
-
+                  
                     MessageBox.Show("Salida Modificada");
 
                 }
                 catch (Exception ex)
                 {
 
-                    MessageBox.Show("Ha ocurrido un error al momento de modificar por " + ex);
+                    MessageBox.Show("Ha ocurrido un error al momento de modificar  " );
                     MessageBox.Show(ex.Message);
 
                 }
@@ -198,8 +197,7 @@ namespace ProyectoMinaELMochito
 
                 infoFormulario(1);
                 salidas.EliminarSalidas(salidas);
-                MessageBox.Show("Seguro que quiere eliminar el Registro?", "Eliminar Registro", MessageBoxButton.YesNo);
-                
+              
                 MessageBox.Show("Salida Eliminada");
 
 
@@ -207,7 +205,7 @@ namespace ProyectoMinaELMochito
             catch (Exception ex)
             {
 
-                MessageBox.Show("Ha ocurrido un error al momento de eliminar por " + ex);
+                MessageBox.Show("Ha ocurrido un error al momento de eliminar  " );
                 MessageBox.Show(ex.Message);
 
             }
@@ -374,9 +372,34 @@ namespace ProyectoMinaELMochito
 
         //    return true;
         //}
+      
+        public void VerificarCantidad()
+        {
+            double Valor = 0;
+            try
+            {
+                if (txtCantidad.Text == string.Empty || (Convert.ToDouble(txtCantidad.Text) == Valor))
+                {
+                    txtCantidad.Text = string.Empty;
+                }
+                else if (cmbIdMineral.SelectedItem == null)
+                {
+                    MessageBoxResult result = MessageBox.Show("Debe seleccionar un mineral",
+                      "Confirmar", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    txtCantidad.Text = string.Empty;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBoxResult result = MessageBox.Show("No puede ingresar dos puntos deguidos",
+                "Confirmar", MessageBoxButton.OK, MessageBoxImage.Warning);
+                txtCantidad.Text = string.Empty;
+            }
+        }
         private void txtCantidad_TextChanged(object sender, TextChangedEventArgs e)
         {
-            //VerificarValor0();
+            VerificarCantidad();
         }
     }
 }

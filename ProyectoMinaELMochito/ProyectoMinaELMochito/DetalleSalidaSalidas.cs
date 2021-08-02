@@ -33,11 +33,11 @@ namespace ProyectoMinaELMochito
             DetalleSalida = detalleSalida;
         }
 
-     
+
         public void AgregarDetalleSalida(DetalleSalidaSalidas detalleSalida)
         {
             Conexion cn = new Conexion();
-           
+
             try
             {
 
@@ -45,7 +45,7 @@ namespace ProyectoMinaELMochito
                 cmd.CommandType = CommandType.StoredProcedure;
                 cn.abrir();
                 cmd.Parameters.AddWithValue("@DetalleSalida", detalleSalida.DetalleSalida);
-                
+
 
                 cmd.ExecuteNonQuery();
             }
@@ -60,7 +60,7 @@ namespace ProyectoMinaELMochito
             }
 
         }
-       
+
 
     }
 }

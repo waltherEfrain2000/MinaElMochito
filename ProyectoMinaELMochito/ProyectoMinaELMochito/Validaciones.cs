@@ -45,28 +45,22 @@ namespace ProyectoMinaELMochito
 
         public bool VerificarCamposLlenos(string Cantidad, string Mineral)
         {
-            Double Valor = 0;
-
-            if (Cantidad == string.Empty  )
+           
+            if (Cantidad == string.Empty || Mineral == null)
             {
-                MessageBox.Show("Favor no dejar vacío ningún campo...");
-                return false;
-            }
-
-            else if (Mineral == null)
-            {
-                MessageBox.Show("Favor, seleccionar un valor mineral!");
-                return false;
-            }
-            else if (Convert.ToDouble(Cantidad) == Valor)
-            {
-                MessageBoxResult result = MessageBox.Show("La cantidad no puede ser 0",
+                MessageBoxResult result = MessageBox.Show("Por favor!, Verifique que las casillas" +
+                   " contengan la infromación requerida!",
                   "Confirmar", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return false;
+            }
+            else if (Cantidad == string.Empty || Mineral == null)
+            {
                 return false;
             }
 
             return true;
         }
+    
 
     }
 
