@@ -272,7 +272,7 @@ namespace ProyectoMinaELMochito
                 txtCantidad.Text = filaSeleccionada["Peso(Kg)"].ToString();
                 txtPrecio.Text = filaSeleccionada["Precio"].ToString();
                 txtIdProduccion.Text = filaSeleccionada["Id Producción"].ToString();
-
+               
                
             }
         }

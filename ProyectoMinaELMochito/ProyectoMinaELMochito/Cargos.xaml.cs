@@ -60,7 +60,7 @@ namespace ProyectoMinaELMochito
                 {
                     txtcodigo.Text = filaSeleccionada["Código"].ToString();
                     txtnombre.Text = filaSeleccionada["Cargo"].ToString();
-                    cmbestado.SelectedItem = filaSeleccionada["Estado"].ToString();
+                    cmbestado.SelectedValue = filaSeleccionada["Estado"].ToString();
 
                 }
             }catch(Exception ex)
@@ -99,7 +99,7 @@ namespace ProyectoMinaELMochito
             }
 
             cargo.NombreCargo = txtnombre.Text;
-            cargo.Estado = cmbestado.Text;
+            cargo.Estado = Convert.ToString(cmbestado.SelectedIndex);
 
         }
 
