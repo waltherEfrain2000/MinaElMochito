@@ -55,7 +55,7 @@ namespace ProyectoMinaELMochito
         {
             if (txtId.Text == string.Empty || txtCantidad.Text == string.Empty)
             {
-                MessageBox.Show("Por favor ingresa todos los valores (incluyendo datagrid)");
+                MessageBox.Show("Por favor ingresa todos los valores (incluyendo la lista)");
                 return false;
             }
             return true;

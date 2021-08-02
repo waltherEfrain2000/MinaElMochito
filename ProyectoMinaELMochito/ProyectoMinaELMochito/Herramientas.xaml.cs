@@ -71,6 +71,8 @@ namespace ProyectoMinaELMochito
             txtEquipamiento.Text = string.Empty;
             txtCantidad.Text = string.Empty;
             txtValorUnitario.Text = string.Empty;
+            pb1.Value = 0;
+            pb3.Value = 0;
         }
 
         private bool VerificarCamposLlenos()
@@ -184,6 +186,7 @@ namespace ProyectoMinaELMochito
         private void btnLimpiar_Click(object sender, RoutedEventArgs e)
         {
             LimpiarCasillas();
+
         }
 
         private void DgvHerramientas_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -320,6 +323,52 @@ namespace ProyectoMinaELMochito
         private void pb1_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
 
+        }
+
+        private void DgEquipamiento_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
+        {
+            if (e.PropertyType == typeof(DateTime))
+            {
+                ((DataGridTextColumn)e.Column).Binding.StringFormat = "dd/MM/yyyy";
+            }
+
+            if (e.PropertyType == typeof(Decimal))
+            {
+                ((DataGridTextColumn)e.Column).Binding.StringFormat = "L00.00";
+            }
+        }
+
+        private void txtValorUnitario_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            double Valor = 0;
+            try
+            {
+                if (txtValorUnitario.Text == string.Empty || (Convert.ToDouble(txtValorUnitario.Text) == Valor))
+                {
+                    txtValorUnitario.Text = "";
+                }
+                //else if (txtSalario.Text == string.Empty)
+                //{
+                //    MessageBoxResult result = MessageBox.Show("Debe seleccionar un mineral",
+                //      "Confirmar", MessageBoxButton.OK, MessageBoxImage.Warning);
+                //    txtSalario.Text = "";
+                //}
+                else
+                {
+                    //double Total;
+                    //double Cantidad, precio;
+                    //Cantidad = Convert.ToDouble(txtSalario.Text);
+                    //precio = Convert.ToDouble(txtSalario.Text);
+                    //Total = Cantidad * precio;
+                    //txtSalario.Text = Cantidad.ToString();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBoxResult result = MessageBox.Show("No puede ingresar dos puntos deguidos",
+                      "Confirmar", MessageBoxButton.OK, MessageBoxImage.Warning);
+                txtValorUnitario.Text = "";
+            }
         }
     }
 }
