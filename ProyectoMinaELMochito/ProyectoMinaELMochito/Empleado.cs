@@ -242,5 +242,30 @@ namespace ProyectoMinaELMochito
             }
 
         }
+
+        public int validarIdentidad (string identidad)
+        {
+            conexion cn = new conexion();
+            try
+            {
+                cn.abrir();
+                SqlCommand sqlCommand = new SqlCommand("validarIdentidades", cn.Conectarbd);
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+                sqlCommand.Parameters.AddWithValue("@identidad", identidad);
+
+                int valor = Convert.ToInt32(sqlCommand.ExecuteScalar());
+                return valor;
+            }
+            catch (Exception)
+            {
+
+                return 7;
+            }
+            finally
+            {
+                cn.cerrar();
+            }
+        }
+
     }
 }

@@ -175,26 +175,36 @@ namespace ProyectoMinaELMochito
             // Verificar que se ingresaron los valores requeridos
             if (VerificarCamposLlenos())
             {
-                try
-                {
-                    //parametro 0 por que no es actualizacion
-                    ExtraerInformacionFormulario(0);
-                    empleado.CrearEmpleado(empleado);
+                int valor = empleado.validarIdentidad(txtIdentidad.Text);
 
-                    // Mensaje de inserción exitosa
-                    MessageBox.Show("¡Empleado insertado correctamente!");
-
-                }
-                catch (Exception ex)
+                if(valor == 0 )
                 {
-                    MessageBox.Show(ex.Message);
+                    try
+                    {
+                        //parametro 0 por que no es actualizacion
+                        ExtraerInformacionFormulario(0);
+                        empleado.CrearEmpleado(empleado);
 
+                        // Mensaje de inserción exitosa
+                        MessageBox.Show("¡Empleado insertado correctamente!");
+
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+
+                    }
+                    finally
+                    {
+                        LimpiarCasillas();
+                        MostrarEmpleado();
+                    }
                 }
-                finally
+                else
                 {
-                    LimpiarCasillas();
-                    MostrarEmpleado();
+                    MessageBox.Show("Esta identidad ya existe...", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
+                
             }
         }
 
@@ -252,6 +262,8 @@ namespace ProyectoMinaELMochito
             }
 
         }
+
+        string validarIde;
         private void DgvEmpleados_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             DataGrid dg = (DataGrid)sender;
@@ -260,6 +272,7 @@ namespace ProyectoMinaELMochito
             {
                 txtEmpleadoID.Text = filaSeleccionada["Código"].ToString();
                 txtIdentidad.Text = filaSeleccionada["Identidad"].ToString();
+                validarIde = filaSeleccionada["Identidad"].ToString();
                 txtNombreCompleto.Text = filaSeleccionada["Nombre"].ToString();
                 dpFechaNacimiento.Text = filaSeleccionada["FechaNacimiento"].ToString();
                 cmbGenero.Text = filaSeleccionada["Género"].ToString();
@@ -302,59 +315,97 @@ namespace ProyectoMinaELMochito
             // Verificar que se ingresaron los valores requeridos
             if (VerificarCamposLlenos())
             {
-                try
-                {
-                    //parametro 1 por que es actualizacion
-                    edicionDeCasillas(false, 1);
-                    //ocultar todos los otones inecesarios
-                    btnModificar.Visibility = Visibility.Hidden;
-                    btnAgregar.Visibility = Visibility.Hidden;
-                    btnEliminar.Visibility = Visibility.Hidden;
-                    btnAceptarModificacion.Visibility = Visibility.Visible;
-                    btnCancelarModificacion.Visibility = Visibility.Visible;
+                    try
+                    {
+                        //parametro 1 por que es actualizacion
+                        edicionDeCasillas(false, 1);
+                        //ocultar todos los otones inecesarios
+                        btnModificar.Visibility = Visibility.Hidden;
+                        btnAgregar.Visibility = Visibility.Hidden;
+                        btnEliminar.Visibility = Visibility.Hidden;
+                        btnAceptarModificacion.Visibility = Visibility.Visible;
+                        btnCancelarModificacion.Visibility = Visibility.Visible;
 
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
 
-                }
+                    }
             }
         }
 
         private void btnAceptarModificacion_Click(object sender, RoutedEventArgs e)
         {
-            // Verificar que se ingresaron los valores requeridos
+
             if (VerificarCamposLlenos())
             {
-                //ocultar todos los otones inecesarios
                 btnModificar.Visibility = Visibility.Visible;
                 btnAgregar.Visibility = Visibility.Visible;
                 btnEliminar.Visibility = Visibility.Visible;
                 btnAceptarModificacion.Visibility = Visibility.Hidden;
                 btnCancelarModificacion.Visibility = Visibility.Hidden;
-                try
+
+                if (txtIdentidad.Text == validarIde)
                 {
-                    //parametro 1 por que es actualizacion
-                    ExtraerInformacionFormulario(1);
-                    empleado.ActualizarEmpleado(empleado);
+                    try
+                    {
+                        //parametro 1 por que es actualizacion
+                        ExtraerInformacionFormulario(1);
+                        empleado.ActualizarEmpleado(empleado);
 
 
-                    // Mensaje de inserción exitosa
-                    MessageBox.Show("¡Empleado modificado correctamente!");
+                        // Mensaje de inserción exitosa
+                        MessageBox.Show("¡Empleado modificado correctamente!");
 
 
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+
+                    }
+                    finally
+                    {
+                        LimpiarCasillas();
+                        MostrarEmpleado();
+                    }
                 }
-                catch (Exception ex)
+                else
                 {
-                    MessageBox.Show(ex.Message);
+                    int valor = empleado.validarIdentidad(txtIdentidad.Text);
 
+                    if (valor == 0)
+                    {
+                        try
+                        {
+                            //parametro 1 por que es actualizacion
+                            ExtraerInformacionFormulario(1);
+                            empleado.ActualizarEmpleado(empleado);
+
+
+                            // Mensaje de inserción exitosa
+                            MessageBox.Show("¡Empleado modificado correctamente!");
+
+
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show(ex.Message);
+
+                        }
+                        finally
+                        {
+                            LimpiarCasillas();
+                            MostrarEmpleado();
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Esta identidad ya existe...", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
                 }
-                finally
-                {
-                    LimpiarCasillas();
-                    MostrarEmpleado();
-                }
+
             }
         }
         private void btnEliminar_Click(object sender, RoutedEventArgs e)
@@ -596,6 +647,21 @@ namespace ProyectoMinaELMochito
                 MessageBoxResult result = MessageBox.Show("No puede ingresar dos puntos deguidos",
                       "Confirmar", MessageBoxButton.OK, MessageBoxImage.Warning);
                 txtSalario.Text = "";
+            }
+        }
+
+        private void DgvEmpleados_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
+        {
+            // referencia: https://social.msdn.microsoft.com/Forums/vstudio/en-US/a5f90126-d509-46c2-93b6-2affd09b13c4/wpf-format-datagrid-column-as-currency-wpf?forum=wpf
+
+            if (e.PropertyType == typeof(DateTime))
+            {
+                ((DataGridTextColumn)e.Column).Binding.StringFormat = "dd/MM/yyyy";
+            }
+
+            if (e.PropertyType == typeof(Decimal))
+            {
+                ((DataGridTextColumn)e.Column).Binding.StringFormat = "L00.00";
             }
         }
     }

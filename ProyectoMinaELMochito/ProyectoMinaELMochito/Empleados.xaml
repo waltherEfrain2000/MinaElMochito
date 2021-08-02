@@ -162,7 +162,7 @@
             <Button x:Name="btnCancelarEliminacion" Foreground="White"  BorderBrush="#0082aa" Content="Cancelar" Grid.Column="4" Grid.Row="2"  Margin="60,5,30,10" Click="btnCancelarEliminacion_Click" Visibility="Hidden" />
             <Button x:Name="btnLimpiar" Foreground="White" BorderBrush="#0082aa" Content="Limpiar" Grid.Column="4" Grid.Row="4" Margin="60,5,30,10" Click="btnLimpiar_Click" />
 
-            <DataGrid Name="DgvEmpleados" Grid.Row="5" Margin="30,20,30,20" Grid.ColumnSpan="5" Grid.RowSpan="6" SelectionChanged="DgvEmpleados_SelectionChanged" IsReadOnly="True" FontSize="15">
+            <DataGrid Name="DgvEmpleados" Grid.Row="5" Margin="30,20,30,20" Grid.ColumnSpan="5" Grid.RowSpan="6" SelectionChanged="DgvEmpleados_SelectionChanged" IsReadOnly="True" FontSize="15" AutoGeneratingColumn="DgvEmpleados_AutoGeneratingColumn" >
 
                 <DataGrid.Resources>
                     <Style TargetType="{x:Type DataGridColumnHeader}" >

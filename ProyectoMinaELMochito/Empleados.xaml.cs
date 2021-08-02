@@ -43,9 +43,6 @@ namespace ProyectoMinaELMochito
             //cmbGenero.Items.Add("F");
             //cmbGenero.Items.Add("M");
             //cmbCargo.Items.Add("Gerente");
-
-            //prueba = DgvEmpleados.CurrentRow.Cells[0].Value.ToString();
-            //DgvEmpleados.Columns[6].CellStyle. = "#,#";
         }
         private void LimpiarCasillas()
         {
@@ -599,30 +596,6 @@ namespace ProyectoMinaELMochito
                 MessageBoxResult result = MessageBox.Show("No puede ingresar dos puntos deguidos",
                       "Confirmar", MessageBoxButton.OK, MessageBoxImage.Warning);
                 txtSalario.Text = "";
-            }
-        }
-
-        private void prueba_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
-
-        private void txtSalario_TextChanged_1(object sender, TextChangedEventArgs e)
-        {
-        }
-
-        private void DgvEmpleados_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
-        {
-            // referencia: https://social.msdn.microsoft.com/Forums/vstudio/en-US/a5f90126-d509-46c2-93b6-2affd09b13c4/wpf-format-datagrid-column-as-currency-wpf?forum=wpf
-
-            if (e.PropertyType == typeof(DateTime))
-            {
-                ((DataGridTextColumn)e.Column).Binding.StringFormat = "dd/MM/yyyy";
-            }
-
-            if (e.PropertyType == typeof(Decimal))
-            {
-                ((DataGridTextColumn)e.Column).Binding.StringFormat = "L00.00";
             }
         }
     }
