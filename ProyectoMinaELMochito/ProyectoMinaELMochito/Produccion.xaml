@@ -143,8 +143,29 @@
             <Label Content="SISTEMA DE PRODUCCIÓN" HorizontalAlignment="Center" Grid.Column="1" FontSize="30" VerticalAlignment="Center" Margin="147,2,131,10" Width="391" Grid.ColumnSpan="3" RenderTransformOrigin="0.862,0.735"/>
             <TextBox Name="txtIdProduccion" Grid.Column="0" Grid.Row="0" Visibility="Hidden" />
 
+            <!--<DataGrid Name="dgvSalida"  Grid.Row="5" Margin="15,10,15,50" Grid.ColumnSpan="4"
+                          IsReadOnly="True" FontSize="15"  SelectionMode="Single"  GridLinesVisibility="All"
+                          HorizontalGridLinesBrush="Black" VerticalGridLinesBrush="Black" 
+                          HeadersVisibility="Column" Grid.RowSpan="3" Width="auto"
+                          SelectionChanged="dgvSalida_SelectionChanged_1"
+                          Grid.Column="1"  BorderBrush="BlueViolet" Background="White">
+                <DataGrid.Resources>
+
+                    <Style TargetType="{x:Type DataGridColumnHeader}">
+                        <Setter Property="Background" Value="#9900afb9"></Setter>
+                        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+
+                    </Style>
+
+                </DataGrid.Resources>
+
+            </DataGrid>-->
+
+
+
             <DataGrid Name="dgvProduccion" Margin="10,22,55,66" Grid.Row="4" 
                   Grid.RowSpan="4" FontFamily="Aldine" IsReadOnly="True"
+                      HorizontalGridLinesBrush="Black" VerticalGridLinesBrush="Black"
                   SelectionChanged="DatosEnCasillas" Grid.Column="1" Grid.ColumnSpan="3" >
 
                 <DataGrid.Resources>
@@ -171,7 +192,7 @@
             <TextBox x:Name="txtCantidad" Grid.Row="3" Width="194" Height="28"
                 Margin="10,22,0,10" materialDesign:HintAssist.Hint="Peso producto" IsReadOnly="False"
                 VerticalAlignment="Center" HorizontalAlignment="Left" FontFamily="Aldine"
-                FontSize="14" ToolTip="  Cantidad del mineral pesado" TextAlignment="Center"  Grid.Column="1" KeyDown="txtCantidad_KeyDown_1" />
+                FontSize="14" ToolTip="  Cantidad del mineral pesado" TextAlignment="Center"  Grid.Column="1" KeyDown="txtCantidad_KeyDown_1" TextChanged="txtCantidad_TextChanged" />
             <TextBox Text="{Binding SelectedItem.Precio, ElementName=cmbMinerales}" 
                 x:Name="txtPrecio" Grid.Row="1" Width="194" Height="28"
                 Margin="9,25,55,7" HorizontalAlignment="Center" VerticalAlignment="Center"

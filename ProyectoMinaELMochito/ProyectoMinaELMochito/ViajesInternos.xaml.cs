@@ -156,7 +156,7 @@ namespace ProyectoMinaELMochito
             }
             else
             {
-                MessageBox.Show("Por favor seleccione una fila del datagrid");
+                MessageBox.Show("Por favor seleccione una fila del datagrid", "¡¡Seleccionar!!", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
 
@@ -173,7 +173,7 @@ namespace ProyectoMinaELMochito
             }
             else
             {
-                MessageBox.Show("Por favor seleccione una fila del datagrid");
+                MessageBox.Show("Por favor seleccione una fila del datagrid", "¡¡Seleccionar!!", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
 
@@ -200,7 +200,7 @@ namespace ProyectoMinaELMochito
                     viajeinterno.AgregarDatosAViajeInterno(viajeinterno);
 
                     //Si los datos se intertarón mostrar un mensje
-                    MessageBox.Show("Los datos han sido ingresados correctamente!");
+                    MessageBox.Show("Los datos han sido ingresados correctamente!", "Datos Correctos", MessageBoxButton.OK, MessageBoxImage.Information);
 
                     Produccion sld = new Produccion();
                     sld.Show();
@@ -208,7 +208,7 @@ namespace ProyectoMinaELMochito
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Ha ocurrido un error al momento de insertar los datos...");
+                    MessageBox.Show("Ha ocurrido un error al momento de insertar los datos", "¡¡Error!!", MessageBoxButton.OK, MessageBoxImage.Error);
                     Console.WriteLine(ex.Message);
                 }
                 finally

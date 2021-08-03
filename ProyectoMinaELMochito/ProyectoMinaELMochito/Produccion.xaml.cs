@@ -173,7 +173,7 @@ namespace ProyectoMinaELMochito
             }
             else
             {
-                MessageBox.Show("Por favor seleccione una fila del datagrid");
+                MessageBox.Show("Por favor seleccione una fila del datagrid", "¡¡Seleccionar!!", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
 
@@ -278,11 +278,11 @@ namespace ProyectoMinaELMochito
                     producciion.AgregarProduccion(producciion);
 
                     //Si los datos se intertarón mostrar un mensje
-                    MessageBox.Show("Los datos han sido ingresados correctamente!");
+                    MessageBox.Show("Los datos han sido ingresados correctamente!", "Datos Correctos", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Ha ocurrido un error al momento de insertar los datos..." + ex);
+                    MessageBox.Show("Ha ocurrido un error al momento de insertar los datos","¡¡Error!!",MessageBoxButton.OK, MessageBoxImage.Error);
                     Console.WriteLine(ex.Message);
                 }
                 finally
@@ -310,12 +310,12 @@ namespace ProyectoMinaELMochito
                     ObtenerDatos(1);
                     producciion.ModificarProduccion(producciion);
 
-                    MessageBox.Show("Datos Actualizados Correctamente!");
+                    MessageBox.Show("¡Registro Actualizado Correctamente!", "Datos Actualizados", MessageBoxButton.OK, MessageBoxImage.Information);
 
                 }
-                catch (Exception ex)
+                catch (Exception )
                 {
-                    MessageBox.Show(ex.Message);
+                    MessageBox.Show("Los datos no se modificaron correctamente","¡¡Error!!",MessageBoxButton.OK, MessageBoxImage.Error);
 
                 }
                 finally
@@ -342,16 +342,16 @@ namespace ProyectoMinaELMochito
                 }
                 else if (txtPrecio.Text == String.Empty)
                 {
-                    MessageBoxResult result = MessageBox.Show("Debe seleccionar un mineral",
-                      "Confirmar", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    MessageBoxResult result = MessageBox.Show("Debe seleccionar un mineral","Verificar", MessageBoxButton.OK, MessageBoxImage.Error);
+                     // "Confirmar", MessageBoxButton.OK, MessageBoxImage.Warning);
                     txtCantidad.Text = string.Empty;
                 }
 
             }
-            catch (Exception ex)
+            catch (Exception )
             {
-                    MessageBoxResult result = MessageBox.Show("No puede ingresar dos puntos deguidos",
-                    "Confirmar", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBoxResult result = MessageBox.Show("No puede ingresar dos puntos deguidos", "Verificar", MessageBoxButton.OK, MessageBoxImage.Hand);
+                    //"Confirmar", MessageBoxButton.OK, MessageBoxImage.Warning);
                     txtCantidad.Text = string.Empty;
             }
         }
@@ -384,12 +384,12 @@ namespace ProyectoMinaELMochito
                     ObtenerDatos(1);
                     producciion.BorrarProduccion(producciion);
 
-                    MessageBox.Show("Se eliminaron Correctamente!");
+                    MessageBox.Show("´¡El registro se eliminó Correctamente!", "Datos Eliminados", MessageBoxButton.OK, MessageBoxImage.Information);
 
                 }
-                catch (Exception ex)
+                catch (Exception )
                 {
-                    MessageBox.Show(ex.Message);
+                    MessageBox.Show("Los datos no se eliminaron correctamente", "¡¡Error!!", MessageBoxButton.OK, MessageBoxImage.Error);
 
                 }
                 finally
@@ -485,7 +485,12 @@ namespace ProyectoMinaELMochito
 
         }
 
-    
+        private void txtCantidad_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            VerificarP();
+        }
+
+
 
         private void ListViewItem_Selected_9(object sender, RoutedEventArgs e)
         {
