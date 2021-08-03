@@ -185,13 +185,17 @@
                  Foreground="White"
                 x:Name="icon4"
                  Width="24" Visibility="Visible" Grid.Column="3" Grid.Row="8" Margin="130,10,0,15" RenderTransformOrigin="2.949,0.131"   />
-            <TextBox x:Name="txtnombre" Grid.Row="2"  Margin="101,60,246,69" RenderTransformOrigin="0.446,-0.098" Grid.Column="2" TextChanged="txtnombre_TextChanged" Grid.RowSpan="2" Grid.ColumnSpan="2"/>
-            <Button x:Name="btnAceptar"  Content="Aceptar" Grid.Column="2" Grid.Row="7" Foreground="#0082aa"  BorderBrush="#0082aa"  Margin="31,40,36,0"  Visibility="Hidden" Click="btnAceptar_Click" Height="Auto"/>
+            <TextBox x:Name="txtnombre" Grid.Row="2"  Margin="101,60,246,69" RenderTransformOrigin="0.446,-0.098" Grid.Column="2" TextChanged="txtnombre_TextChanged" Grid.RowSpan="2" Grid.ColumnSpan="2" KeyDown="txtnombre_KeyDown"/>
+            <Button x:Name="btnAceptarM"  Content="Aceptar" Grid.Column="2" Grid.Row="7" Foreground="#0082aa"  BorderBrush="#0082aa"  Margin="31,40,36,0"  Visibility="Hidden" Click="btnAceptar_Click" Height="Auto"/>
+
+            <Button x:Name="btnAceptareliminar"  Content="Aceptar" Grid.Column="2" Grid.Row="7" Foreground="#0082aa"  BorderBrush="#0082aa"  Margin="31,40,36,0"  Visibility="Hidden"  Height="Auto" Click="btnAceptareliminar_Click_1"/>
+
             <Button x:Name="btnCancelar" Content="Cancelar" Grid.Column="3" Grid.Row="7"  Foreground="#0082aa"  BorderBrush="#0082aa" Margin="34,40,32,0"  Visibility="Hidden" Click="btnCancelar_Click" Height="Auto" />
+
             <Button x:Name="btnlimpiar" Content="Limpiar" Grid.Column="4" Grid.Row="7" Height="40"  Foreground="White"  BorderBrush="#0082aa" Margin="32,40,34,0" Click="btnlimpiar_Click"/>
             <!--<ComboBox Name="txtestado" Grid.Column="3" HorizontalAlignment="Left" Margin="183,76,0,0" Grid.Row="1" VerticalAlignment="Top" Width="221" Height="42" RenderTransformOrigin="0.493,0.381" Grid.ColumnSpan="2" Grid.RowSpan="2" />-->
 
         </Grid>
-        <Label x:Name="lbestado" Content="Estado" Grid.Column="1" HorizontalAlignment="Center" Height="28" Margin="684,113,352,0" VerticalAlignment="Top" Width="144"/>
+        <Label x:Name="lbestado" Content="  Estado" Grid.Column="1" HorizontalAlignment="Center" Height="28" Margin="684,113,352,0" VerticalAlignment="Top" Width="144"/>
     </Grid>
 </Window>

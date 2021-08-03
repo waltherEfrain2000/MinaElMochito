@@ -48,6 +48,12 @@ namespace ProyectoMinaELMochito
             txtcodigo.Text = string.Empty;
             txtnombre.Text = string.Empty;
             cmbestado.Text = null;
+            btnAceptareliminar.Visibility = Visibility.Hidden;
+            btnAceptarM.Visibility = Visibility.Hidden;
+            btnCancelar.Visibility = Visibility.Hidden;
+            btnIngresar.Visibility = Visibility.Visible;
+            btnModificar.Visibility = Visibility.Visible;
+            btnEliminar.Visibility = Visibility.Visible;
         }
 
         private void dtgridcargo_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -75,9 +81,9 @@ namespace ProyectoMinaELMochito
         {
             //Validamos que el campo nombre del cargo no se encuentre vacio
 
-                if (txtnombre.Text == string.Empty)
+                if (txtnombre.Text == string.Empty || cmbestado.SelectedItem == null)
                 {
-                    MessageBox.Show("Por favor ingresar los datos requeridos\n");
+                    MessageBox.Show("Por favor ingresar los datos requeridos\n","Confirmar",MessageBoxButton.OK,MessageBoxImage.Warning);
                     return false;
                 }
                 return true;
@@ -85,7 +91,16 @@ namespace ProyectoMinaELMochito
         }
 
 
+        private void ExtraerInformacionFormularioestado(int operacion)
+        {
+            //entra si va extraer informacion para actualizar
+            if (operacion == 1)
+            {
+                cargo.CargoID = Convert.ToInt32(txtcodigo.Text);
+            }
 
+            cargo.Estado = cmbestado.Text;
+        }
 
 
 
@@ -99,7 +114,7 @@ namespace ProyectoMinaELMochito
             }
 
             cargo.NombreCargo = txtnombre.Text;
-            cargo.Estado = Convert.ToString(cmbestado.SelectedIndex);
+            cargo.Estado = cmbestado.Text;
 
         }
 
@@ -189,7 +204,7 @@ namespace ProyectoMinaELMochito
                 {
                     btnModificar.Visibility = Visibility.Hidden;
                     btnIngresar.Visibility = Visibility.Hidden;
-                    btnAceptar.Visibility = Visibility.Visible;
+                    btnAceptarM.Visibility = Visibility.Visible;
                     btnCancelar.Visibility = Visibility.Visible;
 
                     opcion = 1;
@@ -200,20 +215,34 @@ namespace ProyectoMinaELMochito
                     MessageBox.Show(ex.Message);
 
                 }
+
+                
             }
         }
+
+        private bool validacionbteliminar()
+        {
+            if(txtnombre.Text == string.Empty)
+            {
+                MessageBox.Show("Por favor ingresar los datos requeridos\n", "Confirmar", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return false;
+            }
+            return true;
+           
+        }
+
 
         private void btnEliminar_Click(object sender, RoutedEventArgs e)
         {
 
             // Verificar que se ingresaron los valores requeridos
-            if (VerificarCamposLlenos())
+            if (validacionbteliminar())
             {
                 try
                 {
                     btnModificar.Visibility = Visibility.Hidden;
                     btnIngresar.Visibility = Visibility.Hidden;
-                    btnAceptar.Visibility = Visibility.Visible;
+                    btnAceptareliminar.Visibility = Visibility.Visible;
                     btnCancelar.Visibility = Visibility.Visible;
 
                     opcion = 2;
@@ -230,9 +259,49 @@ namespace ProyectoMinaELMochito
 
         private void btnAceptar_Click(object sender, RoutedEventArgs e)
         {
+            int verificarcargo = cargo.Cargorepetido(txtnombre.Text);
+            //txtnombre.Text = verificarcargo
             try
             {
-                if (opcion == 2)
+                if (verificarcargo == 0 && VerificarCamposLlenos())
+                {
+                    //parametro 1 por que es actualizacion
+                    ExtraerInformacionFormulario(1);
+                    cargo.ActualizarCargo(cargo);
+                    
+                    // Mensaje de inserción exitosa
+                    MessageBox.Show("¡El cargo ha sido modificado exitosamente!", "Cargo Modificado", MessageBoxButton.OK, MessageBoxImage.Information);
+                }else if(VerificarCamposLlenos())
+                {
+                    ExtraerInformacionFormularioestado(1);
+                    cargo.ActualizarCargoEstado(cargo);
+                    MessageBox.Show("El estado se ha modificado","Estado Modificado",MessageBoxButton.OK,MessageBoxImage.Information);
+                    LimpiarCasillas();
+                }
+                
+
+            }
+            catch(Exception )
+            {
+                MessageBox.Show("Al modificar el cargo","¡Error!",MessageBoxButton.OK,MessageBoxImage.Error);
+            }
+            finally
+            {
+                LimpiarCasillas();
+                MostrarCargo();
+            }
+
+
+
+        }
+
+      
+
+        private void btnAceptareliminar_Click_1(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (opcion == 2 && validacionbteliminar())
                 {
                     //parametro 1 por que es actualizacion
                     ExtraerInformacionFormulario(1);
@@ -241,6 +310,8 @@ namespace ProyectoMinaELMochito
                     // Mensaje de inserción exitosa
                     MessageBox.Show("¡El cargo ha sido eliminado exitosamente!");
                 }
+                MostrarCargo();
+                LimpiarCasillas();
             }
             catch (Exception)
             {
@@ -250,86 +321,19 @@ namespace ProyectoMinaELMochito
             {
                 btnModificar.Visibility = Visibility.Visible;
                 btnIngresar.Visibility = Visibility.Visible;
-                btnAceptar.Visibility = Visibility.Hidden;
+                btnAceptareliminar.Visibility = Visibility.Hidden;
                 btnCancelar.Visibility = Visibility.Hidden;
                 LimpiarCasillas();
                 MostrarCargo();
             }
-
-            int verificarcargo = cargo.Cargorepetido(txtnombre.Text);
-            //txtnombre.Text = verificarcargo
-            if (verificarcargo == 0)
-            {
-                try
-                {
-                    if (opcion == 1)
-                    {
-                        //parametro 1 por que es actualizacion
-                        ExtraerInformacionFormulario(1);
-                        cargo.ActualizarCargo(cargo);
-
-
-                        // Mensaje de inserción exitosa
-                        MessageBox.Show("¡El cargo ha sido modificado exitosamente!");
-                    }
-                }
-                catch (Exception)
-                {
-                    MessageBox.Show("Al modificar el cargoooooooooo", "¡Error!", MessageBoxButton.OK);
-                }
-                finally
-                {
-                    btnModificar.Visibility = Visibility.Visible;
-                    btnIngresar.Visibility = Visibility.Visible;
-                    btnAceptar.Visibility = Visibility.Hidden;
-                    btnCancelar.Visibility = Visibility.Hidden;
-                    LimpiarCasillas();
-                    MostrarCargo();
-
-                }
-            }
-            else
-                {
-                    MessageBox.Show("El cargo ya existe, por favor ingrese otro", "¡Error!", MessageBoxButton.OK);
-                }
-            //else
-            //{
-            //    try
-            //    {
-            //        if (opcion == 1)
-            //        {
-            //            //parametro 1 por que es actualizacion
-            //            ExtraerInformacionFormulario(1);
-            //            cargo.Actualizarestado(cargo);
-
-
-            //            // Mensaje de inserción exitosa
-            //            MessageBox.Show("¡El cargo ha sido modificado exitosamente!");
-            //        }
-            //    }
-            //    catch (Exception)
-            //    {
-            //        MessageBox.Show("Al modificar el cargo", "¡Error!", MessageBoxButton.OK);
-            //    }
-            //}
-
-           
-
         }
-
-        private void btnAceptareliminar_Click(object sender, RoutedEventArgs e)
-        {
-            
-        }
-
-
 
         private void btnCancelar_Click(object sender, RoutedEventArgs e)
         {
             
                 btnModificar.Visibility = Visibility.Visible;
                 btnIngresar.Visibility = Visibility.Visible;
-                btnAceptar.Visibility = Visibility.Hidden;
+                btnAceptarM.Visibility = Visibility.Hidden;
                 btnCancelar.Visibility = Visibility.Hidden;
                 dtgridcargo.SelectedItem = null;
                 LimpiarCasillas();
@@ -420,6 +424,16 @@ namespace ProyectoMinaELMochito
             DragMove();
         }
 
-        
+        private void txtnombre_KeyDown(object sender, KeyEventArgs e)
+        {
+            //Validacion.validarTxtSinNumeros(e);
+            if (e.Key >= Key.D0 && e.Key <= Key.D9 || e.Key >= Key.NumPad0 && e.Key <= Key.NumPad9 || e.Key==Key.DbeAlphanumeric || e.Key== Key.Decimal|| e.Key == Key.Divide||
+                e.Key >= Key.OemComma || e.Key == Key.OemPeriod)
+                e.Handled = true;
+            else
+                e.Handled = false;
+
+
+        }
     }
 }

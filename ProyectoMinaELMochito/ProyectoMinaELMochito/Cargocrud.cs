@@ -115,10 +115,9 @@ namespace ProyectoMinaELMochito
                 cmd.ExecuteNonQuery();
 
             }
-            catch (Exception e)
+            catch (Exception )
             {
-
-                throw e;
+                
             }
             finally
             {
@@ -127,6 +126,45 @@ namespace ProyectoMinaELMochito
             }
         }
 
+        public void ActualizarCargoEstado(Cargocrud Cargo)
+        {
+            Conexion cn = new Conexion();
+            try
+            {
+                SqlCommand cmd = new SqlCommand("Actualizarestadocargo", cn.Conectarbd);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.AddWithValue("@idCargo", Cargo.CargoID);
+                cmd.Parameters.AddWithValue("@estado", Cargo.Estado);
+
+                cn.abrir();
+
+                SqlDataAdapter adp = new SqlDataAdapter();
+                adp.SelectCommand = cmd;
+                DataTable tabla = new DataTable();
+                adp.Fill(tabla);
+
+                cn.abrir();
+                cmd.ExecuteNonQuery();
+
+            }
+            catch (Exception)
+            {
+
+            }
+            finally
+            {
+                //sqlConnection.Close();
+                cn.cerrar();
+            }
+        }
+
+
+
+
+
+
+        
         //public void Actualizarestado(Cargocrud Cargo)
         //{
         //    Conexion cn = new Conexion();
