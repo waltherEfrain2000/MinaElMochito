@@ -46,7 +46,8 @@ namespace ProyectoMinaELMochito
             //MostrarDetalleSalidas();
             MostrarInfoSalidas();
             AsignarUltimoId();
-           
+            botonfecha.Content = string.Format("{0}", DateTime.Now.ToString());
+
         }
 
         private void limpiarTexto()

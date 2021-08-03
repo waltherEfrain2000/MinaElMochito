@@ -7,8 +7,8 @@
         xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
         xmlns:fw="clr-namespace:SourceChord.FluentWPF;assembly=FluentWPF"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        fw:AcrylicWindow.Enabled="True" FontSize="15"  MouseDown="Window_MouseDown" Height="650" Width="1400" WindowStyle="None" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" 
-        mc:Ignorable="d" d:DataContext="{d:DesignInstance local:EntradasHistoricas}" Title=" ">
+         FontSize="15"  MouseDown="Window_MouseDown" Height="650" Width="1400" WindowStyle="None" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" 
+      AllowsTransparency="True" Background="Transparent"  mc:Ignorable="d" d:DataContext="{d:DesignInstance local:EntradasHistoricas}" Title=" ">
 
     <Grid>
         <Grid.ColumnDefinitions>

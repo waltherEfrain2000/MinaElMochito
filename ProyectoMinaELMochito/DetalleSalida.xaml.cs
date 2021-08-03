@@ -152,5 +152,10 @@ namespace ProyectoMinaELMochito
             de.Show();
             this.Close();
         }
+
+        private void Window_MouseDown_1(object sender, MouseButtonEventArgs e)
+        {
+
+        }
     }
 }

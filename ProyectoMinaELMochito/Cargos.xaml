@@ -8,7 +8,7 @@
         AllowsTransparency="True" Background="Transparent" 
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:fw="clr-namespace:SourceChord.FluentWPF;assembly=FluentWPF"
-        fw:AcrylicWindow.Enabled="True" FontSize="15"  MouseDown="Window_MouseDown" Height="650" Width="1400
+        FontSize="15"  MouseDown="Window_MouseDown" Height="650" Width="1400
     " WindowStyle="None" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Title=" ">
     <Grid>
         <Grid.ColumnDefinitions>
@@ -16,7 +16,7 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <Grid fw:PointerTracker.Enabled="True" Background="#9900afb9" Height="642" VerticalAlignment="Bottom">
+        <Grid fw:PointerTracker.Enabled="True" Background="#9900afb9" Height="650" VerticalAlignment="Bottom">
             <StackPanel>
                 <TextBlock Text="" Foreground="White" Margin="1" FontWeight="DemiBold"/>
 
@@ -116,7 +116,7 @@
             </StackPanel>
         </Grid>
 
-        <Grid Grid.Column="1" Background="White" Margin="0,0,0,10">
+        <Grid Height="650" Grid.Column="1" Background="White">
 
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="60"/>

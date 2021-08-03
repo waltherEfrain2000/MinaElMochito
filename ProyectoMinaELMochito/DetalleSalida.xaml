@@ -7,7 +7,7 @@
         mc:Ignorable="d"
           xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
            xmlns:fw="clr-namespace:SourceChord.FluentWPF;assembly=FluentWPF"
-            Title="DetalleSalida" Height="450" Width="800" WindowStartupLocation="CenterScreen">
+            Title="DetalleSalida" Height="450" Width="800" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowStyle="None" MouseDown="Window_MouseDown">
    
     <Grid>
         <Grid.ColumnDefinitions>
@@ -18,7 +18,7 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <Grid  Background="#9900afb9" Height="419" VerticalAlignment="Bottom">
+        <Grid  Background="#9900afb9" Height="450" VerticalAlignment="Bottom">
             <StackPanel>
 
                 <ListViewItem Padding="1" Selected="ListViewItem_Selected" MouseDoubleClick="ListViewItem_MouseDoubleClick">

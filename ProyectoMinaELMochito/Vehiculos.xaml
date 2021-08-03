@@ -9,8 +9,8 @@
         xmlns:fw="clr-namespace:SourceChord.FluentWPF;assembly=FluentWPF"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" x:Class="ProyectoMinaELMochito.Vehiculos"
 
-        mc:Ignorable="d"
-        fw:AcrylicWindow.Enabled="True" FontSize="15"  MouseDown="Window_MouseDown" Height="650" Width="1400" WindowStyle="None" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Title=" ">
+        mc:Ignorable="d" Background="Transparent" 
+        AllowsTransparency="True" FontSize="15"  MouseDown="Window_MouseDown" Height="650" Width="1400" WindowStyle="None" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Title=" ">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="220"/>
@@ -33,12 +33,19 @@
 
                 <TextBlock Text="Sistema" Foreground="White" Margin="15" FontWeight="DemiBold"/>
 
-                <ListView FontSize="15" SelectionChanged="ListView_SelectionChanged">
+                <ListView FontSize="15">
 
-                    <ListViewItem  Padding="1" Selected="ListViewItem_Selected">
+                    <ListViewItem Padding="1" Selected="ListViewItem_Selected">
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Foreground="White" Kind="Worker" Margin="15"/>
                             <TextBlock Text="Empleado" Foreground="White" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </ListViewItem>
+
+                    <ListViewItem Padding="1" Selected="ListViewItem_Selected_10" >
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Foreground="White" Kind="Work" Margin="15"/>
+                            <TextBlock Text="Cargo" Foreground="White" VerticalAlignment="Center"/>
                         </StackPanel>
                     </ListViewItem>
 
@@ -70,7 +77,7 @@
                         </StackPanel>
                     </ListViewItem>
 
-                    <ListViewItem Padding="1" Selected="ListViewItem_Selected_5">
+                    <ListViewItem Padding="1" Selected="ListViewItem_Selected_9">
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Foreground="White" Kind="Abacus" Margin="15"/>
                             <TextBlock Text="Producción" Foreground="White" VerticalAlignment="Center"/>
@@ -84,6 +91,13 @@
                         </StackPanel>
                     </ListViewItem>
 
+                    <ListViewItem Padding="1" Selected="ListViewItem_Selected_11"  >
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Foreground="White" Kind="Pickaxe" Margin="15"/>
+                            <TextBlock Text="Equipo" Foreground="White" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </ListViewItem>
+
                     <ListViewItem Padding="1" Selected="ListViewItem_Selected_8" >
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Foreground="White" Kind="Logout" Margin="15"/>
@@ -92,7 +106,7 @@
                     </ListViewItem>
 
                     <StackPanel Orientation="Horizontal">
-                        <Button x:Name="botonfecha" Foreground="white" Background="{x:Null}" BorderBrush="{x:Null}">
+                        <Button x:Name="botonfecha" Foreground="white" Background="{x:Null}" BorderBrush="{x:Null}" >
                             <materialDesign:PackIcon Kind="Calendar"/>
                         </Button>
                         <TextBlock Text="" FontSize="12" Margin="10" VerticalAlignment="Center"/>

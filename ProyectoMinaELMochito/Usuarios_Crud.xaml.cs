@@ -548,5 +548,19 @@ namespace ProyectoMinaELMochito
             btnAceptarEliminacion.Visibility = Visibility.Hidden;
             btnCancelarEliminacion.Visibility = Visibility.Hidden;
         }
+
+        private void ListViewItem_Selected_10(object sender, RoutedEventArgs e)
+        {
+            Cargos cargos = new Cargos();
+            cargos.Show();
+            this.Close();
+        }
+
+        private void ListViewItem_Selected_11(object sender, RoutedEventArgs e)
+        {
+            Herramientas herramientas = new Herramientas();
+            herramientas.Show();
+            this.Close();
+        }
     }
 }

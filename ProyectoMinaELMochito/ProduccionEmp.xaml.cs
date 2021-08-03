@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using System.Data.SqlClient;
 using System.Configuration;
 using System.Data;
+using System.Diagnostics;
 
 namespace ProyectoMinaELMochito
 {
@@ -360,6 +361,20 @@ namespace ProyectoMinaELMochito
             }
             else
                 e.Handled = true;
+        }
+
+        private void ListViewItem_Selected_4(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                Process.Start("https://waltherefrain2000.github.io/WebMinaMochito/AyudaProduccionMain/VProduccion.html");
+
+            }
+            catch (Exception)
+            {
+
+                MessageBox.Show("Error, no se ha encontrado la página...", "Error", MessageBoxButton.OK);
+            }
         }
         //Fin del programa
     }

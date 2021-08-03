@@ -7,7 +7,7 @@
         xmlns:local="clr-namespace:ProyectoMinaELMochito"
         mc:Ignorable="d"
         xmlns:fw="clr-namespace:SourceChord.FluentWPF;assembly=FluentWPF"
-        fw:AcrylicWindow.Enabled="True" FontSize="15" MouseDown="Window_MouseDown" AllowsTransparency="true" Background="Transparent" Height="650" Width="1400" WindowStyle="None" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Title=" ">
+        FontSize="15" MouseDown="Window_MouseDown" AllowsTransparency="true" Background="Transparent" Height="650" Width="1400" WindowStyle="None" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Title=" ">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="220"/>
@@ -32,10 +32,17 @@
 
                 <ListView FontSize="15">
 
-                    <ListViewItem  Padding="1" Selected="ListViewItem_Selected">
+                    <ListViewItem Padding="1" Selected="ListViewItem_Selected">
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Foreground="White" Kind="Worker" Margin="15"/>
                             <TextBlock Text="Empleado" Foreground="White" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </ListViewItem>
+
+                    <ListViewItem Padding="1" Selected="ListViewItem_Selected_10" >
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Foreground="White" Kind="Work" Margin="15"/>
+                            <TextBlock Text="Cargo" Foreground="White" VerticalAlignment="Center"/>
                         </StackPanel>
                     </ListViewItem>
 
@@ -67,7 +74,7 @@
                         </StackPanel>
                     </ListViewItem>
 
-                    <ListViewItem Padding="1" Selected="ListViewItem_Selected_5">
+                    <ListViewItem Padding="1" Selected="ListViewItem_Selected_9">
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Foreground="White" Kind="Abacus" Margin="15"/>
                             <TextBlock Text="Producción" Foreground="White" VerticalAlignment="Center"/>
@@ -81,7 +88,7 @@
                         </StackPanel>
                     </ListViewItem>
 
-                    <ListViewItem Padding="1" Selected="ListViewItem_Selected_9" >
+                    <ListViewItem Padding="1" Selected="ListViewItem_Selected_11"  >
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Foreground="White" Kind="Pickaxe" Margin="15"/>
                             <TextBlock Text="Equipo" Foreground="White" VerticalAlignment="Center"/>
@@ -96,7 +103,7 @@
                     </ListViewItem>
 
                     <StackPanel Orientation="Horizontal">
-                        <Button x:Name="botonfecha" Foreground="white" Background="{x:Null}" BorderBrush="{x:Null}">
+                        <Button x:Name="botonfecha" Foreground="white" Background="{x:Null}" BorderBrush="{x:Null}" >
                             <materialDesign:PackIcon Kind="Calendar"/>
                         </Button>
                         <TextBlock Text="" FontSize="12" Margin="10" VerticalAlignment="Center"/>
@@ -154,11 +161,11 @@
             <Button x:Name="btnAgregar" Foreground="White"  BorderBrush="#0082aa" Content="Agregar" Grid.Column="4" Grid.Row="1" Margin="60,5,30,10" Click="btnAgregar_Click" />
             <Button x:Name="btnModificar" Foreground="White" BorderBrush="#0082aa" Content="Modificar" Grid.Column="4" Grid.Row="2"  Margin="60,5,30,10" Click="btnModificar_Click" />
             <Button x:Name="btnEliminar" Foreground="White" BorderBrush="#0082aa" Content="Eliminar" Grid.Column="4" Grid.Row="3"  Margin="60,5,30,10" Click="btnEliminar_Click" />
-            <Button x:Name="btnLimpiar" Foreground="White" BorderBrush="#0082aa" Content="Limpiar" Grid.Column="4" Grid.Row="4" Margin="60,5,30,10" Click="btnLimpiar_Click"  />
+            <Button x:Name="btnLimpiar" Foreground="White" BorderBrush="#0082aa" Content="Limpiar" Grid.Column="4" Grid.Row="4" Margin="60,11,30,0" Click="btnLimpiar_Click" VerticalAlignment="Top"  />
             <Button x:Name="btnAsignar" Foreground="#0082aa" BorderBrush="#0082aa" Content="Asignar" Grid.Column="4" Grid.Row="5" Margin="60,5,30,10" Background="White" FontStyle="Italic" FontSize="14" Click="btnAsignar_Click"/>
             <Button x:Name="btnActualizar" Foreground="#0082aa" BorderBrush="#0082aa" Content="Actualizar" Grid.Column="4" Grid.Row="6" Margin="60,5,30,10" Background="White" FontStyle="Italic" FontSize="14" Click="btnActualizar_Click"/>
 
-            <DataGrid Name="DgEquipamiento" Grid.Row="5" Margin="30,20,10,20" Grid.ColumnSpan="4" Grid.RowSpan="6" IsReadOnly="True" FontSize="15" SelectionChanged="DgvHerramientas_SelectionChanged" AutoGeneratingColumn="DgEquipamiento_AutoGeneratingColumn">
+            <DataGrid Name="DgEquipamiento" Grid.Row="5" Margin="30,20,10,20" Grid.ColumnSpan="4" Grid.RowSpan="6" IsReadOnly="True" FontSize="15" SelectionChanged="DgvHerramientas_SelectionChanged" AutoGeneratingColumn="DgEquipamiento_AutoGeneratingColumn" >
 
                 <DataGrid.Resources>
                     <Style TargetType="{x:Type DataGridColumnHeader}" >
