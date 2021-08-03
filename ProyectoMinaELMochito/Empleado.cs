@@ -173,7 +173,7 @@ namespace ProyectoMinaELMochito
             try
             {
                 //Realizar el query que cargará la información correspondiente
-                String query = @"Select * From Empleados.cargo";
+                String query = @"Select * From Empleados.cargo where estado = 'Activo'";
 
                 //Establecer la conexión
                 sqlConnection.Open();

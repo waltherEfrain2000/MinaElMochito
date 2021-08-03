@@ -287,9 +287,13 @@ namespace ProyectoMinaELMochito
         private void txtIdentidad_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key >= Key.D0 && e.Key <= Key.D9 || e.Key >= Key.NumPad0 && e.Key <= Key.NumPad9)
+            {
                 e.Handled = false;
+            }
             else
+            {
                 e.Handled = true;
+            }
         }
 
         private void txtEdad_KeyDown(object sender, KeyEventArgs e)
@@ -685,6 +689,20 @@ namespace ProyectoMinaELMochito
             ViajesInternos sld = new ViajesInternos();
             sld.Show();
             this.Close();
+        }
+
+        private void txtIdentidad_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            string espacio = " ";
+            if (txtIdentidad.Text == espacio)
+            {
+                txtIdentidad.Clear();
+            }
+
+            if (txtIdentidad.Text.Contains(" "))
+            {
+                txtIdentidad.Clear();
+            }
         }
     }
 }

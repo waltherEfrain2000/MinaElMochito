@@ -185,9 +185,9 @@
                 </DataGrid>
 
                 <Button x:Name="btnIngresar" Content="Ingresar" Grid.Column="5" Grid.Row="2"    Margin="60,10,30,8"   Click="btnIngresar_Click"  Foreground="White"  BorderBrush="#0082aa"/>
-                <Button x:Name="btnModificar" Content="Modificar" Grid.Column="5" Grid.Row="3"   Margin="60,10,30,8"    Click="btnModificar_Click" Foreground="White"  BorderBrush="#0082aa" />
-                <Button x:Name="btnEliminar" Content="Eliminar" Grid.Column="5" Grid.Row="4"     Margin="60,10,30,8"   Click="btnEliminar_Click" Foreground="White"  BorderBrush="#0082aa"/>
-                <Button x:Name="btnLimpiar" Content="Limpiar" Grid.Column="5" Grid.Row="5"  Margin="60,10,30,8"  Click="btnLimpiar_Click" Foreground="White"  BorderBrush="#0082aa"/>
+                <Button x:Name="btnModificar" Content="Modificar" Grid.Column="5" Grid.Row="3"   Margin="60,10,30,8"    Click="btnModificar_Click" Foreground="White"  BorderBrush="#0082aa" Visibility="Hidden"/>
+                <Button x:Name="btnEliminar" Content="Eliminar" Grid.Column="5" Grid.Row="3"     Margin="60,10,30,8"   Click="btnEliminar_Click" Foreground="White"  BorderBrush="#0082aa"/>
+                <Button x:Name="btnLimpiar" Content="Limpiar" Grid.Column="5" Grid.Row="4"  Margin="60,10,30,8"  Click="btnLimpiar_Click" Foreground="White"  BorderBrush="#0082aa"/>
                 <Button x:Name="btnAsignar" Content="Asignar" Grid.Column="2" Grid.Row="2"  Margin="60,10,30,8"    Foreground="White"  BorderBrush="#0082aa" Click="btnAsignar_Click"/>
 
 

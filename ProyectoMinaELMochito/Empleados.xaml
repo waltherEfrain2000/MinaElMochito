@@ -143,23 +143,24 @@
             <Label Content="Identidad" Grid.Row="2" FontSize="15" Margin="30,23,10,0" />
             <Label Content="Nombre Completo" Grid.Row="3" FontSize="15" Margin="30,23,10,0" />
             <Label Content="Fecha de nacimiento" Grid.Row="4" FontSize="15" Margin="30,23,10,0" />
-            <Label Content="Género" Grid.Row="1" FontSize="15" Margin="105,23,10,0" Grid.Column="2" />
-            <Label Content="Cargo" Grid.Row="2"  FontSize="15" Margin="105,23,10,0" Grid.Column="2" />
-            <Label Content="Salario" Grid.Row="3" FontSize="15" Margin="105,23,10,0" Grid.Column="2" />
-            <Label Content="Dirección" Grid.Row="4" FontSize="15" Margin="105,23,10,0" Grid.Column="2"  />
+            <Label Content="Género" Grid.Row="1" FontSize="15" Margin="105,26,10,56" Grid.Column="2" Grid.RowSpan="2" />
+            <Label Content="Cargo" Grid.Row="2"  FontSize="15" Margin="105,26,10,56" Grid.Column="2" Grid.RowSpan="2" />
+            <Label Content="Salario" Grid.Row="3" FontSize="15" Margin="105,26,10,57" Grid.Column="2" Grid.RowSpan="2" />
+            <Label Content="Dirección" Grid.Row="4" FontSize="15" Margin="105,26,10,56" Grid.Column="2" Grid.RowSpan="2"  />
 
             <TextBox Name="txtEmpleadoID" Grid.Row="1" Grid.Column="1" FontSize="15" Margin="15,10,10,10" IsReadOnly="True" />
-            <TextBox Name="txtIdentidad" Grid.Row="2" Grid.Column="1" FontSize="15" Margin="15,10,10,10"  KeyDown="txtIdentidad_KeyDown" MaxLength="13" />
+            <TextBox Name="txtIdentidad" Grid.Row="2" Grid.Column="1" FontSize="15" Margin="15,10,10,10"  KeyDown="txtIdentidad_KeyDown" MaxLength="13" TextChanged="txtIdentidad_TextChanged" />
             <TextBox Name="txtNombreCompleto" Grid.Row="3" Grid.Column="1" FontSize="15" Margin="15,10,10,10" TextChanged="txtNombreCompleto_TextChanged" KeyDown="txtNombreCompleto_KeyDown" MaxLength="50"/>
 
             <TextBox Name="txtEdad" Grid.Row="4" Grid.Column="1" FontSize="15" Margin="15,10,10,10" KeyDown="txtEdad_KeyDown" Visibility="Hidden"/>
             <DatePicker Name="dpFechaNacimiento" Grid.Row="4" Grid.Column="1" Margin="15,10,10,8" ToolTip="Select date" FontSize="15" Height="30" Foreground="Black" Background="Transparent" SelectedDateFormat="Short">
                 <DatePicker.BlackoutDates>
-                    <CalendarDateRange End="1940-01-01"/>
+                    <CalendarDateRange Start="2002-01-01"/>
+                    <CalendarDateRange End="1950-01-01"/>
                 </DatePicker.BlackoutDates>
             </DatePicker>
 
-            <TextBox Name="txtSalario" Grid.Row="3" Grid.Column="3" FontSize="15" Margin="15,10,10,10" KeyDown="txtSalario_KeyDown" TextChanged="txtSalario_TextChanged" />
+            <TextBox Name="txtSalario" Grid.Row="3" Grid.Column="3" FontSize="15" Margin="15,10,10,10" KeyDown="txtSalario_KeyDown" TextChanged="txtSalario_TextChanged" MaxLength="10"/>
             <TextBox Name="txtDireccion" Grid.Row="4" Grid.Column="3" FontSize="15" Margin="15,10,10,10" MaxLength="50"/>
 
 

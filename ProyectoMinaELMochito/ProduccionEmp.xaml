@@ -99,7 +99,7 @@
                  VerticalAlignment="Center" FontSize="14" FontFamily="Aldine"
                  ToolTip="Se muestra el numero del viaje en que será trasnportado el material"
                  KeyDown="BloquearEdicion" IsReadOnly="True" Grid.Row="1"/>
-            <TextBox Name="txtCantidad" Grid.Row="1" Grid.Column="1" Width="160" Height="25"
+            <TextBox Name="txtCantidad" Grid.Row="1" Grid.Column="1" Width="160" Height="25" MaxLength="6"
                  Margin="152,19,174,16" materialDesign:HintAssist.Hint="Peso producto" IsReadOnly="False"
                  VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Aldine"
                  FontSize="14" ToolTip="Cantidad del mineral pesado" TextAlignment="Center" PreviewTextInput="txtCantidad_PreviewTextInput"/>
@@ -111,7 +111,7 @@
                  IsReadOnly="true"/>
             <TextBox Name="txtIdProduccion" Grid.Column="0" Grid.Row="0" Visibility="Hidden" />
 
-            <DataGrid Name="dgvProduccion" Margin="30,59,102,30" Grid.Row="3" 
+            <DataGrid Name="dgvProduccion" Margin="30,59,102,30" Grid.Row="3" AutoGeneratingColumn="dgvProduccion_AutoGeneratingColumn"
                   Grid.RowSpan="3" FontFamily="Aldine" IsReadOnly="True"
                   SelectionChanged="DatosEnCasillas" Grid.ColumnSpan="2">
 

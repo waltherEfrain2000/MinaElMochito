@@ -376,6 +376,19 @@ namespace ProyectoMinaELMochito
                 MessageBox.Show("Error, no se ha encontrado la página...", "Error", MessageBoxButton.OK);
             }
         }
+
+        private void dgvProduccion_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
+        {
+            if (e.PropertyType == typeof(DateTime))
+            {
+                ((DataGridTextColumn)e.Column).Binding.StringFormat = "dd/MM/yyyy";
+            }
+
+            if (e.PropertyType == typeof(Decimal))
+            {
+                ((DataGridTextColumn)e.Column).Binding.StringFormat = "L00.00";
+            }
+        }
         //Fin del programa
     }
 }
