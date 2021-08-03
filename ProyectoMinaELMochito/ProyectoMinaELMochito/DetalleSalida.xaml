@@ -56,12 +56,15 @@
 
             <Button x:Name="btnAgregar" Foreground="White"  BorderBrush="#0082aa" Content="Agregar" Grid.Column="3" Grid.Row="1" Margin="73,25,99,10" Height="Auto" Click="btnAgregar_Click" Grid.ColumnSpan="2"  />
 
-            <DataGrid Name="DgDetalleSalida" Grid.Row="2" Margin="55,10,99,25" Grid.ColumnSpan="5" Grid.RowSpan="4" IsReadOnly="True" FontSize="15" SelectionChanged="DgDetalleSalida_SelectionChanged" >
+            <DataGrid Name="DgDetalleSalida" Grid.Row="2" Margin="55,10,99,25" Grid.ColumnSpan="5" 
+                      Grid.RowSpan="4" IsReadOnly="True" FontSize="15"   Background="White"  GridLinesVisibility="All"
+                      SelectionChanged="DgDetalleSalida_SelectionChanged"  HeadersVisibility="Column" >
 
                 <DataGrid.Resources>
                     <Style TargetType="{x:Type DataGridColumnHeader}" >
                         <Setter Property="Background" Value="#9900afb9"></Setter>
                         <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                        <Setter Property="Foreground" Value="White"></Setter>
                     </Style>
                 </DataGrid.Resources>
 

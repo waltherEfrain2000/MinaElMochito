@@ -168,20 +168,23 @@
 
                 </DatePicker>-->
 
-                <DataGrid Name="dgvSalida"  Grid.Row="5" Margin="15,10,15,50" Grid.ColumnSpan="4"
+                <DataGrid Name="dgvSalida"  Grid.Row="5" Margin="15,10,15,50" Grid.ColumnSpan="4" 
                           IsReadOnly="True" FontSize="15"  SelectionMode="Single"  GridLinesVisibility="All"
-                          HorizontalGridLinesBrush="Black" VerticalGridLinesBrush="Black" 
+                           
                           HeadersVisibility="Column" Grid.RowSpan="3" Width="auto"
                           SelectionChanged="dgvSalida_SelectionChanged_1"
-                          Grid.Column="1"  BorderBrush="BlueViolet" Background="White">
+                          Grid.Column="1"  Background="White">
                     <DataGrid.Resources>
+                        
                         <Style TargetType="{x:Type DataGridColumnHeader}">
                             <Setter Property="Background" Value="#9900afb9"></Setter>
                             <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                            <Setter Property="Foreground" Value="White"></Setter>
 
                         </Style>
+                     
                     </DataGrid.Resources>
-
+ 
                 </DataGrid>
 
                 <Button x:Name="btnIngresar" Content="Ingresar" Grid.Column="5" Grid.Row="2"    Margin="60,10,30,8"   Click="btnIngresar_Click"  Foreground="White"  BorderBrush="#0082aa"/>

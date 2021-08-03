@@ -58,8 +58,8 @@ namespace ProyectoMinaELMochito
                 detallesalidas.idDetalle = Convert.ToInt32(txtIdDetalle);
 
             }
-                //detallesalidas.idDetalle = Convert.ToInt32(txtIdDetalle);
-                detallesalidas.DetalleSalida = txtDetalle.Text;
+            //detallesalidas.idDetalle = Convert.ToInt32(txtIdDetalle);
+            detallesalidas.DetalleSalida = txtDetalle.Text;
 
             //herramienta.HerramientasEnUso = Convert.ToInt32(txtCantidad.Text);
 
@@ -75,7 +75,7 @@ namespace ProyectoMinaELMochito
                     infoFormulario(0);
                     detallesalidas.AgregarDetalleSalida(detallesalidas);
 
-                    MessageBox.Show("Detalle de salida Ingresada");
+                    MessageBox.Show("Detalle de salida Ingresada","Datos Correctos");
                     MostrarDetalleSalidas();
                     Salidas sa = new Salidas();
                     sa.Show();
@@ -83,7 +83,7 @@ namespace ProyectoMinaELMochito
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Ha ocurrido un error al momento de insertar  por " + ex);
+                    MessageBox.Show("Ha ocurrido un error al momento de insertar un detalle de salida","Datos Incorrectos",MessageBoxButton.OK,MessageBoxImage.Error );
                     Console.WriteLine(ex.Message);
 
                 }
@@ -140,7 +140,7 @@ namespace ProyectoMinaELMochito
         {
             if ( txtDetalle.Text == string.Empty)
             {
-                MessageBox.Show("Por favor ingresa todos los valores");
+                MessageBox.Show("Por favor ingresa todos los datos solicitados","Error",MessageBoxButton.OK,MessageBoxImage.Warning);
                 return false;
             }
             return true;
