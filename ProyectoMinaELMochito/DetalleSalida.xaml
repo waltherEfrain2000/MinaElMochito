@@ -51,7 +51,7 @@
             <Label Content="Detalle de Salidas" Grid.ColumnSpan="3" HorizontalAlignment="Center" FontSize="35" Grid.Column="1" Margin="70,0,54,0" Width="280" />
             <Label Content="Descripción" Grid.Row="1" FontSize="15" Margin="55,38,105,0" Grid.ColumnSpan="2"  />
 
-            <TextBox Name="txtDetalle" Grid.Row="1" Grid.Column="1" FontSize="15" Margin="20,25,55,10" Grid.ColumnSpan="2"/>
+            <TextBox Name="txtDetalle" Grid.Row="1" Grid.Column="1" FontSize="15" Margin="20,25,55,10" Grid.ColumnSpan="2" MaxLength="50"/>
             <TextBox Name="txtIdDetalle" Grid.Row="1" Grid.Column="1" FontSize="15" Margin="15,10,10,10" IsReadOnly="True" Visibility="Hidden"/>
 
             <Button x:Name="btnAgregar" Foreground="White"  BorderBrush="#0082aa" Content="Agregar" Grid.Column="3" Grid.Row="1" Margin="73,25,99,10" Height="Auto" Click="btnAgregar_Click" Grid.ColumnSpan="2"  />

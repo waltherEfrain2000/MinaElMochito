@@ -153,7 +153,7 @@
                 <ComboBox Name="cmbIdMineral" Grid.Row="3" Grid.Column="1" FontSize="15" Margin="15,12,43,4" Height="34"  />
                 <!--<ComboBox Name="cmbSalidas" Grid.Row="2" Grid.Column="3" FontSize="15" Margin="56,0,15,12" Grid.ColumnSpan="2" Height="38"  />-->
 
-                <TextBox Name="txtCantidad" Grid.Row="2" Grid.Column="3"  FontSize="15" Margin="147,10,15,0"    Text="{Binding Cantidad, Mode=TwoWay, ValidatesOnExceptions=True}" 
+                <TextBox Name="txtCantidad" Grid.Row="2" Grid.Column="3"  FontSize="15" Margin="147,10,15,0"    Text="{Binding Cantidad, Mode=TwoWay, ValidatesOnExceptions=True}" MaxLength="7"
                          Height="32" VerticalAlignment="Top" KeyDown="txtCantidad_KeyDown" Grid.ColumnSpan="2" TextChanged="txtCantidad_TextChanged" />
 
 
@@ -168,7 +168,7 @@
 
                 </DatePicker>-->
 
-                <DataGrid Name="dgvSalida"  Grid.Row="5" Margin="15,10,15,50" Grid.ColumnSpan="4"
+                <DataGrid Name="dgvSalida"  Grid.Row="5" Margin="15,10,15,50" Grid.ColumnSpan="4" AutoGeneratingColumn="dgvSalida_AutoGeneratingColumn"
                           IsReadOnly="True" FontSize="15"  SelectionMode="Single"  GridLinesVisibility="All"
                           HeadersVisibility="Column" Grid.RowSpan="3" Width="auto"
                           SelectionChanged="dgvSalida_SelectionChanged_1"

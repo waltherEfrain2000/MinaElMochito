@@ -74,7 +74,7 @@ namespace ProyectoMinaELMochito
         }
         public void ValidarLetras(KeyEventArgs e)
         {
-            if (e.Key >= Key.D0 && e.Key <= Key.D9 || e.Key >= Key.NumPad0 && e.Key <= Key.NumPad9 || e.Key == Key.OemPeriod || e.Key == Key.Decimal)
+            if (e.Key >= Key.D0 && e.Key <= Key.D9 || e.Key >= Key.NumPad0 && e.Key <= Key.NumPad9 || e.Key == Key.OemPeriod || e.Key == Key.Decimal || e.Key == Key.OemComma)
                 e.Handled = false;
             else
                 e.Handled = true;
