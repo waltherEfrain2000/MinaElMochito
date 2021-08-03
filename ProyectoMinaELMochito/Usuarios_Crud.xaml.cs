@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -15,48 +16,55 @@ using System.Windows.Shapes;
 using System.Data.SqlClient;
 using System.Configuration;
 
-namespace ProyectoMinaELMochito 
+namespace ProyectoMinaELMochito
 {
-    /// <summary>
-    /// Lógica de interacción para Usuarios_Crud.xaml
-    /// </summary>
-    /// 
 
-    public partial class Usuarios_Crud : Window 
+
+    public partial class Usuarios_Crud : Window
+
     {
 
-        private static string connectionString = ConfigurationManager.ConnectionStrings["ProyectoMinaELMochito.Properties.Settings.MinaConnectionString"].ConnectionString;
-        private SqlConnection sqlConnection = new SqlConnection(connectionString);
+        private Validaciones validaciones = new Validaciones();
 
         private User user = new User();
-        private List<User> users;
+
+        private conexion cn = new conexion();
         public Usuarios_Crud()
         {
+
             InitializeComponent();
             CargarDatos();
+            ObtenerRol();
             botonfecha.Content = string.Format("{0}", DateTime.Now.ToString());
 
         }
 
-        private void ObtenerUsuarios()
+        private void ObtenerRol()
         {
-            users = user.MostrarUsuario();
 
-            dtgriduser.DisplayMemberPath = "id";
-            dtgriduser.DisplayMemberPath = "nombreCompleto";
-            dtgriduser.DisplayMemberPath = "UserName";
-            dtgriduser.DisplayMemberPath = "Password";
-            dtgriduser.DisplayMemberPath = "Rol";
-            dtgriduser.DisplayMemberPath = "Estado";
-            dtgriduser.SelectedValuePath = "id";
-
-            dtgriduser.ItemsSource = users;
-
+            cmbRol.ItemsSource = user.LlenarComboBoxEstados();
+            cmbRol.DisplayMemberPath = "NombreRol";
+            cmbRol.SelectedValuePath = "Rol";
         }
+
+
 
         private bool VerificarValores()
         {
-            if (txtnombre.Text == string.Empty || txtusername.Text == string.Empty)
+            User Usuario = user.BuscarUsuario(txtusername.Text);
+
+            if (Usuario.Username == null)
+            {
+              
+                return true;
+            }
+            else
+            {
+                MessageBox.Show("El usuario ya existe, porfavor ingrese otro nombre de usuario");
+                return false;
+            }
+
+            if (txtnombre.Text == string.Empty || txtusername.Text == string.Empty || txtApellido.Text == string.Empty || pssPassword.Password == string.Empty)
             {
                 MessageBox.Show("Por favor ingresa todos los valores en las cajas de texto");
                 return false;
@@ -74,6 +82,43 @@ namespace ProyectoMinaELMochito
 
             }
 
+
+            return true;
+        }
+
+        private bool VerificarValoresModificar()
+        {
+
+            User Usuario = user.BuscarUsuario(txtusername.Text);
+
+
+            if(Usuario.Password != pssPassword.Password)
+            {
+                MessageBox.Show("Contraseña Incorrecta, no puede modificar los datos");
+                return false;
+                
+            }
+            if (txtnombre.Text == string.Empty || txtusername.Text == string.Empty || txtApellido.Text == string.Empty)
+            {
+                MessageBox.Show("Por favor ingresa todos los valores en las cajas de texto");
+                return false;
+            }
+            else if(pssPassword.Password == string.Empty){
+                MessageBox.Show("Si desea modificar sus datos confirme su contraseña");
+
+            }
+            else if (cmbEstado.SelectedValue == null)
+            {
+                MessageBox.Show("Por favor selecciona  el estado del Usuario");
+                return false;
+            }
+            else if (cmbRol.SelectedValue == null)
+            {
+
+                MessageBox.Show("Por favor selecciona el Rol del Usuario");
+                return false;
+
+            }
             return true;
         }
 
@@ -81,22 +126,26 @@ namespace ProyectoMinaELMochito
         {
 
 
-            user.NombreCompleto = txtnombre.Text;
+            user.PrimerNombre = txtnombre.Text;
+            user.SegundoNombre = txtsegNombre.Text;
+            user.PrimerApellido = txtApellido.Text;
+            user.SegundoApellido = txtSegApellido.Text;
             user.Username = txtusername.Text;
             user.Password = pssPassword.Password;
-      
+
             if (cmbRol.SelectedIndex == 0)
             {
-                MessageBox.Show("sera un admin");
-                user.Rol = "ADMINISTRADOR";
+                
+                user.Rol = 1;
             }
-            else {
-                MessageBox.Show("sera un empleado normal");
-                user.Rol = "EMPLEADODETURNO";
+            else
+            {
+                
+                user.Rol = 2;
             }
             if (cmbEstado.SelectedIndex == 0)
             {
-                MessageBox.Show("sera un empleado inactivo");
+                
                 user.Estado = false;
             }
             else
@@ -106,24 +155,28 @@ namespace ProyectoMinaELMochito
         private void ObtenerValoresFormularioModify()
         {
 
-            user.Id =Convert.ToInt32( txtid.Text);
-            user.NombreCompleto = txtnombre.Text;
+            user.Id = Convert.ToInt32(txtid.Text);
+            user.PrimerNombre = txtnombre.Text;
+            user.SegundoNombre = txtsegNombre.Text;
+            user.PrimerApellido = txtApellido.Text;
+            user.SegundoApellido = txtSegApellido.Text;
             user.Username = txtusername.Text;
             user.Password = pssPassword.Password;
 
             if (cmbRol.SelectedIndex == 0)
             {
-                MessageBox.Show("sera un admin");
-                user.Rol = "ADMINISTRADOR";
+               
+                user.Rol = 1;
             }
             else
             {
-                MessageBox.Show("sera un empleado normal");
-                user.Rol = "EMPLEADODETURNO";
+                
+                user.Rol = 2;
             }
+
             if (cmbEstado.SelectedIndex == 0)
             {
-                MessageBox.Show("sera un empleado inactivo");
+              
                 user.Estado = false;
             }
             else
@@ -135,25 +188,28 @@ namespace ProyectoMinaELMochito
         {
 
             user.Id = Convert.ToInt32(txtid.Text);
-         
+
             if (cmbEstado.SelectedIndex == 0)
             {
                 MessageBox.Show("El usuario ya esta invalidado, no se puede hacer nada");
-        
+
             }
-            else 
+            else
 
                 user.Estado = false;
 
         }
         private void limpiar()
         {
-            txtnombre.Text = string.Empty;
-            txtusername.Text = String.Empty;
-            pssPassword.Password = String.Empty;
-            cmbEstado.SelectedIndex = -1;
-            cmbRol.SelectedIndex = -1;
-            txtid.Text = string.Empty;
+            txtnombre.Text = "";
+            txtSegApellido.Text = "";
+            txtApellido.Text = "";
+            txtsegNombre.Text = "";
+            txtusername.Text = "";
+            pssPassword.Password = "";
+            cmbEstado.Text = "";
+            cmbRol.Text = "";
+            txtid.Text = "";
 
         }
 
@@ -166,18 +222,20 @@ namespace ProyectoMinaELMochito
                     ObtenerValoresFormulario();
 
                     user.CrearUsuario(user);
-                    MessageBox.Show("Nuevo usuario ingresados correctamente");
+                    
 
                 }
-                catch (Exception f)
+                catch (Exception ex)
                 {
 
-                    MessageBox.Show($"{f}");
+                    MessageBox.Show($"Error al momento de ingresar el Usuario...{ex}");
+
                 }
                 finally
                 {
+                    MessageBox.Show("Nuevo usuario ingresados correctamente");
                     limpiar();
-                    ObtenerUsuarios();
+                    CargarDatos();
 
                 }
             }
@@ -187,18 +245,19 @@ namespace ProyectoMinaELMochito
 
         private void btnModificar_Click(object sender, RoutedEventArgs e)
         {
-            if (VerificarValores())
+            if (VerificarValoresModificar())
             {
                 try
                 {
                     ObtenerValoresFormularioModify();
 
-                    user.ModificarUsuario(user);
+                    btnModificar.Visibility = Visibility.Hidden;
+                    btnIngresar.Visibility = Visibility.Hidden;
+                    btnAceptarEliminacion.Visibility = Visibility.Visible;
+                    btnCancelarEliminacion.Visibility = Visibility.Visible;
 
-                    MessageBox.Show("el Usuario se modifico correctamente!");
 
-                    limpiar();
-
+                    
                 }
                 catch (Exception ex)
                 {
@@ -207,96 +266,79 @@ namespace ProyectoMinaELMochito
                 }
                 finally
                 {
+                    MessageBox.Show("Modifique los valores que desee");
                     CargarDatos();
-                    limpiar();
+                    
                 }
             }
         }
 
 
-        private void SetUsuario(User user)
-        {
-            try
-            {
-                this.txtnombre.Text = Convert.ToString(user.NombreCompleto);
-                this.txtusername.Text = Convert.ToString(user.Username);
-                this.pssPassword.Password = Convert.ToString(user.Password);
-                this.cmbRol.SelectedItem = Convert.ToString(user.Rol);
-                this.cmbEstado.SelectedValue = Convert.ToBoolean(user.Estado);
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-          
-
-        }
         private void dtgriduser_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            //if (dtgriduser.SelectedIndex==-1)
-            //{
-            //    User userselected = this.dtgriduser.SelectedItem as User;
-            //    SetUsuario(userselected);
-            //}
 
-            //else
-            //{
-            //    MessageBox.Show("Favor seleccion el usuario");
-            //}
-            DataGrid dataGrid = (DataGrid)sender;
-            DataRowView dataRowView = dataGrid.SelectedItem as DataRowView;
+            cn.abrir();
 
-            if (dataRowView != null)
+            DataGrid dg = (DataGrid)sender;
+            DataRowView filaSeleccionada = dg.SelectedItem as DataRowView;
+
+
+
+
+            if (filaSeleccionada != null)
             {
-                txtid.Text = dataRowView["ID"].ToString();
-                txtnombre.Text = dataRowView["Nombre Completo"].ToString();
-                txtusername.Text = dataRowView["Nombre de Usuario"].ToString();
-                pssPassword.Password = dataRowView["Contraseña"].ToString();
-                cmbRol.Text = dataRowView["Rol"].ToString();
-                cmbEstado.Text = dataRowView["Estado"].ToString();
+                string estado;
 
+                txtid.Text = filaSeleccionada["ID"].ToString();
+                txtnombre.Text = filaSeleccionada["Primer Nombre"].ToString();
+                txtsegNombre.Text = filaSeleccionada["Segundo Nombre"].ToString();
+                txtApellido.Text = filaSeleccionada["Primer Apellido"].ToString();
+                txtSegApellido.Text = filaSeleccionada["Segundo Apellido"].ToString();
+                txtusername.Text = filaSeleccionada["Usuario"].ToString();
+                cmbRol.Text = filaSeleccionada["Rol"].ToString();
+                estado = filaSeleccionada["Estado"].ToString();
 
-
-                //if (dataRowView["Rol"].ToString()== "ADMINISTRADOR")
-                //{
-                //    cmbRol.SelectedIndex = 0;
-                //}
-                //cmbRol.SelectedIndex = 1;
+                if (estado == "True")
+                {
+                    cmbEstado.Text = "Activo";
+                }
+                else
+                {
+                    cmbEstado.Text = "Inactivo";
+                }
 
 
             }
 
         }
 
-       private void CargarDatos()
+        private void CargarDatos()
         {
+            conexion cn = new conexion();
+            Validaciones val = new Validaciones();
             try
             {
                 //Query para seleccionar los datos de la tabla
-                String queryUser = @"select	id as 'ID',nombreCompleto as 'Nombre Completo',username as 'Nombre de Usuario',
-                                   password as 'Contraseña',rol as 'Rol',estado as 'Estado' from Usuarios.Usuario";
 
 
-                //Establecer la conexion
-                sqlConnection.Open();
+                SqlCommand cmd = new SqlCommand("MostrarUsuarios", cn.Conectarbd);
+                cmd.CommandType = CommandType.StoredProcedure;
 
                 // Crear el comando SQL
-                SqlCommand sqlCommand1 = new SqlCommand(queryUser, sqlConnection);
- 
-                sqlCommand1.ExecuteNonQuery();
-              
 
-                SqlDataAdapter sqlDataAdapter1 = new SqlDataAdapter(sqlCommand1);
- 
+                cn.abrir();
+                cmd.ExecuteNonQuery();
+
+
+                SqlDataAdapter sqlDataAdapter1 = new SqlDataAdapter(cmd);
+
                 DataTable dataTable1 = new DataTable("Usuarios.Usuario");
-         
+
+
 
                 sqlDataAdapter1.Fill(dataTable1);
                 dtgriduser.ItemsSource = dataTable1.DefaultView;
                 sqlDataAdapter1.Update(dataTable1);
-
-     
 
             }
             catch (Exception)
@@ -305,7 +347,7 @@ namespace ProyectoMinaELMochito
             }
             finally
             {
-                sqlConnection.Close();
+                cn.cerrar();
             }
         }
 
@@ -339,7 +381,7 @@ namespace ProyectoMinaELMochito
 
         private void btnsalir_Click(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            limpiar();
         }
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
@@ -427,6 +469,84 @@ namespace ProyectoMinaELMochito
         {
 
         }
+
+        private void txtnombre_KeyDown(object sender, KeyEventArgs e)
+        {
+            validaciones.validarTxtSinNumeros(e);
+        }
+
+        private void dtgriduser_CurrentCellChanged(object sender, EventArgs e)
+        {
+            dtgriduser.IsReadOnly = true;
+        }
+
+        private void btnLimpiar_Click(object sender, RoutedEventArgs e)
+        {
+            limpiar();
+        }
+
+
+
+        private void txtApellido_KeyDown(object sender, KeyEventArgs e)
+        {
+            validaciones.validarTxtSinNumeros(e);
+        }
+
+        private void txtSegApellido_KeyDown(object sender, KeyEventArgs e)
+        {
+            validaciones.validarTxtSinNumeros(e);
+        }
+
+        private void txtnombre_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void btnAceptarEliminacion_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                ObtenerValoresFormularioModify();
+
+                User Usuario = user.BuscarUsuario(txtusername.Text);
+
+                if (Usuario.Username == null)
+                {
+
+                    user.ModificarUsuario(user);
+                    MessageBox.Show("Los datos han sido modificados exitosamente");
+                }
+                else
+                {
+                    MessageBox.Show("El usuario ya existe, porfavor ingrese otro nombre de usuario");
+                    
+                }
+                
+
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show($"Error al momento de actualizar el Usuario...{ex}");
+            }
+            finally
+            {
+                
+                CargarDatos();
+                limpiar();
+                btnModificar.Visibility = Visibility.   Visible;
+                btnIngresar.Visibility = Visibility.Visible;
+                btnAceptarEliminacion.Visibility = Visibility.Hidden;
+                btnCancelarEliminacion.Visibility = Visibility.Hidden;
+            }
+        }
+
+        private void btnCancelarEliminacion_Click(object sender, RoutedEventArgs e)
+        {
+            btnModificar.Visibility = Visibility.Visible;
+            btnIngresar.Visibility = Visibility.Visible;
+            btnAceptarEliminacion.Visibility = Visibility.Hidden;
+            btnCancelarEliminacion.Visibility = Visibility.Hidden;
+        }
     }
 }
-
