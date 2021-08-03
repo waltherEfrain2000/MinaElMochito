@@ -137,7 +137,7 @@
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
-            <Label Content="Vehiculos" Grid.ColumnSpan="5" HorizontalAlignment="Center" FontSize="30" />
+            <Label Content="Vehículos" Grid.ColumnSpan="5" HorizontalAlignment="Center" FontSize="30" />
             <TextBox x:Name="txtPlaca" Grid.Column="3" FontSize="15" Margin="25,0,25,20" Grid.Row="1"/>
             <TextBox x:Name="txtColor" Grid.Row="2" Grid.Column="3" FontSize="15" Margin="25,11,24,10" IsEnabled="False" TextChanged="txtColor_TextChanged"/>
 
@@ -155,7 +155,11 @@
 
             <DataGrid x:Name="DgvVehiculos" Grid.Row="4" Margin="30,35,0,35" Grid.RowSpan="4" SelectionChanged="DgvVehiculos_SelectionChanged" IsReadOnly="True" FontSize="15" Grid.ColumnSpan="4">
                 <DataGrid.Resources>
-                    <Style TargetType="{x:Type DataGridColumnHeader}"/>
+                    <Style TargetType="{x:Type DataGridColumnHeader}">
+                        <Setter Property="Background" Value="#9900afb9" ></Setter>
+                        <Setter Property="Foreground" Value="White"></Setter>
+                        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                    </Style>
                 </DataGrid.Resources>
             </DataGrid>
             <TextBox x:Name="txtVehiculoID" Grid.Column="1" FontSize="15" Margin="25,0,25,20" IsReadOnly="True" Grid.Row="1"/>

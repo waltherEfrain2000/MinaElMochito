@@ -16,26 +16,36 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <Grid fw:PointerTracker.Enabled="True" Background="#9900afb9" Height="652" VerticalAlignment="Bottom" Margin="0,0,0,-10">
+        <Grid fw:PointerTracker.Enabled="True" Background="#9900afb9" Height="660" VerticalAlignment="Bottom" Margin="0,0,0,-10">
             <StackPanel>
-                <TextBlock Text="" Foreground="White" Margin="1" FontWeight="DemiBold"/>
+
+                <TextBlock Text="" Foreground="White" Margin="0.1" FontWeight="DemiBold"/>
 
 
-                <!--<ListViewItem MouseDoubleClick="ListViewItem_MouseDoubleClick" Padding="0" Selected="ListViewItem_Selected_7">
+                <ListViewItem MouseDoubleClick="ListViewItem_MouseDoubleClick" Padding="0" Selected="ListViewItem_Selected_20">
+
                     <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon Foreground="White" Kind="Home" Margin="15"/>
                         <TextBlock Text="Inicio" Foreground="White" VerticalAlignment="Center"/>
                     </StackPanel>
-                </ListViewItem>-->
+
+                </ListViewItem>
 
                 <TextBlock Text="Sistema" Foreground="White" Margin="15" FontWeight="DemiBold"/>
 
-                <ListView FontSize="15" SelectionChanged="ListView_SelectionChanged">
+                <ListView FontSize="15">
 
                     <ListViewItem Padding="1" Selected="ListViewItem_Selected">
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Foreground="White" Kind="Worker" Margin="15"/>
                             <TextBlock Text="Empleado" Foreground="White" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </ListViewItem>
+
+                    <ListViewItem Padding="1" Selected="ListViewItem_Selected_10" >
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Foreground="White" Kind="Work" Margin="15"/>
+                            <TextBlock Text="Cargo" Foreground="White" VerticalAlignment="Center"/>
                         </StackPanel>
                     </ListViewItem>
 
@@ -67,17 +77,24 @@
                         </StackPanel>
                     </ListViewItem>
 
-                    <!--<ListViewItem Padding="1" Selected="ListViewItem_Selected_9">
+                    <ListViewItem Padding="1" Selected="ListViewItem_Selected_9">
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Foreground="White" Kind="Abacus" Margin="15"/>
                             <TextBlock Text="Producción" Foreground="White" VerticalAlignment="Center"/>
                         </StackPanel>
-                    </ListViewItem>-->
+                    </ListViewItem>
 
                     <ListViewItem Padding="1" Selected="ListViewItem_Selected_6" >
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Foreground="White" Kind="User" Margin="15"/>
                             <TextBlock Text="Usuarios" Foreground="White" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </ListViewItem>
+
+                    <ListViewItem Padding="1" Selected="ListViewItem_Selected_11"  >
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Foreground="White" Kind="Pickaxe" Margin="15"/>
+                            <TextBlock Text="Equipo" Foreground="White" VerticalAlignment="Center"/>
                         </StackPanel>
                     </ListViewItem>
 
@@ -89,7 +106,7 @@
                     </ListViewItem>
 
                     <StackPanel Orientation="Horizontal">
-                        <Button x:Name="botonfecha" Foreground="white" Background="{x:Null}" BorderBrush="{x:Null}">
+                        <Button x:Name="botonfecha" Foreground="white" Background="{x:Null}" BorderBrush="{x:Null}" >
                             <materialDesign:PackIcon Kind="Calendar"/>
                         </Button>
                         <TextBlock Text="" FontSize="12" Margin="10" VerticalAlignment="Center"/>
@@ -100,7 +117,7 @@
             </StackPanel>
         </Grid>
 
-        <Grid Grid.Column="1" Background="White" Margin="0,10,0,-10" >
+        <Grid Grid.Column="1" Background="White" Margin="0,0,0,-10" Height="660" VerticalAlignment="Bottom" >
 
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="60"/>

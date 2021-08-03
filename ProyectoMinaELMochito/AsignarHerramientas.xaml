@@ -7,7 +7,7 @@
         xmlns:local="clr-namespace:ProyectoMinaELMochito"
         mc:Ignorable="d"
         xmlns:fw="clr-namespace:SourceChord.FluentWPF;assembly=FluentWPF"
-        FontSize="15" BorderBrush="#9900afb9" BorderThickness="2" MouseDown="Window_MouseDown" AllowsTransparency="False" Height="400" Width="700" WindowStyle="None" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Title=" ">
+        Background="Transparent" AllowsTransparency="True" FontSize="15" BorderBrush="#9900afb9" BorderThickness="2" MouseDown="Window_MouseDown" Height="400" Width="700" WindowStyle="None" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Title=" ">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="100"/>
@@ -50,7 +50,7 @@
 
             <Label Content="Cantidad" Grid.Row="1" FontSize="15" Margin="30,23,10,0" />
 
-            <TextBox Name="txtCantidad" Grid.Row="1" Grid.Column="1" FontSize="15" Margin="15,10,10,10"/>
+            <TextBox Name="txtCantidad" Grid.Row="1" Grid.Column="1" FontSize="15" Margin="15,10,10,10" MaxLength="6"/>
             <TextBox Name="txtId" Grid.Row="1" Grid.Column="1" FontSize="15" Margin="15,10,10,10" IsReadOnly="True" Visibility="Hidden"/>
 
             <Button x:Name="btnAgregar" Foreground="White"  BorderBrush="#0082aa" Content="Agregar" Grid.Column="4" Grid.Row="1" Margin="10,25,20,10" Height="Auto" Click="btnAgregar_Click"  />
@@ -58,10 +58,12 @@
             <DataGrid Name="DgEquipamiento" Grid.Row="2" Margin="110,10,20,10" Grid.ColumnSpan="5" Grid.RowSpan="4" IsReadOnly="True" FontSize="15" SelectionChanged="DgvHerramientas_SelectionChanged">
 
                 <DataGrid.Resources>
-                    <Style TargetType="{x:Type DataGridColumnHeader}" >
+                    <Style TargetType="{x:Type DataGridColumnHeader}">
+                        <Setter Property="Background" Value="#9900afb9" ></Setter>
+                        <Setter Property="Foreground" Value="White"></Setter>
+                        <Setter Property="HorizontalContentAlignment" Value="Center"/>
                     </Style>
                 </DataGrid.Resources>
-
             </DataGrid>
 
         </Grid>

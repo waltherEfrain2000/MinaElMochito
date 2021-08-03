@@ -164,7 +164,13 @@
                 <!--<DataGridTextColumn x:Name="dgId" Header="Id" Binding="{Binding Path=Id}" Width="*"/>
             <DataGridTextColumn x:Name="dgnombreCompleto" Header="Nombre Completo" Binding="{Binding Path=NombreCompleto}" Width="*"/>
             <DataGridTextColumn x:Name="dgusername" Header="Username" Binding="{Binding Path=Username}" Width="*"/>-->
-
+                <DataGrid.Resources>
+                    <Style TargetType="{x:Type DataGridColumnHeader}">
+                        <Setter Property="Background" Value="#9900afb9" ></Setter>
+                        <Setter Property="Foreground" Value="White"></Setter>
+                        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                    </Style>
+                </DataGrid.Resources>
             </DataGrid>
 
             <Button x:Name="btnIngresar" Click="btnIngresar_Click" Content="Insertar" Grid.Column="3" Grid.Row="1" Height="40"  Foreground="White"  BorderBrush="#0082aa" RenderTransformOrigin="0.51,0.525" Margin="37,10,30,1"/>

@@ -139,8 +139,8 @@
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
-            <Label Content="Marcas de Vehiculos" Grid.ColumnSpan="2" HorizontalAlignment="Center" FontSize="30" Grid.Column="1" Margin="86,0,179,0" />
-            <TextBox Name="txtMarca" Grid.Row="2" Grid.Column="1" FontSize="15" Margin="26,22,24,40" Grid.RowSpan="2"/>
+            <Label Content="Marcas de Vehículos" Grid.ColumnSpan="2" HorizontalAlignment="Center" FontSize="30" Grid.Column="1" Margin="86,0,179,0" />
+            <TextBox Name="txtMarca" Grid.Row="2" Grid.Column="1" FontSize="15" Margin="26,22,24,40" Grid.RowSpan="2" MaxLength="20"/>
 
             <Button x:Name="btnAgregar" Content="Agregar" Foreground="White"  BorderBrush="#0082aa" Grid.Column="2" Grid.Row="1" Margin="38,6,52,12" Click="btnAgregar_Click"  />
             <Button x:Name="btnModificar" Content="Modificar" Foreground="White"  BorderBrush="#0082aa" Grid.Column="2" Grid.Row="2"  Margin="38,6,52,12" Click="btnModificar_Click"/>
@@ -151,6 +151,9 @@
             <DataGrid Name="DgvVehiculos" Grid.Row="4" Margin="30,10,52,60" Grid.RowSpan="4" SelectionChanged="DgvVehiculos_SelectionChanged" IsReadOnly="True" FontSize="15" Grid.ColumnSpan="3">
                 <DataGrid.Resources>
                     <Style TargetType="{x:Type DataGridColumnHeader}">
+                        <Setter Property="Background" Value="#9900afb9" ></Setter>
+                        <Setter Property="Foreground" Value="White"></Setter>
+                        <Setter Property="HorizontalContentAlignment" Value="Center"/>
                     </Style>
                 </DataGrid.Resources>
             </DataGrid>
@@ -159,14 +162,18 @@
             <Label Content="Marca" Grid.Row="2" FontSize="15" Margin="31,40,9,32" Grid.RowSpan="2" />
             <DataGrid x:Name="DgvModelos" Grid.Row="4" Margin="224,10,33,60" Grid.RowSpan="4" SelectionChanged="DgvModelos_SelectionChanged" IsReadOnly="True" FontSize="15" Grid.ColumnSpan="3" Grid.Column="2">
                 <DataGrid.Resources>
-                    <Style TargetType="{x:Type DataGridColumnHeader}"/>
+                    <Style TargetType="{x:Type DataGridColumnHeader}">
+                        <Setter Property="Background" Value="#9900afb9" ></Setter>
+                        <Setter Property="Foreground" Value="White"></Setter>
+                        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                    </Style>
                 </DataGrid.Resources>
             </DataGrid>
-            <Label Content="Modelos de Vehiculos" Grid.ColumnSpan="2" HorizontalAlignment="Center" FontSize="30" Grid.Column="3" Margin="100,0,139,0" Width="303" />
+            <Label Content="Modelos de Vehículos" Grid.ColumnSpan="2" HorizontalAlignment="Center" FontSize="30" Grid.Column="3" Margin="100,0,139,0" Width="303" />
             <TextBox x:Name="txtCodigoModelo" Grid.Column="3" FontSize="15" Margin="45,0,5,12" IsReadOnly="True" Grid.Row="1"/>
             <Label Content="Código" Grid.Row="1" FontSize="15" Margin="225,18,261,0" Height="39" VerticalAlignment="Top" Grid.RowSpan="2" Grid.Column="2" Grid.ColumnSpan="2" />
-            <TextBox x:Name="txtModelo" Grid.Row="1" Grid.Column="3" FontSize="15" Margin="45,44,5,18" Grid.RowSpan="2"/>
-            <Label Content="Modelo" Grid.Row="2" FontSize="15" Margin="225,12,231,8" Grid.Column="2" Grid.ColumnSpan="2" />
+            <TextBox x:Name="txtModelo" Grid.Row="1" Grid.Column="3" FontSize="15" Margin="45,44,5,18" Grid.RowSpan="2" MaxLength="20"/>
+            <Label Content="Modelo" Grid.Row="2" FontSize="15" Margin="225,12,231,8" Grid.Column="2" Grid.ColumnSpan="2"  />
             <Button x:Name="btnAgregarModelo" Content="Agregar" Foreground="White"  BorderBrush="#0082aa" Grid.Column="4" Grid.Row="1" Margin="57,6,33,12" Click="btnAgregarModelo_Click"  />
             <Button x:Name="btnModificarModelo" Content="Modificar" Foreground="White"  BorderBrush="#0082aa" Grid.Column="4" Grid.Row="2"  Margin="57,6,33,12" Click="btnModificarModelo_Click"/>
             <Button x:Name="btnLimpiarModelo" Foreground="White"  BorderBrush="#0082aa" Content="Limpiar" Grid.Column="4" Grid.Row="3" Margin="57,8,33,10" Click="btnLimpiarModelo_Click" />

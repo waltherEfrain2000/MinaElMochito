@@ -168,7 +168,10 @@
             <DataGrid Name="DgEquipamiento" Grid.Row="5" Margin="30,20,10,20" Grid.ColumnSpan="4" Grid.RowSpan="6" IsReadOnly="True" FontSize="15" SelectionChanged="DgvHerramientas_SelectionChanged" AutoGeneratingColumn="DgEquipamiento_AutoGeneratingColumn" >
 
                 <DataGrid.Resources>
-                    <Style TargetType="{x:Type DataGridColumnHeader}" >
+                    <Style TargetType="{x:Type DataGridColumnHeader}">
+                        <Setter Property="Background" Value="#9900afb9" ></Setter>
+                        <Setter Property="Foreground" Value="White"></Setter>
+                        <Setter Property="HorizontalContentAlignment" Value="Center"/>
                     </Style>
                 </DataGrid.Resources>
 

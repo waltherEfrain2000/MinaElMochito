@@ -34,6 +34,7 @@ namespace ProyectoMinaELMochito
         {
             InitializeComponent();
             MostrarCargo();
+            botonfecha.Content = string.Format("{0}", DateTime.Now.ToString());
         }
 
         private void txtnombre_TextChanged(object sender, TextChangedEventArgs e)
@@ -369,7 +370,7 @@ namespace ProyectoMinaELMochito
         //-----------------------------------------------------------------------------------------------------------------------------------------------------
         private void ListViewItem_Selected(object sender, RoutedEventArgs e)
         {
-            menuPrincipal sld = new menuPrincipal();
+            Empleados sld = new Empleados();
             sld.Show();
             this.Close();
         }
@@ -451,6 +452,41 @@ namespace ProyectoMinaELMochito
                 e.Handled = false;
 
 
+        }
+
+        private void ListViewItem_Selected_20(object sender, RoutedEventArgs e)
+        {
+            menuPrincipal menuPrincipal = new menuPrincipal();
+            menuPrincipal.Show();
+            this.Close();
+        }
+
+        private void ListViewItem_Selected_10(object sender, RoutedEventArgs e)
+        {
+            Cargos cargos = new Cargos();
+            cargos.Show();
+            this.Close();
+        }
+
+        private void ListViewItem_Selected_11(object sender, RoutedEventArgs e)
+        {
+            Herramientas herramientas = new Herramientas();
+            herramientas.Show();
+            this.Close();
+        }
+
+        private void ListViewItem_Selected_9(object sender, RoutedEventArgs e)
+        {
+            ViajesInternos sld = new ViajesInternos();
+            sld.Show();
+            this.Close();
+        }
+
+        private void ListViewItem_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            menuPrincipal menuPrincipal = new menuPrincipal();
+            menuPrincipal.Show();
+            this.Close();
         }
     }
 }

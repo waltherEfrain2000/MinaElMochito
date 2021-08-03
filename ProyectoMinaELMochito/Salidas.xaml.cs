@@ -271,7 +271,7 @@ namespace ProyectoMinaELMochito
         }
         private void ListViewItem_Selected(object sender, RoutedEventArgs e)
         {
-            menuPrincipal sld = new menuPrincipal();
+            Empleados sld = new Empleados();
             sld.Show();
             this.Close();
         }

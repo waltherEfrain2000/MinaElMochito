@@ -180,11 +180,10 @@
             <DataGrid Name="DgvEmpleados" Grid.Row="5" Margin="30,20,30,20" Grid.ColumnSpan="5" Grid.RowSpan="6" SelectionChanged="DgvEmpleados_SelectionChanged" IsReadOnly="True" FontSize="15" AutoGeneratingColumn="DgvEmpleados_AutoGeneratingColumn" >
 
                 <DataGrid.Resources>
-                    <Style TargetType="{x:Type DataGridColumnHeader}" >
-                        <!--<Setter Property="Block.TextAlignment" Value="Center"></Setter>
-                        <Setter Property="FrameworkElement.HorizontalAlignment" Value="Center" >
-                        </Setter>
-                        <Setter Property="FrameworkElement.VerticalAlignment" Value="Center"> </Setter>-->
+                    <Style TargetType="{x:Type DataGridColumnHeader}">
+                        <Setter Property="Background" Value="#9900afb9" ></Setter>
+                        <Setter Property="Foreground" Value="White"></Setter>
+                        <Setter Property="HorizontalContentAlignment" Value="Center"/>
                     </Style>
                 </DataGrid.Resources>
 
