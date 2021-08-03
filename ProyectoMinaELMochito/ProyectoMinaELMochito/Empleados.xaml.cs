@@ -80,6 +80,7 @@ namespace ProyectoMinaELMochito
                 {
                     MessageBox.Show("Por favor selecciona el Cargo del empleado");
                     return false;
+
                 }
 
                 //else if (Convert.ToInt32(txtEdad.Text) < 18 || Convert.ToInt32(txtEdad.Text) > 100)
