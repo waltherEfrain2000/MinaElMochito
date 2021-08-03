@@ -171,12 +171,12 @@ namespace ProyectoMinaELMochito
                         cargo.CrearCargo(cargo);
 
                         // Mensaje de inserción exitosa
-                        MessageBox.Show("¡El cargo ha sido resgistrado exitosamente!");
+                        MessageBox.Show("¡El cargo ha sido resgistrado exitosamente!", "Cargo Ingresado", MessageBoxButton.OK, MessageBoxImage.Information);
 
                     }
                     catch (Exception)
                     {
-                        MessageBox.Show("El cargo no se puede ingresar", "¡Error!", MessageBoxButton.OK);
+                        MessageBox.Show("El cargo no se puede ingresar", "¡Error!", MessageBoxButton.OK, MessageBoxImage.Error);
 
                     }
                     finally
@@ -186,11 +186,8 @@ namespace ProyectoMinaELMochito
                     }
                 }else
                 {
-                    MessageBox.Show("El cargo ya existe, por favor ingrese otro", "¡Error!", MessageBoxButton.OK);
+                    MessageBox.Show("El cargo ya existe, por favor ingrese otro", "¡Error!", MessageBoxButton.OK,MessageBoxImage.Error);
                 }
-
-
-
 
 
                
@@ -270,7 +267,7 @@ namespace ProyectoMinaELMochito
                         if (VerificarCamposLlenos())
                         {
                             ExtraerInformacionFormularioestado(1);
-                            cargo.ActualizarCargo(cargo);
+                            cargo.ActualizarCargoEstado(cargo);
                             MessageBox.Show("¡El cargo ha sido modificado exitosamente!", "Cargo Modificado", MessageBoxButton.OK, MessageBoxImage.Information);
                             LimpiarCasillas();
                         }
@@ -289,7 +286,7 @@ namespace ProyectoMinaELMochito
                     }
                     else
                     {
-                        MessageBox.Show("Este cargo ya existe ", "¡Error!", MessageBoxButton.OK);
+                        MessageBox.Show("Este cargo ya existe ","¡Error!", MessageBoxButton.OK, MessageBoxImage.Error);
                     }
                 }
                 
@@ -323,14 +320,14 @@ namespace ProyectoMinaELMochito
                     cargo.EliminarCargo(cargo);
 
                     // Mensaje de inserción exitosa
-                    MessageBox.Show("¡El cargo ha sido eliminado exitosamente!");
+                    MessageBox.Show("¡El cargo ha sido eliminado exitosamente!", "Cargo Eliminado", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
                 MostrarCargo();
                 LimpiarCasillas();
             }
             catch (Exception)
             {
-                MessageBox.Show("Al eliminar la acción", "¡Error!", MessageBoxButton.OK);
+                MessageBox.Show("Al eliminar la acción", "¡Error!", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             finally
             {
@@ -436,17 +433,28 @@ namespace ProyectoMinaELMochito
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            DragMove();
+            try
+            {
+                DragMove();
+            }
+            catch
+            {
+
+            }
+            
         }
 
         private void txtnombre_KeyDown(object sender, KeyEventArgs e)
         {
             //Validacion.validarTxtSinNumeros(e);
-            if (e.Key >= Key.D0 && e.Key <= Key.D9 || e.Key >= Key.NumPad0 && e.Key <= Key.NumPad9 || e.Key==Key.DbeAlphanumeric || e.Key== Key.Decimal|| e.Key == Key.Divide||
-                e.Key >= Key.OemComma || e.Key == Key.OemPeriod)
+            if (e.Key >= Key.D0 && e.Key <= Key.D9 || e.Key >= Key.NumPad0 && e.Key <= Key.NumPad9 || e.Key == Key.DbeAlphanumeric || e.Key == Key.Decimal || e.Key == Key.Divide ||
+                e.Key >= Key.OemComma || e.Key == Key.OemPeriod || e.Key == Key.Decimal || e.Key == Key.OemPlus || e.Key == Key.OemMinus || e.Key == Key.D)
                 e.Handled = true;
             else
                 e.Handled = false;
+
+
+
 
 
         }
