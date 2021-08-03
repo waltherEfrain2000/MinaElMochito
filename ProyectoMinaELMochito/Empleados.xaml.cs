@@ -61,35 +61,35 @@ namespace ProyectoMinaELMochito
 
         private bool VerificarCamposLlenos()
         {
-                if (txtIdentidad.Text == string.Empty || txtNombreCompleto.Text == string.Empty || txtSalario.Text == string.Empty || txtDireccion.Text == string.Empty)
-                {
-                    MessageBox.Show("Por favor ingresa todos los valores en las cajas de texto");
-                    return false;
-                }
-                else if (dpFechaNacimiento.SelectedDate == null)
-                {
-                    MessageBox.Show("Por favor, ingresar su fecha de nacimiento");
-                    return false;
-                }
-                else if (cmbGenero.SelectedValue == null)
-                {
-                    MessageBox.Show("Por favor selecciona el Genero del empleado");
-                    return false;
-                }
-                else if (cmbCargo.SelectedValue == null)
-                {
-                    MessageBox.Show("Por favor selecciona el Cargo del empleado");
-                    return false;
-                }
+            if (txtIdentidad.Text == string.Empty || txtNombreCompleto.Text == string.Empty || txtSalario.Text == string.Empty || txtDireccion.Text == string.Empty)
+            {
+                MessageBox.Show("Por favor ingresa todos los valores en las cajas de texto");
+                return false;
+            }
+            else if (dpFechaNacimiento.SelectedDate == null)
+            {
+                MessageBox.Show("Por favor, ingresar su fecha de nacimiento");
+                return false;
+            }
+            else if (cmbGenero.SelectedValue == null)
+            {
+                MessageBox.Show("Por favor selecciona el Genero del empleado");
+                return false;
+            }
+            else if (cmbCargo.SelectedValue == null)
+            {
+                MessageBox.Show("Por favor selecciona el Cargo del empleado");
+                return false;
+            }
 
-                //else if (Convert.ToInt32(txtEdad.Text) < 18 || Convert.ToInt32(txtEdad.Text) > 100)
-                //{
-                //    MessageBox.Show("Por favor selecciona una edad valida!");
-                //    return false;
-                //}
+            //else if (Convert.ToInt32(txtEdad.Text) < 18 || Convert.ToInt32(txtEdad.Text) > 100)
+            //{
+            //    MessageBox.Show("Por favor selecciona una edad valida!");
+            //    return false;
+            //}
 
-                return true;
-            
+            return true;
+
         }
         private void ExtraerInformacionFormulario(int operacion)
         {
@@ -101,7 +101,7 @@ namespace ProyectoMinaELMochito
 
             empleado.Identidad = txtIdentidad.Text;
 
-            char[] delimitador = {' '};
+            char[] delimitador = { ' ' };
             string[] trozos = txtNombreCompleto.Text.Split(delimitador);
 
             empleado.PrimerNombre = trozos[0];
@@ -154,7 +154,7 @@ namespace ProyectoMinaELMochito
 
 
             decimal monto = Convert.ToDecimal(txtSalario.Text);
-            
+
 
             if (!decimal.TryParse(txtSalario.Text, out monto))
             {
@@ -164,7 +164,7 @@ namespace ProyectoMinaELMochito
 
             empleado.Salario = Convert.ToDecimal(txtSalario.Text);
             //empleado.Estado = "activo";
-            
+
             //txtSalario.Text = salario.ToString("0000.00", CultureInfo.InvariantCulture);
 
         }
@@ -175,26 +175,36 @@ namespace ProyectoMinaELMochito
             // Verificar que se ingresaron los valores requeridos
             if (VerificarCamposLlenos())
             {
-                try
-                {
-                    //parametro 0 por que no es actualizacion
-                    ExtraerInformacionFormulario(0);
-                    empleado.CrearEmpleado(empleado);
+                int valor = empleado.validarIdentidad(txtIdentidad.Text);
 
-                    // Mensaje de inserción exitosa
-                    MessageBox.Show("¡Empleado insertado correctamente!");
-
-                }
-                catch (Exception ex)
+                if (valor == 0)
                 {
-                    MessageBox.Show(ex.Message);
+                    try
+                    {
+                        //parametro 0 por que no es actualizacion
+                        ExtraerInformacionFormulario(0);
+                        empleado.CrearEmpleado(empleado);
 
+                        // Mensaje de inserción exitosa
+                        MessageBox.Show("¡Empleado insertado correctamente!");
+
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+
+                    }
+                    finally
+                    {
+                        LimpiarCasillas();
+                        MostrarEmpleado();
+                    }
                 }
-                finally
+                else
                 {
-                    LimpiarCasillas();
-                    MostrarEmpleado();
+                    MessageBox.Show("Esta identidad ya existe...", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
+
             }
         }
 
@@ -252,6 +262,8 @@ namespace ProyectoMinaELMochito
             }
 
         }
+
+        string validarIde;
         private void DgvEmpleados_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             DataGrid dg = (DataGrid)sender;
@@ -260,6 +272,7 @@ namespace ProyectoMinaELMochito
             {
                 txtEmpleadoID.Text = filaSeleccionada["Código"].ToString();
                 txtIdentidad.Text = filaSeleccionada["Identidad"].ToString();
+                validarIde = filaSeleccionada["Identidad"].ToString();
                 txtNombreCompleto.Text = filaSeleccionada["Nombre"].ToString();
                 dpFechaNacimiento.Text = filaSeleccionada["FechaNacimiento"].ToString();
                 cmbGenero.Text = filaSeleccionada["Género"].ToString();
@@ -289,7 +302,7 @@ namespace ProyectoMinaELMochito
 
         private void txtSalario_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.Key >= Key.D0 && e.Key <= Key.D9 || e.Key >= Key.NumPad0 && e.Key <= Key.NumPad9  || e.Key == Key.OemComma)
+            if (e.Key >= Key.D0 && e.Key <= Key.D9 || e.Key >= Key.NumPad0 && e.Key <= Key.NumPad9 || e.Key == Key.OemComma)
             { e.Handled = false; }
 
             else
@@ -324,37 +337,75 @@ namespace ProyectoMinaELMochito
 
         private void btnAceptarModificacion_Click(object sender, RoutedEventArgs e)
         {
-            // Verificar que se ingresaron los valores requeridos
+
             if (VerificarCamposLlenos())
             {
-                //ocultar todos los otones inecesarios
                 btnModificar.Visibility = Visibility.Visible;
                 btnAgregar.Visibility = Visibility.Visible;
                 btnEliminar.Visibility = Visibility.Visible;
                 btnAceptarModificacion.Visibility = Visibility.Hidden;
                 btnCancelarModificacion.Visibility = Visibility.Hidden;
-                try
+
+                if (txtIdentidad.Text == validarIde)
                 {
-                    //parametro 1 por que es actualizacion
-                    ExtraerInformacionFormulario(1);
-                    empleado.ActualizarEmpleado(empleado);
+                    try
+                    {
+                        //parametro 1 por que es actualizacion
+                        ExtraerInformacionFormulario(1);
+                        empleado.ActualizarEmpleado(empleado);
 
 
-                    // Mensaje de inserción exitosa
-                    MessageBox.Show("¡Empleado modificado correctamente!");
+                        // Mensaje de inserción exitosa
+                        MessageBox.Show("¡Empleado modificado correctamente!");
 
 
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+
+                    }
+                    finally
+                    {
+                        LimpiarCasillas();
+                        MostrarEmpleado();
+                    }
                 }
-                catch (Exception ex)
+                else
                 {
-                    MessageBox.Show(ex.Message);
+                    int valor = empleado.validarIdentidad(txtIdentidad.Text);
 
+                    if (valor == 0)
+                    {
+                        try
+                        {
+                            //parametro 1 por que es actualizacion
+                            ExtraerInformacionFormulario(1);
+                            empleado.ActualizarEmpleado(empleado);
+
+
+                            // Mensaje de inserción exitosa
+                            MessageBox.Show("¡Empleado modificado correctamente!");
+
+
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show(ex.Message);
+
+                        }
+                        finally
+                        {
+                            LimpiarCasillas();
+                            MostrarEmpleado();
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Esta identidad ya existe...", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
                 }
-                finally
-                {
-                    LimpiarCasillas();
-                    MostrarEmpleado();
-                }
+
             }
         }
         private void btnEliminar_Click(object sender, RoutedEventArgs e)
@@ -527,7 +578,7 @@ namespace ProyectoMinaELMochito
         {
             menuPrincipal sld = new menuPrincipal();
             sld.Show();
-            this.Close(); 
+            this.Close();
         }
 
         private void ListViewItem_Selected_8(object sender, RoutedEventArgs e)
@@ -599,25 +650,19 @@ namespace ProyectoMinaELMochito
             }
         }
 
-        private void ListViewItem_Selected_10(object sender, RoutedEventArgs e)
+        private void DgvEmpleados_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
         {
-            Cargos cargos = new Cargos();
-            cargos.Show();
-            this.Close();
-        }
+            // referencia: https://social.msdn.microsoft.com/Forums/vstudio/en-US/a5f90126-d509-46c2-93b6-2affd09b13c4/wpf-format-datagrid-column-as-currency-wpf?forum=wpf
 
-        private void ListViewItem_Selected_11(object sender, RoutedEventArgs e)
-        {
-            Herramientas herramientas = new Herramientas();
-            herramientas.Show();
-            this.Close();
-        }
+            if (e.PropertyType == typeof(DateTime))
+            {
+                ((DataGridTextColumn)e.Column).Binding.StringFormat = "dd/MM/yyyy";
+            }
 
-        private void ListViewItem_Selected_9(object sender, RoutedEventArgs e)
-        {
-            ViajesInternos sld = new ViajesInternos();
-            sld.Show();
-            this.Close();
+            if (e.PropertyType == typeof(Decimal))
+            {
+                ((DataGridTextColumn)e.Column).Binding.StringFormat = "L00.00";
+            }
         }
     }
-    }
+}

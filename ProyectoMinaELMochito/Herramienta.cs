@@ -28,7 +28,7 @@ namespace ProyectoMinaELMochito
             HerramientasEnUso = herramientasEnUso;
         }
 
-        public void CrearHerramienta (Herramienta herramienta)
+        public void CrearHerramienta(Herramienta herramienta)
         {
             conexion cn = new conexion();
             try
@@ -40,7 +40,7 @@ namespace ProyectoMinaELMochito
 
                 cmd.Parameters.AddWithValue("@nombreHerramienta", herramienta.NombreHerramienta);
                 cmd.Parameters.AddWithValue("@cantidad", herramienta.Cantidad);
-                cmd.Parameters.AddWithValue("@precioUnitario", herramienta.PrecioUnitario);         
+                cmd.Parameters.AddWithValue("@precioUnitario", herramienta.PrecioUnitario);
 
 
                 cmd.ExecuteNonQuery();
@@ -146,6 +146,28 @@ namespace ProyectoMinaELMochito
             }
         }
 
+        public int validarHerramienta(string identidad)
+        {
+            conexion cn = new conexion();
+            try
+            {
+                cn.abrir();
+                SqlCommand sqlCommand = new SqlCommand("validarHerramienta", cn.Conectarbd);
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+                sqlCommand.Parameters.AddWithValue("@herramienta", identidad);
 
+                int valor = Convert.ToInt32(sqlCommand.ExecuteScalar());
+                return valor;
+            }
+            catch (Exception)
+            {
+
+                return 7;
+            }
+            finally
+            {
+                cn.cerrar();
+            }
+        }
     }
 }

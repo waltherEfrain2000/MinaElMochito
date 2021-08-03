@@ -8,13 +8,13 @@ using System.Configuration;
 using System.Data;
 
 
-//holaa
+//hola
 
 namespace ProyectoMinaELMochito
 {
     class Empleado
     {
-       
+
         // Variables miembro
         private static string connectionString = ConfigurationManager.ConnectionStrings["ProyectoMinaELMochito.Properties.Settings.MinaConnectionString"].ConnectionString;
         private SqlConnection sqlConnection = new SqlConnection(connectionString);
@@ -39,7 +39,7 @@ namespace ProyectoMinaELMochito
         public Empleado() { }
 
 
-        public Empleado(string identidad, string primerNombre, string segundoNombre, string primerApellido, string segundoApellido, string fechaNacimiento , int genero, int cargo, string estado, decimal salario, string direccion)
+        public Empleado(string identidad, string primerNombre, string segundoNombre, string primerApellido, string segundoApellido, string fechaNacimiento, int genero, int cargo, string estado, decimal salario, string direccion)
         {
 
             Identidad = identidad;
@@ -242,5 +242,30 @@ namespace ProyectoMinaELMochito
             }
 
         }
+
+        public int validarIdentidad(string identidad)
+        {
+            conexion cn = new conexion();
+            try
+            {
+                cn.abrir();
+                SqlCommand sqlCommand = new SqlCommand("validarIdentidades", cn.Conectarbd);
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+                sqlCommand.Parameters.AddWithValue("@identidad", identidad);
+
+                int valor = Convert.ToInt32(sqlCommand.ExecuteScalar());
+                return valor;
+            }
+            catch (Exception)
+            {
+
+                return 7;
+            }
+            finally
+            {
+                cn.cerrar();
+            }
+        }
+
     }
 }

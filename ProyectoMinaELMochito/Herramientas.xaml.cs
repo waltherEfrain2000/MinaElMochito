@@ -71,6 +71,8 @@ namespace ProyectoMinaELMochito
             txtEquipamiento.Text = string.Empty;
             txtCantidad.Text = string.Empty;
             txtValorUnitario.Text = string.Empty;
+            pb1.Value = 0;
+            pb3.Value = 0;
         }
 
         private bool VerificarCamposLlenos()
@@ -101,25 +103,34 @@ namespace ProyectoMinaELMochito
             // Verificar que se ingresaron los valores requeridos
             if (VerificarCamposLlenos())
             {
-                try
+                int valor = herramienta.validarHerramienta(txtEquipamiento.Text);
+
+                if (valor == 0)
                 {
-                    //parametro 0 por que no es actualizacion
-                    ExtraerInformacionFormulario(0);
-                    herramienta.CrearHerramienta(herramienta);
+                    try
+                    {
+                        //parametro 0 por que no es actualizacion
+                        ExtraerInformacionFormulario(0);
+                        herramienta.CrearHerramienta(herramienta);
 
-                    // Mensaje de inserción exitosa
-                    MessageBox.Show("¡Herramienta insertada correctamente!");
+                        // Mensaje de inserción exitosa
+                        MessageBox.Show("¡Herramienta insertada correctamente!");
 
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+
+                    }
+                    finally
+                    {
+                        LimpiarCasillas();
+                        MostrarHerramienta();
+                    }
                 }
-                catch (Exception ex)
+                else
                 {
-                    MessageBox.Show(ex.Message);
-
-                }
-                finally
-                {
-                    LimpiarCasillas();
-                    MostrarHerramienta();
+                    MessageBox.Show("Esta herramienta ya...", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
         }
@@ -128,28 +139,68 @@ namespace ProyectoMinaELMochito
         {
             if (VerificarCamposLlenos())
             {
-                try
+                if (txtEquipamiento.Text == equip)
                 {
-                    //parametro 1 por que es actualizacion
-                    ExtraerInformacionFormulario(1);
-                    herramienta.ActualizarHerramienta(herramienta);
+                    try
+                    {
+                        //parametro 1 por que es actualizacion
+                        ExtraerInformacionFormulario(1);
+                        herramienta.ActualizarHerramienta(herramienta);
 
 
-                    // Mensaje de inserción exitosa
-                    MessageBox.Show("¡Herramienta modificada correctamente!");
+                        // Mensaje de inserción exitosa
+                        MessageBox.Show("¡Herramienta modificada correctamente!");
 
 
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+
+                    }
+                    finally
+                    {
+                        LimpiarCasillas();
+                        MostrarHerramienta();
+                    }
                 }
-                catch (Exception ex)
+                else
                 {
-                    MessageBox.Show(ex.Message);
+                    int valor = herramienta.validarHerramienta(txtEquipamiento.Text);
 
+                    if (valor == 0)
+                    {
+                        try
+                        {
+                            //parametro 1 por que es actualizacion
+                            ExtraerInformacionFormulario(1);
+                            herramienta.ActualizarHerramienta(herramienta);
+
+
+                            // Mensaje de inserción exitosa
+                            MessageBox.Show("¡Herramienta modificada correctamente!");
+
+
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show(ex.Message);
+
+                        }
+                        finally
+                        {
+                            LimpiarCasillas();
+                            MostrarHerramienta();
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Esta herramienta ya existe...", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
                 }
-                finally
-                {
-                    LimpiarCasillas();
-                    MostrarHerramienta();
-                }
+
+
+
             }
         }
 
@@ -184,7 +235,10 @@ namespace ProyectoMinaELMochito
         private void btnLimpiar_Click(object sender, RoutedEventArgs e)
         {
             LimpiarCasillas();
+
         }
+
+        string equip;
 
         private void DgvHerramientas_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -194,6 +248,7 @@ namespace ProyectoMinaELMochito
             {
                 txtCodigo.Text = filaSeleccionada["Código"].ToString();
                 txtEquipamiento.Text = filaSeleccionada["Herramienta"].ToString();
+                equip = filaSeleccionada["Herramienta"].ToString();
                 txtCantidad.Text = filaSeleccionada["Inventario"].ToString();
                 txtValorUnitario.Text = filaSeleccionada["Precio de compra"].ToString();
                 txtinversion.Text = filaSeleccionada["Herramientas en uso"].ToString();
@@ -322,18 +377,50 @@ namespace ProyectoMinaELMochito
 
         }
 
-        private void ListViewItem_Selected_10(object sender, RoutedEventArgs e)
+        private void DgEquipamiento_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
         {
-            Cargos cargos = new Cargos();
-            cargos.Show();
-            this.Close();
+            if (e.PropertyType == typeof(DateTime))
+            {
+                ((DataGridTextColumn)e.Column).Binding.StringFormat = "dd/MM/yyyy";
+            }
+
+            if (e.PropertyType == typeof(Decimal))
+            {
+                ((DataGridTextColumn)e.Column).Binding.StringFormat = "L00.00";
+            }
         }
 
-        private void ListViewItem_Selected_11(object sender, RoutedEventArgs e)
+        private void txtValorUnitario_TextChanged(object sender, TextChangedEventArgs e)
         {
-            Herramientas herramientas = new Herramientas();
-            herramientas.Show();
-            this.Close();
+            double Valor = 0;
+            try
+            {
+                if (txtValorUnitario.Text == string.Empty || (Convert.ToDouble(txtValorUnitario.Text) == Valor))
+                {
+                    txtValorUnitario.Text = "";
+                }
+                //else if (txtSalario.Text == string.Empty)
+                //{
+                //    MessageBoxResult result = MessageBox.Show("Debe seleccionar un mineral",
+                //      "Confirmar", MessageBoxButton.OK, MessageBoxImage.Warning);
+                //    txtSalario.Text = "";
+                //}
+                else
+                {
+                    //double Total;
+                    //double Cantidad, precio;
+                    //Cantidad = Convert.ToDouble(txtSalario.Text);
+                    //precio = Convert.ToDouble(txtSalario.Text);
+                    //Total = Cantidad * precio;
+                    //txtSalario.Text = Cantidad.ToString();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBoxResult result = MessageBox.Show("No puede ingresar dos puntos deguidos",
+                      "Confirmar", MessageBoxButton.OK, MessageBoxImage.Warning);
+                txtValorUnitario.Text = "";
+            }
         }
     }
 }

@@ -32,17 +32,10 @@
 
                 <ListView FontSize="15">
 
-                    <ListViewItem Padding="1" Selected="ListViewItem_Selected">
+                    <ListViewItem  Padding="1" Selected="ListViewItem_Selected">
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Foreground="White" Kind="Worker" Margin="15"/>
                             <TextBlock Text="Empleado" Foreground="White" VerticalAlignment="Center"/>
-                        </StackPanel>
-                    </ListViewItem>
-
-                    <ListViewItem Padding="1" Selected="ListViewItem_Selected_10" >
-                        <StackPanel Orientation="Horizontal">
-                            <materialDesign:PackIcon Foreground="White" Kind="Work" Margin="15"/>
-                            <TextBlock Text="Cargo" Foreground="White" VerticalAlignment="Center"/>
                         </StackPanel>
                     </ListViewItem>
 
@@ -74,7 +67,7 @@
                         </StackPanel>
                     </ListViewItem>
 
-                    <ListViewItem Padding="1" Selected="ListViewItem_Selected_9">
+                    <ListViewItem Padding="1" Selected="ListViewItem_Selected_5">
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Foreground="White" Kind="Abacus" Margin="15"/>
                             <TextBlock Text="Producción" Foreground="White" VerticalAlignment="Center"/>
@@ -85,13 +78,6 @@
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Foreground="White" Kind="User" Margin="15"/>
                             <TextBlock Text="Usuarios" Foreground="White" VerticalAlignment="Center"/>
-                        </StackPanel>
-                    </ListViewItem>
-
-                    <ListViewItem Padding="1" Selected="ListViewItem_Selected_11"  >
-                        <StackPanel Orientation="Horizontal">
-                            <materialDesign:PackIcon Foreground="White" Kind="Pickaxe" Margin="15"/>
-                            <TextBlock Text="Equipo" Foreground="White" VerticalAlignment="Center"/>
                         </StackPanel>
                     </ListViewItem>
 
@@ -151,7 +137,7 @@
             <TextBox Name="txtEmpleadoID" Grid.Row="1" Grid.Column="1" FontSize="15" Margin="15,10,10,10" IsReadOnly="True" />
             <TextBox Name="txtIdentidad" Grid.Row="2" Grid.Column="1" FontSize="15" Margin="15,10,10,10"  KeyDown="txtIdentidad_KeyDown" MaxLength="13" />
             <TextBox Name="txtNombreCompleto" Grid.Row="3" Grid.Column="1" FontSize="15" Margin="15,10,10,10" TextChanged="txtNombreCompleto_TextChanged" KeyDown="txtNombreCompleto_KeyDown" MaxLength="50"/>
-            
+
             <TextBox Name="txtEdad" Grid.Row="4" Grid.Column="1" FontSize="15" Margin="15,10,10,10" KeyDown="txtEdad_KeyDown" Visibility="Hidden"/>
             <DatePicker Name="dpFechaNacimiento" Grid.Row="4" Grid.Column="1" Margin="15,10,10,8" ToolTip="Select date" FontSize="15" Height="30" Foreground="Black" Background="Transparent" SelectedDateFormat="Short">
                 <DatePicker.BlackoutDates>
@@ -176,7 +162,7 @@
             <Button x:Name="btnCancelarEliminacion" Foreground="White"  BorderBrush="#0082aa" Content="Cancelar" Grid.Column="4" Grid.Row="2"  Margin="60,5,30,10" Click="btnCancelarEliminacion_Click" Visibility="Hidden" />
             <Button x:Name="btnLimpiar" Foreground="White" BorderBrush="#0082aa" Content="Limpiar" Grid.Column="4" Grid.Row="4" Margin="60,5,30,10" Click="btnLimpiar_Click" />
 
-            <DataGrid Name="DgvEmpleados" Grid.Row="5" Margin="30,20,30,20" Grid.ColumnSpan="5" Grid.RowSpan="6" SelectionChanged="DgvEmpleados_SelectionChanged" IsReadOnly="True" FontSize="15">
+            <DataGrid Name="DgvEmpleados" Grid.Row="5" Margin="30,20,30,20" Grid.ColumnSpan="5" Grid.RowSpan="6" SelectionChanged="DgvEmpleados_SelectionChanged" IsReadOnly="True" FontSize="15" AutoGeneratingColumn="DgvEmpleados_AutoGeneratingColumn" >
 
                 <DataGrid.Resources>
                     <Style TargetType="{x:Type DataGridColumnHeader}" >
@@ -192,4 +178,3 @@
         </Grid>
     </Grid>
 </Window>
-   

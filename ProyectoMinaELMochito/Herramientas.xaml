@@ -32,17 +32,10 @@
 
                 <ListView FontSize="15">
 
-                    <ListViewItem Padding="1" Selected="ListViewItem_Selected">
+                    <ListViewItem  Padding="1" Selected="ListViewItem_Selected">
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Foreground="White" Kind="Worker" Margin="15"/>
                             <TextBlock Text="Empleado" Foreground="White" VerticalAlignment="Center"/>
-                        </StackPanel>
-                    </ListViewItem>
-
-                    <ListViewItem Padding="1" Selected="ListViewItem_Selected_10" >
-                        <StackPanel Orientation="Horizontal">
-                            <materialDesign:PackIcon Foreground="White" Kind="Work" Margin="15"/>
-                            <TextBlock Text="Cargo" Foreground="White" VerticalAlignment="Center"/>
                         </StackPanel>
                     </ListViewItem>
 
@@ -74,7 +67,7 @@
                         </StackPanel>
                     </ListViewItem>
 
-                    <ListViewItem Padding="1" Selected="ListViewItem_Selected_9">
+                    <ListViewItem Padding="1" Selected="ListViewItem_Selected_5">
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Foreground="White" Kind="Abacus" Margin="15"/>
                             <TextBlock Text="Producción" Foreground="White" VerticalAlignment="Center"/>
@@ -88,7 +81,7 @@
                         </StackPanel>
                     </ListViewItem>
 
-                    <ListViewItem Padding="1" Selected="ListViewItem_Selected_11"  >
+                    <ListViewItem Padding="1" Selected="ListViewItem_Selected_9" >
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Foreground="White" Kind="Pickaxe" Margin="15"/>
                             <TextBlock Text="Equipo" Foreground="White" VerticalAlignment="Center"/>
@@ -151,7 +144,7 @@
             <TextBox Name="txtCodigo" Grid.Row="1" Grid.Column="1" FontSize="15" Margin="15,10,10,10" IsReadOnly="True" KeyDown="txtCodigo_KeyDown"/>
             <TextBox Name="txtEquipamiento" Grid.Row="2" Grid.Column="1" FontSize="15" Margin="15,10,10,10" MaxLength="50" KeyDown="txtEquipamiento_KeyDown"/>
             <TextBox Name="txtCantidad" Grid.Row="3" Grid.Column="1" FontSize="15" Margin="15,10,10,10"  MaxLength="50" KeyDown="txtCantidad_KeyDown"/>
-            <TextBox Name="txtValorUnitario" Grid.Row="4" Grid.Column="1" FontSize="15" Margin="15,10,10,10" KeyDown="txtValorUnitario_KeyDown"/>
+            <TextBox Name="txtValorUnitario" Grid.Row="4" Grid.Column="1" FontSize="15" Margin="15,10,10,10" KeyDown="txtValorUnitario_KeyDown" TextChanged="txtValorUnitario_TextChanged"/>
             <TextBox Name="txtinversion" Grid.Row="4" Grid.Column="1" FontSize="15" Margin="15,10,10,10" Visibility="Hidden" IsReadOnly="True"/>
 
             <ProgressBar Name="pb1" Grid.Row="1" Grid.Column="3" Height="30" Margin="10" Minimum="0" Maximum="2000" Value="0" ValueChanged="pb1_ValueChanged"/>
@@ -165,7 +158,7 @@
             <Button x:Name="btnAsignar" Foreground="#0082aa" BorderBrush="#0082aa" Content="Asignar" Grid.Column="4" Grid.Row="5" Margin="60,5,30,10" Background="White" FontStyle="Italic" FontSize="14" Click="btnAsignar_Click"/>
             <Button x:Name="btnActualizar" Foreground="#0082aa" BorderBrush="#0082aa" Content="Actualizar" Grid.Column="4" Grid.Row="6" Margin="60,5,30,10" Background="White" FontStyle="Italic" FontSize="14" Click="btnActualizar_Click"/>
 
-            <DataGrid Name="DgEquipamiento" Grid.Row="5" Margin="30,20,10,20" Grid.ColumnSpan="4" Grid.RowSpan="6" IsReadOnly="True" FontSize="15" SelectionChanged="DgvHerramientas_SelectionChanged">
+            <DataGrid Name="DgEquipamiento" Grid.Row="5" Margin="30,20,10,20" Grid.ColumnSpan="4" Grid.RowSpan="6" IsReadOnly="True" FontSize="15" SelectionChanged="DgvHerramientas_SelectionChanged" AutoGeneratingColumn="DgEquipamiento_AutoGeneratingColumn">
 
                 <DataGrid.Resources>
                     <Style TargetType="{x:Type DataGridColumnHeader}" >
@@ -177,4 +170,3 @@
         </Grid>
     </Grid>
 </Window>
-   
