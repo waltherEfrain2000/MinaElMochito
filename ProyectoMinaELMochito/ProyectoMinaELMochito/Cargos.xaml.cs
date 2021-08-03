@@ -56,6 +56,7 @@ namespace ProyectoMinaELMochito
             btnEliminar.Visibility = Visibility.Visible;
         }
 
+        string verificacioncargo;
         private void dtgridcargo_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             try
@@ -66,6 +67,7 @@ namespace ProyectoMinaELMochito
                 {
                     txtcodigo.Text = filaSeleccionada["Código"].ToString();
                     txtnombre.Text = filaSeleccionada["Cargo"].ToString();
+                    verificacioncargo = filaSeleccionada["Cargo"].ToString();
                     cmbestado.SelectedValue = filaSeleccionada["Estado"].ToString();
 
                 }
@@ -263,22 +265,35 @@ namespace ProyectoMinaELMochito
             //txtnombre.Text = verificarcargo
             try
             {
-                if (verificarcargo == 0 && VerificarCamposLlenos())
+                if (txtnombre.Text == verificacioncargo)
                 {
-                    //parametro 1 por que es actualizacion
-                    ExtraerInformacionFormulario(1);
-                    cargo.ActualizarCargo(cargo);
-                    
-                    // Mensaje de inserción exitosa
-                    MessageBox.Show("¡El cargo ha sido modificado exitosamente!", "Cargo Modificado", MessageBoxButton.OK, MessageBoxImage.Information);
-                }else if(VerificarCamposLlenos())
+                        if (VerificarCamposLlenos())
+                        {
+                            ExtraerInformacionFormularioestado(1);
+                            cargo.ActualizarCargo(cargo);
+                            MessageBox.Show("¡El cargo ha sido modificado exitosamente!", "Cargo Modificado", MessageBoxButton.OK, MessageBoxImage.Information);
+                            LimpiarCasillas();
+                        }
+                  
+                }
+                else
                 {
-                    ExtraerInformacionFormularioestado(1);
-                    cargo.ActualizarCargoEstado(cargo);
-                    MessageBox.Show("El estado se ha modificado","Estado Modificado",MessageBoxButton.OK,MessageBoxImage.Information);
-                    LimpiarCasillas();
+                    if (verificarcargo == 0 && VerificarCamposLlenos())
+                    {
+                        //parametro 1 por que es actualizacion
+                        ExtraerInformacionFormulario(1);
+                        cargo.ActualizarCargo(cargo);
+
+                        // Mensaje de inserción exitosa
+                        MessageBox.Show("¡El cargo ha sido modificado exitosamente!", "Cargo Modificado", MessageBoxButton.OK, MessageBoxImage.Information);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Este cargo ya existe ", "¡Error!", MessageBoxButton.OK);
+                    }
                 }
                 
+
 
             }
             catch(Exception )
