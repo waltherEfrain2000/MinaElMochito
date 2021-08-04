@@ -84,7 +84,7 @@ namespace ProyectoMinaELMochito
                     else if (!elUsuario.Estado)
                         MessageBox.Show("Tu usuario se encuentra inactivo. Favor comunicarte con el personal de IT");
                     else
-                        MessageBox.Show("El usuario o la contraseña no es correcta. Favor verificar.");
+                        MessageBox.Show("El usuario o la contraseña no es correcta. Favor verificar.", "Usuario o contraseña incorrecta", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
             catch (Exception ex)
@@ -144,6 +144,18 @@ namespace ProyectoMinaELMochito
         private void btnLogin_MouseDown(object sender, MouseButtonEventArgs e)
         {
             DragMove();
+        }
+
+        private void Label_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            recuperarContraseña recuperarContraseña = new recuperarContraseña();
+            recuperarContraseña.Show();
+
+        }
+
+        private void txtUsername_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
         }
     }
 }

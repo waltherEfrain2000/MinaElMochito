@@ -169,10 +169,10 @@
                 VerticalAlignment="Center" FontSize="14" FontFamily="Aldine"
                 ToolTip="Se muestra el numero del viaje en que será trasnportado el material"
                 IsReadOnly="True" Grid.Row="1" Grid.Column="1"/>
-            <TextBox x:Name="txtCantidad" Grid.Row="3" Width="194" Height="28"
+            <TextBox x:Name="txtCantidad" Grid.Row="3" Width="194" Height="28" MaxLength="6"
                 Margin="10,22,0,10" materialDesign:HintAssist.Hint="Peso producto" IsReadOnly="False"
                 VerticalAlignment="Center" HorizontalAlignment="Left" FontFamily="Aldine"
-                FontSize="14" ToolTip="  Cantidad del mineral pesado" TextAlignment="Center"  Grid.Column="1" KeyDown="txtCantidad_KeyDown_1" />
+                FontSize="14" ToolTip="  Cantidad del mineral pesado" TextAlignment="Center"  Grid.Column="1" KeyDown="txtCantidad_KeyDown_1" TextChanged="txtCantidad_TextChanged" />
             <TextBox Text="{Binding SelectedItem.Precio, ElementName=cmbMinerales}" 
                 x:Name="txtPrecio" Grid.Row="1" Width="194" Height="28"
                 Margin="9,25,55,7" HorizontalAlignment="Center" VerticalAlignment="Center"
@@ -180,12 +180,12 @@
                 FontSize="14" ToolTip="Precio que tendrá el producto" TextAlignment="Center" 
                 IsReadOnly="true" Grid.Column="3" TextChanged="txtPrecio_TextChanged"/>
             <Button x:Name="btnInsertar" Content="Agregar" Height="28" Foreground="White"  BorderBrush="#0082aa" Margin="60,21,73,10" Click="btnInsertar_Click" Grid.Row="1" Grid.Column="4"/>
-            <Button x:Name="btnModificar" Content="Modificar" Height="Auto" Foreground="White"  BorderBrush="#0082aa"
+            <Button x:Name="btnModificar" Content="Modificar" Height="Auto" Foreground="White"  BorderBrush="#0082aa" Visibility="Hidden" IsEnabled="False"
                 Grid.Row="2" Margin="60,21,73,10" Click="btnModificar_Click" Grid.Column="4"/>
             <Button x:Name="btnEliminar" Content="Eliminar" Height="28" Foreground="White"  BorderBrush="#0082aa"
-                Grid.Row="3" Margin="60,21,73,10" Click="btnEliminar_Click" Grid.Column="4"/>
+                Grid.Row="2" Margin="60,21,73,10" Click="btnEliminar_Click" Grid.Column="4"/>
             <Button x:Name="btnLimpiar" Content="Limpiar" Height="28" Foreground="White"  BorderBrush="#0082aa"
-                Grid.Row="4" Margin="60,22,73,0" Click="btnLimpiar_Click" Grid.Column="4" VerticalAlignment="Top"/>
+                Grid.Row="3" Margin="60,22,73,0" Click="btnLimpiar_Click" Grid.Column="4" VerticalAlignment="Top"/>
             <ComboBox x:Name="cmbMinerales" HorizontalAlignment="Left" Margin="10,20,56,12" Grid.Row="2" 
                 VerticalAlignment="Top" Width="194" Height="28" RenderTransformOrigin="0.53,1.771" Grid.Column="1" />
 

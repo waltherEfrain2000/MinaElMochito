@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Data.SqlClient;
 using System.Configuration;
 using System.Data;
+using System.Windows;
 
 namespace ProyectoMinaELMochito
 {
@@ -94,9 +95,10 @@ namespace ProyectoMinaELMochito
                 // Retornar el usuario con los valores
                 return usuario;
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                throw e;
+                throw ex;
+                //MessageBox.Show($"Ha ocurrido un error, Porfavor verifique los datos...{ex}");
             }
             finally
             {
@@ -234,6 +236,43 @@ namespace ProyectoMinaELMochito
             }
         }
 
+        public void ModificarUsuario2(User user)
+        {
+            conexion cn = new conexion();
+            Validaciones val = new Validaciones();
+            try
+            {
+
+
+
+                SqlCommand cmd = new SqlCommand("ModificarUsuario2", cn.Conectarbd);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.AddWithValue("@primerNombre", user.PrimerNombre);
+                cmd.Parameters.AddWithValue("@segundoNombre", user.SegundoNombre);
+                cmd.Parameters.AddWithValue("@primerApellido", user.PrimerApellido);
+                cmd.Parameters.AddWithValue("@segundoApellido", user.SegundoApellido);
+                cmd.Parameters.AddWithValue("@contraseña", user.Password);
+                cmd.Parameters.AddWithValue("@idRol", user.Rol);
+                cmd.Parameters.AddWithValue("@estado", user.Estado);
+                cmd.Parameters.AddWithValue("@id", user.Id);
+
+                cn.abrir();
+
+                cmd.ExecuteNonQuery();
+
+
+            }
+            catch (Exception e)
+            {
+
+                throw e;
+            }
+            finally
+            {
+                cn.cerrar();
+            }
+        }
 
 
         public void InvalidarUsuario(User user)

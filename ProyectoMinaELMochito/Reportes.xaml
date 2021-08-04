@@ -54,10 +54,9 @@
             <Button x:Name="btnEntrada" Foreground="White"  BorderBrush="#0082aa" Content="Entradas" HorizontalAlignment="Center" Grid.Column="2" Grid.Row="2" Margin="29,10,31,17" Width="160" Click="btnEntrada_Click"/>
             <Button x:Name="btnInventarioMineral" Foreground="White"  BorderBrush="#0082aa" Content="Inventario Mineral" HorizontalAlignment="Center" Grid.Column="2" Grid.Row="3" Margin="29,10,31,17" Width="160" Click="btnInventarioMineral_Click"/>
             <Button x:Name="btnProduccion" Foreground="White"  BorderBrush="#0082aa" Content="Producción" HorizontalAlignment="Center" Grid.Column="2" Grid.Row="4" Margin="29,10,31,18" Width="160" Click="btnProduccion_Click" />
-            <Button x:Name="btnProduccionMineral" Foreground="White"  BorderBrush="#0082aa" Content="Mineral-Año" HorizontalAlignment="Center" Grid.Column="2" Grid.Row="5" Margin="29,10,31,18" Width="160" Click="btnProduccionMineral_Click" />
-            <Button x:Name="btnSalidas" Foreground="White"  BorderBrush="#0082aa" Content="Salidas" HorizontalAlignment="Center" Grid.Column="2" Grid.Row="6" Margin="29,10,31,18" Width="160" Click="btnSalidas_Click" />
-            <Button x:Name="btnUsuarios" Foreground="White"  BorderBrush="#0082aa" Content="Usuarios" HorizontalAlignment="Center" Grid.Column="2" Grid.Row="7" Margin="29,10,31,18" Width="160" Click="btnUsuarios_Click" />
-            <Button x:Name="btnVehiculos" Foreground="White"  BorderBrush="#0082aa" Content="Vehículos" HorizontalAlignment="Center" Grid.Column="2" Grid.Row="8" Margin="29,10,31,17" Width="160" Click="btnVehiculos_Click" />
+            <Button x:Name="btnSalidas" Foreground="White"  BorderBrush="#0082aa" Content="Salidas" HorizontalAlignment="Center" Grid.Column="2" Grid.Row="5" Margin="29,10,31,18" Width="160" Click="btnSalidas_Click" />
+            <Button x:Name="btnUsuarios" Foreground="White"  BorderBrush="#0082aa" Content="Usuarios" HorizontalAlignment="Center" Grid.Column="2" Grid.Row="6" Margin="29,10,31,18" Width="160" Click="btnUsuarios_Click" />
+            <Button x:Name="btnVehiculos" Foreground="White"  BorderBrush="#0082aa" Content="Vehículos" HorizontalAlignment="Center" Grid.Column="2" Grid.Row="7" Margin="29,10,31,17" Width="160" Click="btnVehiculos_Click" />
 
 
         </Grid>

@@ -131,7 +131,7 @@ namespace ProyectoMinaELMochito
             conexion cn = new conexion();
             try
             {
-                SqlCommand cmd = new SqlCommand("Actualizarestadocargo", cn.Conectarbd);
+                SqlCommand cmd = new SqlCommand("Actualizarestado", cn.Conectarbd);
                 cmd.CommandType = CommandType.StoredProcedure;
 
                 cmd.Parameters.AddWithValue("@idCargo", Cargo.CargoID);

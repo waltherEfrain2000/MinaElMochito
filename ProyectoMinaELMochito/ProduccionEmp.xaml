@@ -129,12 +129,12 @@
                   VerticalAlignment="Top" Width="160" />
             <Button x:Name="btnInsertar" Content="Agregar" Width="100" Height="28" Grid.Column="2" Foreground="White"  BorderBrush="#0082aa"
                 Grid.Row="1" Margin="0,16,100,16" Click="btnInsertar_Click"/>
-            <Button x:Name="btnModificar" Content="Modificar" Width="100" Height="28" Grid.Column="2" Foreground="White"  BorderBrush="#0082aa"
+            <Button x:Name="btnModificar" Content="Modificar" Width="100" Height="28" Grid.Column="2" Foreground="White"  BorderBrush="#0082aa" Visibility="Hidden" IsEnabled="False"
                 Grid.Row="2" Margin="0,16,100,16" Click="btnModificar_Click"/>
             <Button x:Name="btnEliminar" Content="Eliminar" Width="100" Height="28" Grid.Column="2" Foreground="White"  BorderBrush="#0082aa"
-                Grid.Row="3" Margin="0,16,100,16" Click="btnEliminar_Click"/>
+                Grid.Row="2" Margin="0,16,100,16" Click="btnEliminar_Click"/>
             <Button x:Name="btnLimpiar" Content="Limpiar" Width="100" Height="28" Grid.Column="2" Foreground="White"  BorderBrush="#0082aa"
-                Grid.Row="4" Margin="0,16,100,16" Click="btnLimpiar_Click"/>
+                Grid.Row="3" Margin="0,16,100,16" Click="btnLimpiar_Click"/>
 
         </Grid>
     </Grid>

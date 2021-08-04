@@ -12,6 +12,7 @@ namespace ProyectoMinaELMochito
     class conexion
     {
         // ojo, arreglar esta conexión si no sirve en su pc
+        // Data Source=192.168.0.7, 1433 ;Initial Catalog=MinaElMochitoVersion2;user id = usuarioMina; password = 123456
         String Cadena = " Data Source=(local)\\SQLEXPRESS;Initial Catalog=MinaElMochitoVersion2;Integrated Security=True ";
         public SqlConnection Conectarbd = new SqlConnection();
 

@@ -17,7 +17,7 @@
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
     <IsWebBootstrapper>false</IsWebBootstrapper>
-    <PublishUrl>publish\</PublishUrl>
+    <PublishUrl>C:\Users\G7\Desktop\CLASES\2-IMPLEMENTACION DE SISTEMAS DE SOFTWARE\Nueva carpeta %282%29\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
     <UpdateEnabled>false</UpdateEnabled>
@@ -27,7 +27,7 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationRevision>2</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -259,6 +259,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="recuperarContraseña.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ReporteEmpleado.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -333,6 +337,7 @@
       <DependentUpon>ComparacionHistoricos.xaml</DependentUpon>
     </Compile>
     <Compile Include="Conexion.cs" />
+    <Compile Include="contraseña.cs" />
     <Compile Include="DetalleSalida.xaml.cs">
       <DependentUpon>DetalleSalida.xaml</DependentUpon>
     </Compile>
@@ -376,6 +381,9 @@
     </Compile>
     <Compile Include="ProduccionEmp.xaml.cs">
       <DependentUpon>ProduccionEmp.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="recuperarContraseña.xaml.cs">
+      <DependentUpon>recuperarContraseña.xaml</DependentUpon>
     </Compile>
     <Compile Include="ReporteEmpleado.xaml.cs">
       <DependentUpon>ReporteEmpleado.xaml</DependentUpon>

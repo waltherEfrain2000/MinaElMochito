@@ -78,7 +78,7 @@ namespace ProyectoMinaELMochito
                     MessageBox.Show("Detalle de salida Ingresada");
                     MostrarDetalleSalidas();
                     Salidas sa = new Salidas();
-                    sa.Show();
+                    //sa.Show();
                     this.Close();
                 }
                 catch (Exception ex)

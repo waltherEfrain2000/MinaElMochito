@@ -130,7 +130,7 @@ namespace ProyectoMinaELMochito
                 }
                 else
                 {
-                    MessageBox.Show("Esta herramienta ya...", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("Esta herramienta ya existe...", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
         }

@@ -553,6 +553,39 @@ namespace ProyectoMinaELMochito
             }
         }
 
+        private void txtCantidad_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            double Valor = 0;
+            try
+            {
+                if (txtCantidad.Text == string.Empty || (Convert.ToDouble(txtCantidad.Text) == Valor))
+                {
+                    txtCantidad.Text = "";
+                }
+                //else if (txtSalario.Text == string.Empty)
+                //{
+                //    MessageBoxResult result = MessageBox.Show("Debe seleccionar un mineral",
+                //      "Confirmar", MessageBoxButton.OK, MessageBoxImage.Warning);
+                //    txtSalario.Text = "";
+                //}
+                else
+                {
+                    //double Total;
+                    //double Cantidad, precio;
+                    //Cantidad = Convert.ToDouble(txtSalario.Text);
+                    //precio = Convert.ToDouble(txtSalario.Text);
+                    //Total = Cantidad * precio;
+                    //txtSalario.Text = Cantidad.ToString();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBoxResult result = MessageBox.Show("No puede ingresar dos puntos deguidos",
+                      "Confirmar", MessageBoxButton.OK, MessageBoxImage.Warning);
+                txtCantidad.Text = "";
+            }
+        }
+
         //Fin del programa
     }
 }

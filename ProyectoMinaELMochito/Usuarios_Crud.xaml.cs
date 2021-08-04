@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -53,15 +54,14 @@ namespace ProyectoMinaELMochito
             User Usuario = user.BuscarUsuario(txtusername.Text);
 
             if (Usuario.Username == null)
-            {
-
                 return true;
-            }
             else
             {
                 MessageBox.Show("El usuario ya existe, porfavor ingrese otro nombre de usuario");
                 return false;
             }
+
+
 
             if (txtnombre.Text == string.Empty || txtusername.Text == string.Empty || txtApellido.Text == string.Empty || pssPassword.Password == string.Empty)
             {
@@ -85,6 +85,21 @@ namespace ProyectoMinaELMochito
             return true;
         }
 
+        private bool VerificarValoresEliminar()
+        {
+
+
+            if (txtid.Text == string.Empty)
+            {
+                MessageBox.Show("Seleccione el usuario que desea eliminar");
+                return false;
+            }
+
+
+
+            return true;
+        }
+
         private bool VerificarValoresModificar()
         {
 
@@ -97,6 +112,34 @@ namespace ProyectoMinaELMochito
                 return false;
 
             }
+
+            if (txtnombre.Text == string.Empty || txtusername.Text == string.Empty || txtApellido.Text == string.Empty)
+            {
+                MessageBox.Show("Por favor ingresa todos los valores en las cajas de texto");
+                return false;
+            }
+            else if (pssPassword.Password == string.Empty)
+            {
+                MessageBox.Show("Si desea modificar sus datos confirme su contraseña");
+
+            }
+            else if (cmbEstado.SelectedValue == null)
+            {
+                MessageBox.Show("Por favor selecciona  el estado del Usuario");
+                return false;
+            }
+            else if (cmbRol.SelectedValue == null)
+            {
+
+                MessageBox.Show("Por favor selecciona el Rol del Usuario");
+                return false;
+
+            }
+            return true;
+        }
+
+        private bool ValCamposVacios()
+        {
             if (txtnombre.Text == string.Empty || txtusername.Text == string.Empty || txtApellido.Text == string.Empty)
             {
                 MessageBox.Show("Por favor ingresa todos los valores en las cajas de texto");
@@ -215,28 +258,37 @@ namespace ProyectoMinaELMochito
 
         private void btnIngresar_Click(object sender, RoutedEventArgs e)
         {
-            if (VerificarValores())
+            if (pssPassword.Password.Length < 6)
             {
-                try
+                MessageBox.Show("Ingrese una contraseña con más de 6 caracteres");
+                pssPassword.Password = string.Empty;
+            }
+            else
+            {
+                if (VerificarValores())
                 {
-                    ObtenerValoresFormulario();
+                    try
+                    {
+                        ObtenerValoresFormulario();
 
-                    user.CrearUsuario(user);
+
+                        user.CrearUsuario(user);
 
 
-                }
-                catch (Exception ex)
-                {
+                    }
+                    catch (Exception ex)
+                    {
 
-                    MessageBox.Show($"Error al momento de ingresar el Usuario...{ex}");
+                        MessageBox.Show($"Error al momento de ingresar el Usuario...{ex}");
 
-                }
-                finally
-                {
-                    MessageBox.Show("Nuevo usuario ingresados correctamente");
-                    limpiar();
-                    CargarDatos();
+                    }
+                    finally
+                    {
+                        MessageBox.Show("Nuevo usuario ingresados correctamente");
+                        limpiar();
+                        CargarDatos();
 
+                    }
                 }
             }
 
@@ -255,6 +307,7 @@ namespace ProyectoMinaELMochito
                     btnIngresar.Visibility = Visibility.Hidden;
                     btnAceptarEliminacion.Visibility = Visibility.Visible;
                     btnCancelarEliminacion.Visibility = Visibility.Visible;
+                    btnEliminar.Visibility = Visibility.Hidden;
 
 
 
@@ -353,7 +406,7 @@ namespace ProyectoMinaELMochito
 
         private void btnEliminar_Click(object sender, RoutedEventArgs e)
         {
-            if (VerificarValores())
+            if (VerificarValoresEliminar())
             {
                 try
                 {
@@ -504,40 +557,48 @@ namespace ProyectoMinaELMochito
 
         private void btnAceptarEliminacion_Click(object sender, RoutedEventArgs e)
         {
-            try
+            if (pssPassword.Password.Length < 6)
             {
-                ObtenerValoresFormularioModify();
+                MessageBox.Show("Ingrese una contraseña con más de 6 caracteres");
+                pssPassword.Password = string.Empty;
+            }
+            else if (ValCamposVacios())
+            {
+                try
+                {
+                    ObtenerValoresFormularioModify();
 
-                User Usuario = user.BuscarUsuario(txtusername.Text);
+                    User Usuario = user.BuscarUsuario(txtusername.Text);
 
-                if (Usuario.Username == null)
+                    if (Usuario.Username == txtusername.Text)
+                    {
+                        user.ModificarUsuario2(user);
+                        MessageBox.Show("El usuario ya existe, sólo fueron modificados los datos restantes");
+                    }
+                    else
+                    {
+                        user.ModificarUsuario(user);
+                        MessageBox.Show("Los datos han sido modificados correctamente");
+                    }
+
+
+                }
+                catch (Exception ex)
                 {
 
-                    user.ModificarUsuario(user);
-                    MessageBox.Show("Los datos han sido modificados exitosamente");
+                    MessageBox.Show($"Error al momento de actualizar el Usuario...{ex}");
                 }
-                else
+                finally
                 {
-                    MessageBox.Show("El usuario ya existe, porfavor ingrese otro nombre de usuario");
 
+                    CargarDatos();
+                    limpiar();
+                    btnModificar.Visibility = Visibility.Visible;
+                    btnIngresar.Visibility = Visibility.Visible;
+                    btnAceptarEliminacion.Visibility = Visibility.Hidden;
+                    btnCancelarEliminacion.Visibility = Visibility.Hidden;
+                    btnEliminar.Visibility = Visibility.Visible;
                 }
-
-
-            }
-            catch (Exception ex)
-            {
-
-                MessageBox.Show($"Error al momento de actualizar el Usuario...{ex}");
-            }
-            finally
-            {
-
-                CargarDatos();
-                limpiar();
-                btnModificar.Visibility = Visibility.Visible;
-                btnIngresar.Visibility = Visibility.Visible;
-                btnAceptarEliminacion.Visibility = Visibility.Hidden;
-                btnCancelarEliminacion.Visibility = Visibility.Hidden;
             }
         }
 
@@ -547,8 +608,8 @@ namespace ProyectoMinaELMochito
             btnIngresar.Visibility = Visibility.Visible;
             btnAceptarEliminacion.Visibility = Visibility.Hidden;
             btnCancelarEliminacion.Visibility = Visibility.Hidden;
+            btnEliminar.Visibility = Visibility.Visible;
         }
-
         private void ListViewItem_Selected_10(object sender, RoutedEventArgs e)
         {
             Cargos cargos = new Cargos();
@@ -563,4 +624,6 @@ namespace ProyectoMinaELMochito
             this.Close();
         }
     }
+
+
 }

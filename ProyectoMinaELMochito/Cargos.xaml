@@ -22,7 +22,7 @@
                 <TextBlock Text="" Foreground="White" Margin="0.1" FontWeight="DemiBold"/>
 
 
-                <ListViewItem MouseDoubleClick="ListViewItem_MouseDoubleClick" Padding="0" Selected="ListViewItem_Selected_20">
+                <ListViewItem MouseDoubleClick="ListViewItem_MouseDoubleClick" Padding="0" >
 
                     <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon Foreground="White" Kind="Home" Margin="15"/>
@@ -170,7 +170,7 @@
             </DataGrid>
 
 
-            <Button x:Name="btnIngresar" Click="btnIngresar_Click" Content="Insertar" Grid.Column="1" Grid.Row="7" Height="40"  Foreground="White"  BorderBrush="#0082aa" RenderTransformOrigin="0.51,0.525" Margin="27,40,40,0"/>
+            <Button x:Name="btnIngresar" Click="btnIngresar_Click" Content="Insertar" Grid.Column="1" Grid.Row="7" Height="40"  Foreground="White"  BorderBrush="#0082aa" RenderTransformOrigin="0.51,0.525" Margin="27,40.4,39.6,0" Grid.RowSpan="2" VerticalAlignment="Top"/>
             <iconPacks:PackIconMaterial 
                VerticalAlignment="Center" 
                HorizontalAlignment="Left" 

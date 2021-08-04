@@ -8,7 +8,7 @@
           xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
            xmlns:fw="clr-namespace:SourceChord.FluentWPF;assembly=FluentWPF"
            AllowsTransparency="True" Background="Transparent" Title="DetalleSalida" Height="450" Width="800" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowStyle="None" MouseDown="Window_MouseDown">
-   
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="100"/>
@@ -54,7 +54,7 @@
             <TextBox Name="txtDetalle" Grid.Row="1" Grid.Column="1" FontSize="15" Margin="20,25,55,10" Grid.ColumnSpan="2" MaxLength="50"/>
             <TextBox Name="txtIdDetalle" Grid.Row="1" Grid.Column="1" FontSize="15" Margin="15,10,10,10" IsReadOnly="True" Visibility="Hidden"/>
 
-            <Button x:Name="btnAgregar" Foreground="White"  BorderBrush="#0082aa" Content="Agregar" Grid.Column="3" Grid.Row="1" Margin="73,25,99,10" Height="Auto" Click="btnAgregar_Click" Grid.ColumnSpan="2"  />
+            <Button x:Name="btnAgregar" Foreground="White"  BorderBrush="#0082aa" Content="Agregar" Grid.Column="3" Grid.Row="1" Margin="73.2,24.8,99,0" Height="42" Click="btnAgregar_Click" Grid.ColumnSpan="2" VerticalAlignment="Top"  />
 
             <DataGrid Name="DgDetalleSalida" Grid.Row="2" Margin="55,10,99,25" Grid.ColumnSpan="5" Grid.RowSpan="4" IsReadOnly="True" FontSize="15" SelectionChanged="DgDetalleSalida_SelectionChanged" >
 

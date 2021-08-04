@@ -63,7 +63,7 @@
                            Opacity="0.5"
                          Height="41"
                              Margin="73,0,0,0"
-                             Name="txtUsername" MouseDoubleClick="txtUsername_MouseDoubleClick"/>
+                             Name="txtUsername" MouseDoubleClick="txtUsername_MouseDoubleClick" TextChanged="txtUsername_TextChanged"/>
                     <iconPacks:PackIconMaterial Kind="Account" 
                                                 VerticalAlignment="Center" 
                                                 HorizontalAlignment="Center" 
@@ -134,9 +134,9 @@
 
 
                 <Border Width="250" Height="2" Background="White" Opacity="0.1"/>
-                <StackPanel Orientation="Horizontal" Margin="0,40,0,30">
+                <StackPanel Orientation="Horizontal" Margin="0,40,0,30" Height="64">
 
-                    <Button fw:PointerTracker.Enabled="True" Name="btnLogin" MouseDown="btnLogin_MouseDown" BorderThickness="2" BorderBrush="White" FontSize="16" Foreground="White" FontWeight="Light" Background="Transparent" FontFamily="helvetica" Width="118" Height="40" Content="Ingresar"  Margin="75,0,60,0" Click="btnLogin_Click" MouseEnter="btnLogin_MouseEnter"/>
+                    <Button fw:PointerTracker.Enabled="True" x:Name="btnLogin" MouseDown="btnLogin_MouseDown" BorderThickness="2" BorderBrush="White" FontSize="16" Foreground="White" FontWeight="Light" Background="Transparent" FontFamily="helvetica" Width="118" Height="40" Content="Ingresar"  Margin="75,0,60,0" Click="btnLogin_Click" MouseEnter="btnLogin_MouseEnter"/>
                     <Button fw:PointerTracker.Enabled="True" MouseDown="btnLogin_MouseDown" BorderThickness="2" BorderBrush="White" FontSize="16" Foreground="White" FontWeight="Light" Background="Transparent" FontFamily="helvetica" Width="118" Height="40" Content="Salir" Click="Button_Click"   Margin="-45,0,0,0"  />
                 </StackPanel>
 
@@ -146,5 +146,6 @@
             </StackPanel>
 
         </Grid>
+        <Label Content="Olvidé mi contraseña" Foreground="White"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="133,320,0,0" Width="127"  MouseDoubleClick="Label_MouseDoubleClick"/>
     </Grid>
 </Window>

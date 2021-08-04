@@ -34,7 +34,6 @@ namespace ProyectoMinaELMochito
         {
             InitializeComponent();
             MostrarCargo();
-            botonfecha.Content = string.Format("{0}", DateTime.Now.ToString());
         }
 
         private void txtnombre_TextChanged(object sender, TextChangedEventArgs e)
@@ -69,7 +68,7 @@ namespace ProyectoMinaELMochito
                     txtcodigo.Text = filaSeleccionada["Código"].ToString();
                     txtnombre.Text = filaSeleccionada["Cargo"].ToString();
                     verificacioncargo = filaSeleccionada["Cargo"].ToString();
-                    cmbestado.Text = filaSeleccionada["Estado"].ToString();
+                    cmbestado.SelectedValue = filaSeleccionada["Estado"].ToString();
 
                 }
             }
@@ -159,45 +158,48 @@ namespace ProyectoMinaELMochito
 
         private void btnIngresar_Click(object sender, RoutedEventArgs e)
         {
-            // Verificar que se ingresaron los valores requeridos
-            if (VerificarCamposLlenos())
-            {
-                int verificarcargo = cargo.Cargorepetido(txtnombre.Text);
-
-                if (verificarcargo == 0)
-                {
-                    try
-                    {
-                        //parametro 0 por que no es actualizacion
-                        ExtraerInformacionFormulario(0);
-                        cargo.CrearCargo(cargo);
-
-                        // Mensaje de inserción exitosa
-                        MessageBox.Show("¡El cargo ha sido resgistrado exitosamente!");
-
-                    }
-                    catch (Exception)
-                    {
-                        MessageBox.Show("El cargo no se puede ingresar", "¡Error!", MessageBoxButton.OK);
-
-                    }
-                    finally
-                    {
-                        LimpiarCasillas();
-                        MostrarCargo();
-                    }
-                }
-                else
-                {
-                    MessageBox.Show("El cargo ya existe, por favor ingrese otro", "¡Error!", MessageBoxButton.OK);
-                }
-
-
-
-
-
+            if (String.IsNullOrEmpty(Convert.ToString(txtnombre.Text)))
+            { 
+                MessageBox.Show("EL cargo no puede estar vacío", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
 
             }
+            else
+            {
+                // Verificar que se ingresaron los valores requeridos
+                if (VerificarCamposLlenos())
+                {
+                    int verificarcargo = cargo.Cargorepetido(txtnombre.Text);
+
+                    if (verificarcargo == 0)
+                    {
+                        try
+                        {
+                            //parametro 0 por que no es actualizacion
+                            ExtraerInformacionFormulario(0);
+                            cargo.CrearCargo(cargo);
+
+                            // Mensaje de inserción exitosa
+                            MessageBox.Show("¡El cargo ha sido resgistrado exitosamente!", "Cargo Ingresado", MessageBoxButton.OK, MessageBoxImage.Information);
+
+                        }
+                        catch (Exception)
+                        {
+                            MessageBox.Show("El cargo no se puede ingresar", "¡Error!", MessageBoxButton.OK, MessageBoxImage.Error);
+
+                        }
+                        finally
+                        {
+                            LimpiarCasillas();
+                            MostrarCargo();
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("El cargo no se puede ingresar", "¡Error!", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                }
+            }
+            
         }
 
         private void btnModificar_Click(object sender, RoutedEventArgs e)
@@ -273,8 +275,8 @@ namespace ProyectoMinaELMochito
                     if (VerificarCamposLlenos())
                     {
                         ExtraerInformacionFormularioestado(1);
-                        cargo.ActualizarCargo(cargo);
-                        MessageBox.Show("¡El cargo ha sido modificado exitosamente!", "Cargo Modificado", MessageBoxButton.OK, MessageBoxImage.Information);
+                        cargo.ActualizarCargoEstado(cargo);
+                        MessageBox.Show("El cargo ya existe, ¡El estado ha sido modificado exitosamente!", "Cargo Modificado", MessageBoxButton.OK, MessageBoxImage.Information);
                         LimpiarCasillas();
                     }
 
@@ -292,7 +294,7 @@ namespace ProyectoMinaELMochito
                     }
                     else
                     {
-                        MessageBox.Show("Este cargo ya existe ", "¡Error!", MessageBoxButton.OK);
+                        MessageBox.Show("Este cargo ya existe ", "¡Error!", MessageBoxButton.OK, MessageBoxImage.Error);
                     }
                 }
 
@@ -326,14 +328,14 @@ namespace ProyectoMinaELMochito
                     cargo.EliminarCargo(cargo);
 
                     // Mensaje de inserción exitosa
-                    MessageBox.Show("¡El cargo ha sido eliminado exitosamente!");
+                    MessageBox.Show("¡El cargo ha sido eliminado exitosamente!", "Cargo Eliminado", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
                 MostrarCargo();
                 LimpiarCasillas();
             }
             catch (Exception)
             {
-                MessageBox.Show("Al eliminar la acción", "¡Error!", MessageBoxButton.OK);
+                MessageBox.Show("Al eliminar la acción", "¡Error!", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             finally
             {
@@ -370,7 +372,7 @@ namespace ProyectoMinaELMochito
         //-----------------------------------------------------------------------------------------------------------------------------------------------------
         private void ListViewItem_Selected(object sender, RoutedEventArgs e)
         {
-            Empleados sld = new Empleados();
+            menuPrincipal sld = new menuPrincipal();
             sld.Show();
             this.Close();
         }
@@ -439,25 +441,36 @@ namespace ProyectoMinaELMochito
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            DragMove();
+            try
+            {
+                DragMove();
+            }
+            catch
+            {
+
+            }
+
         }
 
         private void txtnombre_KeyDown(object sender, KeyEventArgs e)
         {
             //Validacion.validarTxtSinNumeros(e);
             if (e.Key >= Key.D0 && e.Key <= Key.D9 || e.Key >= Key.NumPad0 && e.Key <= Key.NumPad9 || e.Key == Key.DbeAlphanumeric || e.Key == Key.Decimal || e.Key == Key.Divide ||
-                e.Key >= Key.OemComma || e.Key == Key.OemPeriod)
+                e.Key >= Key.OemComma || e.Key == Key.OemPeriod || e.Key == Key.Decimal || e.Key == Key.OemPlus || e.Key == Key.OemMinus)
                 e.Handled = true;
             else
                 e.Handled = false;
 
 
+
+
+
         }
 
-        private void ListViewItem_Selected_20(object sender, RoutedEventArgs e)
+        private void ListViewItem_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            menuPrincipal menuPrincipal = new menuPrincipal();
-            menuPrincipal.Show();
+            menuEmpleado menuEmpleado = new menuEmpleado();
+            menuEmpleado.Show();
             this.Close();
         }
 
@@ -479,13 +492,6 @@ namespace ProyectoMinaELMochito
         {
             ViajesInternos sld = new ViajesInternos();
             sld.Show();
-            this.Close();
-        }
-
-        private void ListViewItem_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-            menuPrincipal menuPrincipal = new menuPrincipal();
-            menuPrincipal.Show();
             this.Close();
         }
     }
